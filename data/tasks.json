@@ -9,5 +9,8 @@
   {"id":"low_cost","name_cn":"低成本 API","description_cn":"按输入输出成本筛选高性价比模型。","icon":"♧","model_types":["Chat","Coding"],"prefer":{"cost":"low"}},
   {"id":"reasoning","name_cn":"复杂推理","description_cn":"数学、规划、科研与多步逻辑。","icon":"✜","model_types":["Reasoning"],"prefer":{"capabilities":{"reasoning":"high"}}},
   {"id":"long_context","name_cn":"长文档处理","description_cn":"超长文档、代码库与资料阅读。","icon":"▤","model_types":["Chat","Reasoning"],"prefer":{"context":"high"}},
-  {"id":"knowledge","name_cn":"企业知识库","description_cn":"RAG、检索增强与长文本企业应用。","icon":"❖","model_types":["Chat","Reasoning"],"prefer":{"context":"high","capabilities":{"knowledge":"high"}}}
+  {"id":"knowledge","name_cn":"企业知识库","description_cn":"RAG、检索增强与长文本企业应用。","icon":"❖","model_types":["Chat","Reasoning"],"prefer":{"context":"high","capabilities":{"knowledge":"high"}}},
+  {"id":"writing","name_cn":"写文章","description_cn":"长文、文案、报告与润色。","icon":"✎","model_types":["Chat"],"prefer":{"capabilities":{"knowledge":"high"}}},
+  {"id":"learning","name_cn":"学习AI","description_cn":"理解概念、答疑与入门学习。","icon":"✺","model_types":["Chat","Reasoning"],"prefer":{"capabilities":{"knowledge":"high"}}},
+  {"id":"enterprise","name_cn":"企业应用","description_cn":"RAG、流程自动化与数据安全场景。","icon":"▣","model_types":["Chat","Reasoning"],"prefer":{"context":"high","capabilities":{"knowledge":"high"}}}
 ]

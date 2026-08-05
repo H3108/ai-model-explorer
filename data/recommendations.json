@@ -110,5 +110,35 @@
       {"id": "mistral-large-3", "score": 4, "reason": "多语（EU）与数据驻留，企业友好。"},
       {"id": "openai-gpt-5-5", "score": 4, "reason": "1M 上下文，综合能力强。"}
     ]
+  },
+  {
+    "id": "rec-writing",
+    "task_id": "writing",
+    "label": "写文章推荐",
+    "model_ids": [
+      {"id": "anthropic-sonnet-5", "score": 5, "reason": "文风自然、长文结构稳定，适合成稿。"},
+      {"id": "openai-gpt-5-4", "score": 5, "reason": "通用写作与润色强，指令遵循好。"},
+      {"id": "google-gemini-3-1-pro", "score": 4, "reason": "长上下文，多语与长文 Draft 友好。"}
+    ]
+  },
+  {
+    "id": "rec-learning",
+    "task_id": "learning",
+    "label": "学习 AI 推荐",
+    "model_ids": [
+      {"id": "anthropic-haiku-4-5", "score": 5, "reason": "解释清晰、响应快，入门答疑首选。"},
+      {"id": "openai-gpt-5-4", "score": 5, "reason": "通用知识广，概念讲解到位。"},
+      {"id": "deepseek-v3", "score": 4, "reason": "中文好且极便宜，适合高频练习。"}
+    ]
+  },
+  {
+    "id": "rec-enterprise",
+    "task_id": "enterprise",
+    "label": "企业应用推荐",
+    "model_ids": [
+      {"id": "google-gemini-3-1-pro", "score": 5, "reason": "多模态长上下文，RAG 与检索强。"},
+      {"id": "mistral-large-3", "score": 5, "reason": "EU 数据驻留与企业合规友好。"},
+      {"id": "openai-gpt-5-5", "score": 4, "reason": "1M 上下文，综合能力强。"}
+    ]
   }
 ]

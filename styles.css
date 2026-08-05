@@ -1097,3 +1097,183 @@ nav a:hover {
 #main-view.hidden {
   display: none;
 }
+
+/* ===== Phase 5：搜索 / 热门 / 排序 / 能力标签 / 代码块 ===== */
+.home-search {
+  margin-top: 22px;
+  max-width: 460px;
+}
+.home-search input,
+#provider-search {
+  width: 100%;
+  padding: 13px 16px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: #fff;
+  font: inherit;
+  font-size: 14px;
+  color: var(--ink);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.home-search input:focus,
+#provider-search:focus {
+  outline: none;
+  border-color: var(--deep);
+  box-shadow: 0 0 0 3px var(--soft);
+}
+
+.hot-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-top: 22px;
+}
+.hot-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  text-align: left;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: #fff;
+  cursor: pointer;
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+.hot-card:hover {
+  border-color: var(--deep);
+  transform: translateY(-2px);
+}
+.hot-card b {
+  font-size: 15px;
+  color: var(--ink);
+}
+.hot-card small {
+  color: var(--muted);
+  font-size: 12px;
+}
+.hot-card .hot-score {
+  margin-top: 6px;
+  font-size: 11px;
+  color: var(--deep);
+  background: var(--soft);
+  padding: 2px 8px;
+  border-radius: 20px;
+}
+
+.list-controls {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 14px 0 20px;
+}
+.list-controls #provider-search {
+  flex: 1;
+  min-width: 220px;
+}
+.sort-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--muted);
+}
+.sort-label select,
+#provider-sort {
+  font: inherit;
+  font-size: 13px;
+  padding: 9px 12px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #fff;
+  color: var(--ink);
+  cursor: pointer;
+}
+.sort-label select:focus,
+#provider-sort:focus {
+  outline: none;
+  border-color: var(--deep);
+}
+
+.cap-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+}
+.cap-tag {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 11px;
+  border-radius: 20px;
+  background: var(--soft);
+  color: var(--deep);
+  border: 1px solid var(--line);
+}
+
+.api-block {
+  margin-top: 4px;
+}
+.code-tabs {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 14px 0 0;
+  flex-wrap: wrap;
+}
+.code-tab {
+  font: inherit;
+  font-size: 12.5px;
+  font-weight: 600;
+  padding: 6px 12px;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  background: #fff;
+  color: var(--muted);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.code-tab.selected {
+  background: var(--deep);
+  color: #fff;
+  border-color: var(--deep);
+}
+.copy-btn {
+  margin-left: auto;
+  font: inherit;
+  font-size: 12.5px;
+  padding: 6px 12px;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  background: #fff;
+  color: var(--deep);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.copy-btn:hover {
+  border-color: var(--deep);
+  background: var(--soft);
+}
+.code-block {
+  margin: 10px 0 0;
+  padding: 16px 18px;
+  background: var(--ink);
+  color: #e9f1e9;
+  border-radius: 12px;
+  font-family: "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+  font-size: 12.5px;
+  line-height: 1.7;
+  overflow-x: auto;
+  white-space: pre;
+}
+.code-block.hidden {
+  display: none;
+}
+
+@media (max-width: 760px) {
+  .hot-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

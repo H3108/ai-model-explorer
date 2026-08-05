@@ -37,6 +37,16 @@ console.log(`[tasks] ${tasks.length} 个`)
 console.log(`[recommendations] ${recs.length} 个`)
 console.log(`[naming_guide] ${naming.length} 条\n`)
 
+console.log('\n校验 providers（API 基础地址 / 风格，base_url 可空）：')
+const styleOk = new Set(['openai', 'anthropic', 'google', 'media'])
+providers.forEach((p) => {
+  if (!('api_base_url' in p)) err(`${p.id}: 缺 api_base_url 字段`)
+  if (p.api_base_url != null && typeof p.api_base_url !== 'string') err(`${p.id}: api_base_url 非字符串`)
+  if (!styleOk.has(p.api_style)) err(`${p.id}: api_style=${p.api_style} 非法（应 openai/anthropic/google/media）`)
+  if (!p.api_docs && p.api_base_url == null) warn(`${p.id}: 无官方文档且无 API 地址（如 Midjourney 无公开 API，可接受）`)
+})
+ok(`providers 均已声明 api_style；base_url 为 null 的走自托管/无公开 API 提示`)
+
 console.log('校验 model_variants：')
 const tierOk = new Set(['low', 'low-medium', 'medium', 'medium-high', 'high', 'highest'])
 const isMedia = (v) => Array.isArray(v.model_type) && (v.model_type.includes('Image') || v.model_type.includes('Video'))

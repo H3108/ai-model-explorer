@@ -31,6 +31,8 @@ const state = {
   speed: 'balanced',
   referrer: { hash: '#home', provider: null },
   currentModelId: null,
+  search: '',
+  sort: 'default',
 }
 
 async function loadData() {
@@ -79,6 +81,110 @@ function capItem(dim, zh, cap) {
   return `<div class="cap-item"><span class="cap-name">${zh} ${dim}</span><span class="cap-tier tier-${t.level}">${t.label}</span><small class="cap-basis">${cap.basis || ''}</small></div>`
 }
 
+// HTML 转义（用于代码与用户输入）
+function esc(s) {
+  return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+}
+
+// 依据 provider.api_style 与 model.media_type 生成 API 示例代码（Python / JS / curl）
+function codeExamples(v) {
+  const p = providerOf(v)
+  const base = p.api_base_url || 'http://localhost:8000/v1'
+  const isLocal = !p.api_base_url
+  const model = v.model_id || v.id
+  const style = p.api_style
+  const prompt = '你好，介绍一下你自己'
+
+  // 媒体模型：图像（OpenAI 兼容）
+  if (v.media_type === 'image' && style === 'openai') {
+    const py = `from openai import OpenAI\n\nclient = OpenAI(api_key="YOUR_API_KEY")\n\nimage = client.images.generate(\n    model="${model}",\n    prompt="一只赛博朋克风格的猫",\n    size="1024x1024",\n    n=1,\n)\nprint(image.data[0].url or image.data[0].b64_json)`
+    const js = `const res = await fetch("${base}/images/generations", {\n  method: "POST",\n  headers: { "Content-Type": "application/json", Authorization: "Bearer YOUR_API_KEY" },\n  body: JSON.stringify({ model: "${model}", prompt: "一只赛博朋克风格的猫", size: "1024x1024", n: 1 }),\n});\nconst data = await res.json();\nconsole.log(data.data[0].url || data.data[0].b64_json);`
+    const curl = `curl ${base}/images/generations \\\n  -H "Content-Type: application/json" \\\n  -H "Authorization: Bearer YOUR_API_KEY" \\\n  -d '{ "model": "${model}", "prompt": "一只赛博朋克风格的猫", "size": "1024x1024", "n": 1 }'`
+    return { py, js, curl }
+  }
+  // 媒体模型：视频（Google Veo）
+  if (v.media_type === 'video' && style === 'google') {
+    const py = `import google.generativeai as genai\n\ngenai.configure(api_key="YOUR_API_KEY")\nmodel = genai.GenerativeModel("${model}")\noperation = model.generate_content("一只猫在月球上奔跑")  # Veo\nvideo = operation.result()  # 轮询获取视频结果`
+    const js = `const res = await fetch("${base}/models/${model}:generateContent?key=YOUR_API_KEY", {\n  method: "POST",\n  headers: { "Content-Type": "application/json" },\n  body: JSON.stringify({ contents: [{ role: "user", parts: [{ text: "一只猫在月球上奔跑" }] }] }),\n});\nconst data = await res.json();\nconsole.log(data.candidates?.[0]?.content?.parts?.[0]?.text);`
+    const curl = `curl "${base}/models/${model}:generateContent?key=YOUR_API_KEY" \\\n  -H "Content-Type: application/json" \\\n  -d '{ "contents": [{"role":"user","parts":[{"text":"一只猫在月球上奔跑"}]}] }'`
+    return { py, js, curl }
+  }
+  // 其它媒体模型：无统一 SDK，给出文档提示
+  if (v.media_type) {
+    const docs = p.api_docs
+      ? `<a class="text-link" href="${p.api_docs}" target="_blank" rel="noopener">官方文档 ↗</a>`
+      : '无公开文档'
+    return {
+      note: `该模型通过官方平台 / API 调用，无统一 SDK 示例。请参考：${docs}${
+        p.api_base_url ? ' · Base URL：<code>' + esc(p.api_base_url) + '</code>' : ''
+      }。`,
+    }
+  }
+  // Anthropic
+  if (style === 'anthropic') {
+    const py = `import anthropic\n\nclient = anthropic.Anthropic(api_key="YOUR_API_KEY")\nmessage = client.messages.create(\n    model="${model}",\n    max_tokens=1024,\n    messages=[{"role": "user", "content": "${prompt}"}],\n)\nprint(message.content[0].text)`
+    const js = `const res = await fetch("${base}/v1/messages", {\n  method: "POST",\n  headers: { "Content-Type": "application/json", "x-api-key": "YOUR_API_KEY", "anthropic-version": "2023-06-01" },\n  body: JSON.stringify({ model: "${model}", max_tokens: 1024, messages: [{ role: "user", content: "${prompt}" }] }),\n});\nconst data = await res.json();\nconsole.log(data.content[0].text);`
+    const curl = `curl ${base}/v1/messages \\\n  -H "Content-Type: application/json" \\\n  -H "x-api-key: YOUR_API_KEY" \\\n  -H "anthropic-version: 2023-06-01" \\\n  -d '{ "model": "${model}", "max_tokens": 1024, "messages": [{"role":"user","content":"${prompt}"}] }'`
+    return { py, js, curl }
+  }
+  // Google Gemini
+  if (style === 'google') {
+    const py = `import google.generativeai as genai\n\ngenai.configure(api_key="YOUR_API_KEY")\nmodel = genai.GenerativeModel("${model}")\nresponse = model.generate_content("${prompt}")\nprint(response.text)`
+    const js = `const res = await fetch("${base}/models/${model}:generateContent?key=YOUR_API_KEY", {\n  method: "POST",\n  headers: { "Content-Type": "application/json" },\n  body: JSON.stringify({ contents: [{ role: "user", parts: [{ text: "${prompt}" }] }] }),\n});\nconst data = await res.json();\nconsole.log(data.candidates[0].content.parts[0].text);`
+    const curl = `curl "${base}/models/${model}:generateContent?key=YOUR_API_KEY" \\\n  -H "Content-Type: application/json" \\\n  -d '{ "contents": [{"role":"user","parts":[{"text":"${prompt}"}]}] }'`
+    return { py, js, curl }
+  }
+  // 默认：OpenAI 兼容（含自托管 / 本地部署）
+  const py = `from openai import OpenAI\n\nclient = OpenAI(\n    base_url="${base}",\n    api_key="YOUR_API_KEY",\n)\n\nresponse = client.chat.completions.create(\n    model="${model}",\n    messages=[{"role": "user", "content": "${prompt}"}],\n)\nprint(response.choices[0].message.content)`
+  const js = `const res = await fetch("${base}/chat/completions", {\n  method: "POST",\n  headers: { "Content-Type": "application/json", Authorization: "Bearer YOUR_API_KEY" },\n  body: JSON.stringify({ model: "${model}", messages: [{ role: "user", content: "${prompt}" }] }),\n});\nconst data = await res.json();\nconsole.log(data.choices[0].message.content);`
+  const curl = `curl ${base}/chat/completions \\\n  -H "Content-Type: application/json" \\\n  -H "Authorization: Bearer YOUR_API_KEY" \\\n  -d '{ "model": "${model}", "messages": [{"role":"user","content":"${prompt}"}] }'`
+  return { py, js, curl, isLocal }
+}
+
+// API 调用信息区块（Base URL + Model ID + 三语言示例代码）
+function apiBlockHTML(v) {
+  const p = providerOf(v)
+  const base = p.api_base_url || 'http://localhost:8000/v1'
+  const ex = codeExamples(v)
+  if (ex.note) {
+    return `<div class="api-block"><h4>API 调用信息</h4>
+      <div class="api-fact"><b>Base URL</b><code>${esc(p.api_base_url || '（自托管）')}</code></div>
+      <div class="api-fact"><b>Model ID</b><code>${esc(v.model_id || v.id)}</code></div>
+      <p class="muted">${ex.note}</p></div>`
+  }
+  const tabs = (label, key) =>
+    `<button class="code-tab${key === 'py' ? ' selected' : ''}" data-code-tab="${key}">${label}</button>`
+  const pre = (key, code) =>
+    `<pre class="code-block${key === 'py' ? '' : ' hidden'}" data-code="${key}">${esc(code)}</pre>`
+  const note = ex.isLocal
+    ? '<p class="muted">开放权重模型：将 Base URL 替换为你自托管的推理服务（如 vLLM / Ollama，监听 <code>http://localhost:8000/v1</code>）。</p>'
+    : ''
+  return `<div class="api-block"><h4>API 调用信息</h4>
+    <div class="api-fact"><b>Base URL</b><code>${esc(base)}</code></div>
+    <div class="api-fact"><b>Model ID</b><code>${esc(v.model_id || v.id)}</code></div>
+    ${note}
+    <div class="code-tabs">${tabs('Python', 'py')}${tabs('JavaScript', 'js')}${tabs('curl', 'curl')}<button class="copy-btn" data-copy>复制</button></div>
+    ${pre('py', ex.py)}${pre('js', ex.js)}${pre('curl', ex.curl)}</div>`
+}
+
+// 能力标签（spec 3.2 指定清单）：Coding / Reasoning / Agent / Long Context / Multimodal / Chinese / Low Cost
+function capTagsHTML(v) {
+  const p = providerOf(v)
+  const caps = v.capabilities || {}
+  const tags = []
+  if (caps.coding) tags.push('Coding')
+  if (caps.reasoning) tags.push('Reasoning')
+  if (caps.agent) tags.push('Agent')
+  if (v.context_window && v.context_window >= 128000) tags.push('Long Context')
+  if (v.vision_support || (v.model_type || []).some((t) => ['Vision', 'Image', 'Video'].includes(t)))
+    tags.push('Multimodal')
+  if (p.country === 'CN') tags.push('Chinese')
+  const cheap = v.input_price_per_mtok != null && v.input_price_per_mtok <= 1.0
+  if (cheap || (v.best_for || []).includes('low_cost')) tags.push('Low Cost')
+  if (!tags.length) return ''
+  return `<div class="cap-tags">${tags.map((t) => `<span class="cap-tag">${t}</span>`).join('')}</div>`
+}
+
 // ---------- 统计 ----------
 function renderStats() {
   $('#provider-count').textContent = state.providers.length
@@ -113,14 +219,60 @@ function renderProviders(filter = 'all') {
     return
   }
   grid.classList.remove('is-detail')
-  const list = state.providers.filter((p) => {
-    if (filter === 'all') return true
-    if (filter === 'US') return p.country === 'US'
-    if (filter === 'CN') return p.country === 'CN'
-    if (filter === 'open') return p.open_weight === true
-    return true
-  })
-  grid.innerHTML = list.map(providerCard).join('')
+  const q = state.search.trim().toLowerCase()
+  const list = state.providers
+    .filter((p) => {
+      if (filter === 'all') return true
+      if (filter === 'US') return p.country === 'US'
+      if (filter === 'CN') return p.country === 'CN'
+      if (filter === 'open') return p.open_weight === true
+      return true
+    })
+    .filter((p) => {
+      if (!q) return true
+      const hitName = (p.name_cn || p.name).toLowerCase().includes(q)
+      const hitModel = variantsOfProvider(p.id).some(
+        (v) =>
+          (v.name_cn || v.name).toLowerCase().includes(q) ||
+          (v.one_liner_cn || '').toLowerCase().includes(q),
+      )
+      return hitName || hitModel
+    })
+  grid.innerHTML = list.length
+    ? list.map(providerCard).join('')
+    : '<p class="muted">没有匹配的厂商或模型。</p>'
+}
+
+// 详情页型号排序
+function sortVariants(arr) {
+  const a = [...arr]
+  const priceOf = (v) => ((v.input_price_per_mtok ?? 1e9) + (v.output_price_per_mtok ?? 1e9)) / 2
+  const speedOf = (v) => SPEED_RANK[v.speed_tier] ?? 2
+  if (state.sort === 'price-asc') a.sort((x, y) => priceOf(x) - priceOf(y))
+  else if (state.sort === 'price-desc') a.sort((x, y) => priceOf(y) - priceOf(x))
+  else if (state.sort === 'context') a.sort((x, y) => (y.context_window || 0) - (x.context_window || 0))
+  else if (state.sort === 'speed') a.sort((x, y) => speedOf(y) - speedOf(x))
+  return a
+}
+
+// 首页热门模型（按推荐评分聚合取 TOP 8）
+function renderHotModels() {
+  const box = $('#hot-grid')
+  if (!box) return
+  const scoreOf = {}
+  state.recommendations.forEach((r) => r.model_ids.forEach((m) => {
+    scoreOf[m.id] = (scoreOf[m.id] || 0) + m.score
+  }))
+  const top = Object.entries(scoreOf)
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 8)
+    .map(([id]) => byId(state.variants, 'id', id))
+    .filter(Boolean)
+  const card = (v) => {
+    const p = providerOf(v)
+    return `<button class="hot-card" data-variant="${v.id}"><span class="provider-logo ${p.country === 'US' ? 'blue' : 'red'}">${p.logo || p.name.slice(0, 1)}</span><b>${v.name_cn || v.name}</b><small>${p.name_cn || ''}</small><span class="hot-score">热度 ${scoreOf[v.id]}</span></button>`
+  }
+  box.innerHTML = top.map(card).join('')
 }
 
 // ---------- 厂商详情（系列 → 型号）----------
@@ -148,7 +300,7 @@ function providerDetail(pid) {
   </div>`
   const body = families
     .map((f) => {
-      const vs = variantsOfFamily(f.id)
+      const vs = sortVariants(variantsOfFamily(f.id))
       return `<div class="family-block">
         <div class="family-head"><h4>${f.name_cn || f.name}</h4><small>${f.description_cn || ''}</small></div>
         ${vs.length ? vs.map(variantRow).join('') : '<p class="muted">该系列暂无收录型号。</p>'}
@@ -197,6 +349,7 @@ function modelCoreHTML(v) {
       </div>
     </div>
     <div class="positioning">${v.one_liner_cn || ''}</div>
+    ${capTagsHTML(v)}
     <div class="cap-section"><h4>能力评估（三档定性 · 含依据）</h4><div class="cap-grid">${capGrid}</div></div>
     <div class="detail-grid">
       <div>
@@ -212,12 +365,14 @@ function modelCoreHTML(v) {
         <div class="api-fact"><b>视觉</b><code>${v.vision_support ? '支持' : '不支持'}</code></div>
         <div class="api-fact"><b>开放权重</b><code>${v.open_weight ? '是' : '否'}</code></div>
         <div class="api-fact"><b>速度档</b><code>${v.speed_tier || '—'}</code></div>
+        <div class="api-fact"><b>参数规模</b><code>${v.params || '未公开'}</code></div>
         <h4>价格</h4>
         <p class="muted">${priceHtml}</p>
         <h4>来源</h4>
         <p class="muted">${v.source_url ? `<a class="text-link" href="${v.source_url}" target="_blank" rel="noopener">官方来源 ↗</a>` : '—'}<br>核验日期：${v.verified_date || 'unknown'}</p>
       </div>
-    </div>`
+    </div>
+    <div class="cap-section"><h4>API 调用</h4>${apiBlockHTML(v)}</div>`
 }
 
 function buildNamingBlock(v) {
@@ -359,10 +514,36 @@ function renderRegistryNotice() {
 function init() {
   renderStats()
   renderProviders()
+  renderHotModels()
   renderMatcher()
   renderGlossary()
   renderRegistryNotice()
+  wireControls()
   applyRoute()
+}
+
+// 搜索框 / 排序 / 复制 等控件事件（绑定一次）
+function wireControls() {
+  const homeSearch = $('#home-search')
+  if (homeSearch)
+    homeSearch.addEventListener('input', (e) => {
+      state.search = e.target.value
+      renderProviders()
+      const sec = document.querySelector('#providers')
+      if (sec && location.hash.replace('#', '') !== 'model') sec.scrollIntoView({ behavior: 'smooth' })
+    })
+  const providerSearch = $('#provider-search')
+  if (providerSearch)
+    providerSearch.addEventListener('input', (e) => {
+      state.search = e.target.value
+      renderProviders()
+    })
+  const providerSort = $('#provider-sort')
+  if (providerSort)
+    providerSort.addEventListener('change', (e) => {
+      state.sort = e.target.value
+      renderProviders()
+    })
 }
 
 // ---------- 事件 ----------
@@ -406,6 +587,28 @@ document.addEventListener('click', (event) => {
     speed.classList.add('selected')
     state.speed = speed.dataset.value
     renderRecommendation()
+  }
+  const codeTab = event.target.closest('[data-code-tab]')
+  if (codeTab) {
+    const block = codeTab.closest('.api-block')
+    block.querySelectorAll('[data-code-tab]').forEach((b) => b.classList.remove('selected'))
+    codeTab.classList.add('selected')
+    const key = codeTab.dataset.codeTab
+    block.querySelectorAll('.code-block').forEach((pre) => pre.classList.toggle('hidden', pre.dataset.code !== key))
+  }
+  const copyBtn = event.target.closest('[data-copy]')
+  if (copyBtn) {
+    const block = copyBtn.closest('.api-block')
+    const visible = block.querySelector('.code-block:not(.hidden)')
+    if (visible && navigator.clipboard) {
+      navigator.clipboard.writeText(visible.textContent).then(
+        () => {
+          copyBtn.textContent = '已复制'
+          setTimeout(() => (copyBtn.textContent = '复制'), 1500)
+        },
+        () => (copyBtn.textContent = '复制失败'),
+      )
+    }
   }
   const detailBack = event.target.closest('[data-detail-back]')
   if (detailBack) {

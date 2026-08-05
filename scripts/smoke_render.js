@@ -198,9 +198,68 @@ setTimeout(() => {
   })
   console.log('  推荐外键错误数:', fkBad)
 
+  // ===== Phase 5：API 示例 / 能力标签 / 热门模型 / 参数规模 =====
+  try {
+    const V = (id) => variants.find((v) => v.id === id)
+    ctx.renderHotModels()
+    const hot = q('#hot-grid')._html
+    console.log('  renderHotModels 含 hot-card:', hot.includes('hot-card'), '| 命中卡片数:', (hot.match(/hot-card/g) || []).length)
+    if (!hot.includes('hot-card')) fail('renderHotModels 未渲染热门模型')
+
+    const core = ctx.modelCoreHTML(V('openai-gpt-5-5'))
+    console.log(
+      '  modelCoreHTML 含 API调用信息:',
+      core.includes('API 调用信息'),
+      '| 含 code-block:',
+      core.includes('code-block'),
+      '| 含 cap-tag:',
+      core.includes('cap-tag'),
+      '| 含 参数规模:',
+      core.includes('参数规模'),
+    )
+    if (!core.includes('API 调用信息') || !core.includes('code-block')) fail('详情页缺少 API 调用信息/代码块')
+    if (!core.includes('cap-tag')) fail('详情页缺少能力标签 cap-tag')
+
+    const exText = ctx.codeExamples(V('openai-gpt-5-5'))
+    console.log('  codeExamples(OpenAI文本) 三语言:', !!(exText.py && exText.js && exText.curl), '| js 含 /chat/completions:', exText.js.includes('/chat/completions'))
+    if (exText.note) fail('OpenAI 文本模型不应走 note 分支')
+
+    const exAnth = ctx.codeExamples(V('anthropic-sonnet-5'))
+    console.log('  codeExamples(Anthropic) js 含 /v1/messages:', exAnth.js.includes('/v1/messages'))
+    if (!exAnth.py.includes('anthropic.Anthropic')) fail('Anthropic 示例未用官方 SDK')
+
+    const exGoogle = ctx.codeExamples(V('google-gemini-3-1-pro'))
+    console.log('  codeExamples(Google) 含 generateContent:', exGoogle.py.includes('generate_content'))
+    if (!exGoogle.py.includes('google.generativeai')) fail('Google 示例未用官方 SDK')
+
+    const exImg = ctx.codeExamples(V('openai-gpt-image-2'))
+    console.log('  codeExamples(图像生成) js 含 /images/generations:', exImg.js.includes('/images/generations'))
+
+    const exVeo = ctx.codeExamples(V('google-veo-3-1'))
+    console.log('  codeExamples(视频生成 Veo) 含 generateContent:', exVeo.py.includes('generate_content'))
+
+    const exKling = ctx.codeExamples(V('kuaishou-kling-3-0'))
+    console.log('  codeExamples(媒体无SDK) 走 note:', !!exKling.note)
+    if (!exKling.note) fail('Kling 应走文档提示分支')
+
+    const exLocal = ctx.codeExamples(V('meta-llama-4-scout'))
+    console.log('  codeExamples(本地部署) 含 localhost 提示:', exLocal.isLocal === true)
+    if (!exLocal.isLocal) fail('Meta 开放权重应走 localhost 提示')
+
+    const tags = ctx.capTagsHTML(V('openai-gpt-5-5'))
+    console.log('  capTagsHTML(文本) 标签示例:', (tags.match(/cap-tag[^>]*>([^<]+)</g) || []).join(','))
+    if (!tags.includes('Coding') && !tags.includes('Reasoning')) fail('能力标签未包含 Coding/Reasoning')
+
+    const tagsCn = ctx.capTagsHTML(V('deepseek-v3'))
+    console.log('  capTagsHTML(DeepSeek) 含 Chinese/Low Cost:', tagsCn.includes('Chinese'), tagsCn.includes('Low Cost'))
+    if (!tagsCn.includes('Chinese')) fail('国产模型应含 Chinese 标签')
+  } catch (e) {
+    fail('Phase 5 渲染异常: ' + e.message)
+  }
+
   console.log(
     ok && fkBad === 0
-      ? '✅ Phase 2/3 全流程（列表/详情页/路由/命名/相关/推荐外键）验证通过。'
+      ? '✅ Phase 2/3/5 全流程（列表/详情页/路由/命名/相关/API示例/能力标签/热门模型/推荐外键）验证通过。'
       : '⚠️ 存在需要修复的问题。',
   )
 }, 300)
