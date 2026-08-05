@@ -32,20 +32,34 @@
   {
     "id": "rec-image",
     "task_id": "image",
+    "label": "图片生成推荐",
+    "model_ids": [
+      {"id": "openai-gpt-image-2", "score": 5, "reason": "OpenAI 生态，ChatGPT 原生，提示词理解强。"},
+      {"id": "google-imagen-4", "score": 5, "reason": "照片级真实，图像内文字渲染最佳。"},
+      {"id": "blackforest-flux-2", "score": 4, "reason": "开放权重可自托管，API 便宜，质量高。"}
+    ],
+    "note": "Midjourney V7 艺术质量最佳但无公开 API；Stable Diffusion 4 / Qwen-Image 可本地开源部署。"
+  },
+  {
+    "id": "rec-image-understanding",
+    "task_id": "image_understanding",
     "label": "图片理解推荐",
     "model_ids": [
       {"id": "google-gemini-3-1-pro", "score": 5, "reason": "多模态与长上下文，视觉理解强。"},
       {"id": "qwen-vl-max", "score": 4, "reason": "视觉多模态，文档/图片问答。"},
       {"id": "meta-llama-4-maverick", "score": 4, "reason": "开放权重多模态，可自托管。"}
-    ],
-    "note": "本数据集为图像理解/视觉模型；图像生成模型（GPT-Image-2、Nano Banana 等）将在模型命名/生成系统阶段补充。"
+    ]
   },
   {
     "id": "rec-video",
     "task_id": "video",
     "label": "视频生成推荐",
-    "model_ids": [],
-    "note": "当前数据集暂无视频生成型号（如 Grok Imagine、Nano Banana 视频）。待补充官方数据后开放推荐。"
+    "model_ids": [
+      {"id": "google-veo-3-1", "score": 5, "reason": "4K + 空间音频，技术最完整，企业首选。"},
+      {"id": "openai-sora-2", "score": 4, "reason": "电影感与物理模拟最强（API 将于 2026-09-24 关停，注意风险）。"},
+      {"id": "kuaishou-kling-3-0", "score": 4, "reason": "4K@60fps，免费额度，性价比高。"}
+    ],
+    "note": "Runway Gen-4.5 创意控制最强、Seedance 2.0 性价比高、Grok Imagine 最便宜含音频；Sora 2 API 计划 2026-09-24 关停。"
   },
   {
     "id": "rec-local",

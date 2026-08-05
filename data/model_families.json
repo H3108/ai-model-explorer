@@ -14,5 +14,20 @@
   {"id":"mistral-codestral","provider_id":"mistral","name":"Codestral","name_cn":"Codestral 系列","description_cn":"Mistral 代码专用模型。"},
   {"id":"mistral-magistral","provider_id":"mistral","name":"Magistral","name_cn":"Magistral 系列","description_cn":"Mistral 推理专用模型。"},
   {"id":"xai-grok","provider_id":"xai","name":"Grok","name_cn":"Grok 系列","description_cn":"xAI 通用、推理与编码模型。"},
-  {"id":"meta-llama","provider_id":"meta","name":"Llama","name_cn":"Llama 系列","description_cn":"Meta 开放权重多模态模型（Scout/Maverick）。"}
+  {"id":"meta-llama","provider_id":"meta","name":"Llama","name_cn":"Llama 系列","description_cn":"Meta 开放权重多模态模型（Scout/Maverick）。"},
+  {"id":"openai-sora","provider_id":"openai","name":"Sora","name_cn":"Sora 系列","description_cn":"OpenAI 文本/图像到视频生成模型。"},
+  {"id":"google-veo","provider_id":"google","name":"Veo","name_cn":"Veo 系列","description_cn":"Google 4K 视频生成与空间音频。"},
+  {"id":"google-imagen","provider_id":"google","name":"Imagen","name_cn":"Imagen 系列","description_cn":"Google 照片级文生图模型。"},
+  {"id":"kuaishou-kling","provider_id":"kuaishou","name":"Kling","name_cn":"可灵 Kling 系列","description_cn":"快手 4K 视频生成，免费额度充足。"},
+  {"id":"runway-gen","provider_id":"runway","name":"Gen","name_cn":"Runway Gen 系列","description_cn":"Runway 创意视频生成与控制。"},
+  {"id":"bytedance-seedance","provider_id":"bytedance","name":"Seedance","name_cn":"Seedance 系列","description_cn":"字节高速多镜头视频生成。"},
+  {"id":"xai-imagine","provider_id":"xai","name":"Grok Imagine","name_cn":"Grok Imagine 系列","description_cn":"xAI 视频生成，最便宜含音频。"},
+  {"id":"luma-ray","provider_id":"luma","name":"Ray","name_cn":"Luma Ray 系列","description_cn":"Luma 物理运动真实视频生成。"},
+  {"id":"midjourney-v7","provider_id":"midjourney","name":"Midjourney","name_cn":"Midjourney 系列","description_cn":"艺术质量标杆图像生成。"},
+  {"id":"blackforest-flux","provider_id":"blackforest","name":"Flux","name_cn":"Flux 系列","description_cn":"Black Forest 开放权重图像生成。"},
+  {"id":"stability-sd","provider_id":"stability","name":"Stable Diffusion","name_cn":"Stable Diffusion 系列","description_cn":"Stability 开源图像生成。"},
+  {"id":"adobe-firefly","provider_id":"adobe","name":"Firefly","name_cn":"Firefly 系列","description_cn":"Adobe 商业安全图像生成。"},
+  {"id":"ideogram-3","provider_id":"ideogram","name":"Ideogram","name_cn":"Ideogram 系列","description_cn":"Ideogram 图像内文字渲染。"},
+  {"id":"alibaba-qwenimage","provider_id":"alibaba-qwen","name":"Qwen-Image","name_cn":"通义千问图像系列","description_cn":"阿里开源文生图模型。"},
+  {"id":"alibaba-wan","provider_id":"alibaba-qwen","name":"Wan","name_cn":"通义万相系列","description_cn":"阿里开源视频生成模型。"}
 ]

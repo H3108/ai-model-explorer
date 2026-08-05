@@ -39,16 +39,30 @@ console.log(`[naming_guide] ${naming.length} 条\n`)
 
 console.log('校验 model_variants：')
 const tierOk = new Set(['low', 'low-medium', 'medium', 'medium-high', 'high', 'highest'])
+const isMedia = (v) => Array.isArray(v.model_type) && (v.model_type.includes('Image') || v.model_type.includes('Video'))
 let priceKnown = 0
+let mediaCount = 0
 variants.forEach((v) => {
   if (!familyIds.has(v.family_id)) err(`${v.id}: family_id=${v.family_id} 不在 model_families`)
   else if (familyByProvider[v.family_id] !== v.provider_id) err(`${v.id}: family ${v.family_id} 属于 ${familyByProvider[v.family_id]}，但 variant.provider_id=${v.provider_id}`)
   if (!providerIds.has(v.provider_id)) err(`${v.id}: provider_id=${v.provider_id} 不存在`)
-  if (v.context_window == null || v.context_window <= 0) err(`${v.id}: context_window 无效`)
-  if (v.input_price_per_mtok != null && (typeof v.input_price_per_mtok !== 'number')) err(`${v.id}: input_price 非数字`)
-  else if (v.input_price_per_mtok != null) priceKnown++
-  if (v.currency && !['USD', 'CNY'].includes(v.currency)) err(`${v.id}: currency=${v.currency} 非法`)
-  if (v.input_price_per_mtok != null && v.output_price_per_mtok == null) err(`${v.id}: 有输入价但缺输出价`)
+  const media = isMedia(v)
+  if (media) {
+    mediaCount++
+    if (!v.media_pricing || typeof v.media_pricing !== 'object') err(`${v.id}: 媒体模型需 media_pricing 对象`)
+    else {
+      if (!['image', 'second'].includes(v.media_pricing.unit)) err(`${v.id}: media_pricing.unit=${v.media_pricing.unit} 非法`)
+      if (v.media_pricing.price != null && typeof v.media_pricing.price !== 'number') err(`${v.id}: media_pricing.price 非数字`)
+      if (v.media_pricing.currency && !['USD', 'CNY'].includes(v.media_pricing.currency)) err(`${v.id}: media_pricing.currency 非法`)
+    }
+    if (v.context_window != null) warn(`${v.id}: 媒体模型 context_window 应留空（用 media_pricing 表达）`)
+  } else {
+    if (v.context_window == null || v.context_window <= 0) err(`${v.id}: context_window 无效`)
+    if (v.input_price_per_mtok != null && (typeof v.input_price_per_mtok !== 'number')) err(`${v.id}: input_price 非数字`)
+    else if (v.input_price_per_mtok != null) priceKnown++
+    if (v.currency && !['USD', 'CNY'].includes(v.currency)) err(`${v.id}: currency=${v.currency} 非法`)
+    if (v.input_price_per_mtok != null && v.output_price_per_mtok == null) err(`${v.id}: 有输入价但缺输出价`)
+  }
   const caps = v.capabilities || {}
   for (const dim of ['reasoning', 'coding', 'agent', 'knowledge', 'multilingual']) {
     if (!caps[dim]) { err(`${v.id}: 缺能力维度 ${dim}`); continue }
@@ -61,7 +75,7 @@ variants.forEach((v) => {
   if (!v.source_url) warn(`${v.id}: 缺 source_url`)
   if (v.verified !== true) warn(`${v.id}: verified != true`)
 })
-ok(`价格已知 ${priceKnown}/${variants.length}；未知价格的型号保持 null（不编造）`)
+ok(`文本模型价格已知 ${priceKnown}/${variants.length - mediaCount}；媒体模型 ${mediaCount} 个；未知价格的型号保持 null（不编造）`)
 
 console.log('\n校验 recommendations：')
 recs.forEach((r) => {
