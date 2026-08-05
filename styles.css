@@ -242,6 +242,8 @@ select { padding: 8px 12px; border-radius: var(--r-sm); }
 .brandmark img { display: block; object-fit: contain; }
 .bm-sm { width: 30px; height: 30px; border-radius: 9px; font-size: 13px; }
 .bm-sm img { width: 17px; height: 17px; }
+.bm-xs { width: 22px; height: 22px; border-radius: 7px; font-size: 11px; }
+.bm-xs img { width: 13px; height: 13px; }
 .bm-md { width: 42px; height: 42px; font-size: 17px; }
 .bm-md img { width: 24px; height: 24px; }
 .bm-lg { width: 64px; height: 64px; border-radius: 18px; font-size: 26px; }
@@ -447,6 +449,14 @@ select { padding: 8px 12px; border-radius: var(--r-sm); }
   padding: 2px 8px; border-radius: 999px; cursor: default;
 }
 .free-badge.sm { font-size: 10px; padding: 1px 6px; }
+/* 厂商类型徽章：免费 API / 托管网关 */
+.cat-badge {
+  display: inline-flex; align-items: center;
+  font-size: 11px; font-weight: 700; letter-spacing: .02em; line-height: 1.4;
+  color: #fff; padding: 2px 8px; border-radius: 999px; cursor: default; white-space: nowrap;
+}
+.cat-free { background: var(--green-600); }
+.cat-gateway { background: #2563EB; }
 .gateway-note {
   background: var(--soft);
   border: 1px solid var(--line);
@@ -463,9 +473,15 @@ select { padding: 8px 12px; border-radius: var(--r-sm); }
 .gateway-note strong { color: var(--deep); }
 .gn-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 8px; }
 .gn-chip {
+  display: inline-flex; align-items: center; gap: 6px;
   font-size: 13px; font-weight: 600; color: var(--deep);
   background: #fff; border: 1px solid var(--line); border-radius: 999px;
-  padding: 5px 12px; text-decoration: none; transition: .15s;
+  padding: 4px 10px 4px 6px; text-decoration: none; transition: .15s;
+}
+.gn-chip .brandmark { flex: none; box-shadow: 0 0 0 1px var(--line); }
+.gn-chip .gn-host {
+  font-style: normal; font-size: 10px; font-weight: 700; letter-spacing: .03em;
+  color: #fff; background: #2563EB; padding: 1px 6px; border-radius: 999px;
 }
 .gn-chip:hover { border-color: var(--green); color: var(--green); }
 .gateway-note small { color: var(--muted); font-size: 12.5px; }

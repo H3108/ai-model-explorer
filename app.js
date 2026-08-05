@@ -118,6 +118,12 @@ function logoHTML(p, size = 'md') {
   const file = p.logo_file || `assets/logos/${p.id}.svg`
   return `<span class="brandmark bm-${size}" style="--brand:${esc(p.brand_color || '#173e35')}"><img src="${esc(file)}" alt="${esc(p.name || '')}" loading="lazy" onerror="this.replaceWith(document.createTextNode('${esc((p.name || '?').slice(0, 1))}'))"></span>`
 }
+function catBadge(p, extraCls = '') {
+  if (!p.category) return ''
+  const map = { free: ['免费 API', 'cat-free'], gateway: ['托管网关', 'cat-gateway'] }
+  const [label, cls] = map[p.category] || [p.category, '']
+  return `<span class="cat-badge ${cls} ${extraCls}" title="${esc(p.category === 'gateway' ? '第三方托管网关：聚合多家模型，一个 API key 调用' : '免信用卡、可 API key 调用的真·免费模型')}">${esc(label)}</span>`
+}
 function modBadge(v, extraCls = '') {
   const m = MODALITY[modalityOf(v)]
   return `<span class="mod-badge mod-${modalityOf(v)} ${extraCls}"><i>${m.icon}</i>${m.short}</span>`
@@ -251,7 +257,7 @@ function providerCard(p) {
   const fs = familiesOfProvider(p.id)
   const region = { US: '美国', CN: '中国', FR: '法国', DE: '德国', GB: '英国' }[p.country] || p.country || '其他'
   return `<a class="provider-card" href="#provider/${encodeURIComponent(p.id)}" style="--brand:${esc(p.brand_color || '#173e35')}">
-    <div class="pc-top">${logoHTML(p, 'md')}<div class="pc-tags"><span class="tag">${esc(region)}</span>${p.open_weight ? '<span class="tag tag-open">开放权重</span>' : ''}</div></div>
+    <div class="pc-top">${logoHTML(p, 'md')}<div class="pc-tags"><span class="tag">${esc(region)}</span>${catBadge(p)}${p.open_weight ? '<span class="tag tag-open">开放权重</span>' : ''}</div></div>
     <h3>${esc(p.name_cn || p.name)}</h3>
     <p>${esc(p.description_cn || '')}</p>
     <div class="pc-mix">${modalityMix(vs)}</div>
@@ -319,7 +325,7 @@ function viewProvider(id) {
         <span class="eyebrow">${esc(region)} · PROVIDER</span>
         <h1>${esc(p.name_cn || p.name)}</h1>
         <p>${esc(p.description_cn || '')}</p>
-        <div class="eh-tags">${modalityMix(vs)}${p.open_weight ? '<span class="tag tag-open">开放权重</span>' : ''}</div>
+        <div class="eh-tags">${modalityMix(vs)}${catBadge(p)}${p.open_weight ? '<span class="tag tag-open">开放权重</span>' : ''}</div>
         <div class="eh-links">
           ${p.website ? `<a class="text-link" href="${esc(p.website)}" target="_blank" rel="noopener">官网 ↗</a>` : ''}
           ${p.api_docs ? `<a class="text-link" href="${esc(p.api_docs)}" target="_blank" rel="noopener">API 文档 ↗</a>` : ''}
@@ -418,7 +424,7 @@ function viewFamily(id) {
         <span class="eyebrow"><a class="crumb" href="#provider/${encodeURIComponent(p.id)}">${esc(p.name_cn || p.name)}</a> · MODEL FAMILY</span>
         <h1>${esc(f.name_cn || f.name)}</h1>
         <p>${esc(f.description_cn || '')}</p>
-        <div class="eh-tags">${modalityMix(list)}<span class="tag">${list.length} 个型号</span></div>
+        <div class="eh-tags">${modalityMix(list)}<span class="tag">${list.length} 个型号</span>${catBadge(p)}</div>
       </div>
     </header>
     ${picks.length ? `<h2 class="sec-title">系列内怎么选</h2>
@@ -531,7 +537,7 @@ function viewBrowse() {
     <div class="gateway-note">
       <span class="gn-title">免费 API 网关</span>
       <p>这些厂商把多家模型聚合成<strong>一个免费 API key</strong>调用（免信用卡）：</p>
-      <div class="gn-chips">${state.providers.filter((p) => p.category === 'gateway').map((p) => `<a class="gn-chip" href="#provider/${p.id}">${esc(p.name_cn || p.name)}</a>`).join('')}</div>
+      <div class="gn-chips">${state.providers.filter((p) => p.category === 'gateway').map((p) => `<a class="gn-chip" href="#provider/${p.id}">${logoHTML(p, 'xs')}<span>${esc(p.name_cn || p.name)}</span><em class="gn-host">托管</em></a>`).join('')}</div>
       <small>在上方「价格」选 <b>免费</b> 即可看到它们；外加大批厂商自带的免费模型。</small>
     </div>
     <div id="browse-body">${state.browseTab === 'capability'
