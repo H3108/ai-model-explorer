@@ -628,7 +628,7 @@
     "verified": true,
     "verified_date": "2026-08-05",
     "free": true,
-    "free_note": "Google AI Studio 免费额度（Flash 系列免费层）"
+    "free_note": "真·免费 API：Google AI Studio 永久免费层（免信用卡，限速率，可程序化调用）；也可按量付费调用"
   },
   {
     "id": "google-gemini-3-flash",
@@ -684,7 +684,7 @@
     "verified": true,
     "verified_date": "2026-08-05",
     "free": true,
-    "free_note": "Google AI Studio 免费 API 额度（15 RPM / 1500 RPD，免信用卡）"
+    "free_note": "真·免费 API：Google AI Studio 永久免费层（免信用卡，限速率，可程序化调用）；也可按量付费调用"
   },
   {
     "id": "google-gemini-3-1-flash-lite",
@@ -742,7 +742,7 @@
     "verified": true,
     "verified_date": "2026-08-05",
     "free": true,
-    "free_note": "Google AI Studio 免费额度（Flash-Lite 系列）"
+    "free_note": "真·免费 API：Google AI Studio 永久免费层（免信用卡，限速率，可程序化调用）；也可按量付费调用"
   },
   {
     "id": "google-gemini-2-5-pro",
@@ -855,7 +855,6 @@
     "source_url": "https://www.deepseek.ai/deepseek-api",
     "verified": true,
     "verified_date": "2026-08-05",
-    "free": true,
     "free_note": "chat.deepseek.com 完全免费；API 新用户赠 $5 额度"
   },
   {
@@ -914,7 +913,6 @@
     "source_url": "https://www.deepseek.ai/deepseek-api",
     "verified": true,
     "verified_date": "2026-08-05",
-    "free": true,
     "free_note": "官网对话免费；API 新用户赠金"
   },
   {
@@ -974,7 +972,6 @@
     "source_url": "https://www.deepseek.ai/deepseek-api",
     "verified": true,
     "verified_date": "2026-08-05",
-    "free": true,
     "free_note": "chat.deepseek.com 完全免费；API 新用户赠 $5 额度（推理）"
   },
   {
@@ -1030,7 +1027,6 @@
     "source_url": "https://www.deepseek.ai/deepseek-api",
     "verified": true,
     "verified_date": "2026-08-05",
-    "free": true,
     "free_note": "DeepSeek 开放模型，官网/API 免费可用"
   },
   {
@@ -1088,7 +1084,6 @@
     "source_url": "https://qwen-ai.com/pricing",
     "verified": true,
     "verified_date": "2026-08-05",
-    "free": true,
     "free_note": "通义千问网页版免费；阿里云百炼 API 每模型赠免费额度"
   },
   {
@@ -1146,7 +1141,6 @@
     "source_url": "https://qwen-ai.com/pricing",
     "verified": true,
     "verified_date": "2026-08-05",
-    "free": true,
     "free_note": "通义千问网页版免费；阿里云百炼 API 赠免费额度"
   },
   {
@@ -1203,7 +1197,6 @@
     "source_url": "https://qwen-ai.com/pricing",
     "verified": true,
     "verified_date": "2026-08-05",
-    "free": true,
     "free_note": "通义千问网页版免费；阿里云百炼 API 赠免费额度"
   },
   {
@@ -1258,7 +1251,6 @@
     "verified": true,
     "verified_date": "2026-08-05",
     "price_note": "视觉模型价格以阿里云官方 CNY 计价为准，本表暂未填入精确数值。",
-    "free": true,
     "free_note": "通义千问 VL 网页版免费；API 赠免费额度"
   },
   {
@@ -1317,7 +1309,6 @@
     "source_url": "https://llmcostcalc.com/cloud/zhipu",
     "verified": true,
     "verified_date": "2026-08-05",
-    "free": true,
     "free_note": "智谱清言网页版免费；BigModel 开放平台赠免费额度"
   },
   {
@@ -1375,7 +1366,6 @@
     "source_url": "https://llmcostcalc.com/cloud/zhipu",
     "verified": true,
     "verified_date": "2026-08-05",
-    "free": true,
     "free_note": "智谱清言网页版免费；BigModel 开放平台赠免费额度"
   },
   {
@@ -1432,7 +1422,6 @@
     "source_url": "https://llmcostcalc.com/cloud/zhipu",
     "verified": true,
     "verified_date": "2026-08-05",
-    "free": true,
     "free_note": "智谱清言网页版免费；BigModel 开放平台赠免费额度"
   },
   {
@@ -1491,7 +1480,6 @@
     "source_url": "https://tokenmix.ai/blog/kimi-k2-api-pricing-tiers-2026",
     "verified": true,
     "verified_date": "2026-08-05",
-    "free": true,
     "free_note": "Kimi 网页版完全免费（长上下文）；API 新用户赠额度"
   },
   {
@@ -1550,7 +1538,6 @@
     "source_url": "https://tokenmix.ai/blog/kimi-k2-api-pricing-tiers-2026",
     "verified": true,
     "verified_date": "2026-08-05",
-    "free": true,
     "free_note": "Kimi 网页版完全免费；API 新用户赠额度"
   },
   {
@@ -1610,7 +1597,6 @@
     "source_url": "https://cloudprice.net/models/moonshot-kimi-k2-preview",
     "verified": true,
     "verified_date": "2026-08-05",
-    "free": true,
     "free_note": "Kimi 网页版完全免费；API 新用户赠额度"
   },
   {
@@ -1725,7 +1711,6 @@
     "verified": true,
     "verified_date": "2026-08-05",
     "price_note": "¥0.8 / ¥3.2 每百万 tokens（人民币）；ERNIE 4.5 提供开放权重版本。",
-    "free": true,
     "free_note": "百度千帆 ERNIE-Speed/3.5 永久免费；4.5-Turbo 有免费额度"
   },
   {
@@ -1784,7 +1769,6 @@
     "source_url": "https://llmgateway.io/providers/minimax",
     "verified": true,
     "verified_date": "2026-08-05",
-    "free": true,
     "free_note": "MiniMax 网页版免费；开放平台赠免费额度"
   },
   {
@@ -1842,7 +1826,6 @@
     "source_url": "https://llmgateway.io/providers/minimax",
     "verified": true,
     "verified_date": "2026-08-05",
-    "free": true,
     "free_note": "MiniMax 网页版免费；开放平台赠免费额度"
   },
   {
@@ -1901,7 +1884,6 @@
     "source_url": "https://llmgateway.io/providers/minimax",
     "verified": true,
     "verified_date": "2026-08-05",
-    "free": true,
     "free_note": "MiniMax 网页版免费；开放平台赠免费额度"
   },
   {
@@ -2181,7 +2163,6 @@
     "source_url": "https://docs.x.ai/developers/pricing",
     "verified": true,
     "verified_date": "2026-08-05",
-    "free": true,
     "free_note": "x.com 网页版 Grok 免费（API 付费）"
   },
   {
@@ -2238,7 +2219,6 @@
     "source_url": "https://docs.x.ai/developers/pricing",
     "verified": true,
     "verified_date": "2026-08-05",
-    "free": true,
     "free_note": "x.com 网页版 Grok 免费（API 付费）"
   },
   {
@@ -2353,7 +2333,6 @@
     "verified": true,
     "verified_date": "2026-08-05",
     "price_note": "开放权重；托管价因供应商而异（Together/Fireworks 等约 $0.17/$0.50 每百万 tokens）。",
-    "free": true,
     "free_note": "开放权重，可自部署（无授权费）"
   },
   {
@@ -2413,7 +2392,6 @@
     "verified": true,
     "verified_date": "2026-08-05",
     "price_note": "原生 10M 上下文；托管价约 $0.08/$0.30 每百万 tokens（Together 等）。",
-    "free": true,
     "free_note": "开放权重，可自部署（无授权费）"
   },
   {
@@ -2648,7 +2626,6 @@
     "source_url": "https://blackforestlabs.ai/",
     "verified": true,
     "verified_date": "2026-08-05",
-    "free": true,
     "free_note": "FLUX 开放权重，可本地部署（无授权费）"
   },
   {
@@ -2709,7 +2686,6 @@
     "source_url": "https://stability.ai/",
     "verified": true,
     "verified_date": "2026-08-05",
-    "free": true,
     "free_note": "Stable Diffusion 开放权重，可本地部署（无授权费）"
   },
   {
@@ -2769,7 +2745,6 @@
     "source_url": "https://www.adobe.com/products/firefly.html",
     "verified": true,
     "verified_date": "2026-08-05",
-    "free": true,
     "free_note": "Firefly 网页版免费额度"
   },
   {
@@ -2888,7 +2863,6 @@
     "source_url": "https://help.aliyun.com/zh/model-studio/",
     "verified": true,
     "verified_date": "2026-08-05",
-    "free": true,
     "free_note": "通义万相网页版免费文生图"
   },
   {
@@ -3191,7 +3165,6 @@
     "source_url": "https://runwayml.com/",
     "verified": true,
     "verified_date": "2026-08-05",
-    "free": true,
     "free_note": "Runway 新用户赠 125 credits"
   },
   {
@@ -3253,7 +3226,6 @@
     "source_url": "https://seedance.ai/",
     "verified": true,
     "verified_date": "2026-08-05",
-    "free": true,
     "free_note": "火山方舟赠免费额度（视频生成）"
   },
   {
@@ -3316,7 +3288,6 @@
     "source_url": "https://x.ai/news/grok-imagine",
     "verified": true,
     "verified_date": "2026-08-05",
-    "free": true,
     "free_note": "x.com 网页版 Grok 免费生成（API 付费）"
   },
   {
@@ -3378,7 +3349,6 @@
     "source_url": "https://lumalabs.ai/",
     "verified": true,
     "verified_date": "2026-08-05",
-    "free": true,
     "free_note": "Luma 网页版免费额度"
   },
   {

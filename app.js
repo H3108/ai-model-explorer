@@ -680,6 +680,7 @@ function specCards(v) {
       statCard('速度档', esc(SPEED_CN[v.speed_tier] || v.speed_tier || '—')),
       statCard('开放权重', v.open_weight ? '是' : '否'),
       statCard('发布', esc(v.release_date || '—')),
+      v.free_note ? statCard('获取方式', esc(v.free_note)) : '',
     ].join('')
   }
   return [
@@ -691,7 +692,7 @@ function specCards(v) {
     statCard('视觉输入', v.vision_support ? '支持' : '不支持'),
     statCard('参数规模', esc(v.params || '未公开')),
     statCard('开放权重', v.open_weight ? '是' : '否'),
-    v.free ? statCard('免费说明', esc(v.free_note || '免费可用')) : '',
+    v.free ? statCard('免费说明', esc(v.free_note || '免费可用')) : (v.free_note ? statCard('获取方式', esc(v.free_note)) : ''),
   ].join('')
 }
 function namingBlock(v) {
