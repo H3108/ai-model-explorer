@@ -1,0 +1,7 @@
+[
+  {"id":"strongest","label":"最强模型","strategy":"quality","modelIds":["openai-o3","anthropic-claude-opus-4","google-gemini-2-5-pro"],"reason":"基于 Reasoning / Coding / 长上下文等能力字段；具体排序需能力数据核验。"},
+  {"id":"value","label":"性价比模型","strategy":"value","modelIds":["deepseek-chat","deepseek-reasoner","qwen-plus"],"reason":"候选模型已纳入 Registry；价格字段当前为 unknown，无法计算真实性价比。"},
+  {"id":"cheapest","label":"最便宜模型","strategy":"price_asc","modelIds":[],"reason":"价格数据尚未经过官方价格表核验，因此不输出虚假的最便宜模型。"},
+  {"id":"agent","label":"Agent 模型","strategy":"agent","modelIds":["openai-o3","anthropic-claude-sonnet-4","glm-4-plus"],"reason":"按模型类型中的 Agent / Reasoning / Tool Calling 数据匹配；未确认字段不参与断言。"},
+  {"id":"coding","label":"Coding 模型","strategy":"coding","modelIds":["mistral-codestral-latest","deepseek-reasoner","anthropic-claude-sonnet-4"],"reason":"按 Coding 类型或 Coding 推荐用途匹配。"}
+]

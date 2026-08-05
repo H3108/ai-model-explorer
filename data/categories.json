@@ -1,0 +1,19 @@
+{
+  "model_types": ["Chat", "Reasoning", "Coding", "Vision", "Embedding", "Image", "Audio", "Agent"],
+  "tasks": [
+    {"id":"chat","name_cn":"AI 聊天","description_cn":"日常问答、总结、翻译和写作。","model_types":["Chat"]},
+    {"id":"coding","name_cn":"写代码","description_cn":"生成、解释、审查和重构代码。","model_types":["Coding","Reasoning"]},
+    {"id":"agent","name_cn":"Agent 开发","description_cn":"规划、工具调用和多步骤任务执行。","model_types":["Agent","Reasoning"]},
+    {"id":"image","name_cn":"图片生成","description_cn":"生成、编辑和理解图片。","model_types":["Image","Vision"]},
+    {"id":"video","name_cn":"视频生成","description_cn":"视频生成模型待补充官方数据。","model_types":["unknown"]},
+    {"id":"local","name_cn":"本地部署","description_cn":"开放权重模型和私有化部署。","model_types":["Chat","Coding","Vision"]},
+    {"id":"low_cost","name_cn":"低成本 API","description_cn":"价格数据核验后，按输入输出成本筛选。","model_types":["Chat","Coding"]}
+  ],
+  "name_suffixes": [
+    {"term":"Mini","name_cn":"小型版本","description_cn":"通常表示更轻量的型号；速度和价格不能仅凭名称推断。"},
+    {"term":"Pro","name_cn":"专业版本","description_cn":"通常表示产品线中的高阶定位；具体能力以官方资料为准。"},
+    {"term":"Flash","name_cn":"高速版本","description_cn":"通常表示速度导向的版本；价格和延迟需要核验。"},
+    {"term":"Reasoning","name_cn":"推理增强","description_cn":"通常用于数学、规划和复杂问题。"},
+    {"term":"Vision","name_cn":"视觉能力","description_cn":"通常表示图像理解或视觉输入能力。"}
+  ]
+}
