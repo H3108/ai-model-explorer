@@ -31,20 +31,18 @@ function makeEl() {
     get nextElementSibling() {
       return makeEl()
     },
+    parentElement: { id: 'main-view' },
     set innerHTML(v) {
       this._html = String(v)
     },
     get innerHTML() {
       return this._html
     },
-    classList_contains(c) {
-      return this.classList.has(c)
-    },
   }
-  // classList 兼容 .add/.remove/.contains
-  el.classList.add = (c) => el.classList.add(c)
-  el.classList.remove = (c) => el.classList.delete(c)
-  el.classList.contains = (c) => el.classList.has(c)
+  el.classList.add = Set.prototype.add.bind(el.classList)
+  el.classList.remove = Set.prototype.delete.bind(el.classList)
+  el.classList.contains = Set.prototype.has.bind(el.classList)
+  el.classList.has = Set.prototype.has.bind(el.classList)
   return el
 }
 
@@ -57,6 +55,11 @@ function q(sel) {
 const documentStub = {
   querySelector: (sel) => q(sel),
   querySelectorAll: () => [],
+  getElementById: () => {
+    const el = makeEl()
+    el.parentElement = { id: 'main-view' }
+    return el
+  },
   createElement: () => makeEl(),
   addEventListener: () => {},
   body: makeEl(),
@@ -83,12 +86,17 @@ const ctx = {
   Array,
   Object,
   JSON,
+  scrollTo: () => {},
+  addEventListener: () => {},
+  location: { hash: '' },
 }
 ctx.window = ctx
 vm.createContext(ctx)
 
 const code = fs.readFileSync(path.join(ROOT, 'app.js'), 'utf8')
 vm.runInContext(code, ctx, { filename: 'app.js' })
+
+const data = (f) => JSON.parse(fs.readFileSync(path.join(ROOT, 'data', f + '.json'), 'utf8'))
 
 // 等待 loadData().then(init()) 完成
 setTimeout(() => {
@@ -104,26 +112,72 @@ setTimeout(() => {
   checks.push(['task-options 有内容', taskOpts._html.includes('task-option')])
   checks.push(['recommendation 有内容', rec._html.includes('result-row')])
   checks.push(['glossary 有内容', glossary._html.includes('glossary-card')])
-  console.log('=== Phase 2 渲染冒烟测试 ===')
+  console.log('=== 渲染冒烟测试（Phase 2/3）===')
   for (const [k, v] of checks) console.log(`  ${k}: ${v}`)
 
-  // 下钻：厂商详情 + 型号弹窗（providerDetail/showVariant 走闭包，不依赖外部 state）
-  let drillOk = true
+  let ok = true
+  const fail = (m) => {
+    ok = false
+    console.log('  ❌ ' + m)
+  }
+
+  // Phase 3：独立详情页 + 路由
   try {
-    const detail = ctx.providerDetail('openai')
-    console.log('  providerDetail(openai) 含 family-block:', detail.includes('family-block'))
-    ctx.showVariant('openai-gpt-5-5')
-    const dc = q('#detail-content')._html
-    console.log('  showVariant(文本模型) 含 cap-grid:', dc.includes('cap-grid'), '| 含 适合:', dc.includes('适合'))
-    ctx.showVariant('openai-gpt-image-2')
-    console.log('  showVariant(媒体模型) 含 cap-grid:', q('#detail-content')._html.includes('cap-grid'))
+    const textId = 'openai-gpt-5-5'
+    const mediaId = 'openai-gpt-image-2'
+    const variants = data('model_variants')
+    const core = ctx.modelCoreHTML(variants.find((v) => v.id === textId))
+    console.log(
+      '  modelCoreHTML(文本) 含 cap-grid:',
+      core.includes('cap-grid'),
+      '| 含 适合:',
+      core.includes('适合'),
+    )
+    if (!core.includes('cap-grid')) fail('modelCoreHTML 缺少能力网格')
+
+    ctx.renderModelDetail(textId)
+    const page = q('#model-detail')._html
+    console.log(
+      '  renderModelDetail 含 detail-title:',
+      page.includes('detail-title'),
+      '| 含 命名解读:',
+      page.includes('型号命名解读'),
+      '| 含 相关模型:',
+      page.includes('related-models'),
+    )
+    if (!page.includes('detail-title') || !page.includes('related-models')) fail('renderModelDetail 内容不完整')
+
+    ctx.renderModelDetail(mediaId)
+    console.log('  renderModelDetail(媒体模型) 含 媒体计费:', q('#model-detail')._html.includes('媒体计费'))
+
+    // 路由：深链 #model/<id>
+    ctx.location.hash = '#model/' + textId
+    ctx.applyRoute()
+    console.log(
+      '  applyRoute(#model/...) 后 model-detail 可见(无 hidden):',
+      !q('#model-detail').classList.has('hidden'),
+    )
+    if (q('#model-detail').classList.has('hidden')) fail('深链详情页应可见')
+
+    // 路由：返回主页
+    ctx.location.hash = '#providers'
+    ctx.applyRoute()
+    console.log(
+      '  applyRoute(#providers) 后 main-view 可见:',
+      !q('#main-view').classList.has('hidden'),
+      '| model-detail 隐藏:',
+      q('#model-detail').classList.has('hidden'),
+    )
+    if (q('#main-view').classList.has('hidden')) fail('返回主页后 main-view 应可见')
+
+    // 未找到型号
+    ctx.renderModelDetail('not-exist-id')
+    console.log('  renderModelDetail(不存在) 含 未找到:', q('#model-detail')._html.includes('未找到'))
   } catch (e) {
-    drillOk = false
-    console.log('  ❌ 下钻/弹窗异常:', e.message)
+    fail('详情页/路由异常: ' + e.message)
   }
 
   // 推荐外键校验（独立于 app.js）
-  const data = (f) => JSON.parse(fs.readFileSync(path.join(ROOT, 'data', f + '.json'), 'utf8'))
   const variants = data('model_variants')
   const tasks = data('tasks')
   const recs = data('recommendations')
@@ -144,6 +198,9 @@ setTimeout(() => {
   })
   console.log('  推荐外键错误数:', fkBad)
 
-  console.log(drillOk && fkBad === 0 ? '✅ Phase 2 全流程（列表/下钻/弹窗/推荐外键）验证通过。' : '⚠️ 存在需要修复的问题。')
-
+  console.log(
+    ok && fkBad === 0
+      ? '✅ Phase 2/3 全流程（列表/详情页/路由/命名/相关/推荐外键）验证通过。'
+      : '⚠️ 存在需要修复的问题。',
+  )
 }, 300)

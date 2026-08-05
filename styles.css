@@ -990,3 +990,110 @@ nav a:hover {
   color: var(--muted);
   line-height: 1.6;
 }
+
+/* ===== Phase 3：独立型号详情页 ===== */
+.detail-page {
+  padding: 28px 0 72px;
+  max-width: 920px;
+}
+.detail-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--soft);
+  color: var(--deep);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 8px 16px;
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+  margin-bottom: 18px;
+  transition: background 0.15s ease;
+}
+.detail-back:hover {
+  background: var(--green);
+}
+.detail-empty {
+  text-align: center;
+  padding: 80px 0;
+  color: var(--muted);
+}
+.detail-empty h2 {
+  color: var(--ink);
+  margin-bottom: 8px;
+}
+/* 型号命名解读 */
+.naming-block {
+  margin-top: 38px;
+}
+.naming-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 14px;
+  margin-top: 12px;
+}
+.naming-card {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 16px;
+}
+.naming-card p {
+  font-size: 12px;
+  color: var(--muted);
+  margin: 8px 0 0;
+  line-height: 1.6;
+}
+.naming-term {
+  display: inline-block;
+  font-weight: 700;
+  color: var(--deep);
+  background: var(--green);
+  border-radius: 8px;
+  padding: 2px 8px;
+  margin-bottom: 8px;
+  font-size: 12px;
+}
+.naming-example {
+  display: block;
+  margin-top: 8px;
+  font-size: 10px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+/* 相关模型 */
+.related-models {
+  margin-top: 38px;
+}
+.related-group {
+  margin-bottom: 18px;
+}
+.related-group h4 {
+  margin-bottom: 0;
+}
+.related-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 12px;
+}
+.model-chip-link {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 8px 14px;
+  font-weight: 500;
+  font-size: 13px;
+  color: var(--ink);
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+.model-chip-link:hover {
+  border-color: var(--deep);
+  background: var(--soft);
+}
+/* 主视图与详情页互斥显隐 */
+#main-view.hidden {
+  display: none;
+}

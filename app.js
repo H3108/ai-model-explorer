@@ -1,6 +1,7 @@
-// AI Model Explorer — Phase 2 渲染层
+// AI Model Explorer — Phase 2/3 渲染层
 // 数据源：data/ 下规范化 JSON（providers / model_families / model_variants / tasks / recommendations / naming_guide）
 // 设计原则：复用 styles.css 现有组件类，保持既有 UI 风格；能力用三档定性 + 中文依据，不编造分数。
+// Phase 3：型号详情升级为独立页，支持 #model/<id> 深链路由（厂商下钻/Matcher 结果均可直达）。
 
 const $ = (selector) => document.querySelector(selector)
 const $$ = (selector) => Array.from(document.querySelectorAll(selector))
@@ -28,17 +29,12 @@ const state = {
   selectedTask: null,
   budget: 'balanced',
   speed: 'balanced',
+  referrer: { hash: '#home', provider: null },
+  currentModelId: null,
 }
 
 async function loadData() {
-  const files = [
-    'providers',
-    'model_families',
-    'model_variants',
-    'tasks',
-    'recommendations',
-    'naming_guide',
-  ]
+  const files = ['providers', 'model_families', 'model_variants', 'tasks', 'recommendations', 'naming_guide']
   const values = await Promise.all(
     files.map((file) =>
       fetch(`./data/${file}.json`).then((response) => {
@@ -47,14 +43,7 @@ async function loadData() {
       }),
     ),
   )
-  ;[
-    state.providers,
-    state.families,
-    state.variants,
-    state.tasks,
-    state.recommendations,
-    state.naming,
-  ] = values
+  ;[state.providers, state.families, state.variants, state.tasks, state.recommendations, state.naming] = values
   init()
 }
 
@@ -137,7 +126,7 @@ function renderProviders(filter = 'all') {
 // ---------- 厂商详情（系列 → 型号）----------
 function variantRow(v) {
   const f = familyOf(v)
-  const tag = v.media_type ? `${v.media_type === 'video' ? '视频' : '图像'}` : (v.speed_tier || '')
+  const tag = v.media_type ? `${v.media_type === 'video' ? '视频' : '图像'}` : v.speed_tier || ''
   return `<button class="series-row" data-variant="${v.id}">
     <span><b>${v.name_cn || v.name}</b><small>${f.name_cn || f.name} · ${tag} · ${contextLabel(v)}</small></span>
     <i>${priceLabel(v)} ↗</i>
@@ -169,10 +158,8 @@ function providerDetail(pid) {
   return head + body
 }
 
-// ---------- 型号详情弹窗 ----------
-function showVariant(id) {
-  const v = byId(state.variants, 'id', id)
-  if (!v) return
+// ---------- 型号详情（核心内容，弹窗与独立页共用）----------
+function modelCoreHTML(v) {
   const p = providerOf(v)
   const f = familyOf(v)
   const caps = v.capabilities || {}
@@ -201,12 +188,12 @@ function showVariant(id) {
   const priceHtml = v.media_pricing
     ? `媒体计费：${priceLabel(v)}（${v.media_pricing.note || ''}）`
     : `输入：${v.input_price_per_mtok == null ? '未公开' : priceLabel(v)}`
-  const detailHtml = `<div class="detail-title">
+  return `<div class="detail-title">
       <span class="provider-logo ${logoCls}">${p.logo || p.name.slice(0, 1)}</span>
       <div>
         <span class="eyebrow">${p.name_cn || p.name} · ${f.name_cn || f.name}</span>
         <h2>${v.name_cn || v.name}</h2>
-        <p>Model ID: ${v.model_id || v.id} · ${v.model_type.join(' / ')}</p>
+        <p>Model ID: ${v.model_id || v.id} · ${(v.model_type || []).join(' / ')}</p>
       </div>
     </div>
     <div class="positioning">${v.one_liner_cn || ''}</div>
@@ -231,8 +218,67 @@ function showVariant(id) {
         <p class="muted">${v.source_url ? `<a class="text-link" href="${v.source_url}" target="_blank" rel="noopener">官方来源 ↗</a>` : '—'}<br>核验日期：${v.verified_date || 'unknown'}</p>
       </div>
     </div>`
-  $('#detail-content').innerHTML = detailHtml
-  $('#modal').classList.remove('hidden')
+}
+
+function buildNamingBlock(v) {
+  const hay = `${(v.name || '')} ${(v.name_cn || '')} ${(v.model_id || '')}`.toLowerCase()
+  const hits = state.naming.filter((n) => hay.includes(n.term.toLowerCase()))
+  if (!hits.length) return ''
+  const cards = hits
+    .map(
+      (n) =>
+        `<article class="naming-card"><span class="naming-term">${n.term}</span><b>${n.name_cn}</b><p>${n.description_cn}</p><small class="naming-example">例：${n.example}</small></article>`,
+    )
+    .join('')
+  return `<div class="naming-block"><h4>型号命名解读</h4><div class="naming-grid">${cards}</div></div>`
+}
+
+function buildRelatedBlock(v) {
+  const siblings = variantsOfFamily(v.family_id).filter((x) => x.id !== v.id).slice(0, 6)
+  const others = variantsOfProvider(v.provider_id)
+    .filter((x) => x.id !== v.id && x.family_id !== v.family_id)
+    .slice(0, 4)
+  const chip = (x) => `<button class="model-chip-link" data-variant="${x.id}" data-related="1">${x.name_cn || x.name}</button>`
+  let html = ''
+  if (siblings.length)
+    html += `<div class="related-group"><h4>同系列其他型号</h4><div class="related-chips">${siblings.map(chip).join('')}</div></div>`
+  if (others.length)
+    html += `<div class="related-group"><h4>同厂商其他模型</h4><div class="related-chips">${others.map(chip).join('')}</div></div>`
+  return html ? `<div class="related-models"><h4>相关模型</h4>${html}</div>` : ''
+}
+
+// ---------- 独立详情页（#model/<id> 路由）----------
+function renderModelDetail(id) {
+  state.currentModelId = id
+  const page = $('#model-detail')
+  const v = byId(state.variants, 'id', id)
+  if (!v) {
+    page.innerHTML = `<button class="detail-back" data-detail-back>← 返回</button><div class="detail-empty"><h2>未找到型号：${id}</h2><p>该型号可能已下线或未收录。</p></div>`
+    $('#main-view').classList.add('hidden')
+    page.classList.remove('hidden')
+    window.scrollTo({ top: 0 })
+    return
+  }
+  const back = `<button class="detail-back" data-detail-back>← 返回</button>`
+  page.innerHTML = back + modelCoreHTML(v) + buildNamingBlock(v) + buildRelatedBlock(v)
+  page.classList.remove('hidden')
+  $('#main-view').classList.add('hidden')
+  window.scrollTo({ top: 0 })
+}
+
+function applyRoute() {
+  const hash = location.hash || ''
+  const m = hash.match(/^#model\/(.+)$/)
+  if (m) {
+    renderModelDetail(decodeURIComponent(m[1]))
+    return
+  }
+  $('#model-detail').classList.add('hidden')
+  $('#main-view').classList.remove('hidden')
+  const id = hash.replace(/^#/, '')
+  const el = id ? document.getElementById(id) : null
+  if (el && el.parentElement && el.parentElement.id === 'main-view') el.scrollIntoView({ behavior: 'smooth' })
+  else window.scrollTo({ top: 0, behavior: 'smooth' })
 }
 
 // ---------- Matcher（任务选择器）----------
@@ -258,8 +304,7 @@ function rankCandidates(ids) {
       : ((v.input_price_per_mtok ?? 1e9) + (v.output_price_per_mtok ?? 1e9)) / 2
   const speedOf = (v) => SPEED_RANK[v.speed_tier] ?? 2
   if (state.budget === 'low') arr.sort((a, b) => priceOf(a.v) - priceOf(b.v))
-  else if (state.budget === 'high' || state.speed === 'quality')
-    arr.sort((a, b) => b.r.score - a.r.score)
+  else if (state.budget === 'high' || state.speed === 'quality') arr.sort((a, b) => b.r.score - a.r.score)
   else if (state.speed === 'fast') arr.sort((a, b) => speedOf(b.v) - speedOf(a.v))
   else arr.sort((a, b) => b.r.score - a.r.score)
   return arr
@@ -317,6 +362,7 @@ function init() {
   renderMatcher()
   renderGlossary()
   renderRegistryNotice()
+  applyRoute()
 }
 
 // ---------- 事件 ----------
@@ -361,16 +407,24 @@ document.addEventListener('click', (event) => {
     state.speed = speed.dataset.value
     renderRecommendation()
   }
+  const detailBack = event.target.closest('[data-detail-back]')
+  if (detailBack) {
+    const r = state.referrer || { hash: '#home', provider: null }
+    if (r.provider) state.selectedProvider = r.provider
+    location.hash = r.hash
+    return
+  }
   const variant = event.target.closest('[data-variant]')
-  if (variant) showVariant(variant.dataset.variant)
+  if (variant) {
+    const related = variant.hasAttribute('data-related')
+    state.referrer = related
+      ? { hash: '#model/' + state.currentModelId, provider: state.selectedProvider }
+      : { hash: state.selectedProvider ? '#providers' : '#matcher', provider: state.selectedProvider }
+    location.hash = 'model/' + variant.dataset.variant
+  }
 })
-$('#modal-close').addEventListener('click', () => $('#modal').classList.add('hidden'))
-$('#modal').addEventListener('click', (event) => {
-  if (event.target.id === 'modal') $('#modal').classList.add('hidden')
-})
-document.addEventListener('keydown', (event) => {
-  if (event.key === 'Escape') $('#modal').classList.add('hidden')
-})
+
+window.addEventListener('hashchange', applyRoute)
 
 loadData().catch((error) => {
   console.error(error)

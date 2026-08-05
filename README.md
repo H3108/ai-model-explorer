@@ -6,12 +6,12 @@
 
 ```text
 data/
-├── providers.json       # 厂商、别名、地区、定位、官方来源
-├── models.json          # 模型名、模型族、类型、Model ID
-├── pricing.json         # 独立价格表、货币、计价单位、生效时间
-├── capabilities.json    # 能力、上下文、协议能力、推荐/避免用途
-├── api.json             # Base URL、兼容格式、认证方式
-└── recommendations.json # 最强 / 性价比 / 最便宜 / Agent / Coding 推荐
+├── providers.json        # 厂商、地区、定位、开放权重、官方来源
+├── model_families.json   # 模型系列（归属厂商）
+├── model_variants.json   # 具体型号：客观字段 + 三档能力(含依据) + 适合/不适合
+├── tasks.json            # 任务与偏好维度
+├── recommendations.json  # 每个任务的 TOP N 推荐(带 score 与 reason)
+└── naming_guide.json     # Mini/Pro/Flash/Nano/Reasoning/Vision... 命名解释
 ```
 
 Registry 覆盖：OpenAI、Anthropic、Google、DeepSeek、Alibaba Qwen、Zhipu GLM、Moonshot Kimi、Baidu、MiniMax、Mistral、xAI、Meta Llama。
@@ -20,7 +20,7 @@ Registry 覆盖：OpenAI、Anthropic、Google、DeepSeek、Alibaba Qwen、Zhipu 
 
 ### 数据真实性约束
 
-当前工作区没有连接官方价格或能力数据源，因此无法确认的值均为 `unknown`，没有用估算值填充。`source` 和 `last_verified` 字段用于未来官方数据更新；页面会明确提示 unknown，不会将未知价格用于“最便宜”结论。
+数据均已联网核实（2026-08-05），厂商官方未公开或无法确认的值保留 `null`（不编造、不估算）。每个型号带 `source_url` 与 `verified_date`，页面会明确标注未知项，不会用未知价格得出“最便宜”之类结论。
 
 AI Model Explorer 已从“模型展示库”升级为“AI 模型选择导航系统”：用户不需要先懂模型名称，只需要描述任务，即可获得带理由的模型推荐。
 
@@ -45,8 +45,8 @@ AI Model Explorer 已从“模型展示库”升级为“AI 模型选择导航�
 ├── styles.css
 ├── app.js
 ├── data/
-│   └── Registry JSON files  # 厂商、模型、价格、能力、端点、分类、推荐
-├── scripts/validate_registry.py
+│   └── Registry JSON files  # 厂商、系列、型号、任务、推荐、命名
+├── scripts/validate_normalized.js
 ├── AI_Model_Explorer.md
 └── README.md
 ```
@@ -82,23 +82,23 @@ npx serve .
 
 ## 数据维护与 V2 Agent 接口
 
-当前 `app.js` 通过 `loadRegistry()` 加载 Registry 文件，推荐逻辑集中在 `renderRecommendation()`。后续接入 Agent 时可以：
+当前 `app.js` 通过 `loadData()` 并发加载 6 份规范化 JSON，推荐逻辑集中在 `renderRecommendation()`。后续接入 Agent 时可以：
 
-1. 保留 Registry JSON 作为静态兜底数据。
-2. 将 `loadRegistry()` 替换为统一数据适配器。
+1. 保留规范化 JSON 作为静态兜底数据。
+2. 将 `loadData()` 替换为统一数据适配器。
 3. 将 `renderRecommendation()` 替换为 Agent 的自然语言意图识别和多目标排序接口。
 4. 让 `recommendations.json` 保存可解释的推荐规则、来源和更新时间。
 
 运行 Registry 校验：
 
 ```bash
-python3 scripts/validate_registry.py
+node scripts/validate_normalized.js
 ```
 
 ## 后续优化建议
 
 - 继续扩充更多厂商、系列和具体型号，并增加官方来源链接、价格更新时间。
-- 增加独立 URL 路由，例如 `/providers`、`/matcher`、`/models/:id`；当前使用 hash 入口和详情弹窗，便于保持零依赖。
+- 可进一步升级为独立页面路径（如 `/models/:id`），当前已实现 `#model/:id` hash 深链独立详情页，并保留零依赖。
 - 加入模型横向对比表，支持最多 3 个型号同时比较性能、速度、价格和部署方式。
 - 增加用户预算、地区、数据隐私、延迟和部署方式等更多推荐维度。
 - 增加 JavaScript、curl、Python 多语言 API 示例。
