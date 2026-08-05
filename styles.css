@@ -106,10 +106,10 @@ code, pre, .mono {
 }
 .brand { text-decoration: none; display: flex; align-items: center; gap: 10px; font-size: 15px; white-space: nowrap; }
 .brand b { font-weight: 800; }
-.brand-mark {
-  width: 28px; height: 28px; border-radius: 9px;
-  display: grid; place-items: center;
-  background: var(--deep); color: var(--green);
+.brand-logo {
+  width: 30px; height: 30px; border-radius: 8px;
+  display: block; object-fit: contain;
+  background: transparent;
 }
 #main-nav { display: flex; gap: 26px; margin-right: auto; }
 #main-nav a {

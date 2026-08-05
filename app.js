@@ -276,7 +276,7 @@ function viewProviders() {
         ${seg('providerModality', state.providerModality, 'providerModality', [['all', '全部模态'], ['text', '文本'], ['image', '图像'], ['video', '视频']])}
       </div>
     </div>
-    <p class="notice">数据联网核实（2026-08-05），价格 / 能力以厂商官方为准；未知字段不编造。</p>
+    <p class="notice">数据于 2026-08-05 联网核实，价格与能力以厂商官方为准；未公开项保持空缺，不做估算。</p>
     <div class="provider-grid" id="provider-grid">${providerGridHTML()}</div>
   </div>`
 }
