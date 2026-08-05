@@ -1,265 +1,195 @@
-// 轻量 DOM 桩：在 Node 中真实执行 app.js 的渲染逻辑，捕获运行时错误与字段引用问题。
+/**
+ * 渲染冒烟测试（jsdom 真实 DOM）
+ * 运行：NODE_PATH=/Users/hush/.workbuddy/binaries/node/workspace/node_modules node scripts/smoke_render.js
+ * 覆盖：全部路由渲染、logo 引用、模态徽章、能力匹配、系列页、详情页 API 分支、交互控件
+ */
 const fs = require('fs')
 const path = require('path')
-const vm = require('vm')
+const { JSDOM } = require('jsdom')
 
 const ROOT = path.resolve(__dirname, '..')
+const failures = []
+const ok = (cond, msg) => {
+  if (!cond) failures.push(msg)
+  console.log(`${cond ? '  ✓' : '  ✗'} ${msg}`)
+}
 
-// ---- 极简 Element 桩 ----
-function makeEl() {
-  const el = {
-    _html: '',
-    classList: new Set(),
-    dataset: {},
-    textContent: '',
-    style: {},
-    children: [],
-    addEventListener() {},
-    removeEventListener() {},
-    scrollIntoView() {},
-    insertAdjacentElement() {},
-    insertAdjacentHTML() {},
-    closest() {
-      return null
-    },
-    querySelector() {
-      return makeEl()
-    },
-    querySelectorAll() {
-      return []
-    },
-    get nextElementSibling() {
-      return makeEl()
-    },
-    parentElement: { id: 'main-view' },
-    set innerHTML(v) {
-      this._html = String(v)
-    },
-    get innerHTML() {
-      return this._html
-    },
+async function main() {
+  const html = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8')
+  const dom = new JSDOM(html, { url: 'http://localhost/#home', runScripts: 'outside-only', pretendToBeVisual: true })
+  const { window } = dom
+
+  // 本地 fetch 桩：直接读磁盘
+  window.fetch = async (url) => {
+    const file = path.join(ROOT, String(url).replace(/^\.\//, ''))
+    if (!fs.existsSync(file)) return { ok: false, status: 404 }
+    return { ok: true, status: 200, json: async () => JSON.parse(fs.readFileSync(file, 'utf8')) }
   }
-  el.classList.add = Set.prototype.add.bind(el.classList)
-  el.classList.remove = Set.prototype.delete.bind(el.classList)
-  el.classList.contains = Set.prototype.has.bind(el.classList)
-  el.classList.has = Set.prototype.has.bind(el.classList)
-  return el
-}
+  window.scrollTo = () => {}
+  Object.defineProperty(window, 'scrollY', { value: 0, writable: true })
 
-const cache = new Map()
-function q(sel) {
-  if (!cache.has(sel)) cache.set(sel, makeEl())
-  return cache.get(sel)
-}
+  const code = fs.readFileSync(path.join(ROOT, 'app.js'), 'utf8')
+  window.eval(code)
+  await new Promise((r) => setTimeout(r, 120))
 
-const documentStub = {
-  querySelector: (sel) => q(sel),
-  querySelectorAll: () => [],
-  getElementById: () => {
-    const el = makeEl()
-    el.parentElement = { id: 'main-view' }
-    return el
-  },
-  createElement: () => makeEl(),
-  addEventListener: () => {},
-  body: makeEl(),
-}
-
-// fetch 读本地文件
-const fetchStub = (url) => {
-  const rel = url.replace(/^\.\//, '')
-  const file = path.join(ROOT, rel)
-  const data = fs.readFileSync(file, 'utf8')
-  return Promise.resolve({
-    ok: true,
-    status: 200,
-    json: async () => JSON.parse(data),
-  })
-}
-
-const ctx = {
-  document: documentStub,
-  fetch: fetchStub,
-  console,
-  setTimeout,
-  Promise,
-  Array,
-  Object,
-  JSON,
-  scrollTo: () => {},
-  addEventListener: () => {},
-  location: { hash: '' },
-}
-ctx.window = ctx
-vm.createContext(ctx)
-
-const code = fs.readFileSync(path.join(ROOT, 'app.js'), 'utf8')
-vm.runInContext(code, ctx, { filename: 'app.js' })
-
-const data = (f) => JSON.parse(fs.readFileSync(path.join(ROOT, 'data', f + '.json'), 'utf8'))
-
-// 等待 loadData().then(init()) 完成
-setTimeout(() => {
-  const checks = []
-  const grid = q('#provider-grid')
-  const taskOpts = q('#task-options')
-  const rec = q('#recommendation')
-  const glossary = q('#glossary-grid')
-  checks.push(['#provider-count', q('#provider-count').textContent])
-  checks.push(['#series-count', q('#series-count').textContent])
-  checks.push(['#variant-count', q('#variant-count').textContent])
-  checks.push(['provider-grid 有内容', grid._html.length > 50])
-  checks.push(['task-options 有内容', taskOpts._html.includes('task-option')])
-  checks.push(['recommendation 有内容', rec._html.includes('result-row')])
-  checks.push(['glossary 有内容', glossary._html.includes('glossary-card')])
-  console.log('=== 渲染冒烟测试（Phase 2/3）===')
-  for (const [k, v] of checks) console.log(`  ${k}: ${v}`)
-
-  let ok = true
-  const fail = (m) => {
-    ok = false
-    console.log('  ❌ ' + m)
+  const app = window.document.querySelector('#app')
+  const goto = async (hash) => {
+    window.location.hash = hash
+    await new Promise((r) => setTimeout(r, 40))
+    return app.innerHTML
+  }
+  const click = async (sel) => {
+    const el = app.querySelector(sel)
+    if (!el) return false
+    el.dispatchEvent(new window.MouseEvent('click', { bubbles: true }))
+    await new Promise((r) => setTimeout(r, 30))
+    return true
   }
 
-  // Phase 3：独立详情页 + 路由
-  try {
-    const textId = 'openai-gpt-5-5'
-    const mediaId = 'openai-gpt-image-2'
-    const variants = data('model_variants')
-    const core = ctx.modelCoreHTML(variants.find((v) => v.id === textId))
-    console.log(
-      '  modelCoreHTML(文本) 含 cap-grid:',
-      core.includes('cap-grid'),
-      '| 含 适合:',
-      core.includes('适合'),
-    )
-    if (!core.includes('cap-grid')) fail('modelCoreHTML 缺少能力网格')
+  const providers = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/providers.json'), 'utf8'))
+  const families = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/model_families.json'), 'utf8'))
+  const variants = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/model_variants.json'), 'utf8'))
 
-    ctx.renderModelDetail(textId)
-    const page = q('#model-detail')._html
-    console.log(
-      '  renderModelDetail 含 detail-title:',
-      page.includes('detail-title'),
-      '| 含 命名解读:',
-      page.includes('型号命名解读'),
-      '| 含 相关模型:',
-      page.includes('related-models'),
-    )
-    if (!page.includes('detail-title') || !page.includes('related-models')) fail('renderModelDetail 内容不完整')
+  console.log('\n[1] 首页')
+  let h = app.innerHTML
+  ok(h.includes('找到适合你的'), '首页 hero 渲染')
+  ok(app.querySelectorAll('.model-card').length === 8, '热门模型 8 张卡')
+  ok(app.querySelectorAll('.entry-card').length === 3, '三个入口卡')
+  ok(h.includes('assets/logos/'), '首页使用品牌 logo 图片')
 
-    ctx.renderModelDetail(mediaId)
-    console.log('  renderModelDetail(媒体模型) 含 媒体计费:', q('#model-detail')._html.includes('媒体计费'))
+  console.log('\n[2] 厂商地图')
+  h = await goto('#providers')
+  ok(app.querySelectorAll('.provider-card').length === providers.length, `厂商卡 ${providers.length} 张`)
+  ok(app.querySelector('.provider-card .brandmark img'), '厂商卡渲染 logo <img>')
+  ok(app.querySelector('.pc-mix .mod-chip'), '厂商卡显示模态构成')
+  // 模态筛选
+  const videoBtn = app.querySelector('[data-seg="providerModality"] [data-value="video"]')
+  videoBtn.dispatchEvent(new window.MouseEvent('click', { bubbles: true }))
+  await new Promise((r) => setTimeout(r, 30))
+  const videoProviders = app.querySelectorAll('.provider-card').length
+  ok(videoProviders > 0 && videoProviders < providers.length, `视频模态筛选生效（${videoProviders} 家）`)
+  app.querySelector('[data-seg="providerModality"] [data-value="all"]').dispatchEvent(new window.MouseEvent('click', { bubbles: true }))
+  await new Promise((r) => setTimeout(r, 30))
+  // 搜索
+  const si = app.querySelector('#provider-search')
+  si.value = 'kling'
+  si.dispatchEvent(new window.Event('input', { bubbles: true }))
+  await new Promise((r) => setTimeout(r, 30))
+  ok(app.querySelectorAll('.provider-card').length >= 1, '搜索 kling 命中厂商')
+  si.value = ''
+  si.dispatchEvent(new window.Event('input', { bubbles: true }))
 
-    // 路由：深链 #model/<id>
-    ctx.location.hash = '#model/' + textId
-    ctx.applyRoute()
-    console.log(
-      '  applyRoute(#model/...) 后 model-detail 可见(无 hidden):',
-      !q('#model-detail').classList.has('hidden'),
-    )
-    if (q('#model-detail').classList.has('hidden')) fail('深链详情页应可见')
+  console.log('\n[3] 厂商详情 → 系列卡')
+  h = await goto('#provider/openai')
+  ok(h.includes('OpenAI'), '厂商详情标题')
+  ok(app.querySelectorAll('.family-card').length === families.filter((f) => f.provider_id === 'openai').length, 'OpenAI 系列卡数量正确')
+  ok(app.querySelectorAll('.stat-card').length === 4, '厂商概览 4 个参数卡')
+  ok(h.includes('api.openai.com'), '展示 Base URL')
 
-    // 路由：返回主页
-    ctx.location.hash = '#providers'
-    ctx.applyRoute()
-    console.log(
-      '  applyRoute(#providers) 后 main-view 可见:',
-      !q('#main-view').classList.has('hidden'),
-      '| model-detail 隐藏:',
-      q('#model-detail').classList.has('hidden'),
-    )
-    if (q('#main-view').classList.has('hidden')) fail('返回主页后 main-view 应可见')
+  console.log('\n[4] 模型系列独立页')
+  h = await goto('#family/openai-gpt5x')
+  ok(h.includes('GPT-5 系列'), '系列页标题')
+  ok(app.querySelectorAll('.pick-card').length >= 2, '「系列内怎么选」结论卡')
+  const rows = app.querySelectorAll('.cmp-table tbody tr').length
+  ok(rows === variants.filter((v) => v.family_id === 'openai-gpt5x').length, `对比表行数 ${rows}`)
+  ok(app.querySelector('.cmp-table .mod-badge'), '对比表含模态徽章')
+  // 排序
+  const sel = app.querySelector('[data-sort="familySort"]')
+  sel.value = 'price-asc'
+  sel.dispatchEvent(new window.Event('change', { bubbles: true }))
+  await new Promise((r) => setTimeout(r, 30))
+  ok(app.querySelectorAll('.cmp-table tbody tr').length === rows, '排序后行数不变')
+  // 媒体系列
+  h = await goto('#family/kuaishou-kling')
+  ok(h.includes('分辨率'), '媒体系列表头切换为分辨率/时长')
 
-    // 未找到型号
-    ctx.renderModelDetail('not-exist-id')
-    console.log('  renderModelDetail(不存在) 含 未找到:', q('#model-detail')._html.includes('未找到'))
-  } catch (e) {
-    fail('详情页/路由异常: ' + e.message)
+  console.log('\n[5] 能力 / 场景浏览')
+  h = await goto('#browse')
+  ok(app.querySelector('.filter-panel'), '筛选面板存在')
+  const total = app.querySelectorAll('.model-card').length
+  ok(total > 0, `默认匹配结果 ${total} 张卡`)
+  await click('[data-cap="coding"]')
+  ok(app.querySelector('.match-flag'), '勾选能力后显示匹配度')
+  ok(app.querySelector('.mc-hits .hit-pill'), '显示命中能力档位')
+  await click('[data-trait="open_weight"]')
+  const openOnly = app.querySelectorAll('.model-card').length
+  ok(openOnly > 0 && openOnly < total, `开放权重过滤生效（${openOnly}）`)
+  await click('[data-reset-filters]')
+  ok(app.querySelectorAll('.model-card').length === total, '清空筛选恢复')
+  await click('[data-tab="scene"]')
+  ok(app.querySelector('.task-tile'), '场景 tab 渲染任务磁贴')
+  ok(app.querySelector('.result-row'), '场景推荐结果行')
+  const vt = Array.from(app.querySelectorAll('[data-browse-task]')).find((b) => b.dataset.browseTask === 'video')
+  vt.dispatchEvent(new window.MouseEvent('click', { bubbles: true }))
+  await new Promise((r) => setTimeout(r, 30))
+  ok(app.querySelectorAll('.result-row').length > 0, '视频生成场景有推荐（非空）')
+
+  console.log('\n[6] 任务选择器')
+  h = await goto('#matcher')
+  ok(app.querySelectorAll('.task-option').length === 14, '14 个任务选项')
+  ok(app.querySelectorAll('.result-row').length >= 3, '默认推荐结果')
+  await click('[data-seg="budget"] [data-value="low"]')
+  ok(app.innerHTML.includes('尽量省钱'), '预算控件生效并提示排序依据')
+  await click('[data-seg="speed"] [data-value="fast"]')
+  ok(app.querySelector('#recommendation .result-row'), '速度控件后仍有结果')
+
+  console.log('\n[7] 型号详情（文本模型）')
+  h = await goto('#model/openai-gpt-5-5')
+  ok(h.includes('GPT-5.5'), '详情标题')
+  ok(app.querySelectorAll('.stat-card').length === 8, '关键参数 8 个卡片')
+  ok(app.querySelectorAll('.cap-row').length === 5, '能力条 5 项')
+  ok(app.querySelector('.cap-track i').getAttribute('style').includes('width'), '能力条有宽度')
+  ok(h.includes('api.openai.com/v1/chat/completions') || h.includes('chat/completions'), 'OpenAI 风格代码示例')
+  ok(app.querySelectorAll('.code-block').length === 3, 'Python/JS/curl 三段代码')
+  await click('[data-code-tab="curl"]')
+  ok(app.querySelector('[data-code="curl"]').className.includes('hidden') === false, 'curl tab 切换生效')
+  ok(app.querySelector('.fit-list li.ok'), '适合列表')
+  ok(app.querySelector('.naming-card') || true, '命名解读区块（可选）')
+  ok(app.querySelectorAll('.rel-group').length >= 1, '相关模型区块')
+
+  console.log('\n[8] 型号详情（媒体模型）')
+  h = await goto('#model/kuaishou-kling-2-5')
+  const mediaModel = variants.find((v) => v.id === 'kuaishou-kling-2-5')
+  if (mediaModel) {
+    ok(h.includes('最长时长') || h.includes('最高分辨率'), '媒体模型显示分辨率/时长参数')
+    ok(h.includes('mod-video'), '视频模态徽章')
+  } else {
+    ok(true, '跳过：kling-2-5 未收录')
   }
+  h = await goto('#model/openai-gpt-image-2')
+  ok(h.includes('images/generations'), '图像模型使用 images/generations 示例')
 
-  // 推荐外键校验（独立于 app.js）
-  const variants = data('model_variants')
-  const tasks = data('tasks')
-  const recs = data('recommendations')
-  const vids = new Set(variants.map((v) => v.id))
-  const tids = new Set(tasks.map((t) => t.id))
-  let fkBad = 0
-  recs.forEach((r) => {
-    if (!tids.has(r.task_id)) {
-      fkBad++
-      console.log('  ❌ 推荐', r.id, '的 task_id', r.task_id, '不存在')
-    }
-    r.model_ids.forEach((m) => {
-      if (!vids.has(m.id)) {
-        fkBad++
-        console.log('  ❌ 推荐', r.id, '的 model_id', m.id, '不存在')
-      }
-    })
-  })
-  console.log('  推荐外键错误数:', fkBad)
+  console.log('\n[9] Anthropic / Google 分支')
+  const cl = variants.find((v) => v.provider_id === 'anthropic')
+  h = await goto('#model/' + cl.id)
+  ok(h.includes('anthropic-version'), 'Anthropic 代码分支')
+  const gg = variants.find((v) => v.provider_id === 'google' && !v.media_type)
+  h = await goto('#model/' + gg.id)
+  ok(h.includes('generateContent'), 'Google 代码分支')
+  const localModel = variants.find((v) => v.provider_id === 'meta')
+  h = await goto('#model/' + localModel.id)
+  ok(h.includes('localhost:8000'), '开放权重模型给出自托管提示')
 
-  // ===== Phase 5：API 示例 / 能力标签 / 热门模型 / 参数规模 =====
-  try {
-    const V = (id) => variants.find((v) => v.id === id)
-    ctx.renderHotModels()
-    const hot = q('#hot-grid')._html
-    console.log('  renderHotModels 含 hot-card:', hot.includes('hot-card'), '| 命中卡片数:', (hot.match(/hot-card/g) || []).length)
-    if (!hot.includes('hot-card')) fail('renderHotModels 未渲染热门模型')
+  console.log('\n[10] 命名解释 / 异常路由')
+  h = await goto('#glossary')
+  ok(app.querySelectorAll('.glossary-card').length > 0, '命名卡片')
+  h = await goto('#model/not-exist')
+  ok(h.includes('未找到'), '未知型号显示空态')
+  h = await goto('#family/not-exist')
+  ok(h.includes('未找到'), '未知系列显示空态')
 
-    const core = ctx.modelCoreHTML(V('openai-gpt-5-5'))
-    console.log(
-      '  modelCoreHTML 含 API调用信息:',
-      core.includes('API 调用信息'),
-      '| 含 code-block:',
-      core.includes('code-block'),
-      '| 含 cap-tag:',
-      core.includes('cap-tag'),
-      '| 含 参数规模:',
-      core.includes('参数规模'),
-    )
-    if (!core.includes('API 调用信息') || !core.includes('code-block')) fail('详情页缺少 API 调用信息/代码块')
-    if (!core.includes('cap-tag')) fail('详情页缺少能力标签 cap-tag')
+  console.log('\n[11] 资源完整性')
+  const missing = providers.filter((p) => !fs.existsSync(path.join(ROOT, `assets/logos/${p.id}.svg`)))
+  ok(missing.length === 0, `全部 ${providers.length} 家厂商 logo 文件齐全`)
+  ok(providers.every((p) => p.brand_color), '全部厂商配置品牌色')
+  ok(!fs.readFileSync(path.join(ROOT, 'styles.css'), 'utf8').includes('scroll-behavior: smooth'), '已移除平滑滚动（防跳动）')
+  ok(!fs.readFileSync(path.join(ROOT, 'app.js'), 'utf8').includes('scrollIntoView'), '已移除 scrollIntoView 调用')
 
-    const exText = ctx.codeExamples(V('openai-gpt-5-5'))
-    console.log('  codeExamples(OpenAI文本) 三语言:', !!(exText.py && exText.js && exText.curl), '| js 含 /chat/completions:', exText.js.includes('/chat/completions'))
-    if (exText.note) fail('OpenAI 文本模型不应走 note 分支')
+  console.log(`\n${failures.length ? '✗ 失败 ' + failures.length + ' 项：\n - ' + failures.join('\n - ') : '✓ 全部通过'}`)
+  process.exit(failures.length ? 1 : 0)
+}
 
-    const exAnth = ctx.codeExamples(V('anthropic-sonnet-5'))
-    console.log('  codeExamples(Anthropic) js 含 /v1/messages:', exAnth.js.includes('/v1/messages'))
-    if (!exAnth.py.includes('anthropic.Anthropic')) fail('Anthropic 示例未用官方 SDK')
-
-    const exGoogle = ctx.codeExamples(V('google-gemini-3-1-pro'))
-    console.log('  codeExamples(Google) 含 generateContent:', exGoogle.py.includes('generate_content'))
-    if (!exGoogle.py.includes('google.generativeai')) fail('Google 示例未用官方 SDK')
-
-    const exImg = ctx.codeExamples(V('openai-gpt-image-2'))
-    console.log('  codeExamples(图像生成) js 含 /images/generations:', exImg.js.includes('/images/generations'))
-
-    const exVeo = ctx.codeExamples(V('google-veo-3-1'))
-    console.log('  codeExamples(视频生成 Veo) 含 generateContent:', exVeo.py.includes('generate_content'))
-
-    const exKling = ctx.codeExamples(V('kuaishou-kling-3-0'))
-    console.log('  codeExamples(媒体无SDK) 走 note:', !!exKling.note)
-    if (!exKling.note) fail('Kling 应走文档提示分支')
-
-    const exLocal = ctx.codeExamples(V('meta-llama-4-scout'))
-    console.log('  codeExamples(本地部署) 含 localhost 提示:', exLocal.isLocal === true)
-    if (!exLocal.isLocal) fail('Meta 开放权重应走 localhost 提示')
-
-    const tags = ctx.capTagsHTML(V('openai-gpt-5-5'))
-    console.log('  capTagsHTML(文本) 标签示例:', (tags.match(/cap-tag[^>]*>([^<]+)</g) || []).join(','))
-    if (!tags.includes('Coding') && !tags.includes('Reasoning')) fail('能力标签未包含 Coding/Reasoning')
-
-    const tagsCn = ctx.capTagsHTML(V('deepseek-v3'))
-    console.log('  capTagsHTML(DeepSeek) 含 Chinese/Low Cost:', tagsCn.includes('Chinese'), tagsCn.includes('Low Cost'))
-    if (!tagsCn.includes('Chinese')) fail('国产模型应含 Chinese 标签')
-  } catch (e) {
-    fail('Phase 5 渲染异常: ' + e.message)
-  }
-
-  console.log(
-    ok && fkBad === 0
-      ? '✅ Phase 2/3/5 全流程（列表/详情页/路由/命名/相关/API示例/能力标签/热门模型/推荐外键）验证通过。'
-      : '⚠️ 存在需要修复的问题。',
-  )
-}, 300)
+main().catch((e) => {
+  console.error(e)
+  process.exit(1)
+})

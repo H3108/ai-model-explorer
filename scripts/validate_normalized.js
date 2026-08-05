@@ -44,8 +44,10 @@ providers.forEach((p) => {
   if (p.api_base_url != null && typeof p.api_base_url !== 'string') err(`${p.id}: api_base_url 非字符串`)
   if (!styleOk.has(p.api_style)) err(`${p.id}: api_style=${p.api_style} 非法（应 openai/anthropic/google/media）`)
   if (!p.api_docs && p.api_base_url == null) warn(`${p.id}: 无官方文档且无 API 地址（如 Midjourney 无公开 API，可接受）`)
+  if (!p.brand_color || !p.logo_file) warn(`${p.id}: 缺少品牌色或 logo_file，前端将降级显示`)
+  if (p.brand_color && !/^#[0-9a-fA-F]{6}$/.test(p.brand_color)) err(`${p.id}: brand_color 格式非法`)
 })
-ok(`providers 均已声明 api_style；base_url 为 null 的走自托管/无公开 API 提示`)
+ok(`providers 均已声明 api_style；base_url 为 null 的走自托管/无公开 API 提示；${providers.filter((p) => p.brand_color).length} 家已配置品牌色`)
 
 console.log('校验 model_variants：')
 const tierOk = new Set(['low', 'low-medium', 'medium', 'medium-high', 'high', 'highest'])
