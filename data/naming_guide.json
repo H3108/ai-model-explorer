@@ -1,0 +1,10 @@
+[
+  {"term":"Mini","name_cn":"小型/轻量版本","description_cn":"通常指更轻量的型号：参数更小、延迟更低、价格更便宜，能力通常弱于同系列标准/Pro 版。","example":"GPT-5.4 mini — 快且便宜，适合子代理与高并发。","verified_example":"gpt-5.4-mini"},
+  {"term":"Pro","name_cn":"专业/高阶版本","description_cn":"通常指产品线中的高阶定位：更强推理或更高能力，但更慢、更贵。具体以官方资料为准。","example":"GPT-5.5-pro — 高推理投入，复杂任务更强。","verified_example":"gpt-5.5-pro"},
+  {"term":"Flash","name_cn":"高速版本","description_cn":"通常指速度导向的版本：低延迟、低成本，适合高并发与实时场景。","example":"Gemini 3.5 Flash — 默认 agentic 编码模型，速度快。","verified_example":"gemini-3.5-flash"},
+  {"term":"Nano","name_cn":"超小版本","description_cn":"比 Mini 更轻量，极致低成本与低延迟，适合大规模简单任务。","example":"GPT-5.4 nano — 最便宜最快，能力最低。","verified_example":"gpt-5.4-nano"},
+  {"term":"Reasoning","name_cn":"推理增强","description_cn":"用于数学、规划和复杂问题，模型会进行多步思考（Chain-of-Thought）。","example":"DeepSeek-R1 — 开源推理模型，数学/代码强。","verified_example":"deepseek-reasoner"},
+  {"term":"Vision","name_cn":"视觉能力","description_cn":"表示图像理解或视觉输入能力；用于图片问答、文档识别等。","example":"Gemini 3.1 Pro / Qwen-VL — 多模态视觉理解。","verified_example":"gemini-3.1-pro"},
+  {"term":"Thinking","name_cn":"思考模式","description_cn":"开启显式推理过程（类似 Reasoning），常用于深度推理型号。","example":"ERNIE 5.0 Thinking / Kimi K2 Thinking。","verified_example":"ernie-5.0-thinking-preview"},
+  {"term":"Lite / Flash-Lite","name_cn":"极简低成本版本","description_cn":"在最便宜档位提供高吞吐，适合大规模简单分类与提取。","example":"Gemini 3.1 Flash-Lite — 全场最便宜之一。","verified_example":"gemini-3.1-flash-lite"}
+]

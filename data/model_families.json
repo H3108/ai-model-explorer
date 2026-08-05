@@ -1,0 +1,18 @@
+[
+  {"id":"openai-gpt5x","provider_id":"openai","name":"GPT-5.x","name_cn":"GPT-5 系列","description_cn":"OpenAI 当前主力旗舰系列，覆盖旗舰/标准/Mini/Nano/Pro 多档。"},
+  {"id":"openai-gptimg","provider_id":"openai","name":"GPT Image","name_cn":"GPT 图像系列","description_cn":"图像生成与编辑模型（GPT-Image-2 等）。"},
+  {"id":"anthropic-claude","provider_id":"anthropic","name":"Claude","name_cn":"Claude 系列","description_cn":"Anthropic 对话与 Agent 模型，含 Fable/Opus/Sonnet/Haiku 档位。"},
+  {"id":"google-gemini","provider_id":"google","name":"Gemini","name_cn":"Gemini 系列","description_cn":"Google 多模态与长上下文模型，含 Pro/Flash/Flash-Lite 档位。"},
+  {"id":"deepseek-deepseek","provider_id":"deepseek","name":"DeepSeek","name_cn":"DeepSeek 系列","description_cn":"通用、推理与代码模型，MIT 开放权重。"},
+  {"id":"qwen-qwen","provider_id":"alibaba-qwen","name":"Qwen","name_cn":"通义千问系列","description_cn":"阿里通义千问文本模型，含 Plus/Max/Flash 档位。"},
+  {"id":"qwen-qwenvl","provider_id":"alibaba-qwen","name":"Qwen-VL","name_cn":"通义千问视觉系列","description_cn":"通义千问视觉与多模态理解模型。"},
+  {"id":"zhipu-glm","provider_id":"zhipu-glm","name":"GLM","name_cn":"GLM 系列","description_cn":"智谱 GLM 长上下文推理与 Agent 模型，GLM-5 开源。"},
+  {"id":"moonshot-kimi","provider_id":"moonshot-kimi","name":"Kimi","name_cn":"Kimi 系列","description_cn":"月之暗面长上下文与工具调用模型。"},
+  {"id":"baidu-ernie","provider_id":"baidu","name":"ERNIE","name_cn":"文心系列","description_cn":"百度文心大模型，含 5.x 旗舰与 4.5 性价比系列。"},
+  {"id":"minimax-minimax","provider_id":"minimax","name":"MiniMax","name_cn":"MiniMax 系列","description_cn":"MiniMax 长上下文与工具调用文本模型。"},
+  {"id":"mistral-mistral","provider_id":"mistral","name":"Mistral","name_cn":"Mistral 系列","description_cn":"Mistral 通用与多语模型（Large/Medium/Small）。"},
+  {"id":"mistral-codestral","provider_id":"mistral","name":"Codestral","name_cn":"Codestral 系列","description_cn":"Mistral 代码专用模型。"},
+  {"id":"mistral-magistral","provider_id":"mistral","name":"Magistral","name_cn":"Magistral 系列","description_cn":"Mistral 推理专用模型。"},
+  {"id":"xai-grok","provider_id":"xai","name":"Grok","name_cn":"Grok 系列","description_cn":"xAI 通用、推理与编码模型。"},
+  {"id":"meta-llama","provider_id":"meta","name":"Llama","name_cn":"Llama 系列","description_cn":"Meta 开放权重多模态模型（Scout/Maverick）。"}
+]

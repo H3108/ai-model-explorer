@@ -1,7 +1,100 @@
 [
-  {"id":"strongest","label":"最强模型","strategy":"quality","model_ids":["openai-o3","anthropic-claude-opus-4","google-gemini-2-5-pro"],"reason":"基于 Reasoning / Coding / 长上下文等能力字段；具体排序需能力数据核验。"},
-  {"id":"value","label":"性价比模型","strategy":"value","model_ids":["deepseek-chat","deepseek-reasoner","qwen-plus"],"reason":"候选模型已纳入 Registry；价格字段当前为 unknown，无法计算真实性价比。"},
-  {"id":"cheapest","label":"最便宜模型","strategy":"price_asc","model_ids":[],"reason":"价格数据尚未经过官方价格表核验，因此不输出虚假的最便宜模型。"},
-  {"id":"agent","label":"Agent 模型","strategy":"agent","model_ids":["openai-o3","anthropic-claude-sonnet-4","glm-4-plus"],"reason":"按模型类型中的 Agent / Reasoning / Tool Calling 数据匹配；未确认字段不参与断言。"},
-  {"id":"coding","label":"Coding 模型","strategy":"coding","model_ids":["mistral-codestral-latest","deepseek-reasoner","anthropic-claude-sonnet-4"],"reason":"按 Coding 类型或 Coding 推荐用途匹配。"}
+  {
+    "id": "rec-chat",
+    "task_id": "chat",
+    "label": "AI 聊天推荐",
+    "model_ids": [
+      {"id": "anthropic-sonnet-5", "score": 5, "reason": "速度与智能最佳平衡，日常问答稳定。"},
+      {"id": "openai-gpt-5-4", "score": 5, "reason": "编码与专业工作强，通用性好。"},
+      {"id": "anthropic-haiku-4-5", "score": 4, "reason": "最快最便宜，高并发聊天首选。"}
+    ]
+  },
+  {
+    "id": "rec-coding",
+    "task_id": "coding",
+    "label": "写代码推荐",
+    "model_ids": [
+      {"id": "anthropic-sonnet-5", "score": 5, "reason": "编码强且均衡，agentic 友好。"},
+      {"id": "openai-gpt-5-5", "score": 5, "reason": "旗舰编码与专业工作定位。"},
+      {"id": "deepseek-v3", "score": 4, "reason": "代码强且极便宜，中文好。"}
+    ]
+  },
+  {
+    "id": "rec-agent",
+    "task_id": "agent",
+    "label": "Agent 开发推荐",
+    "model_ids": [
+      {"id": "anthropic-fable-5", "score": 5, "reason": "官方最強，面向长程 agent。"},
+      {"id": "anthropic-opus-5", "score": 5, "reason": "复杂 agentic 编码与企业工作。"},
+      {"id": "xai-grok-4-3", "score": 4, "reason": "agentic 工具调用强，实时检索。"}
+    ]
+  },
+  {
+    "id": "rec-image",
+    "task_id": "image",
+    "label": "图片理解推荐",
+    "model_ids": [
+      {"id": "google-gemini-3-1-pro", "score": 5, "reason": "多模态与长上下文，视觉理解强。"},
+      {"id": "qwen-vl-max", "score": 4, "reason": "视觉多模态，文档/图片问答。"},
+      {"id": "meta-llama-4-maverick", "score": 4, "reason": "开放权重多模态，可自托管。"}
+    ],
+    "note": "本数据集为图像理解/视觉模型；图像生成模型（GPT-Image-2、Nano Banana 等）将在模型命名/生成系统阶段补充。"
+  },
+  {
+    "id": "rec-video",
+    "task_id": "video",
+    "label": "视频生成推荐",
+    "model_ids": [],
+    "note": "当前数据集暂无视频生成型号（如 Grok Imagine、Nano Banana 视频）。待补充官方数据后开放推荐。"
+  },
+  {
+    "id": "rec-local",
+    "task_id": "local",
+    "label": "本地部署推荐",
+    "model_ids": [
+      {"id": "meta-llama-4-scout", "score": 5, "reason": "开放权重，10M 超长上下文，私有化首选。"},
+      {"id": "meta-llama-4-maverick", "score": 5, "reason": "开放权重多模态，1M 上下文。"},
+      {"id": "deepseek-r1", "score": 4, "reason": "MIT 开源推理模型，可自托管。"}
+    ]
+  },
+  {
+    "id": "rec-low-cost",
+    "task_id": "low_cost",
+    "label": "低成本 API 推荐",
+    "model_ids": [
+      {"id": "deepseek-v3", "score": 5, "reason": "$0.27/$1.10 每百万 tokens，代码强。"},
+      {"id": "qwen-3-5-flash", "score": 5, "reason": "$0.10/$0.40，最便宜的 1M 上下文之一。"},
+      {"id": "openai-gpt-5-4-nano", "score": 4, "reason": "$0.20/$1.25，最快最便宜的 GPT。"}
+    ]
+  },
+  {
+    "id": "rec-reasoning",
+    "task_id": "reasoning",
+    "label": "复杂推理推荐",
+    "model_ids": [
+      {"id": "openai-gpt-5-5-pro", "score": 5, "reason": "最高推理投入，复杂任务最强。"},
+      {"id": "anthropic-fable-5", "score": 5, "reason": "官方最強广泛发布模型。"},
+      {"id": "deepseek-r1", "score": 4, "reason": "开源 CoT 推理，数学/代码强且便宜。"}
+    ]
+  },
+  {
+    "id": "rec-long-context",
+    "task_id": "long_context",
+    "label": "长文档处理推荐",
+    "model_ids": [
+      {"id": "meta-llama-4-scout", "score": 5, "reason": "原生 10M 上下文，长文档/代码库首选。"},
+      {"id": "google-gemini-2-5-pro", "score": 5, "reason": "2M 上下文，上代旗舰仍可用。"},
+      {"id": "openai-gpt-5-5", "score": 4, "reason": "1M 上下文，综合能力强。"}
+    ]
+  },
+  {
+    "id": "rec-knowledge",
+    "task_id": "knowledge",
+    "label": "企业知识库推荐",
+    "model_ids": [
+      {"id": "google-gemini-3-1-pro", "score": 5, "reason": "多模态长上下文，RAG 与检索强。"},
+      {"id": "mistral-large-3", "score": 4, "reason": "多语（EU）与数据驻留，企业友好。"},
+      {"id": "openai-gpt-5-5", "score": 4, "reason": "1M 上下文，综合能力强。"}
+    ]
+  }
 ]
