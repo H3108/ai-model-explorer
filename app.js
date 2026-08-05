@@ -1,42 +1,317 @@
+// AI Model Explorer — Phase 2 渲染层
+// 数据源：data/ 下规范化 JSON（providers / model_families / model_variants / tasks / recommendations / naming_guide）
+// 设计原则：复用 styles.css 现有组件类，保持既有 UI 风格；能力用三档定性 + 中文依据，不编造分数。
+
 const $ = (selector) => document.querySelector(selector)
+const $$ = (selector) => Array.from(document.querySelectorAll(selector))
+
+// 能力三档 → 中文标签 + 视觉档位
+const TIER = {
+  low: { label: '弱', level: 'weak' },
+  'low-medium': { label: '较弱', level: 'weak' },
+  medium: { label: '中等', level: 'mid' },
+  'medium-high': { label: '较强', level: 'mid' },
+  high: { label: '强', level: 'high' },
+  highest: { label: '顶尖', level: 'top' },
+}
+// 速度档位排序（越大越快）
+const SPEED_RANK = { slow: 1, fast: 2, faster: 3, fastest: 4 }
+
 const state = {
   providers: [],
-  models: [],
-  pricing: [],
-  capabilities: [],
-  api: [],
-  categories: {},
+  families: [],
+  variants: [],
+  tasks: [],
   recommendations: [],
-  selectedRecommendation: 'strongest',
+  naming: [],
+  selectedProvider: null,
+  selectedTask: null,
+  budget: 'balanced',
+  speed: 'balanced',
 }
 
-async function loadRegistry() {
+async function loadData() {
   const files = [
     'providers',
-    'models',
-    'pricing',
-    'capabilities',
-    'api',
-    'categories',
+    'model_families',
+    'model_variants',
+    'tasks',
     'recommendations',
+    'naming_guide',
   ]
   const values = await Promise.all(
     files.map((file) =>
       fetch(`./data/${file}.json`).then((response) => {
-        if (!response.ok) throw new Error(`${file}.json load failed`)
+        if (!response.ok) throw new Error(`${file}.json 加载失败 (${response.status})`)
         return response.json()
       }),
     ),
   )
   ;[
     state.providers,
-    state.models,
-    state.pricing,
-    state.capabilities,
-    state.api,
-    state.categories,
+    state.families,
+    state.variants,
+    state.tasks,
     state.recommendations,
+    state.naming,
   ] = values
+  init()
+}
+
+// ---------- 查询辅助 ----------
+const byId = (arr, key, value) => arr.find((item) => item[key] === value) || null
+const variantsOfProvider = (pid) => state.variants.filter((v) => v.provider_id === pid)
+const familiesOfProvider = (pid) => state.families.filter((f) => f.provider_id === pid)
+const variantsOfFamily = (fid) => state.variants.filter((v) => v.family_id === fid)
+const providerOf = (v) => byId(state.providers, 'id', v.provider_id) || {}
+const familyOf = (v) => byId(state.families, 'id', v.family_id) || {}
+
+// 价格展示
+function priceLabel(v) {
+  if (v.media_pricing && v.media_pricing.price != null) {
+    const m = v.media_pricing
+    const cur = m.currency === 'CNY' ? '¥' : '$'
+    return `${cur}${m.price} / ${m.unit || '次'}`
+  }
+  if (v.input_price_per_mtok == null) return '价格未公开'
+  const cur = v.currency === 'CNY' ? '¥' : '$'
+  return `${cur}${v.input_price_per_mtok} / ${cur}${v.output_price_per_mtok} 每百万 tokens`
+}
+// 上下文 / 媒体类型
+function contextLabel(v) {
+  if (v.context_window == null) return v.media_type === 'video' ? '视频生成' : '图像生成'
+  if (v.context_window >= 1e6) return `${v.context_window / 1e6}M`
+  if (v.context_window >= 1e3) return `${Math.round(v.context_window / 1e3)}K`
+  return `${v.context_window}`
+}
+// 能力项卡片
+function capItem(dim, zh, cap) {
+  const t = TIER[cap.tier] || { label: cap.tier, level: 'mid' }
+  return `<div class="cap-item"><span class="cap-name">${zh} ${dim}</span><span class="cap-tier tier-${t.level}">${t.label}</span><small class="cap-basis">${cap.basis || ''}</small></div>`
+}
+
+// ---------- 统计 ----------
+function renderStats() {
+  $('#provider-count').textContent = state.providers.length
+  $('#series-count').textContent = state.families.length
+  $('#variant-count').textContent = state.variants.length
+}
+
+// ---------- 厂商列表 ----------
+function providerCard(p) {
+  const variants = variantsOfProvider(p.id)
+  const families = familiesOfProvider(p.id)
+  const regionText = p.country === 'US' ? '美国' : p.country === 'CN' ? '中国' : p.country || '其他'
+  return `<article class="provider-card" data-open-provider="${p.id}">
+    <div class="provider-card-head">
+      <span class="provider-logo ${p.country === 'US' ? 'blue' : 'red'}">${p.logo || p.name.slice(0, 1)}</span>
+      <span class="region">${regionText}</span>
+      ${p.open_weight ? '<span class="open-source">开放权重</span>' : ''}
+      <span class="open-source">${variants.length} 个型号</span>
+    </div>
+    <h3>${p.name_cn || p.name}</h3>
+    <p>${p.description_cn || ''}</p>
+    <div class="series-list"><strong>模型系列</strong>${families.map((f) => `<span class="series-chip">${f.name_cn || f.name}</span>`).join('')}</div>
+    <button class="button small" data-open-provider="${p.id}">查看全部模型 →</button>
+  </article>`
+}
+
+function renderProviders(filter = 'all') {
+  const grid = $('#provider-grid')
+  if (state.selectedProvider) {
+    grid.classList.add('is-detail')
+    grid.innerHTML = providerDetail(state.selectedProvider)
+    return
+  }
+  grid.classList.remove('is-detail')
+  const list = state.providers.filter((p) => {
+    if (filter === 'all') return true
+    if (filter === 'US') return p.country === 'US'
+    if (filter === 'CN') return p.country === 'CN'
+    if (filter === 'open') return p.open_weight === true
+    return true
+  })
+  grid.innerHTML = list.map(providerCard).join('')
+}
+
+// ---------- 厂商详情（系列 → 型号）----------
+function variantRow(v) {
+  const f = familyOf(v)
+  const tag = v.media_type ? `${v.media_type === 'video' ? '视频' : '图像'}` : (v.speed_tier || '')
+  return `<button class="series-row" data-variant="${v.id}">
+    <span><b>${v.name_cn || v.name}</b><small>${f.name_cn || f.name} · ${tag} · ${contextLabel(v)}</small></span>
+    <i>${priceLabel(v)} ↗</i>
+  </button>`
+}
+function providerDetail(pid) {
+  const p = byId(state.providers, 'id', pid)
+  if (!p) return ''
+  const families = familiesOfProvider(pid)
+  const head = `<div class="provider-detail-head">
+    <button class="provider-back" data-back>← 返回厂商列表</button>
+    <div class="provider-card-head">
+      <span class="provider-logo ${p.country === 'US' ? 'blue' : 'red'}">${p.logo || p.name.slice(0, 1)}</span>
+      <h3>${p.name_cn || p.name}</h3>
+      ${p.open_weight ? '<span class="open-source">开放权重</span>' : ''}
+    </div>
+    <p class="provider-desc">${p.description_cn || ''}</p>
+    ${p.website ? `<a class="text-link" href="${p.website}" target="_blank" rel="noopener">官网 ↗</a>` : ''}
+  </div>`
+  const body = families
+    .map((f) => {
+      const vs = variantsOfFamily(f.id)
+      return `<div class="family-block">
+        <div class="family-head"><h4>${f.name_cn || f.name}</h4><small>${f.description_cn || ''}</small></div>
+        ${vs.length ? vs.map(variantRow).join('') : '<p class="muted">该系列暂无收录型号。</p>'}
+      </div>`
+    })
+    .join('')
+  return head + body
+}
+
+// ---------- 型号详情弹窗 ----------
+function showVariant(id) {
+  const v = byId(state.variants, 'id', id)
+  if (!v) return
+  const p = providerOf(v)
+  const f = familyOf(v)
+  const caps = v.capabilities || {}
+  const capGrid = [
+    caps.reasoning && capItem('Reasoning', '推理', caps.reasoning),
+    caps.coding && capItem('Coding', '编码', caps.coding),
+    caps.agent && capItem('Agent', '智能体', caps.agent),
+    caps.knowledge && capItem('Knowledge', '知识', caps.knowledge),
+    caps.multilingual && capItem('Multilingual', '多语', caps.multilingual),
+  ]
+    .filter(Boolean)
+    .join('')
+  const bestFor = (v.best_for || [])
+    .map((t) => {
+      const task = byId(state.tasks, 'id', t)
+      return `<li class="ok">✓ ${task ? task.name_cn : t}</li>`
+    })
+    .join('')
+  const avoidFor = (v.avoid_for || [])
+    .map((t) => {
+      const task = byId(state.tasks, 'id', t)
+      return `<li class="no">✕ ${task ? task.name_cn : t}</li>`
+    })
+    .join('')
+  const logoCls = p.country === 'US' ? 'blue' : 'red'
+  const priceHtml = v.media_pricing
+    ? `媒体计费：${priceLabel(v)}（${v.media_pricing.note || ''}）`
+    : `输入：${v.input_price_per_mtok == null ? '未公开' : priceLabel(v)}`
+  const detailHtml = `<div class="detail-title">
+      <span class="provider-logo ${logoCls}">${p.logo || p.name.slice(0, 1)}</span>
+      <div>
+        <span class="eyebrow">${p.name_cn || p.name} · ${f.name_cn || f.name}</span>
+        <h2>${v.name_cn || v.name}</h2>
+        <p>Model ID: ${v.model_id || v.id} · ${v.model_type.join(' / ')}</p>
+      </div>
+    </div>
+    <div class="positioning">${v.one_liner_cn || ''}</div>
+    <div class="cap-section"><h4>能力评估（三档定性 · 含依据）</h4><div class="cap-grid">${capGrid}</div></div>
+    <div class="detail-grid">
+      <div>
+        <h4>适合</h4>
+        <ul class="detail-list fit-list">${bestFor || '<li class="muted">—</li>'}</ul>
+        <h4>不适合</h4>
+        <ul class="detail-list avoid-list">${avoidFor || '<li class="muted">—</li>'}</ul>
+      </div>
+      <div class="compare-box">
+        <h4>规格</h4>
+        <div class="api-fact"><b>上下文</b><code>${v.context_window == null ? '—（媒体模型）' : contextLabel(v) + ' tokens'}</code></div>
+        <div class="api-fact"><b>最大输出</b><code>${v.max_output_tokens == null ? '—' : v.max_output_tokens + ' tokens'}</code></div>
+        <div class="api-fact"><b>视觉</b><code>${v.vision_support ? '支持' : '不支持'}</code></div>
+        <div class="api-fact"><b>开放权重</b><code>${v.open_weight ? '是' : '否'}</code></div>
+        <div class="api-fact"><b>速度档</b><code>${v.speed_tier || '—'}</code></div>
+        <h4>价格</h4>
+        <p class="muted">${priceHtml}</p>
+        <h4>来源</h4>
+        <p class="muted">${v.source_url ? `<a class="text-link" href="${v.source_url}" target="_blank" rel="noopener">官方来源 ↗</a>` : '—'}<br>核验日期：${v.verified_date || 'unknown'}</p>
+      </div>
+    </div>`
+  $('#detail-content').innerHTML = detailHtml
+  $('#modal').classList.remove('hidden')
+}
+
+// ---------- Matcher（任务选择器）----------
+function renderMatcher() {
+  $('#task-options').innerHTML = state.tasks
+    .map(
+      (task, index) =>
+        `<button class="task-option ${index === 0 ? 'selected' : ''}" data-task="${task.id}"><span>${task.icon || '◎'}</span><b>${task.name_cn}</b><small>${task.description_cn}</small></button>`,
+    )
+    .join('')
+  state.selectedTask = state.tasks[0]?.id || ''
+  renderRecommendation()
+}
+
+// 按预算/速度对候选做二次排序（修复原“死控件”）
+function rankCandidates(ids) {
+  const arr = ids
+    .map((r) => ({ r, v: byId(state.variants, 'id', r.id) }))
+    .filter((x) => x.v)
+  const priceOf = (v) =>
+    v.media_pricing && v.media_pricing.price != null
+      ? v.media_pricing.price
+      : ((v.input_price_per_mtok ?? 1e9) + (v.output_price_per_mtok ?? 1e9)) / 2
+  const speedOf = (v) => SPEED_RANK[v.speed_tier] ?? 2
+  if (state.budget === 'low') arr.sort((a, b) => priceOf(a.v) - priceOf(b.v))
+  else if (state.budget === 'high' || state.speed === 'quality')
+    arr.sort((a, b) => b.r.score - a.r.score)
+  else if (state.speed === 'fast') arr.sort((a, b) => speedOf(b.v) - speedOf(a.v))
+  else arr.sort((a, b) => b.r.score - a.r.score)
+  return arr
+}
+
+function renderRecommendation() {
+  const task = byId(state.tasks, 'id', state.selectedTask)
+  const rec = state.recommendations.find((r) => r.task_id === state.selectedTask)
+  const box = $('#recommendation')
+  if (!task || !rec) {
+    box.innerHTML = `<div class="recommendation-empty"><span>✦</span><h3>暂无该任务推荐</h3><p>数据收集中。</p></div>`
+    return
+  }
+  const ranked = rankCandidates(rec.model_ids)
+  const rows = ranked
+    .map(
+      (item, index) =>
+        `<button class="result-row" data-variant="${item.v.id}"><span class="rank">0${index + 1}</span><span class="result-main"><b>${item.v.name_cn || item.v.name}</b><small>${providerOf(item.v).name_cn || ''} · ${familyOf(item.v).name_cn || ''}</small></span><span class="result-reason">${item.r.reason}</span><span class="arrow">→</span></button>`,
+    )
+    .join('')
+  const hint =
+    state.budget === 'low'
+      ? '已按「尽量省钱」排序（价格优先）。'
+      : state.speed === 'fast'
+        ? '已按「速度优先」排序。'
+        : state.budget === 'high' || state.speed === 'quality'
+          ? '已按「质量优先」排序（官方评分）。'
+          : '按官方推荐评分排序。'
+  box.innerHTML = `<div class="result-head"><div><span class="eyebrow">RECOMMENDATION</span><h3>${rec.label}</h3></div><span class="match-badge">TOP ${ranked.length}</span></div>${rows}<p class="disclaimer">${hint}${rec.note ? ' · ' + rec.note : ''}</p>`
+}
+
+// ---------- Glossary ----------
+function renderGlossary() {
+  $('#glossary-grid').innerHTML = state.naming
+    .map(
+      (item) =>
+        `<article class="glossary-card"><span>✦</span><div><h3>${item.term}</h3><b>${item.name_cn}</b><p>${item.description_cn}</p><small class="glossary-example">例：${item.example}</small></div></article>`,
+    )
+    .join('')
+}
+
+function renderRegistryNotice() {
+  const node = document.createElement('p')
+  node.className = 'registry-notice'
+  node.textContent =
+    '数据均为联网核实（2026-08-05），价格/能力以厂商官方为准；未知字段不编造。点厂商卡片可下钻查看系列与型号。'
+  const sec = document.querySelector('#providers .heading')
+  if (sec && !sec.nextElementSibling?.classList?.contains('registry-notice'))
+    sec.insertAdjacentElement('afterend', node)
+}
+
+function init() {
   renderStats()
   renderProviders()
   renderMatcher()
@@ -44,161 +319,46 @@ async function loadRegistry() {
   renderRegistryNotice()
 }
 
-const byId = (items, key, value) => items.find((item) => item[key] === value)
-const unknown = (value) =>
-  value === undefined || value === null || value === '' ? 'unknown' : value
-function providerFor(model) {
-  return byId(state.providers, 'id', model.provider_id) || {}
-}
-function pricingFor(model) {
-  return byId(state.pricing, 'model_id', model.id) || {}
-}
-function capabilityFor(model) {
-  return byId(state.capabilities, 'model_id', model.id) || {}
-}
-function apiFor(model) {
-  return byId(state.api, 'provider', model.provider_id) || {}
-}
-
-function renderStats() {
-  $('#provider-count').textContent = state.providers.length
-  $('#series-count').textContent = new Set(state.models.map((model) => model.model_family)).size
-  $('#variant-count').textContent = state.models.length
-}
-function providerCard(provider) {
-  const models = state.models.filter((model) => model.provider_id === provider.id)
-  return `<article class="provider-card"><div class="provider-card-head"><span class="provider-logo ${provider.country === 'US' ? 'blue' : 'red'}">${provider.name.slice(0, 1)}</span><span class="region">${provider.country}</span><span class="open-source">${models.length} 个模型</span></div><h3>${provider.name_cn}</h3><p>${provider.description_cn}</p><div class="series-list"><strong>旗下模型</strong>${models.map(modelRow).join('')}</div></article>`
-}
-function modelRow(model) {
-  const price = pricingFor(model)
-  return `<button class="series-row" data-variant="${model.id}"><span><b>${model.display_name_cn}</b><small>${model.model_family} · ${model.model_type.join(' / ')}</small></span><i>${unknown(price.input_price)} ${price.currency || ''} / ${price.unit || 'unknown'} ↗</i></button>`
-}
-function renderProviders(filter = 'all') {
-  $('#provider-grid').innerHTML = state.providers
-    .filter(
-      (provider) =>
-        filter === 'all' ||
-        provider.country === filter ||
-        (filter === '开源' &&
-          state.models.some(
-            (model) =>
-              model.provider_id === provider.id && model.model_type.includes('Open Weight'),
-          )),
-    )
-    .map(providerCard)
-    .join('')
-}
-
-function renderMatcher() {
-  const tasks = state.categories.tasks || []
-  const icons = ['✦', '⌘', '⚙', '◉', '⌂', '♧', '↗']
-  $('#task-options').innerHTML = tasks
-    .map(
-      (task, index) =>
-        `<button class="task-option ${index === 0 ? 'selected' : ''}" data-task="${task.id}"><span>${icons[index] || '◎'}</span><b>${task.name_cn}</b><small>${task.description_cn}</small></button>`,
-    )
-    .join('')
-  state.selectedTask = tasks[0]?.id || ''
-  state.selectedRecommendation = ''
-  renderRecommendation()
-}
-function modelsForRecommendation(item) {
-  return (item.model_ids || []).map((id) => byId(state.models, 'id', id)).filter(Boolean)
-}
-function renderRecommendation() {
-  const task = (state.categories.tasks || []).find((item) => item.id === state.selectedTask)
-  const strategy = byId(state.recommendations, 'id', state.selectedRecommendation)
-  let models = strategy ? modelsForRecommendation(strategy) : []
-  let title = strategy?.label || task?.name_cn || '任务推荐'
-  let reason = strategy?.reason || task?.description_cn || '根据模型类型匹配。'
-  if (task && !strategy) {
-    models = state.models
-      .filter((model) => model.model_type.some((type) => task.model_types.includes(type)))
-      .slice(0, 3)
-    reason = '根据任务所需模型分类筛选；能力与价格为 unknown 的字段不参与事实判断。'
-  }
-  const rows = models.length
-    ? models
-        .map(
-          (model, index) =>
-            `<button class="result-row" data-variant="${model.id}"><span class="rank">0${index + 1}</span><span class="result-main"><b>${model.display_name_cn}</b><small>${providerFor(model).name_cn} · ${model.model_family}</small></span><span class="result-reason">${model.description_cn}</span><span class="arrow">→</span></button>`,
-        )
-        .join('')
-    : `<div class="unknown-result"><b>暂不输出排序</b><p>${reason}</p></div>`
-  $('#recommendation').innerHTML =
-    `<div class="result-head"><div><span class="eyebrow">REGISTRY RECOMMENDATION</span><h3>${title}</h3></div><span class="match-badge">${models.length ? 'CANDIDATES' : 'UNKNOWN'}</span></div>${rows}<p class="disclaimer">${reason}</p>`
-}
-function renderGlossary() {
-  const items = state.categories.name_suffixes || []
-  $('#glossary-grid').innerHTML = items
-    .map(
-      (item) =>
-        `<article class="glossary-card"><span>✦</span><div><h3>${item.term}</h3><b>${item.name_cn}</b><p>${item.description_cn}</p></div></article>`,
-    )
-    .join('')
-}
-function capabilityChip(label, value) {
-  return `<span class="${value === true ? 'on' : ''}">${label}: ${value === true ? 'yes' : unknown(value)}</span>`
-}
-function showVariant(id) {
-  const model = byId(state.models, 'id', id)
-  if (!model) return
-  const provider = providerFor(model)
-  const price = pricingFor(model)
-  const capability = capabilityFor(model)
-  const api = apiFor(model)
-  $('#detail-content').innerHTML =
-    `<div class="detail-title"><span class="provider-logo ${provider.country === 'US' ? 'blue' : 'red'}">${provider.name.slice(0, 1)}</span><div><span class="eyebrow">${provider.name_cn} · ${model.model_family}</span><h2>${model.display_name_cn}</h2><p>${model.model_name} · ${model.model_type.join(' / ')} · Model ID: ${model.model_id}</p></div></div><div class="positioning"><b>${model.description_cn}</b><br>${model.usage_example_cn}</div><div class="capabilities">${capabilityChip('Reasoning', capability.reasoning)}${capabilityChip('Coding', capability.coding)}${capabilityChip('Vision', capability.vision)}${capabilityChip('Audio', capability.audio)}${capabilityChip('Context', capability.context_length)}${capabilityChip('Streaming', capability.streaming)}${capabilityChip('Function Calling', capability.function_calling)}${capabilityChip('JSON Mode', capability.json_mode)}${capabilityChip('Tool Calling', capability.tool_calling)}</div><div class="detail-grid"><div><h4>推荐用途</h4><ul class="detail-list">${model.best_for.map((item) => `<li>✓ ${item}</li>`).join('')} </ul><h4>避免用途</h4><p class="muted">${model.avoid_for.join(' · ')}</p><h4>价格</h4><p class="muted">输入：${unknown(price.input_price)} ${price.currency || ''} · 输出：${unknown(price.output_price)} ${price.currency || ''}<br>缓存：${unknown(price.cache_price)} · 单位：${price.unit || 'unknown'}<br>生效时间：${price.effective_from || 'unknown'}</p></div><div class="compare-box"><h4>API 参数</h4><div class="api-fact"><b>Base URL</b><code>${api.base_url || 'unknown'}</code></div><div class="api-fact"><b>API Format</b><code>${api.api_format || 'unknown'}</code></div><div class="api-fact"><b>Compatible with OpenAI</b><code>${unknown(api.compatible_with_openai)}</code></div><div class="api-fact"><b>Authentication</b><code>${api.authentication || 'unknown'}</code></div><h4>来源状态</h4><p class="muted">来源：${model.source || 'unknown'}<br>最后核验：${model.last_verified || 'unknown'}</p></div></div>`
-  $('#modal').classList.remove('hidden')
-}
-function renderRegistryNotice() {
-  const node = document.createElement('p')
-  node.className = 'registry-notice'
-  node.textContent =
-    '唯一 Registry 数据源：未核验字段显示为 unknown。价格和能力数据请以厂商官方文档为准。'
-  document.querySelector('#providers').prepend(node)
-}
-
+// ---------- 事件 ----------
 document.addEventListener('click', (event) => {
   const filter = event.target.closest('[data-provider-filter]')
   if (filter) {
-    document
-      .querySelectorAll('[data-provider-filter]')
-      .forEach((button) => button.classList.remove('active'))
+    $$('[data-provider-filter]').forEach((b) => b.classList.remove('active'))
     filter.classList.add('active')
+    state.selectedProvider = null
     const value = { 美国: 'US', 中国: 'CN', 开源: 'open' }[filter.dataset.providerFilter] || 'all'
-    $('#provider-grid').innerHTML = state.providers
-      .filter(
-        (provider) =>
-          value === 'all' ||
-          provider.country === value ||
-          (value === 'open' &&
-            state.models.some(
-              (model) =>
-                model.provider_id === provider.id && model.model_type.includes('Open Weight'),
-            )),
-      )
-      .map(providerCard)
-      .join('')
+    renderProviders(value)
+  }
+  const openProvider = event.target.closest('[data-open-provider]')
+  if (openProvider) {
+    state.selectedProvider = openProvider.dataset.openProvider
+    renderProviders()
+    document.querySelector('#providers').scrollIntoView({ behavior: 'smooth' })
+  }
+  const back = event.target.closest('[data-back]')
+  if (back) {
+    state.selectedProvider = null
+    renderProviders()
   }
   const task = event.target.closest('[data-task]')
   if (task) {
-    document
-      .querySelectorAll('[data-task]')
-      .forEach((button) => button.classList.remove('selected'))
+    $$('[data-task]').forEach((b) => b.classList.remove('selected'))
     task.classList.add('selected')
     state.selectedTask = task.dataset.task
-    state.selectedRecommendation = ''
     renderRecommendation()
   }
-  const choice = event.target.closest('[data-recommendation]')
-  if (choice) {
-    document
-      .querySelectorAll('[data-recommendation]')
-      .forEach((button) => button.classList.remove('selected'))
-    choice.classList.add('selected')
-    state.selectedRecommendation = choice.dataset.recommendation
-    state.selectedTask = ''
+  const budget = event.target.closest('#budget-options [data-value]')
+  if (budget) {
+    $$('#budget-options [data-value]').forEach((b) => b.classList.remove('selected'))
+    budget.classList.add('selected')
+    state.budget = budget.dataset.value
+    renderRecommendation()
+  }
+  const speed = event.target.closest('#speed-options [data-value]')
+  if (speed) {
+    $$('#speed-options [data-value]').forEach((b) => b.classList.remove('selected'))
+    speed.classList.add('selected')
+    state.speed = speed.dataset.value
     renderRecommendation()
   }
   const variant = event.target.closest('[data-variant]')
@@ -211,10 +371,11 @@ $('#modal').addEventListener('click', (event) => {
 document.addEventListener('keydown', (event) => {
   if (event.key === 'Escape') $('#modal').classList.add('hidden')
 })
-loadRegistry().catch((error) => {
+
+loadData().catch((error) => {
   console.error(error)
   document.body.insertAdjacentHTML(
     'beforeend',
-    '<p class="load-error">请通过本地静态服务器启动，以加载 Registry JSON 数据。</p>',
+    '<p class="load-error">请通过本地静态服务器启动，以加载数据 JSON（例如：python3 -m http.server）。</p>',
   )
 })
