@@ -9,22 +9,50 @@
     "one_liner_cn": "OpenAI 当前旗舰，强推理与编码，1M 上下文。",
     "context_window": 1000000,
     "max_output_tokens": 128000,
-    "input_price_per_mtok": 5.0,
-    "output_price_per_mtok": 30.0,
+    "input_price_per_mtok": 5,
+    "output_price_per_mtok": 30,
     "currency": "USD",
     "vision_support": true,
     "open_weight": false,
     "speed_tier": "fast",
-    "model_type": ["Chat", "Vision", "Reasoning", "Coding", "Agent"],
+    "model_type": [
+      "Chat",
+      "Vision",
+      "Reasoning",
+      "Coding",
+      "Agent"
+    ],
     "capabilities": {
-      "reasoning": {"tier": "high", "basis": "官方推理档 xhigh；1M 上下文，复杂多步问题。"},
-      "coding": {"tier": "high", "basis": "官方定位编码与专业工作。"},
-      "agent": {"tier": "high", "basis": "支持 Computer use / 工具调用。"},
-      "knowledge": {"tier": "high", "basis": "知识截止 2025-12。"},
-      "multilingual": {"tier": "high", "basis": "多语言支持。"}
+      "reasoning": {
+        "tier": "high",
+        "basis": "官方推理档 xhigh；1M 上下文，复杂多步问题。"
+      },
+      "coding": {
+        "tier": "high",
+        "basis": "官方定位编码与专业工作。"
+      },
+      "agent": {
+        "tier": "high",
+        "basis": "支持 Computer use / 工具调用。"
+      },
+      "knowledge": {
+        "tier": "high",
+        "basis": "知识截止 2025-12。"
+      },
+      "multilingual": {
+        "tier": "high",
+        "basis": "多语言支持。"
+      }
     },
-    "best_for": ["reasoning", "coding", "agent", "long_context"],
-    "avoid_for": ["low_cost"],
+    "best_for": [
+      "reasoning",
+      "coding",
+      "agent",
+      "long_context"
+    ],
+    "avoid_for": [
+      "low_cost"
+    ],
     "release_date": "2026",
     "source_url": "https://platform.openai.com/docs/pricing",
     "verified": true,
@@ -41,21 +69,48 @@
     "context_window": 1000000,
     "max_output_tokens": 128000,
     "input_price_per_mtok": 2.5,
-    "output_price_per_mtok": 15.0,
+    "output_price_per_mtok": 15,
     "currency": "USD",
     "vision_support": true,
     "open_weight": false,
     "speed_tier": "fast",
-    "model_type": ["Chat", "Vision", "Reasoning", "Coding", "Agent"],
+    "model_type": [
+      "Chat",
+      "Vision",
+      "Reasoning",
+      "Coding",
+      "Agent"
+    ],
     "capabilities": {
-      "reasoning": {"tier": "high", "basis": "官方推理档 high；编码定位。"},
-      "coding": {"tier": "high", "basis": "面向专业编码工作。"},
-      "agent": {"tier": "medium", "basis": "支持工具调用。"},
-      "knowledge": {"tier": "high", "basis": "知识截止 2025-08。"},
-      "multilingual": {"tier": "high", "basis": "多语言支持。"}
+      "reasoning": {
+        "tier": "high",
+        "basis": "官方推理档 high；编码定位。"
+      },
+      "coding": {
+        "tier": "high",
+        "basis": "面向专业编码工作。"
+      },
+      "agent": {
+        "tier": "medium",
+        "basis": "支持工具调用。"
+      },
+      "knowledge": {
+        "tier": "high",
+        "basis": "知识截止 2025-08。"
+      },
+      "multilingual": {
+        "tier": "high",
+        "basis": "多语言支持。"
+      }
     },
-    "best_for": ["coding", "agent", "chat"],
-    "avoid_for": ["low_cost"],
+    "best_for": [
+      "coding",
+      "agent",
+      "chat"
+    ],
+    "avoid_for": [
+      "low_cost"
+    ],
     "release_date": "2026",
     "source_url": "https://platform.openai.com/docs/pricing",
     "verified": true,
@@ -77,15 +132,40 @@
     "vision_support": true,
     "open_weight": false,
     "speed_tier": "faster",
-    "model_type": ["Chat", "Vision", "Reasoning", "Coding", "Agent"],
+    "model_type": [
+      "Chat",
+      "Vision",
+      "Reasoning",
+      "Coding",
+      "Agent"
+    ],
     "capabilities": {
-      "reasoning": {"tier": "medium", "basis": "mini 档推理弱于旗舰。"},
-      "coding": {"tier": "medium", "basis": "官方强调编码与子代理。"},
-      "agent": {"tier": "medium", "basis": "适合子代理场景。"},
-      "knowledge": {"tier": "medium", "basis": "知识截止 2025-08。"},
-      "multilingual": {"tier": "high", "basis": "多语言支持。"}
+      "reasoning": {
+        "tier": "medium",
+        "basis": "mini 档推理弱于旗舰。"
+      },
+      "coding": {
+        "tier": "medium",
+        "basis": "官方强调编码与子代理。"
+      },
+      "agent": {
+        "tier": "medium",
+        "basis": "适合子代理场景。"
+      },
+      "knowledge": {
+        "tier": "medium",
+        "basis": "知识截止 2025-08。"
+      },
+      "multilingual": {
+        "tier": "high",
+        "basis": "多语言支持。"
+      }
     },
-    "best_for": ["low_cost", "coding", "agent"],
+    "best_for": [
+      "low_cost",
+      "coding",
+      "agent"
+    ],
     "avoid_for": [],
     "release_date": "2026",
     "source_url": "https://platform.openai.com/docs/pricing",
@@ -108,16 +188,41 @@
     "vision_support": true,
     "open_weight": false,
     "speed_tier": "fastest",
-    "model_type": ["Chat", "Vision", "Coding"],
+    "model_type": [
+      "Chat",
+      "Vision",
+      "Coding"
+    ],
     "capabilities": {
-      "reasoning": {"tier": "low", "basis": "nano 档定位简单任务。"},
-      "coding": {"tier": "low", "basis": "能力最低档。"},
-      "agent": {"tier": "low", "basis": "不面向 agent。"},
-      "knowledge": {"tier": "low", "basis": "简单问答。"},
-      "multilingual": {"tier": "high", "basis": "多语言支持。"}
+      "reasoning": {
+        "tier": "low",
+        "basis": "nano 档定位简单任务。"
+      },
+      "coding": {
+        "tier": "low",
+        "basis": "能力最低档。"
+      },
+      "agent": {
+        "tier": "low",
+        "basis": "不面向 agent。"
+      },
+      "knowledge": {
+        "tier": "low",
+        "basis": "简单问答。"
+      },
+      "multilingual": {
+        "tier": "high",
+        "basis": "多语言支持。"
+      }
     },
-    "best_for": ["low_cost", "chat"],
-    "avoid_for": ["reasoning", "coding"],
+    "best_for": [
+      "low_cost",
+      "chat"
+    ],
+    "avoid_for": [
+      "reasoning",
+      "coding"
+    ],
     "release_date": "2026",
     "source_url": "https://platform.openai.com/docs/pricing",
     "verified": true,
@@ -133,22 +238,47 @@
     "one_liner_cn": "高推理投入的 Pro 版，复杂任务更强但更慢更贵。",
     "context_window": 1000000,
     "max_output_tokens": 128000,
-    "input_price_per_mtok": 30.0,
-    "output_price_per_mtok": 180.0,
+    "input_price_per_mtok": 30,
+    "output_price_per_mtok": 180,
     "currency": "USD",
     "vision_support": true,
     "open_weight": false,
     "speed_tier": "slow",
-    "model_type": ["Chat", "Vision", "Reasoning", "Coding", "Agent"],
+    "model_type": [
+      "Chat",
+      "Vision",
+      "Reasoning",
+      "Coding",
+      "Agent"
+    ],
     "capabilities": {
-      "reasoning": {"tier": "highest", "basis": "Pro = 最高推理投入。"},
-      "coding": {"tier": "high", "basis": "专业编码。"},
-      "agent": {"tier": "high", "basis": "工具调用。"},
-      "knowledge": {"tier": "high", "basis": "知识截止 2025-12。"},
-      "multilingual": {"tier": "high", "basis": "多语言支持。"}
+      "reasoning": {
+        "tier": "highest",
+        "basis": "Pro = 最高推理投入。"
+      },
+      "coding": {
+        "tier": "high",
+        "basis": "专业编码。"
+      },
+      "agent": {
+        "tier": "high",
+        "basis": "工具调用。"
+      },
+      "knowledge": {
+        "tier": "high",
+        "basis": "知识截止 2025-12。"
+      },
+      "multilingual": {
+        "tier": "high",
+        "basis": "多语言支持。"
+      }
     },
-    "best_for": ["reasoning"],
-    "avoid_for": ["low_cost"],
+    "best_for": [
+      "reasoning"
+    ],
+    "avoid_for": [
+      "low_cost"
+    ],
     "release_date": "2026",
     "source_url": "https://platform.openai.com/docs/pricing",
     "verified": true,
@@ -164,22 +294,50 @@
     "one_liner_cn": "Anthropic 最强广泛发布模型，面向长程 Agent。",
     "context_window": 1000000,
     "max_output_tokens": 128000,
-    "input_price_per_mtok": 10.0,
-    "output_price_per_mtok": 50.0,
+    "input_price_per_mtok": 10,
+    "output_price_per_mtok": 50,
     "currency": "USD",
     "vision_support": true,
     "open_weight": false,
     "speed_tier": "slower",
-    "model_type": ["Chat", "Vision", "Reasoning", "Coding", "Agent"],
+    "model_type": [
+      "Chat",
+      "Vision",
+      "Reasoning",
+      "Coding",
+      "Agent"
+    ],
     "capabilities": {
-      "reasoning": {"tier": "highest", "basis": "官方最強广泛发布模型。"},
-      "coding": {"tier": "highest", "basis": "长程 agentic coding。"},
-      "agent": {"tier": "highest", "basis": "面向长程 agent。"},
-      "knowledge": {"tier": "high", "basis": "知识截止 2026-01。"},
-      "multilingual": {"tier": "high", "basis": "多语言支持。"}
+      "reasoning": {
+        "tier": "highest",
+        "basis": "官方最強广泛发布模型。"
+      },
+      "coding": {
+        "tier": "highest",
+        "basis": "长程 agentic coding。"
+      },
+      "agent": {
+        "tier": "highest",
+        "basis": "面向长程 agent。"
+      },
+      "knowledge": {
+        "tier": "high",
+        "basis": "知识截止 2026-01。"
+      },
+      "multilingual": {
+        "tier": "high",
+        "basis": "多语言支持。"
+      }
     },
-    "best_for": ["agent", "reasoning", "coding", "long_context"],
-    "avoid_for": ["low_cost"],
+    "best_for": [
+      "agent",
+      "reasoning",
+      "coding",
+      "long_context"
+    ],
+    "avoid_for": [
+      "low_cost"
+    ],
     "release_date": "2026-06",
     "source_url": "https://docs.anthropic.com/en/docs/about-claude/models",
     "verified": true,
@@ -195,22 +353,49 @@
     "one_liner_cn": "面向复杂 agentic 编码和企业工作的高能力模型。",
     "context_window": 1000000,
     "max_output_tokens": 128000,
-    "input_price_per_mtok": 5.0,
-    "output_price_per_mtok": 25.0,
+    "input_price_per_mtok": 5,
+    "output_price_per_mtok": 25,
     "currency": "USD",
     "vision_support": true,
     "open_weight": false,
     "speed_tier": "moderate",
-    "model_type": ["Chat", "Vision", "Reasoning", "Coding", "Agent"],
+    "model_type": [
+      "Chat",
+      "Vision",
+      "Reasoning",
+      "Coding",
+      "Agent"
+    ],
     "capabilities": {
-      "reasoning": {"tier": "high", "basis": "复杂 agentic 编码。"},
-      "coding": {"tier": "high", "basis": "企业级编码。"},
-      "agent": {"tier": "high", "basis": "多步 agent 工作。"},
-      "knowledge": {"tier": "high", "basis": "知识截止 2026-05。"},
-      "multilingual": {"tier": "high", "basis": "多语言支持。"}
+      "reasoning": {
+        "tier": "high",
+        "basis": "复杂 agentic 编码。"
+      },
+      "coding": {
+        "tier": "high",
+        "basis": "企业级编码。"
+      },
+      "agent": {
+        "tier": "high",
+        "basis": "多步 agent 工作。"
+      },
+      "knowledge": {
+        "tier": "high",
+        "basis": "知识截止 2026-05。"
+      },
+      "multilingual": {
+        "tier": "high",
+        "basis": "多语言支持。"
+      }
     },
-    "best_for": ["coding", "agent", "reasoning"],
-    "avoid_for": ["low_cost"],
+    "best_for": [
+      "coding",
+      "agent",
+      "reasoning"
+    ],
+    "avoid_for": [
+      "low_cost"
+    ],
     "release_date": "2026",
     "source_url": "https://docs.anthropic.com/en/docs/about-claude/models",
     "verified": true,
@@ -226,21 +411,46 @@
     "one_liner_cn": "速度与智能最佳平衡的均衡模型。",
     "context_window": 1000000,
     "max_output_tokens": 128000,
-    "input_price_per_mtok": 3.0,
-    "output_price_per_mtok": 15.0,
+    "input_price_per_mtok": 3,
+    "output_price_per_mtok": 15,
     "currency": "USD",
     "vision_support": true,
     "open_weight": false,
     "speed_tier": "fast",
-    "model_type": ["Chat", "Vision", "Reasoning", "Coding", "Agent"],
+    "model_type": [
+      "Chat",
+      "Vision",
+      "Reasoning",
+      "Coding",
+      "Agent"
+    ],
     "capabilities": {
-      "reasoning": {"tier": "high", "basis": "均衡高智能。"},
-      "coding": {"tier": "high", "basis": "编码强。"},
-      "agent": {"tier": "high", "basis": "agent 友好。"},
-      "knowledge": {"tier": "high", "basis": "知识截止 2026-01。"},
-      "multilingual": {"tier": "high", "basis": "多语言支持。"}
+      "reasoning": {
+        "tier": "high",
+        "basis": "均衡高智能。"
+      },
+      "coding": {
+        "tier": "high",
+        "basis": "编码强。"
+      },
+      "agent": {
+        "tier": "high",
+        "basis": "agent 友好。"
+      },
+      "knowledge": {
+        "tier": "high",
+        "basis": "知识截止 2026-01。"
+      },
+      "multilingual": {
+        "tier": "high",
+        "basis": "多语言支持。"
+      }
     },
-    "best_for": ["coding", "agent", "chat"],
+    "best_for": [
+      "coding",
+      "agent",
+      "chat"
+    ],
     "avoid_for": [],
     "release_date": "2026",
     "source_url": "https://docs.anthropic.com/en/docs/about-claude/models",
@@ -257,22 +467,46 @@
     "one_liner_cn": "最快、最便宜的模型，近前沿智能。",
     "context_window": 200000,
     "max_output_tokens": 64000,
-    "input_price_per_mtok": 1.0,
-    "output_price_per_mtok": 5.0,
+    "input_price_per_mtok": 1,
+    "output_price_per_mtok": 5,
     "currency": "USD",
     "vision_support": true,
     "open_weight": false,
     "speed_tier": "fastest",
-    "model_type": ["Chat", "Vision", "Coding"],
+    "model_type": [
+      "Chat",
+      "Vision",
+      "Coding"
+    ],
     "capabilities": {
-      "reasoning": {"tier": "medium", "basis": "近前沿但非最高。"},
-      "coding": {"tier": "medium", "basis": "日常编码。"},
-      "agent": {"tier": "medium", "basis": "轻量 agent。"},
-      "knowledge": {"tier": "medium", "basis": "知识截止 2025-02。"},
-      "multilingual": {"tier": "high", "basis": "多语言支持。"}
+      "reasoning": {
+        "tier": "medium",
+        "basis": "近前沿但非最高。"
+      },
+      "coding": {
+        "tier": "medium",
+        "basis": "日常编码。"
+      },
+      "agent": {
+        "tier": "medium",
+        "basis": "轻量 agent。"
+      },
+      "knowledge": {
+        "tier": "medium",
+        "basis": "知识截止 2025-02。"
+      },
+      "multilingual": {
+        "tier": "high",
+        "basis": "多语言支持。"
+      }
     },
-    "best_for": ["low_cost", "chat"],
-    "avoid_for": ["reasoning"],
+    "best_for": [
+      "low_cost",
+      "chat"
+    ],
+    "avoid_for": [
+      "reasoning"
+    ],
     "release_date": "2025-10",
     "source_url": "https://docs.anthropic.com/en/docs/about-claude/models",
     "verified": true,
@@ -288,22 +522,50 @@
     "one_liner_cn": "Google 旗舰多模态推理模型，2M 上下文。",
     "context_window": 1000000,
     "max_output_tokens": 64000,
-    "input_price_per_mtok": 2.0,
-    "output_price_per_mtok": 12.0,
+    "input_price_per_mtok": 2,
+    "output_price_per_mtok": 12,
     "currency": "USD",
     "vision_support": true,
     "open_weight": false,
     "speed_tier": "medium",
-    "model_type": ["Chat", "Vision", "Reasoning", "Coding", "Agent"],
+    "model_type": [
+      "Chat",
+      "Vision",
+      "Reasoning",
+      "Coding",
+      "Agent"
+    ],
     "capabilities": {
-      "reasoning": {"tier": "high", "basis": "旗舰推理与 agentic。"},
-      "coding": {"tier": "high", "basis": "编码强。"},
-      "agent": {"tier": "high", "basis": "agentic 工作。"},
-      "knowledge": {"tier": "high", "basis": "多模态与长上下文。"},
-      "multilingual": {"tier": "high", "basis": "多语言支持。"}
+      "reasoning": {
+        "tier": "high",
+        "basis": "旗舰推理与 agentic。"
+      },
+      "coding": {
+        "tier": "high",
+        "basis": "编码强。"
+      },
+      "agent": {
+        "tier": "high",
+        "basis": "agentic 工作。"
+      },
+      "knowledge": {
+        "tier": "high",
+        "basis": "多模态与长上下文。"
+      },
+      "multilingual": {
+        "tier": "high",
+        "basis": "多语言支持。"
+      }
     },
-    "best_for": ["reasoning", "knowledge", "long_context", "image_understanding"],
-    "avoid_for": ["low_cost"],
+    "best_for": [
+      "reasoning",
+      "knowledge",
+      "long_context",
+      "image_understanding"
+    ],
+    "avoid_for": [
+      "low_cost"
+    ],
     "release_date": "2026",
     "source_url": "https://ai.google.dev/gemini-api/docs/pricing",
     "verified": true,
@@ -321,25 +583,52 @@
     "context_window": 1000000,
     "max_output_tokens": 66000,
     "input_price_per_mtok": 1.5,
-    "output_price_per_mtok": 9.0,
+    "output_price_per_mtok": 9,
     "currency": "USD",
     "vision_support": true,
     "open_weight": false,
     "speed_tier": "fast",
-    "model_type": ["Chat", "Vision", "Reasoning", "Coding", "Agent"],
+    "model_type": [
+      "Chat",
+      "Vision",
+      "Reasoning",
+      "Coding",
+      "Agent"
+    ],
     "capabilities": {
-      "reasoning": {"tier": "medium-high", "basis": "Flash 档推理中上。"},
-      "coding": {"tier": "high", "basis": "默认 agentic 编码模型。"},
-      "agent": {"tier": "high", "basis": "agentic + 编码规模场景。"},
-      "knowledge": {"tier": "high", "basis": "多模态。"},
-      "multilingual": {"tier": "high", "basis": "多语言支持。"}
+      "reasoning": {
+        "tier": "medium-high",
+        "basis": "Flash 档推理中上。"
+      },
+      "coding": {
+        "tier": "high",
+        "basis": "默认 agentic 编码模型。"
+      },
+      "agent": {
+        "tier": "high",
+        "basis": "agentic + 编码规模场景。"
+      },
+      "knowledge": {
+        "tier": "high",
+        "basis": "多模态。"
+      },
+      "multilingual": {
+        "tier": "high",
+        "basis": "多语言支持。"
+      }
     },
-    "best_for": ["coding", "agent", "low_cost"],
+    "best_for": [
+      "coding",
+      "agent",
+      "low_cost"
+    ],
     "avoid_for": [],
     "release_date": "2026",
     "source_url": "https://ai.google.dev/gemini-api/docs/pricing",
     "verified": true,
-    "verified_date": "2026-08-05"
+    "verified_date": "2026-08-05",
+    "free": true,
+    "free_note": "Google AI Studio 免费额度（Flash 系列免费层）"
   },
   {
     "id": "google-gemini-3-flash",
@@ -352,25 +641,50 @@
     "context_window": 1000000,
     "max_output_tokens": 64000,
     "input_price_per_mtok": 0.5,
-    "output_price_per_mtok": 3.0,
+    "output_price_per_mtok": 3,
     "currency": "USD",
     "vision_support": true,
     "open_weight": false,
     "speed_tier": "fast",
-    "model_type": ["Chat", "Vision", "Reasoning", "Coding"],
+    "model_type": [
+      "Chat",
+      "Vision",
+      "Reasoning",
+      "Coding"
+    ],
     "capabilities": {
-      "reasoning": {"tier": "medium", "basis": "近 Pro 但低成本。"},
-      "coding": {"tier": "medium", "basis": "通用编码。"},
-      "agent": {"tier": "medium", "basis": "agent 可用。"},
-      "knowledge": {"tier": "high", "basis": "多模态。"},
-      "multilingual": {"tier": "high", "basis": "多语言支持。"}
+      "reasoning": {
+        "tier": "medium",
+        "basis": "近 Pro 但低成本。"
+      },
+      "coding": {
+        "tier": "medium",
+        "basis": "通用编码。"
+      },
+      "agent": {
+        "tier": "medium",
+        "basis": "agent 可用。"
+      },
+      "knowledge": {
+        "tier": "high",
+        "basis": "多模态。"
+      },
+      "multilingual": {
+        "tier": "high",
+        "basis": "多语言支持。"
+      }
     },
-    "best_for": ["low_cost", "chat"],
+    "best_for": [
+      "low_cost",
+      "chat"
+    ],
     "avoid_for": [],
     "release_date": "2026",
     "source_url": "https://ai.google.dev/gemini-api/docs/pricing",
     "verified": true,
-    "verified_date": "2026-08-05"
+    "verified_date": "2026-08-05",
+    "free": true,
+    "free_note": "Google AI Studio 免费 API 额度（15 RPM / 1500 RPD，免信用卡）"
   },
   {
     "id": "google-gemini-3-1-flash-lite",
@@ -388,20 +702,47 @@
     "vision_support": true,
     "open_weight": false,
     "speed_tier": "fastest",
-    "model_type": ["Chat", "Vision", "Coding"],
+    "model_type": [
+      "Chat",
+      "Vision",
+      "Coding"
+    ],
     "capabilities": {
-      "reasoning": {"tier": "low", "basis": "Lite 档推理最低。"},
-      "coding": {"tier": "low", "basis": "简单任务。"},
-      "agent": {"tier": "low", "basis": "不面向 agent。"},
-      "knowledge": {"tier": "medium", "basis": "多模态。"},
-      "multilingual": {"tier": "high", "basis": "多语言支持。"}
+      "reasoning": {
+        "tier": "low",
+        "basis": "Lite 档推理最低。"
+      },
+      "coding": {
+        "tier": "low",
+        "basis": "简单任务。"
+      },
+      "agent": {
+        "tier": "low",
+        "basis": "不面向 agent。"
+      },
+      "knowledge": {
+        "tier": "medium",
+        "basis": "多模态。"
+      },
+      "multilingual": {
+        "tier": "high",
+        "basis": "多语言支持。"
+      }
     },
-    "best_for": ["low_cost", "chat"],
-    "avoid_for": ["reasoning", "coding"],
+    "best_for": [
+      "low_cost",
+      "chat"
+    ],
+    "avoid_for": [
+      "reasoning",
+      "coding"
+    ],
     "release_date": "2026",
     "source_url": "https://ai.google.dev/gemini-api/docs/pricing",
     "verified": true,
-    "verified_date": "2026-08-05"
+    "verified_date": "2026-08-05",
+    "free": true,
+    "free_note": "Google AI Studio 免费额度（Flash-Lite 系列）"
   },
   {
     "id": "google-gemini-2-5-pro",
@@ -414,20 +755,44 @@
     "context_window": 2000000,
     "max_output_tokens": 64000,
     "input_price_per_mtok": 1.25,
-    "output_price_per_mtok": 10.0,
+    "output_price_per_mtok": 10,
     "currency": "USD",
     "vision_support": true,
     "open_weight": false,
     "speed_tier": "medium",
-    "model_type": ["Chat", "Vision", "Reasoning", "Coding"],
+    "model_type": [
+      "Chat",
+      "Vision",
+      "Reasoning",
+      "Coding"
+    ],
     "capabilities": {
-      "reasoning": {"tier": "high", "basis": "上代旗舰推理。"},
-      "coding": {"tier": "high", "basis": "编码强。"},
-      "agent": {"tier": "medium", "basis": "agent 可用。"},
-      "knowledge": {"tier": "high", "basis": "2M 上下文。"},
-      "multilingual": {"tier": "high", "basis": "多语言支持。"}
+      "reasoning": {
+        "tier": "high",
+        "basis": "上代旗舰推理。"
+      },
+      "coding": {
+        "tier": "high",
+        "basis": "编码强。"
+      },
+      "agent": {
+        "tier": "medium",
+        "basis": "agent 可用。"
+      },
+      "knowledge": {
+        "tier": "high",
+        "basis": "2M 上下文。"
+      },
+      "multilingual": {
+        "tier": "high",
+        "basis": "多语言支持。"
+      }
     },
-    "best_for": ["reasoning", "long_context", "knowledge"],
+    "best_for": [
+      "reasoning",
+      "long_context",
+      "knowledge"
+    ],
     "avoid_for": [],
     "release_date": "2025",
     "source_url": "https://ai.google.dev/gemini-api/docs/pricing",
@@ -452,20 +817,46 @@
     "vision_support": false,
     "open_weight": true,
     "speed_tier": "fast",
-    "model_type": ["Chat", "Coding"],
+    "model_type": [
+      "Chat",
+      "Coding"
+    ],
     "capabilities": {
-      "reasoning": {"tier": "medium", "basis": "通用强，非原生 CoT 推理。"},
-      "coding": {"tier": "high", "basis": "代码生成与调试强。"},
-      "agent": {"tier": "medium", "basis": "工具调用可用。"},
-      "knowledge": {"tier": "medium", "basis": "中文知识强。"},
-      "multilingual": {"tier": "medium", "basis": "中英双语强。"}
+      "reasoning": {
+        "tier": "medium",
+        "basis": "通用强，非原生 CoT 推理。"
+      },
+      "coding": {
+        "tier": "high",
+        "basis": "代码生成与调试强。"
+      },
+      "agent": {
+        "tier": "medium",
+        "basis": "工具调用可用。"
+      },
+      "knowledge": {
+        "tier": "medium",
+        "basis": "中文知识强。"
+      },
+      "multilingual": {
+        "tier": "medium",
+        "basis": "中英双语强。"
+      }
     },
-    "best_for": ["coding", "chat", "low_cost"],
-    "avoid_for": ["image"],
+    "best_for": [
+      "coding",
+      "chat",
+      "low_cost"
+    ],
+    "avoid_for": [
+      "image"
+    ],
     "release_date": "2025",
     "source_url": "https://www.deepseek.ai/deepseek-api",
     "verified": true,
-    "verified_date": "2026-08-05"
+    "verified_date": "2026-08-05",
+    "free": true,
+    "free_note": "chat.deepseek.com 完全免费；API 新用户赠 $5 额度"
   },
   {
     "id": "deepseek-v3-2",
@@ -484,20 +875,47 @@
     "vision_support": false,
     "open_weight": true,
     "speed_tier": "fast",
-    "model_type": ["Chat", "Reasoning", "Coding"],
+    "model_type": [
+      "Chat",
+      "Reasoning",
+      "Coding"
+    ],
     "capabilities": {
-      "reasoning": {"tier": "medium-high", "basis": "统一推理+聊天。"},
-      "coding": {"tier": "high", "basis": "代码强。"},
-      "agent": {"tier": "medium", "basis": "工具调用可用。"},
-      "knowledge": {"tier": "medium", "basis": "中文知识强。"},
-      "multilingual": {"tier": "medium", "basis": "中英双语强。"}
+      "reasoning": {
+        "tier": "medium-high",
+        "basis": "统一推理+聊天。"
+      },
+      "coding": {
+        "tier": "high",
+        "basis": "代码强。"
+      },
+      "agent": {
+        "tier": "medium",
+        "basis": "工具调用可用。"
+      },
+      "knowledge": {
+        "tier": "medium",
+        "basis": "中文知识强。"
+      },
+      "multilingual": {
+        "tier": "medium",
+        "basis": "中英双语强。"
+      }
     },
-    "best_for": ["chat", "coding", "low_cost"],
-    "avoid_for": ["image"],
+    "best_for": [
+      "chat",
+      "coding",
+      "low_cost"
+    ],
+    "avoid_for": [
+      "image"
+    ],
     "release_date": "2026",
     "source_url": "https://www.deepseek.ai/deepseek-api",
     "verified": true,
-    "verified_date": "2026-08-05"
+    "verified_date": "2026-08-05",
+    "free": true,
+    "free_note": "官网对话免费；API 新用户赠金"
   },
   {
     "id": "deepseek-r1",
@@ -516,20 +934,48 @@
     "vision_support": false,
     "open_weight": true,
     "speed_tier": "medium",
-    "model_type": ["Reasoning", "Coding", "Agent"],
+    "model_type": [
+      "Reasoning",
+      "Coding",
+      "Agent"
+    ],
     "capabilities": {
-      "reasoning": {"tier": "high", "basis": "开源 CoT 推理，数学/代码强。"},
-      "coding": {"tier": "high", "basis": "代码规划强。"},
-      "agent": {"tier": "medium", "basis": "多步推理。"},
-      "knowledge": {"tier": "medium", "basis": "中文知识强。"},
-      "multilingual": {"tier": "medium", "basis": "中英双语强。"}
+      "reasoning": {
+        "tier": "high",
+        "basis": "开源 CoT 推理，数学/代码强。"
+      },
+      "coding": {
+        "tier": "high",
+        "basis": "代码规划强。"
+      },
+      "agent": {
+        "tier": "medium",
+        "basis": "多步推理。"
+      },
+      "knowledge": {
+        "tier": "medium",
+        "basis": "中文知识强。"
+      },
+      "multilingual": {
+        "tier": "medium",
+        "basis": "中英双语强。"
+      }
     },
-    "best_for": ["reasoning", "coding", "local"],
-    "avoid_for": ["image", "low_cost"],
+    "best_for": [
+      "reasoning",
+      "coding",
+      "local"
+    ],
+    "avoid_for": [
+      "image",
+      "low_cost"
+    ],
     "release_date": "2025",
     "source_url": "https://www.deepseek.ai/deepseek-api",
     "verified": true,
-    "verified_date": "2026-08-05"
+    "verified_date": "2026-08-05",
+    "free": true,
+    "free_note": "chat.deepseek.com 完全免费；API 新用户赠 $5 额度（推理）"
   },
   {
     "id": "deepseek-coder",
@@ -547,20 +993,45 @@
     "vision_support": false,
     "open_weight": true,
     "speed_tier": "fast",
-    "model_type": ["Coding"],
+    "model_type": [
+      "Coding"
+    ],
     "capabilities": {
-      "reasoning": {"tier": "medium", "basis": "代码逻辑。"},
-      "coding": {"tier": "high", "basis": "补全/重构/修复。"},
-      "agent": {"tier": "low", "basis": "非 agent 定位。"},
-      "knowledge": {"tier": "low", "basis": "专注代码。"},
-      "multilingual": {"tier": "medium", "basis": "代码注释多语言。"}
+      "reasoning": {
+        "tier": "medium",
+        "basis": "代码逻辑。"
+      },
+      "coding": {
+        "tier": "high",
+        "basis": "补全/重构/修复。"
+      },
+      "agent": {
+        "tier": "low",
+        "basis": "非 agent 定位。"
+      },
+      "knowledge": {
+        "tier": "low",
+        "basis": "专注代码。"
+      },
+      "multilingual": {
+        "tier": "medium",
+        "basis": "代码注释多语言。"
+      }
     },
-    "best_for": ["coding", "low_cost"],
-    "avoid_for": ["long_context", "image"],
+    "best_for": [
+      "coding",
+      "low_cost"
+    ],
+    "avoid_for": [
+      "long_context",
+      "image"
+    ],
     "release_date": "2025",
     "source_url": "https://www.deepseek.ai/deepseek-api",
     "verified": true,
-    "verified_date": "2026-08-05"
+    "verified_date": "2026-08-05",
+    "free": true,
+    "free_note": "DeepSeek 开放模型，官网/API 免费可用"
   },
   {
     "id": "qwen-plus",
@@ -578,20 +1049,47 @@
     "vision_support": false,
     "open_weight": false,
     "speed_tier": "fast",
-    "model_type": ["Chat", "Reasoning", "Coding"],
+    "model_type": [
+      "Chat",
+      "Reasoning",
+      "Coding"
+    ],
     "capabilities": {
-      "reasoning": {"tier": "medium", "basis": "通用推理。"},
-      "coding": {"tier": "medium", "basis": "日常编码。"},
-      "agent": {"tier": "medium", "basis": "工具调用。"},
-      "knowledge": {"tier": "medium", "basis": "中文知识强。"},
-      "multilingual": {"tier": "medium", "basis": "中英强。"}
+      "reasoning": {
+        "tier": "medium",
+        "basis": "通用推理。"
+      },
+      "coding": {
+        "tier": "medium",
+        "basis": "日常编码。"
+      },
+      "agent": {
+        "tier": "medium",
+        "basis": "工具调用。"
+      },
+      "knowledge": {
+        "tier": "medium",
+        "basis": "中文知识强。"
+      },
+      "multilingual": {
+        "tier": "medium",
+        "basis": "中英强。"
+      }
     },
-    "best_for": ["chat", "low_cost", "knowledge"],
-    "avoid_for": ["image"],
+    "best_for": [
+      "chat",
+      "low_cost",
+      "knowledge"
+    ],
+    "avoid_for": [
+      "image"
+    ],
     "release_date": "2025",
     "source_url": "https://qwen-ai.com/pricing",
     "verified": true,
-    "verified_date": "2026-08-05"
+    "verified_date": "2026-08-05",
+    "free": true,
+    "free_note": "通义千问网页版免费；阿里云百炼 API 每模型赠免费额度"
   },
   {
     "id": "qwen-3-max",
@@ -604,25 +1102,52 @@
     "context_window": 262000,
     "max_output_tokens": 16000,
     "input_price_per_mtok": 1.2,
-    "output_price_per_mtok": 6.0,
+    "output_price_per_mtok": 6,
     "currency": "USD",
     "vision_support": false,
     "open_weight": false,
     "speed_tier": "medium",
-    "model_type": ["Chat", "Reasoning", "Coding"],
+    "model_type": [
+      "Chat",
+      "Reasoning",
+      "Coding"
+    ],
     "capabilities": {
-      "reasoning": {"tier": "high", "basis": "旗舰推理档。"},
-      "coding": {"tier": "high", "basis": "编码强。"},
-      "agent": {"tier": "medium", "basis": "工具调用。"},
-      "knowledge": {"tier": "high", "basis": "中文知识强。"},
-      "multilingual": {"tier": "medium", "basis": "中英强。"}
+      "reasoning": {
+        "tier": "high",
+        "basis": "旗舰推理档。"
+      },
+      "coding": {
+        "tier": "high",
+        "basis": "编码强。"
+      },
+      "agent": {
+        "tier": "medium",
+        "basis": "工具调用。"
+      },
+      "knowledge": {
+        "tier": "high",
+        "basis": "中文知识强。"
+      },
+      "multilingual": {
+        "tier": "medium",
+        "basis": "中英强。"
+      }
     },
-    "best_for": ["coding", "reasoning"],
-    "avoid_for": ["low_cost", "image"],
+    "best_for": [
+      "coding",
+      "reasoning"
+    ],
+    "avoid_for": [
+      "low_cost",
+      "image"
+    ],
     "release_date": "2026",
     "source_url": "https://qwen-ai.com/pricing",
     "verified": true,
-    "verified_date": "2026-08-05"
+    "verified_date": "2026-08-05",
+    "free": true,
+    "free_note": "通义千问网页版免费；阿里云百炼 API 赠免费额度"
   },
   {
     "id": "qwen-3-5-flash",
@@ -640,20 +1165,46 @@
     "vision_support": false,
     "open_weight": false,
     "speed_tier": "fastest",
-    "model_type": ["Chat", "Coding"],
+    "model_type": [
+      "Chat",
+      "Coding"
+    ],
     "capabilities": {
-      "reasoning": {"tier": "low", "basis": "Flash 档。"},
-      "coding": {"tier": "medium", "basis": "轻量编码。"},
-      "agent": {"tier": "low", "basis": "不面向 agent。"},
-      "knowledge": {"tier": "medium", "basis": "中文知识。"},
-      "multilingual": {"tier": "medium", "basis": "中英强。"}
+      "reasoning": {
+        "tier": "low",
+        "basis": "Flash 档。"
+      },
+      "coding": {
+        "tier": "medium",
+        "basis": "轻量编码。"
+      },
+      "agent": {
+        "tier": "low",
+        "basis": "不面向 agent。"
+      },
+      "knowledge": {
+        "tier": "medium",
+        "basis": "中文知识。"
+      },
+      "multilingual": {
+        "tier": "medium",
+        "basis": "中英强。"
+      }
     },
-    "best_for": ["low_cost", "chat"],
-    "avoid_for": ["reasoning", "image"],
+    "best_for": [
+      "low_cost",
+      "chat"
+    ],
+    "avoid_for": [
+      "reasoning",
+      "image"
+    ],
     "release_date": "2026",
     "source_url": "https://qwen-ai.com/pricing",
     "verified": true,
-    "verified_date": "2026-08-05"
+    "verified_date": "2026-08-05",
+    "free": true,
+    "free_note": "通义千问网页版免费；阿里云百炼 API 赠免费额度"
   },
   {
     "id": "qwen-vl-max",
@@ -671,21 +1222,44 @@
     "vision_support": true,
     "open_weight": false,
     "speed_tier": "medium",
-    "model_type": ["Vision", "Chat"],
+    "model_type": [
+      "Vision",
+      "Chat"
+    ],
     "capabilities": {
-      "reasoning": {"tier": "medium", "basis": "视觉理解。"},
-      "coding": {"tier": "medium", "basis": "文档/图表理解。"},
-      "agent": {"tier": "low", "basis": "非 agent 定位。"},
-      "knowledge": {"tier": "medium", "basis": "中文文档强。"},
-      "multilingual": {"tier": "medium", "basis": "中英强。"}
+      "reasoning": {
+        "tier": "medium",
+        "basis": "视觉理解。"
+      },
+      "coding": {
+        "tier": "medium",
+        "basis": "文档/图表理解。"
+      },
+      "agent": {
+        "tier": "low",
+        "basis": "非 agent 定位。"
+      },
+      "knowledge": {
+        "tier": "medium",
+        "basis": "中文文档强。"
+      },
+      "multilingual": {
+        "tier": "medium",
+        "basis": "中英强。"
+      }
     },
-    "best_for": ["image_understanding", "knowledge"],
+    "best_for": [
+      "image_understanding",
+      "knowledge"
+    ],
     "avoid_for": [],
     "release_date": "2025",
     "source_url": "https://help.aliyun.com/zh/model-studio/",
     "verified": true,
     "verified_date": "2026-08-05",
-    "price_note": "视觉模型价格以阿里云官方 CNY 计价为准，本表暂未填入精确数值。"
+    "price_note": "视觉模型价格以阿里云官方 CNY 计价为准，本表暂未填入精确数值。",
+    "free": true,
+    "free_note": "通义千问 VL 网页版免费；API 赠免费额度"
   },
   {
     "id": "glm-5-2",
@@ -697,26 +1271,54 @@
     "one_liner_cn": "智谱最新旗舰，1M 上下文，长程 agent。",
     "context_window": 1000000,
     "max_output_tokens": 128000,
-    "input_price_per_mtok": 8.0,
-    "output_price_per_mtok": 28.0,
+    "input_price_per_mtok": 8,
+    "output_price_per_mtok": 28,
     "currency": "USD",
     "vision_support": false,
     "open_weight": false,
     "speed_tier": "medium",
-    "model_type": ["Chat", "Reasoning", "Coding", "Agent"],
+    "model_type": [
+      "Chat",
+      "Reasoning",
+      "Coding",
+      "Agent"
+    ],
     "capabilities": {
-      "reasoning": {"tier": "high", "basis": "旗舰推理。"},
-      "coding": {"tier": "high", "basis": "编码强。"},
-      "agent": {"tier": "high", "basis": "长程 agentic 工程。"},
-      "knowledge": {"tier": "high", "basis": "中文知识强。"},
-      "multilingual": {"tier": "medium", "basis": "中英强。"}
+      "reasoning": {
+        "tier": "high",
+        "basis": "旗舰推理。"
+      },
+      "coding": {
+        "tier": "high",
+        "basis": "编码强。"
+      },
+      "agent": {
+        "tier": "high",
+        "basis": "长程 agentic 工程。"
+      },
+      "knowledge": {
+        "tier": "high",
+        "basis": "中文知识强。"
+      },
+      "multilingual": {
+        "tier": "medium",
+        "basis": "中英强。"
+      }
     },
-    "best_for": ["agent", "reasoning", "long_context"],
-    "avoid_for": ["low_cost"],
+    "best_for": [
+      "agent",
+      "reasoning",
+      "long_context"
+    ],
+    "avoid_for": [
+      "low_cost"
+    ],
     "release_date": "2026",
     "source_url": "https://llmcostcalc.com/cloud/zhipu",
     "verified": true,
-    "verified_date": "2026-08-05"
+    "verified_date": "2026-08-05",
+    "free": true,
+    "free_note": "智谱清言网页版免费；BigModel 开放平台赠免费额度"
   },
   {
     "id": "glm-5",
@@ -728,26 +1330,53 @@
     "one_liner_cn": "开源 MoE，长上下文推理与工具编排。",
     "context_window": 205000,
     "max_output_tokens": 131000,
-    "input_price_per_mtok": 1.0,
+    "input_price_per_mtok": 1,
     "output_price_per_mtok": 3.2,
     "currency": "USD",
     "vision_support": false,
     "open_weight": true,
     "speed_tier": "medium",
-    "model_type": ["Chat", "Reasoning", "Coding", "Agent"],
+    "model_type": [
+      "Chat",
+      "Reasoning",
+      "Coding",
+      "Agent"
+    ],
     "capabilities": {
-      "reasoning": {"tier": "high", "basis": "开源 MoE，长上下文推理。"},
-      "coding": {"tier": "high", "basis": "编码强。"},
-      "agent": {"tier": "high", "basis": "多步工具编排。"},
-      "knowledge": {"tier": "high", "basis": "中文知识强。"},
-      "multilingual": {"tier": "medium", "basis": "中英强。"}
+      "reasoning": {
+        "tier": "high",
+        "basis": "开源 MoE，长上下文推理。"
+      },
+      "coding": {
+        "tier": "high",
+        "basis": "编码强。"
+      },
+      "agent": {
+        "tier": "high",
+        "basis": "多步工具编排。"
+      },
+      "knowledge": {
+        "tier": "high",
+        "basis": "中文知识强。"
+      },
+      "multilingual": {
+        "tier": "medium",
+        "basis": "中英强。"
+      }
     },
-    "best_for": ["coding", "agent", "reasoning", "local"],
+    "best_for": [
+      "coding",
+      "agent",
+      "reasoning",
+      "local"
+    ],
     "avoid_for": [],
     "release_date": "2026-02",
     "source_url": "https://llmcostcalc.com/cloud/zhipu",
     "verified": true,
-    "verified_date": "2026-08-05"
+    "verified_date": "2026-08-05",
+    "free": true,
+    "free_note": "智谱清言网页版免费；BigModel 开放平台赠免费额度"
   },
   {
     "id": "glm-5-turbo",
@@ -760,25 +1389,51 @@
     "context_window": 200000,
     "max_output_tokens": 128000,
     "input_price_per_mtok": 1.2,
-    "output_price_per_mtok": 4.0,
+    "output_price_per_mtok": 4,
     "currency": "USD",
     "vision_support": false,
     "open_weight": false,
     "speed_tier": "fast",
-    "model_type": ["Chat", "Reasoning", "Coding"],
+    "model_type": [
+      "Chat",
+      "Reasoning",
+      "Coding"
+    ],
     "capabilities": {
-      "reasoning": {"tier": "medium", "basis": "Turbo 推理中上。"},
-      "coding": {"tier": "medium", "basis": "日常编码。"},
-      "agent": {"tier": "medium", "basis": "工具调用。"},
-      "knowledge": {"tier": "high", "basis": "中文知识强。"},
-      "multilingual": {"tier": "medium", "basis": "中英强。"}
+      "reasoning": {
+        "tier": "medium",
+        "basis": "Turbo 推理中上。"
+      },
+      "coding": {
+        "tier": "medium",
+        "basis": "日常编码。"
+      },
+      "agent": {
+        "tier": "medium",
+        "basis": "工具调用。"
+      },
+      "knowledge": {
+        "tier": "high",
+        "basis": "中文知识强。"
+      },
+      "multilingual": {
+        "tier": "medium",
+        "basis": "中英强。"
+      }
     },
-    "best_for": ["chat", "low_cost"],
-    "avoid_for": ["image"],
+    "best_for": [
+      "chat",
+      "low_cost"
+    ],
+    "avoid_for": [
+      "image"
+    ],
     "release_date": "2026",
     "source_url": "https://llmcostcalc.com/cloud/zhipu",
     "verified": true,
-    "verified_date": "2026-08-05"
+    "verified_date": "2026-08-05",
+    "free": true,
+    "free_note": "智谱清言网页版免费；BigModel 开放平台赠免费额度"
   },
   {
     "id": "kimi-k2",
@@ -796,20 +1451,48 @@
     "vision_support": false,
     "open_weight": false,
     "speed_tier": "medium",
-    "model_type": ["Chat", "Reasoning", "Coding", "Agent"],
+    "model_type": [
+      "Chat",
+      "Reasoning",
+      "Coding",
+      "Agent"
+    ],
     "capabilities": {
-      "reasoning": {"tier": "medium", "basis": "通用推理。"},
-      "coding": {"tier": "high", "basis": "代码生成强。"},
-      "agent": {"tier": "high", "basis": "工具调用强。"},
-      "knowledge": {"tier": "medium", "basis": "中文知识强。"},
-      "multilingual": {"tier": "medium", "basis": "中英强。"}
+      "reasoning": {
+        "tier": "medium",
+        "basis": "通用推理。"
+      },
+      "coding": {
+        "tier": "high",
+        "basis": "代码生成强。"
+      },
+      "agent": {
+        "tier": "high",
+        "basis": "工具调用强。"
+      },
+      "knowledge": {
+        "tier": "medium",
+        "basis": "中文知识强。"
+      },
+      "multilingual": {
+        "tier": "medium",
+        "basis": "中英强。"
+      }
     },
-    "best_for": ["agent", "coding", "chat"],
-    "avoid_for": ["image"],
+    "best_for": [
+      "agent",
+      "coding",
+      "chat"
+    ],
+    "avoid_for": [
+      "image"
+    ],
     "release_date": "2025",
     "source_url": "https://tokenmix.ai/blog/kimi-k2-api-pricing-tiers-2026",
     "verified": true,
-    "verified_date": "2026-08-05"
+    "verified_date": "2026-08-05",
+    "free": true,
+    "free_note": "Kimi 网页版完全免费（长上下文）；API 新用户赠额度"
   },
   {
     "id": "kimi-k2-5",
@@ -827,20 +1510,48 @@
     "vision_support": false,
     "open_weight": false,
     "speed_tier": "medium",
-    "model_type": ["Chat", "Reasoning", "Coding", "Agent"],
+    "model_type": [
+      "Chat",
+      "Reasoning",
+      "Coding",
+      "Agent"
+    ],
     "capabilities": {
-      "reasoning": {"tier": "medium-high", "basis": "K2.5 推理中上。"},
-      "coding": {"tier": "high", "basis": "视觉编码定位。"},
-      "agent": {"tier": "high", "basis": "agent 群。"},
-      "knowledge": {"tier": "medium", "basis": "中文知识强。"},
-      "multilingual": {"tier": "medium", "basis": "中英强。"}
+      "reasoning": {
+        "tier": "medium-high",
+        "basis": "K2.5 推理中上。"
+      },
+      "coding": {
+        "tier": "high",
+        "basis": "视觉编码定位。"
+      },
+      "agent": {
+        "tier": "high",
+        "basis": "agent 群。"
+      },
+      "knowledge": {
+        "tier": "medium",
+        "basis": "中文知识强。"
+      },
+      "multilingual": {
+        "tier": "medium",
+        "basis": "中英强。"
+      }
     },
-    "best_for": ["coding", "agent", "long_context"],
-    "avoid_for": ["image"],
+    "best_for": [
+      "coding",
+      "agent",
+      "long_context"
+    ],
+    "avoid_for": [
+      "image"
+    ],
     "release_date": "2026",
     "source_url": "https://tokenmix.ai/blog/kimi-k2-api-pricing-tiers-2026",
     "verified": true,
-    "verified_date": "2026-08-05"
+    "verified_date": "2026-08-05",
+    "free": true,
+    "free_note": "Kimi 网页版完全免费；API 新用户赠额度"
   },
   {
     "id": "kimi-k3",
@@ -852,26 +1563,55 @@
     "one_liner_cn": "最新旗舰，1M 上下文。",
     "context_window": 1000000,
     "max_output_tokens": 64000,
-    "input_price_per_mtok": 3.0,
-    "output_price_per_mtok": 15.0,
+    "input_price_per_mtok": 3,
+    "output_price_per_mtok": 15,
     "currency": "USD",
     "vision_support": false,
     "open_weight": false,
     "speed_tier": "medium",
-    "model_type": ["Chat", "Reasoning", "Coding", "Agent"],
+    "model_type": [
+      "Chat",
+      "Reasoning",
+      "Coding",
+      "Agent"
+    ],
     "capabilities": {
-      "reasoning": {"tier": "high", "basis": "最新旗舰推理。"},
-      "coding": {"tier": "high", "basis": "编码强。"},
-      "agent": {"tier": "high", "basis": "agent 强。"},
-      "knowledge": {"tier": "high", "basis": "中文知识强。"},
-      "multilingual": {"tier": "medium", "basis": "中英强。"}
+      "reasoning": {
+        "tier": "high",
+        "basis": "最新旗舰推理。"
+      },
+      "coding": {
+        "tier": "high",
+        "basis": "编码强。"
+      },
+      "agent": {
+        "tier": "high",
+        "basis": "agent 强。"
+      },
+      "knowledge": {
+        "tier": "high",
+        "basis": "中文知识强。"
+      },
+      "multilingual": {
+        "tier": "medium",
+        "basis": "中英强。"
+      }
     },
-    "best_for": ["reasoning", "coding", "agent", "long_context"],
-    "avoid_for": ["low_cost"],
+    "best_for": [
+      "reasoning",
+      "coding",
+      "agent",
+      "long_context"
+    ],
+    "avoid_for": [
+      "low_cost"
+    ],
     "release_date": "2026-07",
     "source_url": "https://cloudprice.net/models/moonshot-kimi-k2-preview",
     "verified": true,
-    "verified_date": "2026-08-05"
+    "verified_date": "2026-08-05",
+    "free": true,
+    "free_note": "Kimi 网页版完全免费；API 新用户赠额度"
   },
   {
     "id": "baidu-ernie-5-1",
@@ -883,22 +1623,48 @@
     "one_liner_cn": "百度当前旗舰，原生全模态，深度推理。",
     "context_window": 128000,
     "max_output_tokens": 32000,
-    "input_price_per_mtok": 5.0,
-    "output_price_per_mtok": 20.0,
+    "input_price_per_mtok": 5,
+    "output_price_per_mtok": 20,
     "currency": "CNY",
     "vision_support": true,
     "open_weight": false,
     "speed_tier": "medium",
-    "model_type": ["Chat", "Vision", "Reasoning", "Coding"],
+    "model_type": [
+      "Chat",
+      "Vision",
+      "Reasoning",
+      "Coding"
+    ],
     "capabilities": {
-      "reasoning": {"tier": "high", "basis": "5.0/5.1 深度推理。"},
-      "coding": {"tier": "high", "basis": "编码强。"},
-      "agent": {"tier": "medium", "basis": "工具/规划。"},
-      "knowledge": {"tier": "high", "basis": "中文知识强。"},
-      "multilingual": {"tier": "medium", "basis": "中文为主。"}
+      "reasoning": {
+        "tier": "high",
+        "basis": "5.0/5.1 深度推理。"
+      },
+      "coding": {
+        "tier": "high",
+        "basis": "编码强。"
+      },
+      "agent": {
+        "tier": "medium",
+        "basis": "工具/规划。"
+      },
+      "knowledge": {
+        "tier": "high",
+        "basis": "中文知识强。"
+      },
+      "multilingual": {
+        "tier": "medium",
+        "basis": "中文为主。"
+      }
     },
-    "best_for": ["reasoning", "knowledge", "chat"],
-    "avoid_for": ["low_cost"],
+    "best_for": [
+      "reasoning",
+      "knowledge",
+      "chat"
+    ],
+    "avoid_for": [
+      "low_cost"
+    ],
     "release_date": "2026",
     "source_url": "https://intl.cloud.baidu.com/en/doc/qianfan/s/Jm8r1826a-intl-en",
     "verified": true,
@@ -921,21 +1687,46 @@
     "vision_support": false,
     "open_weight": true,
     "speed_tier": "fast",
-    "model_type": ["Chat", "Coding"],
+    "model_type": [
+      "Chat",
+      "Coding"
+    ],
     "capabilities": {
-      "reasoning": {"tier": "medium", "basis": "4.5 推理中上。"},
-      "coding": {"tier": "medium", "basis": "日常编码。"},
-      "agent": {"tier": "medium", "basis": "工具调用。"},
-      "knowledge": {"tier": "medium", "basis": "中文知识强。"},
-      "multilingual": {"tier": "medium", "basis": "中文为主。"}
+      "reasoning": {
+        "tier": "medium",
+        "basis": "4.5 推理中上。"
+      },
+      "coding": {
+        "tier": "medium",
+        "basis": "日常编码。"
+      },
+      "agent": {
+        "tier": "medium",
+        "basis": "工具调用。"
+      },
+      "knowledge": {
+        "tier": "medium",
+        "basis": "中文知识强。"
+      },
+      "multilingual": {
+        "tier": "medium",
+        "basis": "中文为主。"
+      }
     },
-    "best_for": ["low_cost", "chat"],
-    "avoid_for": ["image"],
+    "best_for": [
+      "low_cost",
+      "chat"
+    ],
+    "avoid_for": [
+      "image"
+    ],
     "release_date": "2025",
     "source_url": "https://www.iqilian.com/learn/wenxin-api-jifei",
     "verified": true,
     "verified_date": "2026-08-05",
-    "price_note": "¥0.8 / ¥3.2 每百万 tokens（人民币）；ERNIE 4.5 提供开放权重版本。"
+    "price_note": "¥0.8 / ¥3.2 每百万 tokens（人民币）；ERNIE 4.5 提供开放权重版本。",
+    "free": true,
+    "free_note": "百度千帆 ERNIE-Speed/3.5 永久免费；4.5-Turbo 有免费额度"
   },
   {
     "id": "minimax-m2-5",
@@ -953,20 +1744,48 @@
     "vision_support": false,
     "open_weight": false,
     "speed_tier": "medium",
-    "model_type": ["Chat", "Reasoning", "Coding", "Agent"],
+    "model_type": [
+      "Chat",
+      "Reasoning",
+      "Coding",
+      "Agent"
+    ],
     "capabilities": {
-      "reasoning": {"tier": "medium", "basis": "推理模式。"},
-      "coding": {"tier": "medium", "basis": "日常编码。"},
-      "agent": {"tier": "medium", "basis": "工具集成。"},
-      "knowledge": {"tier": "medium", "basis": "通用知识。"},
-      "multilingual": {"tier": "medium", "basis": "中英强。"}
+      "reasoning": {
+        "tier": "medium",
+        "basis": "推理模式。"
+      },
+      "coding": {
+        "tier": "medium",
+        "basis": "日常编码。"
+      },
+      "agent": {
+        "tier": "medium",
+        "basis": "工具集成。"
+      },
+      "knowledge": {
+        "tier": "medium",
+        "basis": "通用知识。"
+      },
+      "multilingual": {
+        "tier": "medium",
+        "basis": "中英强。"
+      }
     },
-    "best_for": ["coding", "agent", "long_context"],
-    "avoid_for": ["image"],
+    "best_for": [
+      "coding",
+      "agent",
+      "long_context"
+    ],
+    "avoid_for": [
+      "image"
+    ],
     "release_date": "2026-02",
     "source_url": "https://llmgateway.io/providers/minimax",
     "verified": true,
-    "verified_date": "2026-08-05"
+    "verified_date": "2026-08-05",
+    "free": true,
+    "free_note": "MiniMax 网页版免费；开放平台赠免费额度"
   },
   {
     "id": "minimax-m2-7",
@@ -984,20 +1803,47 @@
     "vision_support": false,
     "open_weight": false,
     "speed_tier": "fast",
-    "model_type": ["Chat", "Reasoning", "Coding", "Agent"],
+    "model_type": [
+      "Chat",
+      "Reasoning",
+      "Coding",
+      "Agent"
+    ],
     "capabilities": {
-      "reasoning": {"tier": "medium", "basis": "推理模式。"},
-      "coding": {"tier": "medium", "basis": "日常编码。"},
-      "agent": {"tier": "medium", "basis": "工具集成。"},
-      "knowledge": {"tier": "medium", "basis": "通用知识。"},
-      "multilingual": {"tier": "medium", "basis": "中英强。"}
+      "reasoning": {
+        "tier": "medium",
+        "basis": "推理模式。"
+      },
+      "coding": {
+        "tier": "medium",
+        "basis": "日常编码。"
+      },
+      "agent": {
+        "tier": "medium",
+        "basis": "工具集成。"
+      },
+      "knowledge": {
+        "tier": "medium",
+        "basis": "通用知识。"
+      },
+      "multilingual": {
+        "tier": "medium",
+        "basis": "中英强。"
+      }
     },
-    "best_for": ["coding", "low_cost"],
-    "avoid_for": ["image"],
+    "best_for": [
+      "coding",
+      "low_cost"
+    ],
+    "avoid_for": [
+      "image"
+    ],
     "release_date": "2026",
     "source_url": "https://llmgateway.io/providers/minimax",
     "verified": true,
-    "verified_date": "2026-08-05"
+    "verified_date": "2026-08-05",
+    "free": true,
+    "free_note": "MiniMax 网页版免费；开放平台赠免费额度"
   },
   {
     "id": "minimax-m3",
@@ -1015,20 +1861,48 @@
     "vision_support": false,
     "open_weight": false,
     "speed_tier": "medium",
-    "model_type": ["Chat", "Reasoning", "Coding", "Agent"],
+    "model_type": [
+      "Chat",
+      "Reasoning",
+      "Coding",
+      "Agent"
+    ],
     "capabilities": {
-      "reasoning": {"tier": "high", "basis": "新一代推理。"},
-      "coding": {"tier": "high", "basis": "编码强。"},
-      "agent": {"tier": "medium", "basis": "工具集成。"},
-      "knowledge": {"tier": "medium", "basis": "通用知识。"},
-      "multilingual": {"tier": "medium", "basis": "中英强。"}
+      "reasoning": {
+        "tier": "high",
+        "basis": "新一代推理。"
+      },
+      "coding": {
+        "tier": "high",
+        "basis": "编码强。"
+      },
+      "agent": {
+        "tier": "medium",
+        "basis": "工具集成。"
+      },
+      "knowledge": {
+        "tier": "medium",
+        "basis": "通用知识。"
+      },
+      "multilingual": {
+        "tier": "medium",
+        "basis": "中英强。"
+      }
     },
-    "best_for": ["coding", "reasoning", "long_context"],
-    "avoid_for": ["image"],
+    "best_for": [
+      "coding",
+      "reasoning",
+      "long_context"
+    ],
+    "avoid_for": [
+      "image"
+    ],
     "release_date": "2026",
     "source_url": "https://llmgateway.io/providers/minimax",
     "verified": true,
-    "verified_date": "2026-08-05"
+    "verified_date": "2026-08-05",
+    "free": true,
+    "free_note": "MiniMax 网页版免费；开放平台赠免费额度"
   },
   {
     "id": "mistral-large-3",
@@ -1046,16 +1920,43 @@
     "vision_support": true,
     "open_weight": true,
     "speed_tier": "medium",
-    "model_type": ["Chat", "Vision", "Reasoning", "Coding", "Agent"],
+    "model_type": [
+      "Chat",
+      "Vision",
+      "Reasoning",
+      "Coding",
+      "Agent"
+    ],
     "capabilities": {
-      "reasoning": {"tier": "medium-high", "basis": "旗舰推理中上。"},
-      "coding": {"tier": "medium-high", "basis": "编码强。"},
-      "agent": {"tier": "high", "basis": "agentic。"},
-      "knowledge": {"tier": "high", "basis": "多语（EU）。"},
-      "multilingual": {"tier": "high", "basis": "多语言强。"}
+      "reasoning": {
+        "tier": "medium-high",
+        "basis": "旗舰推理中上。"
+      },
+      "coding": {
+        "tier": "medium-high",
+        "basis": "编码强。"
+      },
+      "agent": {
+        "tier": "high",
+        "basis": "agentic。"
+      },
+      "knowledge": {
+        "tier": "high",
+        "basis": "多语（EU）。"
+      },
+      "multilingual": {
+        "tier": "high",
+        "basis": "多语言强。"
+      }
     },
-    "best_for": ["knowledge", "coding", "agent"],
-    "avoid_for": ["low_cost"],
+    "best_for": [
+      "knowledge",
+      "coding",
+      "agent"
+    ],
+    "avoid_for": [
+      "low_cost"
+    ],
     "release_date": "2026",
     "source_url": "https://mistral.ai/pricing/api/",
     "verified": true,
@@ -1077,16 +1978,40 @@
     "vision_support": false,
     "open_weight": true,
     "speed_tier": "fast",
-    "model_type": ["Chat", "Coding"],
+    "model_type": [
+      "Chat",
+      "Coding"
+    ],
     "capabilities": {
-      "reasoning": {"tier": "low-medium", "basis": "Small 档。"},
-      "coding": {"tier": "medium", "basis": "日常编码。"},
-      "agent": {"tier": "low", "basis": "非 agent 定位。"},
-      "knowledge": {"tier": "medium", "basis": "多语支持。"},
-      "multilingual": {"tier": "high", "basis": "多语言强。"}
+      "reasoning": {
+        "tier": "low-medium",
+        "basis": "Small 档。"
+      },
+      "coding": {
+        "tier": "medium",
+        "basis": "日常编码。"
+      },
+      "agent": {
+        "tier": "low",
+        "basis": "非 agent 定位。"
+      },
+      "knowledge": {
+        "tier": "medium",
+        "basis": "多语支持。"
+      },
+      "multilingual": {
+        "tier": "high",
+        "basis": "多语言强。"
+      }
     },
-    "best_for": ["low_cost", "chat"],
-    "avoid_for": ["reasoning", "image"],
+    "best_for": [
+      "low_cost",
+      "chat"
+    ],
+    "avoid_for": [
+      "reasoning",
+      "image"
+    ],
     "release_date": "2026",
     "source_url": "https://mistral.ai/pricing/api/",
     "verified": true,
@@ -1108,16 +2033,39 @@
     "vision_support": false,
     "open_weight": true,
     "speed_tier": "fast",
-    "model_type": ["Coding"],
+    "model_type": [
+      "Coding"
+    ],
     "capabilities": {
-      "reasoning": {"tier": "medium", "basis": "代码逻辑。"},
-      "coding": {"tier": "high", "basis": "FIM 补全/生成。"},
-      "agent": {"tier": "low", "basis": "非 agent 定位。"},
-      "knowledge": {"tier": "low", "basis": "专注代码。"},
-      "multilingual": {"tier": "medium", "basis": "代码注释多语。"}
+      "reasoning": {
+        "tier": "medium",
+        "basis": "代码逻辑。"
+      },
+      "coding": {
+        "tier": "high",
+        "basis": "FIM 补全/生成。"
+      },
+      "agent": {
+        "tier": "low",
+        "basis": "非 agent 定位。"
+      },
+      "knowledge": {
+        "tier": "low",
+        "basis": "专注代码。"
+      },
+      "multilingual": {
+        "tier": "medium",
+        "basis": "代码注释多语。"
+      }
     },
-    "best_for": ["coding", "low_cost"],
-    "avoid_for": ["long_context", "image"],
+    "best_for": [
+      "coding",
+      "low_cost"
+    ],
+    "avoid_for": [
+      "long_context",
+      "image"
+    ],
     "release_date": "2025",
     "source_url": "https://mistral.ai/pricing/api/",
     "verified": true,
@@ -1133,22 +2081,44 @@
     "one_liner_cn": "领域推理模型，透明多步推理。",
     "context_window": 40000,
     "max_output_tokens": 32000,
-    "input_price_per_mtok": 2.0,
-    "output_price_per_mtok": 5.0,
+    "input_price_per_mtok": 2,
+    "output_price_per_mtok": 5,
     "currency": "USD",
     "vision_support": false,
     "open_weight": false,
     "speed_tier": "medium",
-    "model_type": ["Reasoning"],
+    "model_type": [
+      "Reasoning"
+    ],
     "capabilities": {
-      "reasoning": {"tier": "high", "basis": "推理专用。"},
-      "coding": {"tier": "medium", "basis": "代码逻辑。"},
-      "agent": {"tier": "low", "basis": "非 agent 定位。"},
-      "knowledge": {"tier": "medium", "basis": "领域知识。"},
-      "multilingual": {"tier": "medium", "basis": "多语支持。"}
+      "reasoning": {
+        "tier": "high",
+        "basis": "推理专用。"
+      },
+      "coding": {
+        "tier": "medium",
+        "basis": "代码逻辑。"
+      },
+      "agent": {
+        "tier": "low",
+        "basis": "非 agent 定位。"
+      },
+      "knowledge": {
+        "tier": "medium",
+        "basis": "领域知识。"
+      },
+      "multilingual": {
+        "tier": "medium",
+        "basis": "多语支持。"
+      }
     },
-    "best_for": ["reasoning"],
-    "avoid_for": ["long_context", "low_cost"],
+    "best_for": [
+      "reasoning"
+    ],
+    "avoid_for": [
+      "long_context",
+      "low_cost"
+    ],
     "release_date": "2026",
     "source_url": "https://mistral.ai/pricing/api/",
     "verified": true,
@@ -1170,20 +2140,49 @@
     "vision_support": false,
     "open_weight": false,
     "speed_tier": "fast",
-    "model_type": ["Chat", "Reasoning", "Coding", "Agent"],
+    "model_type": [
+      "Chat",
+      "Reasoning",
+      "Coding",
+      "Agent"
+    ],
     "capabilities": {
-      "reasoning": {"tier": "high", "basis": "旗舰推理。"},
-      "coding": {"tier": "high", "basis": "编码强。"},
-      "agent": {"tier": "high", "basis": "agentic 工具调用强。"},
-      "knowledge": {"tier": "high", "basis": "实时 X 检索。"},
-      "multilingual": {"tier": "high", "basis": "多语言。"}
+      "reasoning": {
+        "tier": "high",
+        "basis": "旗舰推理。"
+      },
+      "coding": {
+        "tier": "high",
+        "basis": "编码强。"
+      },
+      "agent": {
+        "tier": "high",
+        "basis": "agentic 工具调用强。"
+      },
+      "knowledge": {
+        "tier": "high",
+        "basis": "实时 X 检索。"
+      },
+      "multilingual": {
+        "tier": "high",
+        "basis": "多语言。"
+      }
     },
-    "best_for": ["agent", "reasoning", "coding", "long_context"],
-    "avoid_for": ["low_cost"],
+    "best_for": [
+      "agent",
+      "reasoning",
+      "coding",
+      "long_context"
+    ],
+    "avoid_for": [
+      "low_cost"
+    ],
     "release_date": "2026-04",
     "source_url": "https://docs.x.ai/developers/pricing",
     "verified": true,
-    "verified_date": "2026-08-05"
+    "verified_date": "2026-08-05",
+    "free": true,
+    "free_note": "x.com 网页版 Grok 免费（API 付费）"
   },
   {
     "id": "xai-grok-4",
@@ -1195,26 +2194,52 @@
     "one_liner_cn": "常开推理旗舰，256K 上下文。",
     "context_window": 256000,
     "max_output_tokens": 64000,
-    "input_price_per_mtok": 3.0,
-    "output_price_per_mtok": 15.0,
+    "input_price_per_mtok": 3,
+    "output_price_per_mtok": 15,
     "currency": "USD",
     "vision_support": false,
     "open_weight": false,
     "speed_tier": "medium",
-    "model_type": ["Chat", "Reasoning", "Coding"],
+    "model_type": [
+      "Chat",
+      "Reasoning",
+      "Coding"
+    ],
     "capabilities": {
-      "reasoning": {"tier": "high", "basis": "常开推理。"},
-      "coding": {"tier": "medium-high", "basis": "编码强。"},
-      "agent": {"tier": "medium", "basis": "工具调用可用。"},
-      "knowledge": {"tier": "high", "basis": "实时检索。"},
-      "multilingual": {"tier": "high", "basis": "多语言。"}
+      "reasoning": {
+        "tier": "high",
+        "basis": "常开推理。"
+      },
+      "coding": {
+        "tier": "medium-high",
+        "basis": "编码强。"
+      },
+      "agent": {
+        "tier": "medium",
+        "basis": "工具调用可用。"
+      },
+      "knowledge": {
+        "tier": "high",
+        "basis": "实时检索。"
+      },
+      "multilingual": {
+        "tier": "high",
+        "basis": "多语言。"
+      }
     },
-    "best_for": ["reasoning", "coding"],
-    "avoid_for": ["low_cost"],
+    "best_for": [
+      "reasoning",
+      "coding"
+    ],
+    "avoid_for": [
+      "low_cost"
+    ],
     "release_date": "2025",
     "source_url": "https://docs.x.ai/developers/pricing",
     "verified": true,
-    "verified_date": "2026-08-05"
+    "verified_date": "2026-08-05",
+    "free": true,
+    "free_note": "x.com 网页版 Grok 免费（API 付费）"
   },
   {
     "id": "xai-grok-build-0-1",
@@ -1226,22 +2251,45 @@
     "one_liner_cn": "早期访问的编码专用模型。",
     "context_window": 256000,
     "max_output_tokens": 64000,
-    "input_price_per_mtok": 1.0,
-    "output_price_per_mtok": 2.0,
+    "input_price_per_mtok": 1,
+    "output_price_per_mtok": 2,
     "currency": "USD",
     "vision_support": false,
     "open_weight": false,
     "speed_tier": "fast",
-    "model_type": ["Coding"],
+    "model_type": [
+      "Coding"
+    ],
     "capabilities": {
-      "reasoning": {"tier": "medium", "basis": "代码逻辑。"},
-      "coding": {"tier": "high", "basis": "agentic 编码训练。"},
-      "agent": {"tier": "low", "basis": "编码定位。"},
-      "knowledge": {"tier": "low", "basis": "专注代码。"},
-      "multilingual": {"tier": "medium", "basis": "代码多语。"}
+      "reasoning": {
+        "tier": "medium",
+        "basis": "代码逻辑。"
+      },
+      "coding": {
+        "tier": "high",
+        "basis": "agentic 编码训练。"
+      },
+      "agent": {
+        "tier": "low",
+        "basis": "编码定位。"
+      },
+      "knowledge": {
+        "tier": "low",
+        "basis": "专注代码。"
+      },
+      "multilingual": {
+        "tier": "medium",
+        "basis": "代码多语。"
+      }
     },
-    "best_for": ["coding", "low_cost"],
-    "avoid_for": ["long_context", "image"],
+    "best_for": [
+      "coding",
+      "low_cost"
+    ],
+    "avoid_for": [
+      "long_context",
+      "image"
+    ],
     "release_date": "2026",
     "source_url": "https://docs.x.ai/developers/pricing",
     "verified": true,
@@ -1264,21 +2312,49 @@
     "vision_support": true,
     "open_weight": true,
     "speed_tier": "medium",
-    "model_type": ["Chat", "Vision", "Coding", "Agent"],
+    "model_type": [
+      "Chat",
+      "Vision",
+      "Coding",
+      "Agent"
+    ],
     "capabilities": {
-      "reasoning": {"tier": "medium", "basis": "开放权重多模态。"},
-      "coding": {"tier": "medium-high", "basis": "编码尚可。"},
-      "agent": {"tier": "medium", "basis": "agent 可用。"},
-      "knowledge": {"tier": "medium", "basis": "通用知识。"},
-      "multilingual": {"tier": "high", "basis": "多语言。"}
+      "reasoning": {
+        "tier": "medium",
+        "basis": "开放权重多模态。"
+      },
+      "coding": {
+        "tier": "medium-high",
+        "basis": "编码尚可。"
+      },
+      "agent": {
+        "tier": "medium",
+        "basis": "agent 可用。"
+      },
+      "knowledge": {
+        "tier": "medium",
+        "basis": "通用知识。"
+      },
+      "multilingual": {
+        "tier": "high",
+        "basis": "多语言。"
+      }
     },
-    "best_for": ["local", "image_understanding", "chat"],
-    "avoid_for": ["reasoning"],
+    "best_for": [
+      "local",
+      "image_understanding",
+      "chat"
+    ],
+    "avoid_for": [
+      "reasoning"
+    ],
     "release_date": "2026-04",
     "source_url": "https://www.llama.com/docs/",
     "verified": true,
     "verified_date": "2026-08-05",
-    "price_note": "开放权重；托管价因供应商而异（Together/Fireworks 等约 $0.17/$0.50 每百万 tokens）。"
+    "price_note": "开放权重；托管价因供应商而异（Together/Fireworks 等约 $0.17/$0.50 每百万 tokens）。",
+    "free": true,
+    "free_note": "开放权重，可自部署（无授权费）"
   },
   {
     "id": "meta-llama-4-scout",
@@ -1297,21 +2373,48 @@
     "vision_support": true,
     "open_weight": true,
     "speed_tier": "fast",
-    "model_type": ["Chat", "Vision", "Coding"],
+    "model_type": [
+      "Chat",
+      "Vision",
+      "Coding"
+    ],
     "capabilities": {
-      "reasoning": {"tier": "low-medium", "basis": "Scout 推理中下。"},
-      "coding": {"tier": "medium", "basis": "编码尚可。"},
-      "agent": {"tier": "low", "basis": "非 agent 定位。"},
-      "knowledge": {"tier": "medium", "basis": "通用知识。"},
-      "multilingual": {"tier": "high", "basis": "多语言。"}
+      "reasoning": {
+        "tier": "low-medium",
+        "basis": "Scout 推理中下。"
+      },
+      "coding": {
+        "tier": "medium",
+        "basis": "编码尚可。"
+      },
+      "agent": {
+        "tier": "low",
+        "basis": "非 agent 定位。"
+      },
+      "knowledge": {
+        "tier": "medium",
+        "basis": "通用知识。"
+      },
+      "multilingual": {
+        "tier": "high",
+        "basis": "多语言。"
+      }
     },
-    "best_for": ["local", "long_context", "low_cost"],
-    "avoid_for": ["reasoning"],
+    "best_for": [
+      "local",
+      "long_context",
+      "low_cost"
+    ],
+    "avoid_for": [
+      "reasoning"
+    ],
     "release_date": "2026-04",
     "source_url": "https://www.llama.com/docs/",
     "verified": true,
     "verified_date": "2026-08-05",
-    "price_note": "原生 10M 上下文；托管价约 $0.08/$0.30 每百万 tokens（Together 等）。"
+    "price_note": "原生 10M 上下文；托管价约 $0.08/$0.30 每百万 tokens（Together 等）。",
+    "free": true,
+    "free_note": "开放权重，可自部署（无授权费）"
   },
   {
     "id": "openai-gpt-image-2",
@@ -1329,19 +2432,43 @@
     "vision_support": false,
     "open_weight": false,
     "speed_tier": "fast",
-    "model_type": ["Image"],
+    "model_type": [
+      "Image"
+    ],
     "capabilities": {
-      "reasoning": {"tier": "low", "basis": "生成模型，非推理定位。"},
-      "coding": {"tier": "low", "basis": "非编码模型。"},
-      "agent": {"tier": "low", "basis": "非 Agent 定位。"},
-      "knowledge": {"tier": "medium", "basis": "依赖提示词理解与世界知识生成。"},
-      "multilingual": {"tier": "high", "basis": "支持多语言提示词。"}
+      "reasoning": {
+        "tier": "low",
+        "basis": "生成模型，非推理定位。"
+      },
+      "coding": {
+        "tier": "low",
+        "basis": "非编码模型。"
+      },
+      "agent": {
+        "tier": "low",
+        "basis": "非 Agent 定位。"
+      },
+      "knowledge": {
+        "tier": "medium",
+        "basis": "依赖提示词理解与世界知识生成。"
+      },
+      "multilingual": {
+        "tier": "high",
+        "basis": "支持多语言提示词。"
+      }
     },
-    "best_for": ["image"],
+    "best_for": [
+      "image"
+    ],
     "avoid_for": [],
     "media_type": "image",
     "max_resolution": "1792x1792",
-    "media_pricing": {"unit": "image", "price": 0.08, "currency": "USD", "note": "约 $0.04–$0.12/张（按分辨率），或含于 ChatGPT Plus 订阅。"},
+    "media_pricing": {
+      "unit": "image",
+      "price": 0.08,
+      "currency": "USD",
+      "note": "约 $0.04–$0.12/张（按分辨率），或含于 ChatGPT Plus 订阅。"
+    },
     "release_date": "2026",
     "source_url": "https://platform.openai.com/docs/features/image-generation",
     "verified": true,
@@ -1363,19 +2490,43 @@
     "vision_support": false,
     "open_weight": false,
     "speed_tier": "fast",
-    "model_type": ["Image"],
+    "model_type": [
+      "Image"
+    ],
     "capabilities": {
-      "reasoning": {"tier": "low", "basis": "生成模型，非推理定位。"},
-      "coding": {"tier": "low", "basis": "非编码模型。"},
-      "agent": {"tier": "low", "basis": "非 Agent 定位。"},
-      "knowledge": {"tier": "medium", "basis": "依赖提示词理解与世界知识生成。"},
-      "multilingual": {"tier": "high", "basis": "支持多语言提示词。"}
+      "reasoning": {
+        "tier": "low",
+        "basis": "生成模型，非推理定位。"
+      },
+      "coding": {
+        "tier": "low",
+        "basis": "非编码模型。"
+      },
+      "agent": {
+        "tier": "low",
+        "basis": "非 Agent 定位。"
+      },
+      "knowledge": {
+        "tier": "medium",
+        "basis": "依赖提示词理解与世界知识生成。"
+      },
+      "multilingual": {
+        "tier": "high",
+        "basis": "支持多语言提示词。"
+      }
     },
-    "best_for": ["image"],
+    "best_for": [
+      "image"
+    ],
     "avoid_for": [],
     "media_type": "image",
     "max_resolution": "2048x2048",
-    "media_pricing": {"unit": "image", "price": 0.06, "currency": "USD", "note": "约 $0.04–$0.08/张（Gemini API）。"},
+    "media_pricing": {
+      "unit": "image",
+      "price": 0.06,
+      "currency": "USD",
+      "note": "约 $0.04–$0.08/张（Gemini API）。"
+    },
     "release_date": "2026",
     "source_url": "https://ai.google.dev/gemini-api/docs/models#imagen",
     "verified": true,
@@ -1397,19 +2548,43 @@
     "vision_support": false,
     "open_weight": false,
     "speed_tier": "medium",
-    "model_type": ["Image"],
+    "model_type": [
+      "Image"
+    ],
     "capabilities": {
-      "reasoning": {"tier": "low", "basis": "生成模型，非推理定位。"},
-      "coding": {"tier": "low", "basis": "非编码模型。"},
-      "agent": {"tier": "low", "basis": "非 Agent 定位。"},
-      "knowledge": {"tier": "medium", "basis": "依赖提示词理解与世界知识生成。"},
-      "multilingual": {"tier": "high", "basis": "支持多语言提示词。"}
+      "reasoning": {
+        "tier": "low",
+        "basis": "生成模型，非推理定位。"
+      },
+      "coding": {
+        "tier": "low",
+        "basis": "非编码模型。"
+      },
+      "agent": {
+        "tier": "low",
+        "basis": "非 Agent 定位。"
+      },
+      "knowledge": {
+        "tier": "medium",
+        "basis": "依赖提示词理解与世界知识生成。"
+      },
+      "multilingual": {
+        "tier": "high",
+        "basis": "支持多语言提示词。"
+      }
     },
-    "best_for": ["image"],
+    "best_for": [
+      "image"
+    ],
     "avoid_for": [],
     "media_type": "image",
     "max_resolution": "—",
-    "media_pricing": {"unit": "image", "price": null, "currency": "USD", "note": "订阅制 $10–$60/月；无公开 API（仅 Discord / 网页）。"},
+    "media_pricing": {
+      "unit": "image",
+      "price": null,
+      "currency": "USD",
+      "note": "订阅制 $10–$60/月；无公开 API（仅 Discord / 网页）。"
+    },
     "release_date": "2026",
     "source_url": "https://www.midjourney.com/",
     "verified": true,
@@ -1431,23 +2606,50 @@
     "vision_support": false,
     "open_weight": true,
     "speed_tier": "fast",
-    "model_type": ["Image"],
+    "model_type": [
+      "Image"
+    ],
     "capabilities": {
-      "reasoning": {"tier": "low", "basis": "生成模型，非推理定位。"},
-      "coding": {"tier": "low", "basis": "非编码模型。"},
-      "agent": {"tier": "low", "basis": "非 Agent 定位。"},
-      "knowledge": {"tier": "medium", "basis": "依赖提示词理解与世界知识生成。"},
-      "multilingual": {"tier": "high", "basis": "支持多语言提示词。"}
+      "reasoning": {
+        "tier": "low",
+        "basis": "生成模型，非推理定位。"
+      },
+      "coding": {
+        "tier": "low",
+        "basis": "非编码模型。"
+      },
+      "agent": {
+        "tier": "low",
+        "basis": "非 Agent 定位。"
+      },
+      "knowledge": {
+        "tier": "medium",
+        "basis": "依赖提示词理解与世界知识生成。"
+      },
+      "multilingual": {
+        "tier": "high",
+        "basis": "支持多语言提示词。"
+      }
     },
-    "best_for": ["image", "local"],
+    "best_for": [
+      "image",
+      "local"
+    ],
     "avoid_for": [],
     "media_type": "image",
     "max_resolution": "2048x2048",
-    "media_pricing": {"unit": "image", "price": 0.08, "currency": "USD", "note": "API $0.05–$0.10/张；Schnell 开放权重可免费自托管。"},
+    "media_pricing": {
+      "unit": "image",
+      "price": 0.08,
+      "currency": "USD",
+      "note": "API $0.05–$0.10/张；Schnell 开放权重可免费自托管。"
+    },
     "release_date": "2026",
     "source_url": "https://blackforestlabs.ai/",
     "verified": true,
-    "verified_date": "2026-08-05"
+    "verified_date": "2026-08-05",
+    "free": true,
+    "free_note": "FLUX 开放权重，可本地部署（无授权费）"
   },
   {
     "id": "stability-sd-4",
@@ -1465,23 +2667,50 @@
     "vision_support": false,
     "open_weight": true,
     "speed_tier": "medium",
-    "model_type": ["Image"],
+    "model_type": [
+      "Image"
+    ],
     "capabilities": {
-      "reasoning": {"tier": "low", "basis": "生成模型，非推理定位。"},
-      "coding": {"tier": "low", "basis": "非编码模型。"},
-      "agent": {"tier": "low", "basis": "非 Agent 定位。"},
-      "knowledge": {"tier": "medium", "basis": "依赖提示词理解与世界知识生成。"},
-      "multilingual": {"tier": "high", "basis": "支持多语言提示词。"}
+      "reasoning": {
+        "tier": "low",
+        "basis": "生成模型，非推理定位。"
+      },
+      "coding": {
+        "tier": "low",
+        "basis": "非编码模型。"
+      },
+      "agent": {
+        "tier": "low",
+        "basis": "非 Agent 定位。"
+      },
+      "knowledge": {
+        "tier": "medium",
+        "basis": "依赖提示词理解与世界知识生成。"
+      },
+      "multilingual": {
+        "tier": "high",
+        "basis": "支持多语言提示词。"
+      }
     },
-    "best_for": ["image", "local"],
+    "best_for": [
+      "image",
+      "local"
+    ],
     "avoid_for": [],
     "media_type": "image",
     "max_resolution": "1024x1024",
-    "media_pricing": {"unit": "image", "price": null, "currency": "USD", "note": "Apache 2.0 开放权重，可自托管；托管约 $0.01–$0.05/张（fal/Replicate）。"},
+    "media_pricing": {
+      "unit": "image",
+      "price": null,
+      "currency": "USD",
+      "note": "Apache 2.0 开放权重，可自托管；托管约 $0.01–$0.05/张（fal/Replicate）。"
+    },
     "release_date": "2026",
     "source_url": "https://stability.ai/",
     "verified": true,
-    "verified_date": "2026-08-05"
+    "verified_date": "2026-08-05",
+    "free": true,
+    "free_note": "Stable Diffusion 开放权重，可本地部署（无授权费）"
   },
   {
     "id": "adobe-firefly-4",
@@ -1499,23 +2728,49 @@
     "vision_support": false,
     "open_weight": false,
     "speed_tier": "medium",
-    "model_type": ["Image"],
+    "model_type": [
+      "Image"
+    ],
     "capabilities": {
-      "reasoning": {"tier": "low", "basis": "生成模型，非推理定位。"},
-      "coding": {"tier": "low", "basis": "非编码模型。"},
-      "agent": {"tier": "low", "basis": "非 Agent 定位。"},
-      "knowledge": {"tier": "medium", "basis": "依赖提示词理解与世界知识生成。"},
-      "multilingual": {"tier": "high", "basis": "支持多语言提示词。"}
+      "reasoning": {
+        "tier": "low",
+        "basis": "生成模型，非推理定位。"
+      },
+      "coding": {
+        "tier": "low",
+        "basis": "非编码模型。"
+      },
+      "agent": {
+        "tier": "low",
+        "basis": "非 Agent 定位。"
+      },
+      "knowledge": {
+        "tier": "medium",
+        "basis": "依赖提示词理解与世界知识生成。"
+      },
+      "multilingual": {
+        "tier": "high",
+        "basis": "支持多语言提示词。"
+      }
     },
-    "best_for": ["image"],
+    "best_for": [
+      "image"
+    ],
     "avoid_for": [],
     "media_type": "image",
     "max_resolution": "2048x2048",
-    "media_pricing": {"unit": "image", "price": null, "currency": "USD", "note": "含于 Creative Cloud 订阅；独立版约 $4.99/月起。IP 安全可商用。"},
+    "media_pricing": {
+      "unit": "image",
+      "price": null,
+      "currency": "USD",
+      "note": "含于 Creative Cloud 订阅；独立版约 $4.99/月起。IP 安全可商用。"
+    },
     "release_date": "2026",
     "source_url": "https://www.adobe.com/products/firefly.html",
     "verified": true,
-    "verified_date": "2026-08-05"
+    "verified_date": "2026-08-05",
+    "free": true,
+    "free_note": "Firefly 网页版免费额度"
   },
   {
     "id": "ideogram-3",
@@ -1533,19 +2788,43 @@
     "vision_support": false,
     "open_weight": false,
     "speed_tier": "fast",
-    "model_type": ["Image"],
+    "model_type": [
+      "Image"
+    ],
     "capabilities": {
-      "reasoning": {"tier": "low", "basis": "生成模型，非推理定位。"},
-      "coding": {"tier": "low", "basis": "非编码模型。"},
-      "agent": {"tier": "low", "basis": "非 Agent 定位。"},
-      "knowledge": {"tier": "medium", "basis": "依赖提示词理解与世界知识生成。"},
-      "multilingual": {"tier": "high", "basis": "支持多语言提示词。"}
+      "reasoning": {
+        "tier": "low",
+        "basis": "生成模型，非推理定位。"
+      },
+      "coding": {
+        "tier": "low",
+        "basis": "非编码模型。"
+      },
+      "agent": {
+        "tier": "low",
+        "basis": "非 Agent 定位。"
+      },
+      "knowledge": {
+        "tier": "medium",
+        "basis": "依赖提示词理解与世界知识生成。"
+      },
+      "multilingual": {
+        "tier": "high",
+        "basis": "支持多语言提示词。"
+      }
     },
-    "best_for": ["image"],
+    "best_for": [
+      "image"
+    ],
     "avoid_for": [],
     "media_type": "image",
     "max_resolution": "1536x1536",
-    "media_pricing": {"unit": "image", "price": null, "currency": "USD", "note": "订阅 $7–$50/月；图像内文字渲染领先。"},
+    "media_pricing": {
+      "unit": "image",
+      "price": null,
+      "currency": "USD",
+      "note": "订阅 $7–$50/月；图像内文字渲染领先。"
+    },
     "release_date": "2026",
     "source_url": "https://ideogram.ai/",
     "verified": true,
@@ -1567,23 +2846,50 @@
     "vision_support": false,
     "open_weight": true,
     "speed_tier": "medium",
-    "model_type": ["Image"],
+    "model_type": [
+      "Image"
+    ],
     "capabilities": {
-      "reasoning": {"tier": "low", "basis": "生成模型，非推理定位。"},
-      "coding": {"tier": "low", "basis": "非编码模型。"},
-      "agent": {"tier": "low", "basis": "非 Agent 定位。"},
-      "knowledge": {"tier": "medium", "basis": "依赖提示词理解与世界知识生成。"},
-      "multilingual": {"tier": "high", "basis": "中英文提示词强。"}
+      "reasoning": {
+        "tier": "low",
+        "basis": "生成模型，非推理定位。"
+      },
+      "coding": {
+        "tier": "low",
+        "basis": "非编码模型。"
+      },
+      "agent": {
+        "tier": "low",
+        "basis": "非 Agent 定位。"
+      },
+      "knowledge": {
+        "tier": "medium",
+        "basis": "依赖提示词理解与世界知识生成。"
+      },
+      "multilingual": {
+        "tier": "high",
+        "basis": "中英文提示词强。"
+      }
     },
-    "best_for": ["image", "local"],
+    "best_for": [
+      "image",
+      "local"
+    ],
     "avoid_for": [],
     "media_type": "image",
     "max_resolution": "1328x1328",
-    "media_pricing": {"unit": "image", "price": null, "currency": "CNY", "note": "Apache 2.0 开放权重，可自托管；阿里云按量计费。"},
+    "media_pricing": {
+      "unit": "image",
+      "price": null,
+      "currency": "CNY",
+      "note": "Apache 2.0 开放权重，可自托管；阿里云按量计费。"
+    },
     "release_date": "2026",
     "source_url": "https://help.aliyun.com/zh/model-studio/",
     "verified": true,
-    "verified_date": "2026-08-05"
+    "verified_date": "2026-08-05",
+    "free": true,
+    "free_note": "通义万相网页版免费文生图"
   },
   {
     "id": "openai-sora-2",
@@ -1601,21 +2907,45 @@
     "vision_support": false,
     "open_weight": false,
     "speed_tier": "slow",
-    "model_type": ["Video"],
+    "model_type": [
+      "Video"
+    ],
     "capabilities": {
-      "reasoning": {"tier": "low", "basis": "生成模型，非推理定位。"},
-      "coding": {"tier": "low", "basis": "非编码模型。"},
-      "agent": {"tier": "low", "basis": "非 Agent 定位。"},
-      "knowledge": {"tier": "medium", "basis": "依赖提示词理解生成。"},
-      "multilingual": {"tier": "high", "basis": "支持多语言提示词。"}
+      "reasoning": {
+        "tier": "low",
+        "basis": "生成模型，非推理定位。"
+      },
+      "coding": {
+        "tier": "low",
+        "basis": "非编码模型。"
+      },
+      "agent": {
+        "tier": "low",
+        "basis": "非 Agent 定位。"
+      },
+      "knowledge": {
+        "tier": "medium",
+        "basis": "依赖提示词理解生成。"
+      },
+      "multilingual": {
+        "tier": "high",
+        "basis": "支持多语言提示词。"
+      }
     },
-    "best_for": ["video"],
+    "best_for": [
+      "video"
+    ],
     "avoid_for": [],
     "media_type": "video",
     "max_resolution": "1080p",
     "max_duration_sec": 20,
     "has_audio": true,
-    "media_pricing": {"unit": "second", "price": 0.30, "currency": "USD", "note": "API $0.10–$0.50/秒（按分辨率）；Sora API 计划 2026-09-24 关停，长期项目慎用。"},
+    "media_pricing": {
+      "unit": "second",
+      "price": 0.3,
+      "currency": "USD",
+      "note": "API $0.10–$0.50/秒（按分辨率）；Sora API 计划 2026-09-24 关停，长期项目慎用。"
+    },
     "release_date": "2025-12",
     "source_url": "https://openai.com/sora",
     "verified": true,
@@ -1637,21 +2967,45 @@
     "vision_support": false,
     "open_weight": false,
     "speed_tier": "medium",
-    "model_type": ["Video"],
+    "model_type": [
+      "Video"
+    ],
     "capabilities": {
-      "reasoning": {"tier": "low", "basis": "生成模型，非推理定位。"},
-      "coding": {"tier": "low", "basis": "非编码模型。"},
-      "agent": {"tier": "low", "basis": "非 Agent 定位。"},
-      "knowledge": {"tier": "medium", "basis": "依赖提示词理解生成。"},
-      "multilingual": {"tier": "high", "basis": "支持多语言提示词。"}
+      "reasoning": {
+        "tier": "low",
+        "basis": "生成模型，非推理定位。"
+      },
+      "coding": {
+        "tier": "low",
+        "basis": "非编码模型。"
+      },
+      "agent": {
+        "tier": "low",
+        "basis": "非 Agent 定位。"
+      },
+      "knowledge": {
+        "tier": "medium",
+        "basis": "依赖提示词理解生成。"
+      },
+      "multilingual": {
+        "tier": "high",
+        "basis": "支持多语言提示词。"
+      }
     },
-    "best_for": ["video"],
+    "best_for": [
+      "video"
+    ],
     "avoid_for": [],
     "media_type": "video",
     "max_resolution": "4K",
     "max_duration_sec": 60,
     "has_audio": true,
-    "media_pricing": {"unit": "second", "price": 0.40, "currency": "USD", "note": "Vertex AI 约 $0.30/秒（标准）/ $0.50/秒（高清）。"},
+    "media_pricing": {
+      "unit": "second",
+      "price": 0.4,
+      "currency": "USD",
+      "note": "Vertex AI 约 $0.30/秒（标准）/ $0.50/秒（高清）。"
+    },
     "release_date": "2026-01",
     "source_url": "https://deepmind.google/models/veo/",
     "verified": true,
@@ -1673,21 +3027,46 @@
     "vision_support": false,
     "open_weight": false,
     "speed_tier": "fast",
-    "model_type": ["Video"],
+    "model_type": [
+      "Video"
+    ],
     "capabilities": {
-      "reasoning": {"tier": "low", "basis": "生成模型，非推理定位。"},
-      "coding": {"tier": "low", "basis": "非编码模型。"},
-      "agent": {"tier": "low", "basis": "非 Agent 定位。"},
-      "knowledge": {"tier": "medium", "basis": "依赖提示词理解生成。"},
-      "multilingual": {"tier": "high", "basis": "支持多语言提示词。"}
+      "reasoning": {
+        "tier": "low",
+        "basis": "生成模型，非推理定位。"
+      },
+      "coding": {
+        "tier": "low",
+        "basis": "非编码模型。"
+      },
+      "agent": {
+        "tier": "low",
+        "basis": "非 Agent 定位。"
+      },
+      "knowledge": {
+        "tier": "medium",
+        "basis": "依赖提示词理解生成。"
+      },
+      "multilingual": {
+        "tier": "high",
+        "basis": "支持多语言提示词。"
+      }
     },
-    "best_for": ["video", "low_cost"],
+    "best_for": [
+      "video",
+      "low_cost"
+    ],
     "avoid_for": [],
     "media_type": "video",
     "max_resolution": "720p",
     "max_duration_sec": 60,
     "has_audio": true,
-    "media_pricing": {"unit": "second", "price": 0.05, "currency": "USD", "note": "约 $0.05/秒（720p），比原版低约 93%。"},
+    "media_pricing": {
+      "unit": "second",
+      "price": 0.05,
+      "currency": "USD",
+      "note": "约 $0.05/秒（720p），比原版低约 93%。"
+    },
     "release_date": "2026-03",
     "source_url": "https://deepmind.google/models/veo/",
     "verified": true,
@@ -1709,21 +3088,45 @@
     "vision_support": false,
     "open_weight": false,
     "speed_tier": "medium",
-    "model_type": ["Video"],
+    "model_type": [
+      "Video"
+    ],
     "capabilities": {
-      "reasoning": {"tier": "low", "basis": "生成模型，非推理定位。"},
-      "coding": {"tier": "low", "basis": "非编码模型。"},
-      "agent": {"tier": "low", "basis": "非 Agent 定位。"},
-      "knowledge": {"tier": "medium", "basis": "依赖提示词理解生成。"},
-      "multilingual": {"tier": "high", "basis": "支持多语言提示词。"}
+      "reasoning": {
+        "tier": "low",
+        "basis": "生成模型，非推理定位。"
+      },
+      "coding": {
+        "tier": "low",
+        "basis": "非编码模型。"
+      },
+      "agent": {
+        "tier": "low",
+        "basis": "非 Agent 定位。"
+      },
+      "knowledge": {
+        "tier": "medium",
+        "basis": "依赖提示词理解生成。"
+      },
+      "multilingual": {
+        "tier": "high",
+        "basis": "支持多语言提示词。"
+      }
     },
-    "best_for": ["video"],
+    "best_for": [
+      "video"
+    ],
     "avoid_for": [],
     "media_type": "video",
     "max_resolution": "4K",
     "max_duration_sec": 10,
     "has_audio": true,
-    "media_pricing": {"unit": "second", "price": 0.13, "currency": "USD", "note": "直连 API 约 $0.084–$0.168/秒；每日免费额度约 6 段。"},
+    "media_pricing": {
+      "unit": "second",
+      "price": 0.13,
+      "currency": "USD",
+      "note": "直连 API 约 $0.084–$0.168/秒；每日免费额度约 6 段。"
+    },
     "release_date": "2026",
     "source_url": "https://klingai.com/",
     "verified": true,
@@ -1745,25 +3148,51 @@
     "vision_support": false,
     "open_weight": false,
     "speed_tier": "medium",
-    "model_type": ["Video"],
+    "model_type": [
+      "Video"
+    ],
     "capabilities": {
-      "reasoning": {"tier": "low", "basis": "生成模型，非推理定位。"},
-      "coding": {"tier": "low", "basis": "非编码模型。"},
-      "agent": {"tier": "low", "basis": "非 Agent 定位。"},
-      "knowledge": {"tier": "medium", "basis": "依赖提示词理解生成。"},
-      "multilingual": {"tier": "high", "basis": "支持多语言提示词。"}
+      "reasoning": {
+        "tier": "low",
+        "basis": "生成模型，非推理定位。"
+      },
+      "coding": {
+        "tier": "low",
+        "basis": "非编码模型。"
+      },
+      "agent": {
+        "tier": "low",
+        "basis": "非 Agent 定位。"
+      },
+      "knowledge": {
+        "tier": "medium",
+        "basis": "依赖提示词理解生成。"
+      },
+      "multilingual": {
+        "tier": "high",
+        "basis": "支持多语言提示词。"
+      }
     },
-    "best_for": ["video"],
+    "best_for": [
+      "video"
+    ],
     "avoid_for": [],
     "media_type": "video",
     "max_resolution": "4K",
     "max_duration_sec": 10,
     "has_audio": true,
-    "media_pricing": {"unit": "second", "price": 0.12, "currency": "USD", "note": "约 $0.12/秒（12 credits/秒）；订阅制 $12/月起含额度。"},
+    "media_pricing": {
+      "unit": "second",
+      "price": 0.12,
+      "currency": "USD",
+      "note": "约 $0.12/秒（12 credits/秒）；订阅制 $12/月起含额度。"
+    },
     "release_date": "2026",
     "source_url": "https://runwayml.com/",
     "verified": true,
-    "verified_date": "2026-08-05"
+    "verified_date": "2026-08-05",
+    "free": true,
+    "free_note": "Runway 新用户赠 125 credits"
   },
   {
     "id": "bytedance-seedance-2",
@@ -1781,25 +3210,51 @@
     "vision_support": false,
     "open_weight": false,
     "speed_tier": "fast",
-    "model_type": ["Video"],
+    "model_type": [
+      "Video"
+    ],
     "capabilities": {
-      "reasoning": {"tier": "low", "basis": "生成模型，非推理定位。"},
-      "coding": {"tier": "low", "basis": "非编码模型。"},
-      "agent": {"tier": "low", "basis": "非 Agent 定位。"},
-      "knowledge": {"tier": "medium", "basis": "依赖提示词理解生成。"},
-      "multilingual": {"tier": "high", "basis": "支持多语言提示词。"}
+      "reasoning": {
+        "tier": "low",
+        "basis": "生成模型，非推理定位。"
+      },
+      "coding": {
+        "tier": "low",
+        "basis": "非编码模型。"
+      },
+      "agent": {
+        "tier": "low",
+        "basis": "非 Agent 定位。"
+      },
+      "knowledge": {
+        "tier": "medium",
+        "basis": "依赖提示词理解生成。"
+      },
+      "multilingual": {
+        "tier": "high",
+        "basis": "支持多语言提示词。"
+      }
     },
-    "best_for": ["video"],
+    "best_for": [
+      "video"
+    ],
     "avoid_for": [],
     "media_type": "video",
     "max_resolution": "4K",
     "max_duration_sec": 10,
     "has_audio": true,
-    "media_pricing": {"unit": "second", "price": 0.27, "currency": "USD", "note": "约 $0.24–$0.30/秒（720p，fal.ai）；原生同步音频。"},
+    "media_pricing": {
+      "unit": "second",
+      "price": 0.27,
+      "currency": "USD",
+      "note": "约 $0.24–$0.30/秒（720p，fal.ai）；原生同步音频。"
+    },
     "release_date": "2026-04",
     "source_url": "https://seedance.ai/",
     "verified": true,
-    "verified_date": "2026-08-05"
+    "verified_date": "2026-08-05",
+    "free": true,
+    "free_note": "火山方舟赠免费额度（视频生成）"
   },
   {
     "id": "xai-grok-imagine-video",
@@ -1817,25 +3272,52 @@
     "vision_support": false,
     "open_weight": false,
     "speed_tier": "fast",
-    "model_type": ["Video"],
+    "model_type": [
+      "Video"
+    ],
     "capabilities": {
-      "reasoning": {"tier": "low", "basis": "生成模型，非推理定位。"},
-      "coding": {"tier": "low", "basis": "非编码模型。"},
-      "agent": {"tier": "low", "basis": "非 Agent 定位。"},
-      "knowledge": {"tier": "medium", "basis": "依赖提示词理解生成。"},
-      "multilingual": {"tier": "high", "basis": "支持多语言提示词。"}
+      "reasoning": {
+        "tier": "low",
+        "basis": "生成模型，非推理定位。"
+      },
+      "coding": {
+        "tier": "low",
+        "basis": "非编码模型。"
+      },
+      "agent": {
+        "tier": "low",
+        "basis": "非 Agent 定位。"
+      },
+      "knowledge": {
+        "tier": "medium",
+        "basis": "依赖提示词理解生成。"
+      },
+      "multilingual": {
+        "tier": "high",
+        "basis": "支持多语言提示词。"
+      }
     },
-    "best_for": ["video", "low_cost"],
+    "best_for": [
+      "video",
+      "low_cost"
+    ],
     "avoid_for": [],
     "media_type": "video",
     "max_resolution": "720p",
     "max_duration_sec": 60,
     "has_audio": true,
-    "media_pricing": {"unit": "second", "price": 0.07, "currency": "USD", "note": "约 $0.07/秒（$4.20/分钟），含同步音频，最长 60 秒。"},
+    "media_pricing": {
+      "unit": "second",
+      "price": 0.07,
+      "currency": "USD",
+      "note": "约 $0.07/秒（$4.20/分钟），含同步音频，最长 60 秒。"
+    },
     "release_date": "2026",
     "source_url": "https://x.ai/news/grok-imagine",
     "verified": true,
-    "verified_date": "2026-08-05"
+    "verified_date": "2026-08-05",
+    "free": true,
+    "free_note": "x.com 网页版 Grok 免费生成（API 付费）"
   },
   {
     "id": "luma-ray-2",
@@ -1853,25 +3335,51 @@
     "vision_support": false,
     "open_weight": false,
     "speed_tier": "medium",
-    "model_type": ["Video"],
+    "model_type": [
+      "Video"
+    ],
     "capabilities": {
-      "reasoning": {"tier": "low", "basis": "生成模型，非推理定位。"},
-      "coding": {"tier": "low", "basis": "非编码模型。"},
-      "agent": {"tier": "low", "basis": "非 Agent 定位。"},
-      "knowledge": {"tier": "medium", "basis": "依赖提示词理解生成。"},
-      "multilingual": {"tier": "high", "basis": "支持多语言提示词。"}
+      "reasoning": {
+        "tier": "low",
+        "basis": "生成模型，非推理定位。"
+      },
+      "coding": {
+        "tier": "low",
+        "basis": "非编码模型。"
+      },
+      "agent": {
+        "tier": "low",
+        "basis": "非 Agent 定位。"
+      },
+      "knowledge": {
+        "tier": "medium",
+        "basis": "依赖提示词理解生成。"
+      },
+      "multilingual": {
+        "tier": "high",
+        "basis": "支持多语言提示词。"
+      }
     },
-    "best_for": ["video"],
+    "best_for": [
+      "video"
+    ],
     "avoid_for": [],
     "media_type": "video",
     "max_resolution": "1080p",
     "max_duration_sec": 10,
     "has_audio": false,
-    "media_pricing": {"unit": "second", "price": null, "currency": "USD", "note": "标准版 + Flash 高速版；精确定价以官网为准（约 $0.10–$0.20/秒区间）。"},
+    "media_pricing": {
+      "unit": "second",
+      "price": null,
+      "currency": "USD",
+      "note": "标准版 + Flash 高速版；精确定价以官网为准（约 $0.10–$0.20/秒区间）。"
+    },
     "release_date": "2026",
     "source_url": "https://lumalabs.ai/",
     "verified": true,
-    "verified_date": "2026-08-05"
+    "verified_date": "2026-08-05",
+    "free": true,
+    "free_note": "Luma 网页版免费额度"
   },
   {
     "id": "alibaba-wan-2-1",
@@ -1889,21 +3397,46 @@
     "vision_support": false,
     "open_weight": true,
     "speed_tier": "slow",
-    "model_type": ["Video"],
+    "model_type": [
+      "Video"
+    ],
     "capabilities": {
-      "reasoning": {"tier": "low", "basis": "生成模型，非推理定位。"},
-      "coding": {"tier": "low", "basis": "非编码模型。"},
-      "agent": {"tier": "low", "basis": "非 Agent 定位。"},
-      "knowledge": {"tier": "medium", "basis": "依赖提示词理解生成。"},
-      "multilingual": {"tier": "high", "basis": "支持多语言提示词。"}
+      "reasoning": {
+        "tier": "low",
+        "basis": "生成模型，非推理定位。"
+      },
+      "coding": {
+        "tier": "low",
+        "basis": "非编码模型。"
+      },
+      "agent": {
+        "tier": "low",
+        "basis": "非 Agent 定位。"
+      },
+      "knowledge": {
+        "tier": "medium",
+        "basis": "依赖提示词理解生成。"
+      },
+      "multilingual": {
+        "tier": "high",
+        "basis": "支持多语言提示词。"
+      }
     },
-    "best_for": ["video", "local"],
+    "best_for": [
+      "video",
+      "local"
+    ],
     "avoid_for": [],
     "media_type": "video",
     "max_resolution": "720p",
     "max_duration_sec": 6,
     "has_audio": false,
-    "media_pricing": {"unit": "second", "price": null, "currency": "USD", "note": "Apache 2.0 开放权重，本地免费（需 24GB+ VRAM）；无官方 API 价。"},
+    "media_pricing": {
+      "unit": "second",
+      "price": null,
+      "currency": "USD",
+      "note": "Apache 2.0 开放权重，本地免费（需 24GB+ VRAM）；无官方 API 价。"
+    },
     "release_date": "2025",
     "source_url": "https://github.com/Wan-Video/Wan2.1",
     "verified": true,

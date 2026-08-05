@@ -116,6 +116,18 @@ async function main() {
   ok(openOnly > 0 && openOnly < total, `开放权重过滤生效（${openOnly}）`)
   await click('[data-reset-filters]')
   ok(app.querySelectorAll('.model-card').length === total, '清空筛选恢复')
+  // 价格筛选（免费 / 低成本 / 标准价）
+  const freeCount = variants.filter((v) => v.free).length
+  ok(freeCount > 0, `数据集中有 ${freeCount} 个免费模型`)
+  await click('[data-seg="browsePrice"] [data-value="free"]')
+  const freeCards = app.querySelectorAll('.model-card').length
+  ok(freeCards === Math.min(freeCount, 24), `免费筛选命中 ${freeCards} 张卡（上限 24）`)
+  ok(Array.from(app.querySelectorAll('.model-card')).every((c) => c.querySelector('.free-badge')), '免费结果全部带「免费」徽章')
+  await click('[data-seg="browsePrice"] [data-value="low"]')
+  const lowCards = app.querySelectorAll('.model-card').length
+  ok(lowCards > 0 && lowCards < total, `低成本筛选生效（${lowCards}）`)
+  await click('[data-seg="browsePrice"] [data-value="all"]')
+  ok(app.querySelectorAll('.model-card').length === total, '价格筛选清空恢复全部')
   await click('[data-tab="scene"]')
   ok(app.querySelector('.task-tile'), '场景 tab 渲染任务磁贴')
   ok(app.querySelector('.result-row'), '场景推荐结果行')

@@ -1,13 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none" role="img" aria-label="AI Model Explorer">
   <defs>
-    <linearGradient id="node" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#34D399"/>
-      <stop offset="1" stop-color="#0E9F6E"/>
-    </linearGradient>
     <radialGradient id="core" cx="0.5" cy="0.42" r="0.65">
-      <stop offset="0" stop-color="#10B981"/>
-      <stop offset="0.6" stop-color="#067A57"/>
-      <stop offset="1" stop-color="#053B2C"/>
+      <stop offset="0" stop-color="#1f4d42"/>
+      <stop offset="0.7" stop-color="#173e35"/>
+      <stop offset="1" stop-color="#0e2a24"/>
     </radialGradient>
     <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
       <feGaussianBlur stdDeviation="2.2" result="b"/>
@@ -15,13 +11,13 @@
     </filter>
   </defs>
 
-  <!-- 轨道环 -->
-  <ellipse cx="60" cy="60" rx="46" ry="20" transform="rotate(-24 60 60)" stroke="#10B981" stroke-opacity="0.32" stroke-width="1.6"/>
-  <ellipse cx="60" cy="60" rx="46" ry="20" transform="rotate(28 60 60)" stroke="#34D399" stroke-opacity="0.28" stroke-width="1.6"/>
-  <ellipse cx="60" cy="60" rx="20" ry="46" transform="rotate(12 60 60)" stroke="#0E9F6E" stroke-opacity="0.18" stroke-width="1.4"/>
+  <!-- 轨道环（深绿） -->
+  <ellipse cx="60" cy="60" rx="46" ry="20" transform="rotate(-24 60 60)" stroke="#173e35" stroke-opacity="0.30" stroke-width="1.6"/>
+  <ellipse cx="60" cy="60" rx="46" ry="20" transform="rotate(28 60 60)" stroke="#173e35" stroke-opacity="0.24" stroke-width="1.6"/>
+  <ellipse cx="60" cy="60" rx="20" ry="46" transform="rotate(12 60 60)" stroke="#173e35" stroke-opacity="0.18" stroke-width="1.4"/>
 
-  <!-- 连接线：核心到各节点 -->
-  <g stroke="#0E9F6E" stroke-opacity="0.55" stroke-width="1.5">
+  <!-- 连接线：核心到各节点（深绿） -->
+  <g stroke="#173e35" stroke-opacity="0.45" stroke-width="1.5">
     <line x1="60" y1="60" x2="102" y2="60"/>
     <line x1="60" y1="60" x2="90" y2="90"/>
     <line x1="60" y1="60" x2="60" y2="102"/>
@@ -31,8 +27,8 @@
     <line x1="60" y1="60" x2="60" y2="18"/>
     <line x1="60" y1="60" x2="90" y2="30"/>
   </g>
-  <!-- 节点间网状连线 -->
-  <g stroke="#34D399" stroke-opacity="0.30" stroke-width="1.1">
+  <!-- 节点间网状连线（中绿） -->
+  <g stroke="#63933a" stroke-opacity="0.30" stroke-width="1.1">
     <line x1="102" y1="60" x2="90" y2="90"/>
     <line x1="90" y1="90" x2="60" y2="102"/>
     <line x1="60" y1="102" x2="30" y2="90"/>
@@ -44,20 +40,20 @@
     <line x1="90" y1="30" x2="30" y2="90"/>
   </g>
 
-  <!-- 环绕节点 -->
+  <!-- 环绕节点（浅绿 #baf17a，网站浅绿） -->
   <g filter="url(#glow)">
-    <circle cx="102" cy="60" r="6.5" fill="url(#node)"/>
-    <circle cx="90" cy="90" r="6.5" fill="url(#node)"/>
-    <circle cx="60" cy="102" r="6.5" fill="url(#node)"/>
-    <circle cx="30" cy="90" r="6.5" fill="url(#node)"/>
-    <circle cx="18" cy="60" r="6.5" fill="url(#node)"/>
-    <circle cx="30" cy="30" r="6.5" fill="url(#node)"/>
-    <circle cx="60" cy="18" r="6.5" fill="url(#node)"/>
-    <circle cx="90" cy="30" r="6.5" fill="url(#node)"/>
+    <circle cx="102" cy="60" r="6.5" fill="#baf17a" stroke="#63933a" stroke-width="1.2"/>
+    <circle cx="90" cy="90" r="6.5" fill="#baf17a" stroke="#63933a" stroke-width="1.2"/>
+    <circle cx="60" cy="102" r="6.5" fill="#baf17a" stroke="#63933a" stroke-width="1.2"/>
+    <circle cx="30" cy="90" r="6.5" fill="#baf17a" stroke="#63933a" stroke-width="1.2"/>
+    <circle cx="18" cy="60" r="6.5" fill="#baf17a" stroke="#63933a" stroke-width="1.2"/>
+    <circle cx="30" cy="30" r="6.5" fill="#baf17a" stroke="#63933a" stroke-width="1.2"/>
+    <circle cx="60" cy="18" r="6.5" fill="#baf17a" stroke="#63933a" stroke-width="1.2"/>
+    <circle cx="90" cy="30" r="6.5" fill="#baf17a" stroke="#63933a" stroke-width="1.2"/>
   </g>
 
-  <!-- 中央核心 -->
+  <!-- 中央核心（深绿 #173e35，网站深绿） -->
   <circle cx="60" cy="60" r="14" fill="url(#core)" filter="url(#glow)"/>
-  <circle cx="60" cy="60" r="14" fill="none" stroke="#6EE7B7" stroke-opacity="0.7" stroke-width="1.4"/>
-  <circle cx="55" cy="54" r="3.4" fill="#A7F3D0" fill-opacity="0.85"/>
+  <circle cx="60" cy="60" r="14" fill="none" stroke="#baf17a" stroke-opacity="0.6" stroke-width="1.4"/>
+  <circle cx="55" cy="54" r="3.4" fill="#baf17a" fill-opacity="0.85"/>
 </svg>

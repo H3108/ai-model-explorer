@@ -44,7 +44,7 @@ const state = {
   // 系列页
   familySort: 'default',
   // 浏览页
-  browseTab: 'capability', browseModality: 'all', browseCaps: [], browseTraits: [], browseSort: 'match',
+  browseTab: 'capability', browseModality: 'all', browseCaps: [], browseTraits: [], browseSort: 'match', browsePrice: 'all',
   browseTask: null,
   // 匹配器
   selectedTask: null, budget: 'balanced', speed: 'balanced',
@@ -88,6 +88,7 @@ function cur(c) {
   return c === 'CNY' ? '¥' : '$'
 }
 function priceLabel(v) {
+  if (v.free) return '免费'
   if (v.media_pricing && v.media_pricing.price != null) {
     const m = v.media_pricing
     return `${cur(m.currency)}${m.price} / ${m.unit === 'image' ? '张' : m.unit === 'second' ? '秒' : m.unit || '次'}`
@@ -162,12 +163,17 @@ function capBar(dim, cap) {
 function modelCard(v, extra = '') {
   const p = providerOf(v)
   const f = familyOf(v)
+  const free = v.free ? `<span class="free-badge" title="${esc(v.free_note || '免费可用')}">免费</span>` : ''
+  const priceTxt =
+    modalityOf(v) === 'text'
+      ? v.free ? '免费' : `${priceLabel(v)} /M`
+      : priceLabel(v)
   const meta =
     modalityOf(v) === 'text'
-      ? `<span>${ctxShort(v.context_window)} 上下文</span><span>${priceLabel(v)} /M</span>`
-      : `<span>${esc(v.max_resolution || v.max_duration_sec ? (v.max_resolution || v.max_duration_sec + 's') : '—')}</span><span>${priceLabel(v)}</span>`
+      ? `<span>${ctxShort(v.context_window)} 上下文</span><span>${priceTxt}</span>`
+      : `<span>${esc(v.max_resolution || v.max_duration_sec ? (v.max_resolution || v.max_duration_sec + 's') : '—')}</span><span>${priceTxt}</span>`
   return `<a class="model-card" href="#model/${encodeURIComponent(v.id)}">
-    <div class="mc-top">${logoHTML(p, 'sm')}${modBadge(v)}${extra}</div>
+    <div class="mc-top">${logoHTML(p, 'sm')}${modBadge(v)}${free}${extra}</div>
     <b class="mc-name">${esc(v.name_cn || v.name)}</b>
     <small class="mc-from">${esc(p.name_cn || p.name)} · ${esc(f.name_cn || f.name || '')}</small>
     <p class="mc-desc">${esc(v.one_liner_cn || '')}</p>
@@ -421,6 +427,9 @@ function viewFamily(id) {
 // ---------- 视图：能力 / 场景浏览 ----------
 function matchModels() {
   let list = state.variants.filter((v) => state.browseModality === 'all' || modalityOf(v) === state.browseModality)
+  if (state.browsePrice === 'free') list = list.filter((v) => v.free)
+  else if (state.browsePrice === 'low') list = list.filter((v) => v.free !== true && v.input_price_per_mtok != null && v.input_price_per_mtok <= 1)
+  else if (state.browsePrice === 'standard') list = list.filter((v) => v.free !== true && v.input_price_per_mtok != null && v.input_price_per_mtok > 1)
   state.browseTraits.forEach((k) => {
     const t = TRAITS.find((x) => x.key === k)
     if (t) list = list.filter(t.test)
@@ -485,7 +494,7 @@ function browseTaskResultsHTML() {
       <span class="rank">0${i + 1}</span>
       ${logoHTML(providerOf(v), 'sm')}
       <span class="result-main"><b>${esc(v.name_cn || v.name)}</b><small>${esc(providerOf(v).name_cn || '')} · ${esc(familyOf(v).name_cn || '')}</small></span>
-      ${modBadge(v)}
+      ${modBadge(v)}${v.free ? ' <span class="free-badge sm">免费</span>' : ''}
       <span class="result-reason">${esc(m.reason)}</span>
       <span class="score-pill">${m.score}/5</span>
       <span class="arrow">→</span>
@@ -502,6 +511,8 @@ function viewBrowse() {
     `<button class="chip ${state.browseTraits.includes(t.key) ? 'on' : ''}" data-trait="${t.key}">${t.cn}<span>${t.hint}</span></button>`
   const modBtn = (k, label) =>
     `<button class="${state.browseModality === k ? 'selected' : ''}" data-value="${k}">${label}</button>`
+  const priceBtn = (k, label) =>
+    `<button class="${state.browsePrice === k ? 'selected' : ''}" data-value="${k}">${label}</button>`
   const taskCard = (t) =>
     `<button class="task-tile ${state.browseTask === t.id ? 'on' : ''}" data-browse-task="${t.id}"><span>${t.icon || '◎'}</span><b>${esc(t.name_cn)}</b><small>${esc(t.description_cn)}</small></button>`
   return `<div class="wrap page">
@@ -514,6 +525,7 @@ function viewBrowse() {
       ? `<div class="browse-layout">
           <aside class="filter-panel">
             <div class="fp-block"><h4>模态</h4><div class="segmented" data-seg="browseModality">${modBtn('all', '全部')}${modBtn('text', '文本')}${modBtn('image', '图像')}${modBtn('video', '视频')}</div></div>
+            <div class="fp-block"><h4>价格<small>按付费方式筛选</small></h4><div class="segmented" data-seg="browsePrice">${priceBtn('all', '全部')}${priceBtn('free', '免费')}${priceBtn('low', '低成本')}${priceBtn('standard', '标准价')}</div></div>
             <div class="fp-block"><h4>能力维度<small>多选，取平均匹配度</small></h4><div class="chip-wrap">${CAP_DIMS.map(capChip).join('')}</div></div>
             <div class="fp-block"><h4>硬性条件<small>多选，逐条过滤</small></h4><div class="chip-wrap">${TRAITS.map(traitChip).join('')}</div></div>
             <div class="fp-block"><h4>排序</h4><div class="segmented" data-seg="browseSort"><button class="${state.browseSort === 'match' ? 'selected' : ''}" data-value="match">匹配度</button><button class="${state.browseSort === 'price' ? 'selected' : ''}" data-value="price">价格</button><button class="${state.browseSort === 'context' ? 'selected' : ''}" data-value="context">上下文</button></div></div>
@@ -558,7 +570,7 @@ function recommendationHTML() {
     <span class="rank">0${i + 1}</span>
     ${logoHTML(providerOf(v), 'sm')}
     <span class="result-main"><b>${esc(v.name_cn || v.name)}</b><small>${esc(providerOf(v).name_cn || '')} · ${esc(familyOf(v).name_cn || '')}</small></span>
-    ${modBadge(v)}
+    ${modBadge(v)}${v.free ? ' <span class="free-badge sm">免费</span>' : ''}
     <span class="result-reason">${esc(r.reason)}</span>
     <span class="score-pill">${r.score}/5</span>
     <span class="arrow">→</span>
@@ -664,7 +676,7 @@ function specCards(v) {
       statCard('最高分辨率', esc(v.max_resolution || '—')),
       statCard('最长时长', v.max_duration_sec ? v.max_duration_sec + ' 秒' : '—'),
       statCard('原生音频', v.has_audio == null ? '—' : v.has_audio ? '支持' : '不支持'),
-      statCard('单价', m.price != null ? priceLabel(v) : '未公开', m.note || ''),
+      statCard('单价', v.free ? '免费' : (m.price != null ? priceLabel(v) : '未公开'), v.free ? (v.free_note || '') : (m.note || '')),
       statCard('速度档', esc(SPEED_CN[v.speed_tier] || v.speed_tier || '—')),
       statCard('开放权重', v.open_weight ? '是' : '否'),
       statCard('发布', esc(v.release_date || '—')),
@@ -673,12 +685,13 @@ function specCards(v) {
   return [
     statCard('上下文窗口', ctxShort(v.context_window), v.context_window ? v.context_window.toLocaleString() + ' tokens' : ''),
     statCard('最大输出', v.max_output_tokens ? ctxShort(v.max_output_tokens) : '—', v.max_output_tokens ? v.max_output_tokens.toLocaleString() + ' tokens' : ''),
-    statCard('输入价格', v.input_price_per_mtok == null ? '未公开' : `${cur(v.currency)}${v.input_price_per_mtok}`, '每百万 tokens'),
-    statCard('输出价格', v.output_price_per_mtok == null ? '未公开' : `${cur(v.currency)}${v.output_price_per_mtok}`, '每百万 tokens'),
+    statCard('输入价格', v.free ? '免费' : (v.input_price_per_mtok == null ? '未公开' : `${cur(v.currency)}${v.input_price_per_mtok}`), '每百万 tokens'),
+    statCard('输出价格', v.free ? '免费' : (v.output_price_per_mtok == null ? '未公开' : `${cur(v.currency)}${v.output_price_per_mtok}`), '每百万 tokens'),
     statCard('速度档', esc(SPEED_CN[v.speed_tier] || v.speed_tier || '—')),
     statCard('视觉输入', v.vision_support ? '支持' : '不支持'),
     statCard('参数规模', esc(v.params || '未公开')),
     statCard('开放权重', v.open_weight ? '是' : '否'),
+    v.free ? statCard('免费说明', esc(v.free_note || '免费可用')) : '',
   ].join('')
 }
 function namingBlock(v) {
@@ -907,6 +920,7 @@ function bindGlobalEvents() {
       state.browseTraits = []
       state.browseModality = 'all'
       state.browseSort = 'match'
+      state.browsePrice = 'all'
       render()
       return
     }
