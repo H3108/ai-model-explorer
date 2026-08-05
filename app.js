@@ -14,8 +14,9 @@ const TIER = {
   high: { label: '强', lv: 'high', pct: 88, score: 5 },
   highest: { label: '顶尖', lv: 'top', pct: 100, score: 6 },
 }
-const SPEED_RANK = { slow: 1, fast: 2, faster: 3, fastest: 4 }
-const SPEED_CN = { slow: '较慢', fast: '快', faster: '很快', fastest: '极快' }
+const SPEED_RANK = { slow: 1, slower: 2, moderate: 3, medium: 3, fast: 4, faster: 5, fastest: 6 }
+const SPEED_CN = { slow: '较慢', slower: '偏慢', moderate: '中速', medium: '中速', fast: '快', faster: '很快', fastest: '极快' }
+const API_STYLE_CN = { openai: 'OpenAI 兼容', media: '媒体接口', anthropic: 'Anthropic', google: 'Google Gemini' }
 const MODALITY = {
   text: { label: '文本', short: '文本', icon: '⌘' },
   image: { label: '图像生成', short: '图像', icon: '◈' },
@@ -141,14 +142,14 @@ function capTags(v) {
   const caps = v.capabilities || {}
   const strong = (c) => c && ['high', 'highest'].includes(c.tier)
   const tags = []
-  if (strong(caps.coding)) tags.push('Coding')
-  if (strong(caps.reasoning)) tags.push('Reasoning')
-  if (strong(caps.agent)) tags.push('Agent')
-  if ((v.context_window || 0) >= 128000) tags.push('Long Context')
-  if (v.vision_support || v.media_type) tags.push('Multimodal')
+  if (strong(caps.coding)) tags.push('编码')
+  if (strong(caps.reasoning)) tags.push('推理')
+  if (strong(caps.agent)) tags.push('智能体')
+  if ((v.context_window || 0) >= 128000) tags.push('长上下文')
+  if (v.vision_support || v.media_type) tags.push('多模态')
   if (p.country === 'CN') tags.push('中文优化')
-  if (v.open_weight) tags.push('Open Weight')
-  if (v.input_price_per_mtok != null && v.input_price_per_mtok <= 1) tags.push('Low Cost')
+  if (v.open_weight) tags.push('开放权重')
+  if (v.input_price_per_mtok != null && v.input_price_per_mtok <= 1) tags.push('低成本')
   return tags
 }
 
@@ -210,7 +211,7 @@ function viewHome() {
   return `
   <section class="hero wrap">
     <div class="hero-copy">
-      <span class="eyebrow">AI MODEL SELECTION SYSTEM</span>
+      <span class="eyebrow">AI 模型选型系统</span>
       <h1>找到适合你的<br><em>AI 模型。</em></h1>
       <p>不需要研究几十个模型名称。告诉我你的任务，系统自动推荐，并解释为什么。</p>
       <div class="hero-actions">
@@ -222,9 +223,9 @@ function viewHome() {
     </div>
     <div class="hero-visual">
       <div class="orbit orbit-a"></div><div class="orbit orbit-b"></div>
-      <div class="visual-core"><b>30</b><small>SECONDS<br>TO CHOOSE</small></div>
+      <div class="visual-core"><b>30</b><small>秒级<br>选型</small></div>
       <div class="float-card f-one"><i class="dot green"></i><b>任务</b><small>写代码 Agent</small></div>
-      <div class="float-card f-two"><i class="dot orange"></i><b>推荐 TOP 3</b><small>理由清晰可见</small></div>
+      <div class="float-card f-two"><i class="dot orange"></i><b>推荐前 3</b><small>理由清晰可见</small></div>
       <div class="float-card f-three"><i class="dot purple"></i><b>模型族</b><small>系列 → 型号</small></div>
     </div>
   </section>
@@ -241,7 +242,7 @@ function viewHome() {
     <div class="entry-grid">
       <a class="entry-card" href="#providers"><span class="entry-ico">◎</span><b>按厂商浏览</b><p>厂商 → 系列 → 型号，理解每家在做什么。</p><i>${state.providers.length} 家厂商 →</i></a>
       <a class="entry-card" href="#browse"><span class="entry-ico">◈</span><b>按能力 / 场景</b><p>勾选你要的能力（推理、编码、长上下文…），实时匹配。</p><i>${CAP_DIMS.length + TRAITS.length} 个维度 →</i></a>
-      <a class="entry-card" href="#matcher"><span class="entry-ico">✦</span><b>任务选择器</b><p>说出任务 + 预算 + 速度偏好，直接给 TOP 推荐。</p><i>${state.tasks.length} 类任务 →</i></a>
+      <a class="entry-card" href="#matcher"><span class="entry-ico">✦</span><b>任务选择器</b><p>说出任务 + 预算 + 速度偏好，直接给出推荐。</p><i>${state.tasks.length} 类任务 →</i></a>
     </div>
   </section>
 
@@ -287,7 +288,7 @@ function viewProviders() {
   const seg = (key, cur, groupAttr, items) =>
     `<div class="segmented" data-seg="${groupAttr}">${items.map((i) => `<button class="${cur === i[0] ? 'selected' : ''}" data-value="${i[0]}">${i[1]}</button>`).join('')}</div>`
   return `<div class="wrap page">
-    ${pageHead({ eyebrow: '01 / PROVIDER MAP', title: '先认识厂商，<em>再理解模型。</em>', desc: '从公司定位开始浏览，顺着「厂商 → 系列 → 型号」找到适合你的选择。' })}
+    ${pageHead({ eyebrow: '01 / 厂商地图', title: '先认识厂商，<em>再理解模型。</em>', desc: '从公司定位开始浏览，顺着「厂商 → 系列 → 型号」找到适合你的选择。' })}
     <div class="toolbar">
       <input id="provider-search" type="search" placeholder="搜索厂商或模型…" autocomplete="off" value="${esc(state.providerSearch)}">
       <div class="toolbar-segs">
@@ -336,7 +337,7 @@ function viewProvider(id) {
       ${statCard('模型系列', fs.length)}
       ${statCard('收录型号', vs.length)}
       ${statCard('API Base URL', p.api_base_url ? `<code>${esc(p.api_base_url)}</code>` : '自托管 / 无公开 API')}
-      ${statCard('接口风格', esc(p.api_style || '—'))}
+      ${statCard('接口风格', esc(API_STYLE_CN[p.api_style] || p.api_style || '—'))}
     </div>
     <h2 class="sec-title">模型系列</h2>
     <p class="sec-sub">系列是理解一家厂商的最短路径：同一系列共享定位与训练思路，差别只在档位。</p>
@@ -500,7 +501,7 @@ function browseTaskResultsHTML() {
     .filter((x) => x.v)
     .sort((a, b) => b.m.score - a.m.score)
   return `<div class="task-result">
-    <div class="tr-head"><div><span class="eyebrow">${esc(task.name_cn)}</span><h3>${esc(rec.label)}</h3></div><span class="match-badge">TOP ${rows.length}</span></div>
+    <div class="tr-head"><div><span class="eyebrow">${esc(task.name_cn)}</span><h3>${esc(rec.label)}</h3></div><span class="match-badge">前 ${rows.length}</span></div>
     ${rows
       .map(
         ({ m, v }, i) => `<a class="result-row" href="#model/${encodeURIComponent(v.id)}">
@@ -529,7 +530,7 @@ function viewBrowse() {
   const taskCard = (t) =>
     `<button class="task-tile ${state.browseTask === t.id ? 'on' : ''}" data-browse-task="${t.id}"><span>${t.icon || '◎'}</span><b>${esc(t.name_cn)}</b><small>${esc(t.description_cn)}</small></button>`
   return `<div class="wrap page">
-    ${pageHead({ eyebrow: '02 / BROWSE', title: '按<em>能力</em>或<em>场景</em>找模型', desc: '左边勾选你需要的能力，右边实时给出匹配结果；或者直接切到「按场景」，用大白话选。' })}
+    ${pageHead({ eyebrow: '02 / 浏览', title: '按<em>能力</em>或<em>场景</em>找模型', desc: '左边勾选你需要的能力，右边实时给出匹配结果；或者直接切到「按场景」，用大白话选。' })}
     <div class="tabs">
       <button class="${state.browseTab === 'capability' ? 'on' : ''}" data-tab="capability">按能力匹配</button>
       <button class="${state.browseTab === 'scene' ? 'on' : ''}" data-tab="scene">按场景浏览</button>
@@ -582,7 +583,7 @@ function recommendationHTML() {
         : state.budget === 'high' || state.speed === 'quality'
           ? '已按「质量优先」排序（推荐评分）'
           : '按推荐评分排序'
-  return `<div class="tr-head"><div><span class="eyebrow">RECOMMENDATION</span><h3>${esc(rec.label)}</h3></div><span class="match-badge">TOP ${ranked.length}</span></div>
+  return `<div class="tr-head"><div><span class="eyebrow">推荐</span><h3>${esc(rec.label)}</h3></div><span class="match-badge">前 ${ranked.length}</span></div>
   ${ranked
     .map(
       ({ r, v }, i) => `<a class="result-row" href="#model/${encodeURIComponent(v.id)}">
@@ -605,7 +606,7 @@ function viewMatcher() {
     `<button class="${cur === val ? 'selected' : ''}" data-value="${val}">${label}</button>`
   return `<div class="matcher-page">
     <div class="wrap page">
-      ${pageHead({ eyebrow: '03 / TASK MATCHER', title: '告诉我，你想做什么？', desc: '选择任务、预算和偏好，得到带理由的推荐列表。' })}
+      ${pageHead({ eyebrow: '03 / 任务匹配', title: '告诉我，你想做什么？', desc: '选择任务、预算和偏好，得到带理由的推荐列表。' })}
       <div class="matcher-layout">
         <div class="matcher-form">
           <label>我想要</label>
@@ -673,9 +674,9 @@ function apiBlockHTML(v) {
   const base = p.api_base_url || 'http://localhost:8000/v1'
   const ex = codeExamples(v)
   const facts = `<div class="api-facts">
-    <div class="api-fact"><b>Base URL</b><code>${esc(p.api_base_url || '（自托管）')}</code></div>
-    <div class="api-fact"><b>Model ID</b><code>${esc(v.model_id || v.id)}</code></div>
-    <div class="api-fact"><b>接口风格</b><code>${esc(p.api_style || '—')}</code></div>
+    <div class="api-fact"><b>接入地址</b><code>${esc(p.api_base_url || '（自托管）')}</code></div>
+    <div class="api-fact"><b>模型 ID</b><code>${esc(v.model_id || v.id)}</code></div>
+    <div class="api-fact"><b>接口风格</b><code>${esc(API_STYLE_CN[p.api_style] || p.api_style || '—')}</code></div>
   </div>`
   if (ex.note) return `<div class="api-block">${facts}<p class="muted">${ex.note}</p></div>`
   const note = ex.isLocal
@@ -703,10 +704,10 @@ function specCards(v) {
     ].join('')
   }
   return [
-    statCard('上下文窗口', ctxShort(v.context_window), v.context_window ? v.context_window.toLocaleString() + ' tokens' : ''),
-    statCard('最大输出', v.max_output_tokens ? ctxShort(v.max_output_tokens) : '—', v.max_output_tokens ? v.max_output_tokens.toLocaleString() + ' tokens' : ''),
-    statCard('输入价格', v.free ? '免费' : (v.input_price_per_mtok == null ? '未公开' : `${cur(v.currency)}${v.input_price_per_mtok}`), '每百万 tokens'),
-    statCard('输出价格', v.free ? '免费' : (v.output_price_per_mtok == null ? '未公开' : `${cur(v.currency)}${v.output_price_per_mtok}`), '每百万 tokens'),
+    statCard('上下文窗口', ctxShort(v.context_window), v.context_window ? v.context_window.toLocaleString() + ' token' : ''),
+    statCard('最大输出', v.max_output_tokens ? ctxShort(v.max_output_tokens) : '—', v.max_output_tokens ? v.max_output_tokens.toLocaleString() + ' token' : ''),
+    statCard('输入价格', v.free ? '免费' : (v.input_price_per_mtok == null ? '未公开' : `${cur(v.currency)}${v.input_price_per_mtok}`), '每百万 token'),
+    statCard('输出价格', v.free ? '免费' : (v.output_price_per_mtok == null ? '未公开' : `${cur(v.currency)}${v.output_price_per_mtok}`), '每百万 token'),
     statCard('速度档', esc(SPEED_CN[v.speed_tier] || v.speed_tier || '—')),
     statCard('视觉输入', v.vision_support ? '支持' : '不支持'),
     statCard('参数规模', esc(v.params || '未公开')),
@@ -781,7 +782,7 @@ function viewModel(id) {
 // ---------- 视图：命名解释 ----------
 function viewGlossary() {
   return `<div class="wrap page">
-    ${pageHead({ eyebrow: '04 / NAME GLOSSARY', title: '模型名称，<em>其实有规律。</em>', desc: '不再被 Mini、Pro、Flash 搞混。快速理解型号后缀代表什么。' })}
+    ${pageHead({ eyebrow: '04 / 命名词典', title: '模型名称，<em>其实有规律。</em>', desc: '不再被 Mini、Pro、Flash 搞混。快速理解型号后缀代表什么。' })}
     <div class="glossary-grid">${state.naming
       .map((i) => `<article class="glossary-card"><span class="naming-term">${esc(i.term)}</span><b>${esc(i.name_cn)}</b><p>${esc(i.description_cn)}</p><small>例：${esc(i.example)}</small></article>`)
       .join('')}</div>
