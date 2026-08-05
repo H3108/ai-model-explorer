@@ -443,10 +443,32 @@ select { padding: 8px 12px; border-radius: var(--r-sm); }
 .free-badge {
   display: inline-flex; align-items: center;
   font-size: 11px; font-weight: 700; letter-spacing: .02em; line-height: 1.4;
-  color: #fff; background: var(--green-600);
+  color: #fff; background: var(--green-600, var(--green));
   padding: 2px 8px; border-radius: 999px; cursor: default;
 }
 .free-badge.sm { font-size: 10px; padding: 1px 6px; }
+.gateway-note {
+  background: var(--soft);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--green);
+  border-radius: 14px;
+  padding: 16px 18px;
+  margin-bottom: 18px;
+}
+.gateway-note .gn-title {
+  display: inline-block; font-size: 12px; font-weight: 800; letter-spacing: .04em;
+  color: #fff; background: var(--green); padding: 2px 10px; border-radius: 999px; margin-bottom: 8px;
+}
+.gateway-note p { margin: 4px 0 10px; font-size: 14px; color: var(--ink); }
+.gateway-note strong { color: var(--deep); }
+.gn-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 8px; }
+.gn-chip {
+  font-size: 13px; font-weight: 600; color: var(--deep);
+  background: #fff; border: 1px solid var(--line); border-radius: 999px;
+  padding: 5px 12px; text-decoration: none; transition: .15s;
+}
+.gn-chip:hover { border-color: var(--green); color: var(--green); }
+.gateway-note small { color: var(--muted); font-size: 12.5px; }
 .result-count { font-size: 13px; color: var(--muted); margin: 0 0 14px; }
 .result-count b { color: var(--deep); }
 

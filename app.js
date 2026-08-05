@@ -62,6 +62,13 @@ async function loadData() {
     ),
   )
   ;[state.providers, state.families, state.variants, state.tasks, state.recommendations, state.naming] = values
+  // 合并增量模型（新增免费模型 / 网关模型）；加载失败不影响主站
+  try {
+    const extra = await fetch('./data/model_variants_extra.json').then((r) => (r.ok ? r.json() : []))
+    if (Array.isArray(extra) && extra.length) state.variants = state.variants.concat(extra)
+  } catch (e) {
+    console.warn('增量模型加载失败：', e)
+  }
   state.selectedTask = state.tasks[0]?.id || null
   state.browseTask = state.tasks[0]?.id || null
   bindGlobalEvents()
@@ -520,6 +527,12 @@ function viewBrowse() {
     <div class="tabs">
       <button class="${state.browseTab === 'capability' ? 'on' : ''}" data-tab="capability">按能力匹配</button>
       <button class="${state.browseTab === 'scene' ? 'on' : ''}" data-tab="scene">按场景浏览</button>
+    </div>
+    <div class="gateway-note">
+      <span class="gn-title">免费 API 网关</span>
+      <p>这些厂商把多家模型聚合成<strong>一个免费 API key</strong>调用（免信用卡）：</p>
+      <div class="gn-chips">${state.providers.filter((p) => p.category === 'gateway').map((p) => `<a class="gn-chip" href="#provider/${p.id}">${esc(p.name_cn || p.name)}</a>`).join('')}</div>
+      <small>在上方「价格」选 <b>免费</b> 即可看到它们；外加大批厂商自带的免费模型。</small>
     </div>
     <div id="browse-body">${state.browseTab === 'capability'
       ? `<div class="browse-layout">

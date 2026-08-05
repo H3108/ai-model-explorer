@@ -29,5 +29,11 @@
   {"id":"adobe-firefly","provider_id":"adobe","name":"Firefly","name_cn":"Firefly 系列","description_cn":"Adobe 商业安全图像生成。"},
   {"id":"ideogram-3","provider_id":"ideogram","name":"Ideogram","name_cn":"Ideogram 系列","description_cn":"Ideogram 图像内文字渲染。"},
   {"id":"alibaba-qwenimage","provider_id":"alibaba-qwen","name":"Qwen-Image","name_cn":"通义千问图像系列","description_cn":"阿里开源文生图模型。"},
-  {"id":"alibaba-wan","provider_id":"alibaba-qwen","name":"Wan","name_cn":"通义万相系列","description_cn":"阿里开源视频生成模型。"}
+  {"id":"alibaba-wan","provider_id":"alibaba-qwen","name":"Wan","name_cn":"通义万相系列","description_cn":"阿里开源视频生成模型。"},
+  {"id":"zhipu-cogview","provider_id":"zhipu-glm","name":"CogView","name_cn":"CogView 图像系列","description_cn":"智谱文生图模型（CogView-3-Flash / CogView-4）。"},
+  {"id":"zhipu-cogvideo","provider_id":"zhipu-glm","name":"CogVideoX","name_cn":"CogVideoX 视频系列","description_cn":"智谱文生视频模型（CogVideoX-Flash）。"},
+  {"id":"agnes-flash","provider_id":"agnes","name":"Agnes Flash","name_cn":"Agnes Flash 系列","description_cn":"Agnes AI 免费文本/视觉/推理全模态模型（2.5 / 2.0 Flash，1M 上下文）。"},
+  {"id":"agnes-image","provider_id":"agnes","name":"Agnes Image","name_cn":"Agnes Image 系列","description_cn":"Agnes AI 免费文生图模型（4K 输出，中文提示友好）。"},
+  {"id":"agnes-video","provider_id":"agnes","name":"Agnes Video","name_cn":"Agnes Video 系列","description_cn":"Agnes AI 免费文生视频模型（720P/1080P，含原生音频）。"},
+  {"id":"nvidia-nim","provider_id":"nvidia-nim","name":"NVIDIA NIM","name_cn":"NVIDIA NIM 系列","description_cn":"NVIDIA 免费推理微服务托管的模型。"}
 ]
