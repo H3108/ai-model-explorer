@@ -103,7 +103,7 @@ async function main() {
   h = await goto('#family/kuaishou-kling')
   ok(h.includes('分辨率'), '媒体系列表头切换为分辨率/时长')
 
-  console.log('\n[5] 能力 / 场景浏览')
+  console.log('\n[5] 能力筛选浏览')
   h = await goto('#browse')
   ok(app.querySelector('.filter-panel'), '筛选面板存在')
   const total = app.querySelectorAll('.model-card').length
@@ -128,13 +128,14 @@ async function main() {
   ok(lowCards > 0 && lowCards < total, `低成本筛选生效（${lowCards}）`)
   await click('[data-seg="browsePrice"] [data-value="all"]')
   ok(app.querySelectorAll('.model-card').length === total, '价格筛选清空恢复全部')
-  await click('[data-tab="scene"]')
-  ok(app.querySelector('.task-tile'), '场景 tab 渲染任务磁贴')
-  ok(app.querySelector('.result-row'), '场景推荐结果行')
-  const vt = Array.from(app.querySelectorAll('[data-browse-task]')).find((b) => b.dataset.browseTask === 'video')
-  vt.dispatchEvent(new window.MouseEvent('click', { bubbles: true }))
-  await new Promise((r) => setTimeout(r, 30))
-  ok(app.querySelectorAll('.result-row').length > 0, '视频生成场景有推荐（非空）')
+  // 计费方式筛选（per_token / per_image / per_second）
+  await click('[data-seg="browseBill"] [data-value="per_second"]')
+  const secCards = app.querySelectorAll('.model-card').length
+  ok(secCards > 0 && secCards < total, `按秒计费筛选生效（${secCards}）`)
+  await click('[data-seg="browseBill"] [data-value="all"]')
+  ok(app.querySelectorAll('.model-card').length === total, '计费方式清空恢复全部')
+  // #browse 只做能力筛选，场景入口统一在首页场景模块 + #matcher（见 398b801 去重决策）
+  ok(!app.querySelector('[data-tab="scene"]'), '#browse 无场景 tab（不与 #matcher 重复）')
 
   console.log('\n[6] 任务选择器')
   h = await goto('#matcher')

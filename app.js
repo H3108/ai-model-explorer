@@ -47,8 +47,7 @@ const state = {
   // 系列页
   familySort: 'default',
   // 浏览页
-  browseTab: 'capability', browseModality: 'all', browseCaps: [], browseTraits: [], browseSort: 'match', browsePrice: 'all', browseBill: 'all',
-  browseTask: null,
+  browseModality: 'all', browseCaps: [], browseTraits: [], browseSort: 'match', browsePrice: 'all', browseBill: 'all',
   // 匹配器
   selectedTask: null, budget: 'balanced', speed: 'balanced',
 }
@@ -86,7 +85,6 @@ async function loadData() {
     console.warn('V4 数据加载失败：', e)
   }
   state.selectedTask = state.tasks[0]?.id || null
-  state.browseTask = state.tasks[0]?.id || null
   bindGlobalEvents()
   render()
 }
@@ -553,15 +551,7 @@ function matchModels() {
   else scored.sort((a, b) => b.score - a.score || priceValue(a.v) - priceValue(b.v))
   return scored
 }
-function sceneTabHTML() {
-  const tiles = (state.scenarios || [])
-    .map((s) => `<button class="task-tile ${state.browseTask === s.task_ids[0] ? 'on' : ''}" data-browse-task="${esc(s.task_ids[0] || s.id)}"><span class="tt-ico">${s.icon || '✦'}</span><b>${esc(s.name_cn)}</b><small>${esc(s.description_cn || '')}</small></button>`)
-    .join('')
-  const results = state.browseTask ? recommendationHTML(state.browseTask) : `<div class="empty-box"><span>✦</span><p>选择一个场景，查看为该任务推荐的模型。</p></div>`
-  return `<div class="scene-tab"><div class="task-tiles">${tiles}</div><div class="browse-results" id="browse-results-inner">${results}</div></div>`
-}
 function browseResultsHTML() {
-  if (state.browseTab === 'scene') return sceneTabHTML()
   const scored = matchModels()
   if (!scored.length) return emptyBox('没有同时满足这些条件的模型，试着减少几个筛选项。')
   const top = scored.slice(0, 24)
@@ -601,10 +591,6 @@ function viewBrowse() {
     `<button class="${state.browseBill === k ? 'selected' : ''}" data-value="${k}">${label}</button>`
   return `<div class="wrap page">
     ${pageHead({ eyebrow: '02 / 能力筛选', title: '按<em>能力</em>找模型', desc: '左边勾选你需要的能力与硬性条件，右边即时过滤并排序，找到最合适的型号。' })}
-    <div class="browse-tabs">
-      <button class="b-tab ${state.browseTab === 'capability' ? 'on' : ''}" data-tab="capability">按能力筛选</button>
-      <button class="b-tab ${state.browseTab === 'scene' ? 'on' : ''}" data-tab="scene">按场景选</button>
-    </div>
     <div class="browse-layout">
       <aside class="filter-panel">
         <div class="fp-block"><h4>模态</h4><div class="segmented" data-seg="browseModality">${modBtn('all', '全部')}${modBtn('text', '文本')}${modBtn('image', '图像')}${modBtn('video', '视频')}</div></div>
@@ -1076,20 +1062,6 @@ function bindGlobalEvents() {
       state.browsePrice = costChip.dataset.cost
       if (parseHash().name === 'browse') { refreshBrowse(); document.querySelectorAll('[data-seg="browsePrice"] button').forEach((b) => b.classList.toggle('selected', b.dataset.value === costChip.dataset.cost)) }
       else location.hash = 'browse'
-      return
-    }
-    // V4 浏览页：能力/场景 标签切换
-    const tabBtn = e.target.closest('[data-tab]')
-    if (tabBtn) {
-      state.browseTab = tabBtn.dataset.tab
-      render()
-      return
-    }
-    // V4 浏览页场景 tab：选中场景 → 渲染该任务推荐
-    const bt = e.target.closest('[data-browse-task]')
-    if (bt) {
-      state.browseTask = bt.dataset.browseTask
-      render()
       return
     }
     // 返回
