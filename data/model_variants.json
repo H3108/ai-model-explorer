@@ -66,7 +66,11 @@
     "role": "reasoning",
     "access_types": [
       "official_api"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 85,
+    "data_source": "official",
+    "last_verified_at": "2026-08-05"
   },
   {
     "id": "openai-gpt-5-4",
@@ -134,7 +138,11 @@
     "role": "reasoning",
     "access_types": [
       "official_api"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 85,
+    "data_source": "official",
+    "last_verified_at": "2026-08-05"
   },
   {
     "id": "openai-gpt-5-4-mini",
@@ -200,7 +208,11 @@
     "role": "reasoning",
     "access_types": [
       "official_api"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 85,
+    "data_source": "official",
+    "last_verified_at": "2026-08-05"
   },
   {
     "id": "openai-gpt-5-4-nano",
@@ -266,7 +278,11 @@
     "role": "coding",
     "access_types": [
       "official_api"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 85,
+    "data_source": "official",
+    "last_verified_at": "2026-08-05"
   },
   {
     "id": "openai-gpt-5-5-pro",
@@ -332,7 +348,11 @@
     "role": "reasoning",
     "access_types": [
       "official_api"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 85,
+    "data_source": "official",
+    "last_verified_at": "2026-08-05"
   },
   {
     "id": "anthropic-fable-5",
@@ -401,7 +421,11 @@
     "role": "reasoning",
     "access_types": [
       "official_api"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 85,
+    "data_source": "official",
+    "last_verified_at": "2026-08-05"
   },
   {
     "id": "anthropic-opus-5",
@@ -469,7 +493,11 @@
     "role": "reasoning",
     "access_types": [
       "official_api"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 85,
+    "data_source": "official",
+    "last_verified_at": "2026-08-05"
   },
   {
     "id": "anthropic-sonnet-5",
@@ -535,7 +563,11 @@
     "role": "reasoning",
     "access_types": [
       "official_api"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 85,
+    "data_source": "official",
+    "last_verified_at": "2026-08-05"
   },
   {
     "id": "anthropic-haiku-4-5",
@@ -600,7 +632,11 @@
     "role": "coding",
     "access_types": [
       "official_api"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 85,
+    "data_source": "official",
+    "last_verified_at": "2026-08-05"
   },
   {
     "id": "google-gemini-3-1-pro",
@@ -670,7 +706,11 @@
     "role": "reasoning",
     "access_types": [
       "official_api"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 85,
+    "data_source": "official",
+    "last_verified_at": "2026-08-05"
   },
   {
     "id": "google-gemini-3-5-flash",
@@ -738,7 +778,11 @@
     "role": "reasoning",
     "access_types": [
       "official_api"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 85,
+    "data_source": "official",
+    "last_verified_at": "2026-08-05"
   },
   {
     "id": "google-gemini-3-flash",
@@ -804,7 +848,11 @@
     "role": "reasoning",
     "access_types": [
       "official_api"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 85,
+    "data_source": "official",
+    "last_verified_at": "2026-08-05"
   },
   {
     "id": "google-gemini-3-1-flash-lite",
@@ -872,7 +920,11 @@
     "role": "coding",
     "access_types": [
       "official_api"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 85,
+    "data_source": "official",
+    "last_verified_at": "2026-08-05"
   },
   {
     "id": "google-gemini-2-5-pro",
@@ -939,7 +991,11 @@
     "role": "reasoning",
     "access_types": [
       "official_api"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 85,
+    "data_source": "official",
+    "last_verified_at": "2026-08-05"
   },
   {
     "id": "deepseek-v3",
@@ -1008,7 +1064,11 @@
       "official_api",
       "open_source",
       "self_host"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 95,
+    "data_source": "official",
+    "last_verified_at": "2026-08-05"
   },
   {
     "id": "deepseek-v3-2",
@@ -1079,7 +1139,11 @@
       "official_api",
       "open_source",
       "self_host"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 95,
+    "data_source": "official",
+    "last_verified_at": "2026-08-05"
   },
   {
     "id": "deepseek-r1",
@@ -1150,7 +1214,11 @@
       "official_api",
       "open_source",
       "self_host"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 95,
+    "data_source": "official",
+    "last_verified_at": "2026-08-05"
   },
   {
     "id": "deepseek-coder",
@@ -1217,7 +1285,11 @@
       "official_api",
       "open_source",
       "self_host"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 90,
+    "data_source": "official",
+    "last_verified_at": "2026-08-05"
   },
   {
     "id": "qwen-plus",
@@ -1286,7 +1358,11 @@
     "role": "reasoning",
     "access_types": [
       "official_api"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 85,
+    "data_source": "official",
+    "last_verified_at": "2026-08-05"
   },
   {
     "id": "qwen-3-max",
@@ -1355,7 +1431,11 @@
     "role": "reasoning",
     "access_types": [
       "official_api"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 85,
+    "data_source": "official",
+    "last_verified_at": "2026-08-05"
   },
   {
     "id": "qwen-3-5-flash",
@@ -1423,7 +1503,11 @@
     "role": "coding",
     "access_types": [
       "official_api"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 85,
+    "data_source": "official",
+    "last_verified_at": "2026-08-05"
   },
   {
     "id": "qwen-vl-max",
@@ -1489,7 +1573,11 @@
     "role": "general",
     "access_types": [
       "official_api"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 75,
+    "data_source": "official",
+    "last_verified_at": "2026-08-05"
   },
   {
     "id": "glm-5-2",
@@ -1558,7 +1646,11 @@
     "role": "reasoning",
     "access_types": [
       "official_api"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 85,
+    "data_source": "official",
+    "last_verified_at": "2026-08-05"
   },
   {
     "id": "glm-5",
@@ -1628,7 +1720,11 @@
       "official_api",
       "open_source",
       "self_host"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 90,
+    "data_source": "official",
+    "last_verified_at": "2026-08-05"
   },
   {
     "id": "glm-5-turbo",
@@ -1695,7 +1791,11 @@
     "role": "reasoning",
     "access_types": [
       "official_api"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 85,
+    "data_source": "official",
+    "last_verified_at": "2026-08-05"
   },
   {
     "id": "kimi-k2",
@@ -1763,7 +1863,11 @@
     "role": "reasoning",
     "access_types": [
       "official_api"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 85,
+    "data_source": "official",
+    "last_verified_at": "2026-08-05"
   },
   {
     "id": "kimi-k2-5",
@@ -1831,7 +1935,11 @@
     "role": "reasoning",
     "access_types": [
       "official_api"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 85,
+    "data_source": "official",
+    "last_verified_at": "2026-08-05"
   },
   {
     "id": "kimi-k3",
@@ -1900,7 +2008,11 @@
     "role": "reasoning",
     "access_types": [
       "official_api"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 85,
+    "data_source": "official",
+    "last_verified_at": "2026-08-05"
   },
   {
     "id": "baidu-ernie-5-1",
@@ -1969,7 +2081,11 @@
     "role": "reasoning",
     "access_types": [
       "official_api"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 85,
+    "data_source": "official",
+    "last_verified_at": "2026-08-05"
   },
   {
     "id": "baidu-ernie-4-5-turbo",
@@ -2038,7 +2154,11 @@
       "official_api",
       "open_source",
       "self_host"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 90,
+    "data_source": "official",
+    "last_verified_at": "2026-08-05"
   },
   {
     "id": "minimax-m2-5",
@@ -2105,7 +2225,11 @@
     "role": "reasoning",
     "access_types": [
       "official_api"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 85,
+    "data_source": "official",
+    "last_verified_at": "2026-08-05"
   },
   {
     "id": "minimax-m2-7",
@@ -2171,7 +2295,11 @@
     "role": "reasoning",
     "access_types": [
       "official_api"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 85,
+    "data_source": "official",
+    "last_verified_at": "2026-08-05"
   },
   {
     "id": "minimax-m3",
@@ -2238,7 +2366,11 @@
     "role": "reasoning",
     "access_types": [
       "official_api"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 85,
+    "data_source": "official",
+    "last_verified_at": "2026-08-05"
   },
   {
     "id": "mistral-large-3",
@@ -2307,7 +2439,11 @@
       "official_api",
       "open_source",
       "self_host"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 90,
+    "data_source": "official",
+    "last_verified_at": "2026-08-05"
   },
   {
     "id": "mistral-small-4",
@@ -2373,7 +2509,11 @@
       "official_api",
       "open_source",
       "self_host"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 90,
+    "data_source": "official",
+    "last_verified_at": "2026-08-05"
   },
   {
     "id": "mistral-codestral",
@@ -2438,7 +2578,11 @@
       "official_api",
       "open_source",
       "self_host"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 90,
+    "data_source": "official",
+    "last_verified_at": "2026-08-05"
   },
   {
     "id": "mistral-magistral-medium",
@@ -2500,7 +2644,11 @@
     "role": "reasoning",
     "access_types": [
       "official_api"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 85,
+    "data_source": "official",
+    "last_verified_at": "2026-08-05"
   },
   {
     "id": "xai-grok-4-3",
@@ -2569,7 +2717,11 @@
     "role": "reasoning",
     "access_types": [
       "official_api"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 85,
+    "data_source": "official",
+    "last_verified_at": "2026-08-05"
   },
   {
     "id": "xai-grok-4",
@@ -2635,7 +2787,11 @@
     "role": "reasoning",
     "access_types": [
       "official_api"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 85,
+    "data_source": "official",
+    "last_verified_at": "2026-08-05"
   },
   {
     "id": "xai-grok-build-0-1",
@@ -2699,7 +2855,11 @@
     "role": "coding",
     "access_types": [
       "official_api"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 85,
+    "data_source": "official",
+    "last_verified_at": "2026-08-05"
   },
   {
     "id": "meta-llama-4-maverick",
@@ -2771,7 +2931,11 @@
       "official_api",
       "open_source",
       "self_host"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 85,
+    "data_source": "official",
+    "last_verified_at": "2026-08-05"
   },
   {
     "id": "meta-llama-4-scout",
@@ -2842,7 +3006,11 @@
       "official_api",
       "open_source",
       "self_host"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 85,
+    "data_source": "official",
+    "last_verified_at": "2026-08-05"
   },
   {
     "id": "openai-gpt-image-2",
@@ -2911,7 +3079,11 @@
     "role": "multimodal",
     "access_types": [
       "official_api"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 65,
+    "data_source": "official",
+    "last_verified_at": "2026-08-05"
   },
   {
     "id": "google-imagen-4",
@@ -2979,7 +3151,11 @@
     "role": "multimodal",
     "access_types": [
       "official_api"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 65,
+    "data_source": "official",
+    "last_verified_at": "2026-08-05"
   },
   {
     "id": "midjourney-v7",
@@ -3046,7 +3222,11 @@
     "role": "multimodal",
     "access_types": [
       "official_api"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 55,
+    "data_source": "official",
+    "last_verified_at": "2026-08-05"
   },
   {
     "id": "blackforest-flux-2",
@@ -3117,7 +3297,11 @@
       "official_api",
       "open_source",
       "self_host"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 70,
+    "data_source": "official",
+    "last_verified_at": "2026-08-05"
   },
   {
     "id": "stability-sd-4",
@@ -3188,7 +3372,11 @@
       "official_api",
       "open_source",
       "self_host"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 70,
+    "data_source": "official",
+    "last_verified_at": "2026-08-05"
   },
   {
     "id": "adobe-firefly-4",
@@ -3256,7 +3444,11 @@
     "role": "multimodal",
     "access_types": [
       "official_api"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 65,
+    "data_source": "official",
+    "last_verified_at": "2026-08-05"
   },
   {
     "id": "ideogram-3",
@@ -3323,7 +3515,11 @@
     "role": "multimodal",
     "access_types": [
       "official_api"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 65,
+    "data_source": "official",
+    "last_verified_at": "2026-08-05"
   },
   {
     "id": "alibaba-qwen-image",
@@ -3397,7 +3593,11 @@
       "official_api",
       "open_source",
       "self_host"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 70,
+    "data_source": "official",
+    "last_verified_at": "2026-08-05"
   },
   {
     "id": "openai-sora-2",
@@ -3467,7 +3667,11 @@
     "role": "multimodal",
     "access_types": [
       "official_api"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 65,
+    "data_source": "official",
+    "last_verified_at": "2026-08-05"
   },
   {
     "id": "google-veo-3-1",
@@ -3537,7 +3741,11 @@
     "role": "multimodal",
     "access_types": [
       "official_api"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 65,
+    "data_source": "official",
+    "last_verified_at": "2026-08-05"
   },
   {
     "id": "google-veo-3-1-lite",
@@ -3608,7 +3816,11 @@
     "role": "multimodal",
     "access_types": [
       "official_api"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 65,
+    "data_source": "official",
+    "last_verified_at": "2026-08-05"
   },
   {
     "id": "kuaishou-kling-3-0",
@@ -3678,7 +3890,11 @@
     "role": "multimodal",
     "access_types": [
       "official_api"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 65,
+    "data_source": "official",
+    "last_verified_at": "2026-08-05"
   },
   {
     "id": "runway-gen-4-5",
@@ -3748,7 +3964,11 @@
     "role": "multimodal",
     "access_types": [
       "official_api"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 65,
+    "data_source": "official",
+    "last_verified_at": "2026-08-05"
   },
   {
     "id": "bytedance-seedance-2",
@@ -3818,7 +4038,11 @@
     "role": "multimodal",
     "access_types": [
       "official_api"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 65,
+    "data_source": "official",
+    "last_verified_at": "2026-08-05"
   },
   {
     "id": "xai-grok-imagine-video",
@@ -3891,7 +4115,11 @@
     "role": "multimodal",
     "access_types": [
       "official_api"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 65,
+    "data_source": "official",
+    "last_verified_at": "2026-08-05"
   },
   {
     "id": "luma-ray-2",
@@ -3961,7 +4189,11 @@
     "role": "multimodal",
     "access_types": [
       "official_api"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 65,
+    "data_source": "official",
+    "last_verified_at": "2026-08-05"
   },
   {
     "id": "alibaba-wan-2-1",
@@ -4036,6 +4268,10 @@
       "official_api",
       "open_source",
       "self_host"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 70,
+    "data_source": "official",
+    "last_verified_at": "2026-08-05"
   }
 ]

@@ -1,0 +1,1064 @@
+[
+  {
+    "id": "ver_openai-gpt-5-5",
+    "model_id": "openai-gpt-5-5",
+    "version": "GPT-5.5",
+    "release_date": "2026",
+    "status": "active",
+    "context_length": 1000000,
+    "notes": ""
+  },
+  {
+    "id": "ver_openai-gpt-5-4",
+    "model_id": "openai-gpt-5-4",
+    "version": "GPT-5.4",
+    "release_date": "2026",
+    "status": "active",
+    "context_length": 1000000,
+    "notes": ""
+  },
+  {
+    "id": "ver_openai-gpt-5-4-mini",
+    "model_id": "openai-gpt-5-4-mini",
+    "version": "GPT-5.4 mini",
+    "release_date": "2026",
+    "status": "active",
+    "context_length": 400000,
+    "notes": ""
+  },
+  {
+    "id": "ver_openai-gpt-5-4-nano",
+    "model_id": "openai-gpt-5-4-nano",
+    "version": "GPT-5.4 nano",
+    "release_date": "2026",
+    "status": "active",
+    "context_length": 400000,
+    "notes": ""
+  },
+  {
+    "id": "ver_openai-gpt-5-5-pro",
+    "model_id": "openai-gpt-5-5-pro",
+    "version": "GPT-5.5 Pro",
+    "release_date": "2026",
+    "status": "active",
+    "context_length": 1000000,
+    "notes": ""
+  },
+  {
+    "id": "ver_anthropic-fable-5",
+    "model_id": "anthropic-fable-5",
+    "version": "Claude Fable 5",
+    "release_date": "2026-06",
+    "status": "active",
+    "context_length": 1000000,
+    "notes": ""
+  },
+  {
+    "id": "ver_anthropic-opus-5",
+    "model_id": "anthropic-opus-5",
+    "version": "Claude Opus 5",
+    "release_date": "2026",
+    "status": "active",
+    "context_length": 1000000,
+    "notes": ""
+  },
+  {
+    "id": "ver_anthropic-sonnet-5",
+    "model_id": "anthropic-sonnet-5",
+    "version": "Claude Sonnet 5",
+    "release_date": "2026",
+    "status": "active",
+    "context_length": 1000000,
+    "notes": ""
+  },
+  {
+    "id": "ver_anthropic-haiku-4-5",
+    "model_id": "anthropic-haiku-4-5",
+    "version": "Claude Haiku 4.5",
+    "release_date": "2025-10",
+    "status": "active",
+    "context_length": 200000,
+    "notes": ""
+  },
+  {
+    "id": "ver_google-gemini-3-1-pro",
+    "model_id": "google-gemini-3-1-pro",
+    "version": "Gemini 3.1 Pro",
+    "release_date": "2026",
+    "status": "active",
+    "context_length": 1000000,
+    "notes": ""
+  },
+  {
+    "id": "ver_google-gemini-3-5-flash",
+    "model_id": "google-gemini-3-5-flash",
+    "version": "Gemini 3.5 Flash",
+    "release_date": "2026",
+    "status": "active",
+    "context_length": 1000000,
+    "notes": ""
+  },
+  {
+    "id": "ver_google-gemini-3-flash",
+    "model_id": "google-gemini-3-flash",
+    "version": "Gemini 3 Flash",
+    "release_date": "2026",
+    "status": "active",
+    "context_length": 1000000,
+    "notes": ""
+  },
+  {
+    "id": "ver_google-gemini-3-1-flash-lite",
+    "model_id": "google-gemini-3-1-flash-lite",
+    "version": "Gemini 3.1 Flash-Lite",
+    "release_date": "2026",
+    "status": "active",
+    "context_length": 1000000,
+    "notes": ""
+  },
+  {
+    "id": "ver_google-gemini-2-5-pro",
+    "model_id": "google-gemini-2-5-pro",
+    "version": "Gemini 2.5 Pro",
+    "release_date": "2025",
+    "status": "active",
+    "context_length": 2000000,
+    "notes": ""
+  },
+  {
+    "id": "ver_deepseek-v3",
+    "model_id": "deepseek-v3",
+    "version": "DeepSeek-V3",
+    "release_date": "2025",
+    "status": "active",
+    "context_length": 128000,
+    "notes": ""
+  },
+  {
+    "id": "ver_deepseek-v3-2",
+    "model_id": "deepseek-v3-2",
+    "version": "DeepSeek-V3.2",
+    "release_date": "2026",
+    "status": "active",
+    "context_length": 128000,
+    "notes": ""
+  },
+  {
+    "id": "ver_deepseek-r1",
+    "model_id": "deepseek-r1",
+    "version": "DeepSeek-R1",
+    "release_date": "2025",
+    "status": "active",
+    "context_length": 128000,
+    "notes": ""
+  },
+  {
+    "id": "ver_deepseek-coder",
+    "model_id": "deepseek-coder",
+    "version": "DeepSeek Coder",
+    "release_date": "2025",
+    "status": "active",
+    "context_length": 16000,
+    "notes": ""
+  },
+  {
+    "id": "ver_qwen-plus",
+    "model_id": "qwen-plus",
+    "version": "Qwen-Plus",
+    "release_date": "2025",
+    "status": "active",
+    "context_length": 1000000,
+    "notes": ""
+  },
+  {
+    "id": "ver_qwen-3-max",
+    "model_id": "qwen-3-max",
+    "version": "Qwen3-Max",
+    "release_date": "2026",
+    "status": "active",
+    "context_length": 262000,
+    "notes": ""
+  },
+  {
+    "id": "ver_qwen-3-5-flash",
+    "model_id": "qwen-3-5-flash",
+    "version": "Qwen3.5-Flash",
+    "release_date": "2026",
+    "status": "active",
+    "context_length": 1000000,
+    "notes": ""
+  },
+  {
+    "id": "ver_qwen-vl-max",
+    "model_id": "qwen-vl-max",
+    "version": "Qwen-VL-Max",
+    "release_date": "2025",
+    "status": "active",
+    "context_length": 128000,
+    "notes": ""
+  },
+  {
+    "id": "ver_glm-5-2",
+    "model_id": "glm-5-2",
+    "version": "GLM-5.2",
+    "release_date": "2026",
+    "status": "active",
+    "context_length": 1000000,
+    "notes": ""
+  },
+  {
+    "id": "ver_glm-5",
+    "model_id": "glm-5",
+    "version": "GLM-5",
+    "release_date": "2026-02",
+    "status": "active",
+    "context_length": 205000,
+    "notes": ""
+  },
+  {
+    "id": "ver_glm-5-turbo",
+    "model_id": "glm-5-turbo",
+    "version": "GLM-5-Turbo",
+    "release_date": "2026",
+    "status": "active",
+    "context_length": 200000,
+    "notes": ""
+  },
+  {
+    "id": "ver_kimi-k2",
+    "model_id": "kimi-k2",
+    "version": "Kimi K2",
+    "release_date": "2025",
+    "status": "active",
+    "context_length": 128000,
+    "notes": ""
+  },
+  {
+    "id": "ver_kimi-k2-5",
+    "model_id": "kimi-k2-5",
+    "version": "Kimi K2.5",
+    "release_date": "2026",
+    "status": "active",
+    "context_length": 262000,
+    "notes": ""
+  },
+  {
+    "id": "ver_kimi-k3",
+    "model_id": "kimi-k3",
+    "version": "Kimi K3",
+    "release_date": "2026-07",
+    "status": "active",
+    "context_length": 1000000,
+    "notes": ""
+  },
+  {
+    "id": "ver_baidu-ernie-5-1",
+    "model_id": "baidu-ernie-5-1",
+    "version": "ERNIE 5.1",
+    "release_date": "2026",
+    "status": "active",
+    "context_length": 128000,
+    "notes": ""
+  },
+  {
+    "id": "ver_baidu-ernie-4-5-turbo",
+    "model_id": "baidu-ernie-4-5-turbo",
+    "version": "ERNIE 4.5 Turbo",
+    "release_date": "2025",
+    "status": "active",
+    "context_length": 128000,
+    "notes": ""
+  },
+  {
+    "id": "ver_minimax-m2-5",
+    "model_id": "minimax-m2-5",
+    "version": "MiniMax M2.5",
+    "release_date": "2026-02",
+    "status": "active",
+    "context_length": 204800,
+    "notes": ""
+  },
+  {
+    "id": "ver_minimax-m2-7",
+    "model_id": "minimax-m2-7",
+    "version": "MiniMax M2.7",
+    "release_date": "2026",
+    "status": "active",
+    "context_length": 204800,
+    "notes": ""
+  },
+  {
+    "id": "ver_minimax-m3",
+    "model_id": "minimax-m3",
+    "version": "MiniMax M3",
+    "release_date": "2026",
+    "status": "active",
+    "context_length": 512000,
+    "notes": ""
+  },
+  {
+    "id": "ver_mistral-large-3",
+    "model_id": "mistral-large-3",
+    "version": "Mistral Large 3",
+    "release_date": "2026",
+    "status": "active",
+    "context_length": 256000,
+    "notes": ""
+  },
+  {
+    "id": "ver_mistral-small-4",
+    "model_id": "mistral-small-4",
+    "version": "Mistral Small 4",
+    "release_date": "2026",
+    "status": "active",
+    "context_length": 256000,
+    "notes": ""
+  },
+  {
+    "id": "ver_mistral-codestral",
+    "model_id": "mistral-codestral",
+    "version": "Codestral",
+    "release_date": "2025",
+    "status": "active",
+    "context_length": 256000,
+    "notes": ""
+  },
+  {
+    "id": "ver_mistral-magistral-medium",
+    "model_id": "mistral-magistral-medium",
+    "version": "Magistral Medium",
+    "release_date": "2026",
+    "status": "active",
+    "context_length": 40000,
+    "notes": ""
+  },
+  {
+    "id": "ver_xai-grok-4-3",
+    "model_id": "xai-grok-4-3",
+    "version": "Grok 4.3",
+    "release_date": "2026-04",
+    "status": "active",
+    "context_length": 1000000,
+    "notes": ""
+  },
+  {
+    "id": "ver_xai-grok-4",
+    "model_id": "xai-grok-4",
+    "version": "Grok 4",
+    "release_date": "2025",
+    "status": "active",
+    "context_length": 256000,
+    "notes": ""
+  },
+  {
+    "id": "ver_xai-grok-build-0-1",
+    "model_id": "xai-grok-build-0-1",
+    "version": "Grok Build 0.1",
+    "release_date": "2026",
+    "status": "active",
+    "context_length": 256000,
+    "notes": ""
+  },
+  {
+    "id": "ver_meta-llama-4-maverick",
+    "model_id": "meta-llama-4-maverick",
+    "version": "Llama 4 Maverick",
+    "release_date": "2026-04",
+    "status": "active",
+    "context_length": 1000000,
+    "notes": ""
+  },
+  {
+    "id": "ver_meta-llama-4-scout",
+    "model_id": "meta-llama-4-scout",
+    "version": "Llama 4 Scout",
+    "release_date": "2026-04",
+    "status": "active",
+    "context_length": 10000000,
+    "notes": ""
+  },
+  {
+    "id": "ver_openai-gpt-image-2",
+    "model_id": "openai-gpt-image-2",
+    "version": "GPT-Image-2",
+    "release_date": "2026",
+    "status": "active",
+    "context_length": null,
+    "notes": ""
+  },
+  {
+    "id": "ver_google-imagen-4",
+    "model_id": "google-imagen-4",
+    "version": "Imagen 4",
+    "release_date": "2026",
+    "status": "active",
+    "context_length": null,
+    "notes": ""
+  },
+  {
+    "id": "ver_midjourney-v7",
+    "model_id": "midjourney-v7",
+    "version": "Midjourney V7",
+    "release_date": "2026",
+    "status": "active",
+    "context_length": null,
+    "notes": ""
+  },
+  {
+    "id": "ver_blackforest-flux-2",
+    "model_id": "blackforest-flux-2",
+    "version": "Flux 2 Pro",
+    "release_date": "2026",
+    "status": "active",
+    "context_length": null,
+    "notes": ""
+  },
+  {
+    "id": "ver_stability-sd-4",
+    "model_id": "stability-sd-4",
+    "version": "Stable Diffusion 4",
+    "release_date": "2026",
+    "status": "active",
+    "context_length": null,
+    "notes": ""
+  },
+  {
+    "id": "ver_adobe-firefly-4",
+    "model_id": "adobe-firefly-4",
+    "version": "Firefly 4",
+    "release_date": "2026",
+    "status": "active",
+    "context_length": null,
+    "notes": ""
+  },
+  {
+    "id": "ver_ideogram-3",
+    "model_id": "ideogram-3",
+    "version": "Ideogram 3",
+    "release_date": "2026",
+    "status": "active",
+    "context_length": null,
+    "notes": ""
+  },
+  {
+    "id": "ver_alibaba-qwen-image",
+    "model_id": "alibaba-qwen-image",
+    "version": "Qwen-Image",
+    "release_date": "2026",
+    "status": "active",
+    "context_length": null,
+    "notes": ""
+  },
+  {
+    "id": "ver_openai-sora-2",
+    "model_id": "openai-sora-2",
+    "version": "Sora 2",
+    "release_date": "2025-12",
+    "status": "active",
+    "context_length": null,
+    "notes": ""
+  },
+  {
+    "id": "ver_google-veo-3-1",
+    "model_id": "google-veo-3-1",
+    "version": "Veo 3.1",
+    "release_date": "2026-01",
+    "status": "active",
+    "context_length": null,
+    "notes": ""
+  },
+  {
+    "id": "ver_google-veo-3-1-lite",
+    "model_id": "google-veo-3-1-lite",
+    "version": "Veo 3.1 Lite",
+    "release_date": "2026-03",
+    "status": "active",
+    "context_length": null,
+    "notes": ""
+  },
+  {
+    "id": "ver_kuaishou-kling-3-0",
+    "model_id": "kuaishou-kling-3-0",
+    "version": "Kling 3.0",
+    "release_date": "2026",
+    "status": "active",
+    "context_length": null,
+    "notes": ""
+  },
+  {
+    "id": "ver_runway-gen-4-5",
+    "model_id": "runway-gen-4-5",
+    "version": "Runway Gen-4.5",
+    "release_date": "2026",
+    "status": "active",
+    "context_length": null,
+    "notes": ""
+  },
+  {
+    "id": "ver_bytedance-seedance-2",
+    "model_id": "bytedance-seedance-2",
+    "version": "Seedance 2.0",
+    "release_date": "2026-04",
+    "status": "active",
+    "context_length": null,
+    "notes": ""
+  },
+  {
+    "id": "ver_xai-grok-imagine-video",
+    "model_id": "xai-grok-imagine-video",
+    "version": "Grok Imagine Video",
+    "release_date": "2026",
+    "status": "active",
+    "context_length": null,
+    "notes": ""
+  },
+  {
+    "id": "ver_luma-ray-2",
+    "model_id": "luma-ray-2",
+    "version": "Luma Ray 2",
+    "release_date": "2026",
+    "status": "active",
+    "context_length": null,
+    "notes": ""
+  },
+  {
+    "id": "ver_alibaba-wan-2-1",
+    "model_id": "alibaba-wan-2-1",
+    "version": "Wan 2.1",
+    "release_date": "2025",
+    "status": "active",
+    "context_length": null,
+    "notes": ""
+  },
+  {
+    "id": "ver_glm-4-7-flash",
+    "model_id": "glm-4-7-flash",
+    "version": "GLM-4.7-Flash",
+    "release_date": "2026",
+    "status": "active",
+    "context_length": 200000,
+    "notes": ""
+  },
+  {
+    "id": "ver_glm-4-flash-250414",
+    "model_id": "glm-4-flash-250414",
+    "version": "GLM-4-Flash",
+    "release_date": "2026",
+    "status": "archived",
+    "context_length": 128000,
+    "notes": ""
+  },
+  {
+    "id": "ver_glm-4-6v-flash",
+    "model_id": "glm-4-6v-flash",
+    "version": "GLM-4.6V-Flash",
+    "release_date": "2026",
+    "status": "active",
+    "context_length": 128000,
+    "notes": ""
+  },
+  {
+    "id": "ver_glm-5-1",
+    "model_id": "glm-5-1",
+    "version": "GLM-5.1",
+    "release_date": "2026",
+    "status": "active",
+    "context_length": 200000,
+    "notes": ""
+  },
+  {
+    "id": "ver_glm-4-7",
+    "model_id": "glm-4-7",
+    "version": "GLM-4.7",
+    "release_date": "2026",
+    "status": "active",
+    "context_length": 200000,
+    "notes": ""
+  },
+  {
+    "id": "ver_glm-4-6",
+    "model_id": "glm-4-6",
+    "version": "GLM-4.6",
+    "release_date": "2026",
+    "status": "active",
+    "context_length": 200000,
+    "notes": ""
+  },
+  {
+    "id": "ver_glm-4-5",
+    "model_id": "glm-4-5",
+    "version": "GLM-4.5",
+    "release_date": "2026",
+    "status": "active",
+    "context_length": 205000,
+    "notes": ""
+  },
+  {
+    "id": "ver_glm-4-5-air",
+    "model_id": "glm-4-5-air",
+    "version": "GLM-4.5-Air",
+    "release_date": "2026",
+    "status": "active",
+    "context_length": 128000,
+    "notes": ""
+  },
+  {
+    "id": "ver_cogview-3-flash",
+    "model_id": "cogview-3-flash",
+    "version": "CogView-3-Flash",
+    "release_date": "2026",
+    "status": "active",
+    "context_length": null,
+    "notes": ""
+  },
+  {
+    "id": "ver_cogview-4",
+    "model_id": "cogview-4",
+    "version": "CogView-4",
+    "release_date": "2026",
+    "status": "active",
+    "context_length": null,
+    "notes": ""
+  },
+  {
+    "id": "ver_cogvideox-flash",
+    "model_id": "cogvideox-flash",
+    "version": "CogVideoX-Flash",
+    "release_date": "2026",
+    "status": "active",
+    "context_length": null,
+    "notes": ""
+  },
+  {
+    "id": "ver_agnes-2-5-flash",
+    "model_id": "agnes-2-5-flash",
+    "version": "Agnes 2.5 Flash",
+    "release_date": "2026",
+    "status": "active",
+    "context_length": 1000000,
+    "notes": ""
+  },
+  {
+    "id": "ver_agnes-2-0-flash",
+    "model_id": "agnes-2-0-flash",
+    "version": "Agnes 2.0 Flash",
+    "release_date": "2026",
+    "status": "active",
+    "context_length": 1000000,
+    "notes": ""
+  },
+  {
+    "id": "ver_agnes-image-2-1-flash",
+    "model_id": "agnes-image-2-1-flash",
+    "version": "Agnes Image 2.1 Flash",
+    "release_date": "2026",
+    "status": "active",
+    "context_length": null,
+    "notes": ""
+  },
+  {
+    "id": "ver_agnes-video-2-0",
+    "model_id": "agnes-video-2-0",
+    "version": "Agnes Video 2.0",
+    "release_date": "2026",
+    "status": "active",
+    "context_length": null,
+    "notes": ""
+  },
+  {
+    "id": "ver_groq-llama-3-3-70b",
+    "model_id": "groq-llama-3-3-70b",
+    "version": "Llama 3.3 70B (Groq)",
+    "release_date": "2026",
+    "status": "active",
+    "context_length": 128000,
+    "notes": ""
+  },
+  {
+    "id": "ver_groq-qwen3-32b",
+    "model_id": "groq-qwen3-32b",
+    "version": "Qwen3-32B (Groq)",
+    "release_date": "2026",
+    "status": "active",
+    "context_length": 128000,
+    "notes": ""
+  },
+  {
+    "id": "ver_groq-llama-4-scout",
+    "model_id": "groq-llama-4-scout",
+    "version": "Llama 4 Scout (Groq)",
+    "release_date": "2026",
+    "status": "active",
+    "context_length": 128000,
+    "notes": ""
+  },
+  {
+    "id": "ver_openrouter-llama-3-3-70b-free",
+    "model_id": "openrouter-llama-3-3-70b-free",
+    "version": "Llama 3.3 70B (OpenRouter)",
+    "release_date": "2026",
+    "status": "active",
+    "context_length": 128000,
+    "notes": ""
+  },
+  {
+    "id": "ver_openrouter-deepseek-r1-free",
+    "model_id": "openrouter-deepseek-r1-free",
+    "version": "DeepSeek R1 (OpenRouter)",
+    "release_date": "2026",
+    "status": "active",
+    "context_length": 128000,
+    "notes": ""
+  },
+  {
+    "id": "ver_nvidia-nim-nemotron-70b",
+    "model_id": "nvidia-nim-nemotron-70b",
+    "version": "Nemotron-70B (NIM)",
+    "release_date": "2026",
+    "status": "active",
+    "context_length": 128000,
+    "notes": ""
+  },
+  {
+    "id": "ver_nvidia-nim-llama-3-3-70b",
+    "model_id": "nvidia-nim-llama-3-3-70b",
+    "version": "Llama 3.3 70B (NIM)",
+    "release_date": "2026",
+    "status": "active",
+    "context_length": 128000,
+    "notes": ""
+  },
+  {
+    "id": "ver_mistral-small-free",
+    "model_id": "mistral-small-free",
+    "version": "Mistral Small",
+    "release_date": "2026",
+    "status": "active",
+    "context_length": 32000,
+    "notes": ""
+  },
+  {
+    "id": "ver_groq-llama-3-1-8b-instant",
+    "model_id": "groq-llama-3-1-8b-instant",
+    "version": "Llama 3.1 8B (Groq)",
+    "release_date": "2026",
+    "status": "active",
+    "context_length": 131072,
+    "notes": ""
+  },
+  {
+    "id": "ver_groq-gemma-2-9b",
+    "model_id": "groq-gemma-2-9b",
+    "version": "Gemma 2 9B (Groq)",
+    "release_date": "2026",
+    "status": "active",
+    "context_length": 8192,
+    "notes": ""
+  },
+  {
+    "id": "ver_groq-mixtral-8x7b",
+    "model_id": "groq-mixtral-8x7b",
+    "version": "Mixtral 8x7B (Groq)",
+    "release_date": "2026",
+    "status": "active",
+    "context_length": 32768,
+    "notes": ""
+  },
+  {
+    "id": "ver_groq-whisper-large-v3",
+    "model_id": "groq-whisper-large-v3",
+    "version": "Whisper Large v3 (Groq)",
+    "release_date": "2026",
+    "status": "active",
+    "context_length": 131072,
+    "notes": ""
+  },
+  {
+    "id": "ver_groq-deepseek-r1-distill-70b",
+    "model_id": "groq-deepseek-r1-distill-70b",
+    "version": "DeepSeek-R1-Distill-Llama-70B (Groq)",
+    "release_date": "2026",
+    "status": "active",
+    "context_length": 131072,
+    "notes": ""
+  },
+  {
+    "id": "ver_groq-llama-4-maverick",
+    "model_id": "groq-llama-4-maverick",
+    "version": "Llama 4 Maverick (Groq)",
+    "release_date": "2026",
+    "status": "active",
+    "context_length": 131072,
+    "notes": ""
+  },
+  {
+    "id": "ver_groq-kimi-k2",
+    "model_id": "groq-kimi-k2",
+    "version": "Kimi K2 (Groq)",
+    "release_date": "2026",
+    "status": "active",
+    "context_length": 262144,
+    "notes": ""
+  },
+  {
+    "id": "ver_openrouter-llama-4-maverick-free",
+    "model_id": "openrouter-llama-4-maverick-free",
+    "version": "Llama 4 Maverick (OpenRouter)",
+    "release_date": "2026",
+    "status": "active",
+    "context_length": 128000,
+    "notes": ""
+  },
+  {
+    "id": "ver_openrouter-llama-4-scout-free",
+    "model_id": "openrouter-llama-4-scout-free",
+    "version": "Llama 4 Scout (OpenRouter)",
+    "release_date": "2026",
+    "status": "active",
+    "context_length": 128000,
+    "notes": ""
+  },
+  {
+    "id": "ver_openrouter-gemma-2-9b-free",
+    "model_id": "openrouter-gemma-2-9b-free",
+    "version": "Gemma 2 9B (OpenRouter)",
+    "release_date": "2026",
+    "status": "active",
+    "context_length": 8192,
+    "notes": ""
+  },
+  {
+    "id": "ver_openrouter-mistral-7b-free",
+    "model_id": "openrouter-mistral-7b-free",
+    "version": "Mistral 7B (OpenRouter)",
+    "release_date": "2026",
+    "status": "active",
+    "context_length": 32768,
+    "notes": ""
+  },
+  {
+    "id": "ver_openrouter-qwen-2-5-72b-free",
+    "model_id": "openrouter-qwen-2-5-72b-free",
+    "version": "Qwen2.5 72B (OpenRouter)",
+    "release_date": "2026",
+    "status": "active",
+    "context_length": 131072,
+    "notes": ""
+  },
+  {
+    "id": "ver_openrouter-llama-3-1-8b-free",
+    "model_id": "openrouter-llama-3-1-8b-free",
+    "version": "Llama 3.1 8B (OpenRouter)",
+    "release_date": "2026",
+    "status": "active",
+    "context_length": 131072,
+    "notes": ""
+  },
+  {
+    "id": "ver_openrouter-phi-3-5-mini-free",
+    "model_id": "openrouter-phi-3-5-mini-free",
+    "version": "Phi-3.5 Mini (OpenRouter)",
+    "release_date": "2026",
+    "status": "active",
+    "context_length": 131072,
+    "notes": ""
+  },
+  {
+    "id": "ver_openrouter-gemini-2-0-flash-free",
+    "model_id": "openrouter-gemini-2-0-flash-free",
+    "version": "Gemini 2.0 Flash (OpenRouter)",
+    "release_date": "2026",
+    "status": "active",
+    "context_length": 1000000,
+    "notes": ""
+  },
+  {
+    "id": "ver_nvidia-nim-llama-4-maverick",
+    "model_id": "nvidia-nim-llama-4-maverick",
+    "version": "Llama 4 Maverick (NIM)",
+    "release_date": "2026",
+    "status": "active",
+    "context_length": 128000,
+    "notes": ""
+  },
+  {
+    "id": "ver_nvidia-nim-mistral-small-24b",
+    "model_id": "nvidia-nim-mistral-small-24b",
+    "version": "Mistral Small 24B (NIM)",
+    "release_date": "2026",
+    "status": "active",
+    "context_length": 32000,
+    "notes": ""
+  },
+  {
+    "id": "ver_nvidia-nim-deepseek-r1",
+    "model_id": "nvidia-nim-deepseek-r1",
+    "version": "DeepSeek R1 (NIM)",
+    "release_date": "2026",
+    "status": "active",
+    "context_length": 128000,
+    "notes": ""
+  },
+  {
+    "id": "ver_nvidia-nim-qwen3-coder-480b",
+    "model_id": "nvidia-nim-qwen3-coder-480b",
+    "version": "Qwen3 Coder 480B (NIM)",
+    "release_date": "2026",
+    "status": "active",
+    "context_length": 256000,
+    "notes": ""
+  },
+  {
+    "id": "ver_nvidia-nim-nemotron-nano-9b",
+    "model_id": "nvidia-nim-nemotron-nano-9b",
+    "version": "Nemotron Nano 9B (NIM)",
+    "release_date": "2026",
+    "status": "active",
+    "context_length": 128000,
+    "notes": ""
+  },
+  {
+    "id": "ver_nvidia-nim-phi-4",
+    "model_id": "nvidia-nim-phi-4",
+    "version": "Phi-4 (NIM)",
+    "release_date": "2026",
+    "status": "active",
+    "context_length": 16384,
+    "notes": ""
+  },
+  {
+    "id": "ver_nvidia-nim-gemma-2-9b",
+    "model_id": "nvidia-nim-gemma-2-9b",
+    "version": "Gemma 2 9B (NIM)",
+    "release_date": "2026",
+    "status": "active",
+    "context_length": 8192,
+    "notes": ""
+  },
+  {
+    "id": "ver_anyapi-auto",
+    "model_id": "anyapi-auto",
+    "version": "AnyAPI Auto",
+    "release_date": "2026",
+    "status": "active",
+    "context_length": 128000,
+    "notes": ""
+  },
+  {
+    "id": "ver_bazaarlink-auto-free",
+    "model_id": "bazaarlink-auto-free",
+    "version": "BazaarLink auto:free",
+    "release_date": "2026",
+    "status": "active",
+    "context_length": 128000,
+    "notes": ""
+  },
+  {
+    "id": "ver_requesty-auto",
+    "model_id": "requesty-auto",
+    "version": "Requesty Auto",
+    "release_date": "2026",
+    "status": "active",
+    "context_length": 200000,
+    "notes": ""
+  },
+  {
+    "id": "ver_opencode-zen-llama33",
+    "model_id": "opencode-zen-llama33",
+    "version": "Zen Llama 3.3 70B",
+    "release_date": "2026",
+    "status": "active",
+    "context_length": 128000,
+    "notes": ""
+  },
+  {
+    "id": "ver_opencode-zen-qwen25",
+    "model_id": "opencode-zen-qwen25",
+    "version": "Zen Qwen2.5 72B",
+    "release_date": "2026",
+    "status": "active",
+    "context_length": 128000,
+    "notes": ""
+  },
+  {
+    "id": "ver_ovh-llama33",
+    "model_id": "ovh-llama33",
+    "version": "OVH Llama 3.3 70B",
+    "release_date": "2026",
+    "status": "active",
+    "context_length": 131072,
+    "notes": ""
+  },
+  {
+    "id": "ver_ovh-deepseek-r1",
+    "model_id": "ovh-deepseek-r1",
+    "version": "OVH DeepSeek R1 Distill",
+    "release_date": "2026",
+    "status": "active",
+    "context_length": 128000,
+    "notes": ""
+  },
+  {
+    "id": "ver_freeai-auto",
+    "model_id": "freeai-auto",
+    "version": "Free.ai Auto",
+    "release_date": "2026",
+    "status": "active",
+    "context_length": 128000,
+    "notes": ""
+  },
+  {
+    "id": "ver_hunyuan-turbos-latest",
+    "model_id": "hunyuan-turbos-latest",
+    "version": "Hunyuan TurboS",
+    "release_date": "2025",
+    "status": "active",
+    "context_length": 128000,
+    "notes": ""
+  },
+  {
+    "id": "ver_hunyuan-t1-latest",
+    "model_id": "hunyuan-t1-latest",
+    "version": "Hunyuan T1",
+    "release_date": "2025",
+    "status": "active",
+    "context_length": 32000,
+    "notes": ""
+  },
+  {
+    "id": "ver_hunyuan-standard",
+    "model_id": "hunyuan-standard",
+    "version": "Hunyuan Standard",
+    "release_date": "2024",
+    "status": "active",
+    "context_length": 30000,
+    "notes": ""
+  },
+  {
+    "id": "ver_hunyuan-vision-1-5-instruct",
+    "model_id": "hunyuan-vision-1-5-instruct",
+    "version": "Hunyuan Vision 1.5",
+    "release_date": "2025",
+    "status": "active",
+    "context_length": 24000,
+    "notes": ""
+  },
+  {
+    "id": "ver_hunyuan-image-3",
+    "model_id": "hunyuan-image-3",
+    "version": "Hunyuan Image 3.0",
+    "release_date": "2026",
+    "status": "active",
+    "context_length": null,
+    "notes": ""
+  },
+  {
+    "id": "ver_kuaishou-kolors",
+    "model_id": "kuaishou-kolors",
+    "version": "Kolors",
+    "release_date": "2024",
+    "status": "active",
+    "context_length": null,
+    "notes": ""
+  }
+]

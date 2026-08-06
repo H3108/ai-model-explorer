@@ -258,11 +258,18 @@ function costModuleHTML() {
 function viewHome() {
   const scoreOf = {}
   state.recommendations.forEach((r) => r.model_ids.forEach((m) => (scoreOf[m.id] = (scoreOf[m.id] || 0) + m.score)))
+  // V4 治理 §11：推荐排序以数据质量分为主键、推荐热度为辅（质量优先，热度破平）
   const hot = Object.entries(scoreOf)
-    .sort((a, b) => b[1] - a[1])
+    .map(([id, heat]) => ({ v: variantById(id), heat }))
+    .filter((x) => x.v)
+    .sort((a, b) => {
+      const qa = a.v.data_quality_score || 0
+      const qb = b.v.data_quality_score || 0
+      if (qb !== qa) return qb - qa
+      return b.heat - a.heat
+    })
     .slice(0, 8)
-    .map(([id]) => variantById(id))
-    .filter(Boolean)
+    .map((x) => x.v)
   const mix = modalityMix(state.variants)
   return `
   <section class="hero wrap">
@@ -308,7 +315,7 @@ function viewHome() {
   ${costModuleHTML()}
 
   <section class="section wrap">
-    <div class="heading"><div><span class="eyebrow">当前主流模型</span><h2>大家都在看的模型</h2></div><p>按各场景推荐评分聚合，挑出当前最受关注的型号（非排行榜）。</p></div>
+    <div class="heading"><div><span class="eyebrow">当前主流模型</span><h2>大家都在看的模型</h2></div><p>按各场景推荐评分聚合，挑出当前最受关注的型号。</p></div>
     <div class="card-grid">${hot.map((v) => modelCard(v, `<span class="hot-flag">热度 ${scoreOf[v.id]}</span>`)).join('')}</div>
   </section>`
 }

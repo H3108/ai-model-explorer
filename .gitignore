@@ -3,3 +3,6 @@ node_modules/
 .DS_Store
 *.log
 .cache/
+# 治理脚本本地产物（每日质量检查基线 / 日报告）
+.last_snapshot.json
+daily_model_update_report.md

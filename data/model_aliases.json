@@ -1,0 +1,2204 @@
+[
+  {
+    "id": "al_0001",
+    "model_id": "openai-gpt-5-5",
+    "alias": "gpt-5.5",
+    "source": "official"
+  },
+  {
+    "id": "al_0002",
+    "model_id": "openai-gpt-5-5",
+    "alias": "OpenAI",
+    "source": "official"
+  },
+  {
+    "id": "al_0003",
+    "model_id": "openai-gpt-5-5",
+    "alias": "ChatGPT",
+    "source": "official"
+  },
+  {
+    "id": "al_0004",
+    "model_id": "openai-gpt-5-4",
+    "alias": "gpt-5.4",
+    "source": "official"
+  },
+  {
+    "id": "al_0005",
+    "model_id": "openai-gpt-5-4",
+    "alias": "OpenAI",
+    "source": "official"
+  },
+  {
+    "id": "al_0006",
+    "model_id": "openai-gpt-5-4",
+    "alias": "ChatGPT",
+    "source": "official"
+  },
+  {
+    "id": "al_0007",
+    "model_id": "openai-gpt-5-4-mini",
+    "alias": "gpt-5.4-mini",
+    "source": "official"
+  },
+  {
+    "id": "al_0008",
+    "model_id": "openai-gpt-5-4-mini",
+    "alias": "OpenAI",
+    "source": "official"
+  },
+  {
+    "id": "al_0009",
+    "model_id": "openai-gpt-5-4-mini",
+    "alias": "ChatGPT",
+    "source": "official"
+  },
+  {
+    "id": "al_0010",
+    "model_id": "openai-gpt-5-4-nano",
+    "alias": "gpt-5.4-nano",
+    "source": "official"
+  },
+  {
+    "id": "al_0011",
+    "model_id": "openai-gpt-5-4-nano",
+    "alias": "OpenAI",
+    "source": "official"
+  },
+  {
+    "id": "al_0012",
+    "model_id": "openai-gpt-5-4-nano",
+    "alias": "ChatGPT",
+    "source": "official"
+  },
+  {
+    "id": "al_0013",
+    "model_id": "openai-gpt-5-5-pro",
+    "alias": "gpt-5.5-pro",
+    "source": "official"
+  },
+  {
+    "id": "al_0014",
+    "model_id": "openai-gpt-5-5-pro",
+    "alias": "OpenAI",
+    "source": "official"
+  },
+  {
+    "id": "al_0015",
+    "model_id": "openai-gpt-5-5-pro",
+    "alias": "ChatGPT",
+    "source": "official"
+  },
+  {
+    "id": "al_0016",
+    "model_id": "anthropic-fable-5",
+    "alias": "claude-fable-5",
+    "source": "official"
+  },
+  {
+    "id": "al_0017",
+    "model_id": "anthropic-fable-5",
+    "alias": "Anthropic",
+    "source": "official"
+  },
+  {
+    "id": "al_0018",
+    "model_id": "anthropic-fable-5",
+    "alias": "Claude",
+    "source": "official"
+  },
+  {
+    "id": "al_0019",
+    "model_id": "anthropic-opus-5",
+    "alias": "claude-opus-5",
+    "source": "official"
+  },
+  {
+    "id": "al_0020",
+    "model_id": "anthropic-opus-5",
+    "alias": "Anthropic",
+    "source": "official"
+  },
+  {
+    "id": "al_0021",
+    "model_id": "anthropic-opus-5",
+    "alias": "Claude",
+    "source": "official"
+  },
+  {
+    "id": "al_0022",
+    "model_id": "anthropic-sonnet-5",
+    "alias": "claude-sonnet-5",
+    "source": "official"
+  },
+  {
+    "id": "al_0023",
+    "model_id": "anthropic-sonnet-5",
+    "alias": "Anthropic",
+    "source": "official"
+  },
+  {
+    "id": "al_0024",
+    "model_id": "anthropic-sonnet-5",
+    "alias": "Claude",
+    "source": "official"
+  },
+  {
+    "id": "al_0025",
+    "model_id": "anthropic-haiku-4-5",
+    "alias": "claude-haiku-4-5-20251001",
+    "source": "official"
+  },
+  {
+    "id": "al_0026",
+    "model_id": "anthropic-haiku-4-5",
+    "alias": "Anthropic",
+    "source": "official"
+  },
+  {
+    "id": "al_0027",
+    "model_id": "anthropic-haiku-4-5",
+    "alias": "Claude",
+    "source": "official"
+  },
+  {
+    "id": "al_0028",
+    "model_id": "google-gemini-3-1-pro",
+    "alias": "gemini-3.1-pro",
+    "source": "official"
+  },
+  {
+    "id": "al_0029",
+    "model_id": "google-gemini-3-1-pro",
+    "alias": "Google Gemini",
+    "source": "official"
+  },
+  {
+    "id": "al_0030",
+    "model_id": "google-gemini-3-1-pro",
+    "alias": "谷歌",
+    "source": "official"
+  },
+  {
+    "id": "al_0031",
+    "model_id": "google-gemini-3-5-flash",
+    "alias": "gemini-3.5-flash",
+    "source": "official"
+  },
+  {
+    "id": "al_0032",
+    "model_id": "google-gemini-3-5-flash",
+    "alias": "Google Gemini",
+    "source": "official"
+  },
+  {
+    "id": "al_0033",
+    "model_id": "google-gemini-3-5-flash",
+    "alias": "谷歌",
+    "source": "official"
+  },
+  {
+    "id": "al_0034",
+    "model_id": "google-gemini-3-flash",
+    "alias": "gemini-3-flash",
+    "source": "official"
+  },
+  {
+    "id": "al_0035",
+    "model_id": "google-gemini-3-flash",
+    "alias": "Google Gemini",
+    "source": "official"
+  },
+  {
+    "id": "al_0036",
+    "model_id": "google-gemini-3-flash",
+    "alias": "谷歌",
+    "source": "official"
+  },
+  {
+    "id": "al_0037",
+    "model_id": "google-gemini-3-1-flash-lite",
+    "alias": "gemini-3.1-flash-lite",
+    "source": "official"
+  },
+  {
+    "id": "al_0038",
+    "model_id": "google-gemini-3-1-flash-lite",
+    "alias": "Google Gemini",
+    "source": "official"
+  },
+  {
+    "id": "al_0039",
+    "model_id": "google-gemini-3-1-flash-lite",
+    "alias": "谷歌",
+    "source": "official"
+  },
+  {
+    "id": "al_0040",
+    "model_id": "google-gemini-2-5-pro",
+    "alias": "Gemini 2.5 Pro（旧版）",
+    "source": "official"
+  },
+  {
+    "id": "al_0041",
+    "model_id": "google-gemini-2-5-pro",
+    "alias": "gemini-2.5-pro",
+    "source": "official"
+  },
+  {
+    "id": "al_0042",
+    "model_id": "google-gemini-2-5-pro",
+    "alias": "Google Gemini",
+    "source": "official"
+  },
+  {
+    "id": "al_0043",
+    "model_id": "google-gemini-2-5-pro",
+    "alias": "谷歌",
+    "source": "official"
+  },
+  {
+    "id": "al_0044",
+    "model_id": "deepseek-v3",
+    "alias": "deepseek-chat",
+    "source": "official"
+  },
+  {
+    "id": "al_0045",
+    "model_id": "deepseek-v3",
+    "alias": "DeepSeek",
+    "source": "official"
+  },
+  {
+    "id": "al_0046",
+    "model_id": "deepseek-v3",
+    "alias": "深度求索",
+    "source": "official"
+  },
+  {
+    "id": "al_0047",
+    "model_id": "deepseek-v3-2",
+    "alias": "DeepSeek-V3.2（统一模型）",
+    "source": "official"
+  },
+  {
+    "id": "al_0048",
+    "model_id": "deepseek-v3-2",
+    "alias": "deepseek-v3.2",
+    "source": "official"
+  },
+  {
+    "id": "al_0049",
+    "model_id": "deepseek-v3-2",
+    "alias": "DeepSeek",
+    "source": "official"
+  },
+  {
+    "id": "al_0050",
+    "model_id": "deepseek-v3-2",
+    "alias": "深度求索",
+    "source": "official"
+  },
+  {
+    "id": "al_0051",
+    "model_id": "deepseek-r1",
+    "alias": "deepseek-reasoner",
+    "source": "official"
+  },
+  {
+    "id": "al_0052",
+    "model_id": "deepseek-r1",
+    "alias": "DeepSeek",
+    "source": "official"
+  },
+  {
+    "id": "al_0053",
+    "model_id": "deepseek-r1",
+    "alias": "深度求索",
+    "source": "official"
+  },
+  {
+    "id": "al_0054",
+    "model_id": "deepseek-coder",
+    "alias": "deepseek-coder",
+    "source": "official"
+  },
+  {
+    "id": "al_0055",
+    "model_id": "deepseek-coder",
+    "alias": "DeepSeek",
+    "source": "official"
+  },
+  {
+    "id": "al_0056",
+    "model_id": "deepseek-coder",
+    "alias": "深度求索",
+    "source": "official"
+  },
+  {
+    "id": "al_0057",
+    "model_id": "qwen-plus",
+    "alias": "通义千问 Plus",
+    "source": "official"
+  },
+  {
+    "id": "al_0058",
+    "model_id": "qwen-plus",
+    "alias": "qwen-plus",
+    "source": "official"
+  },
+  {
+    "id": "al_0059",
+    "model_id": "qwen-plus",
+    "alias": "阿里通义千问",
+    "source": "official"
+  },
+  {
+    "id": "al_0060",
+    "model_id": "qwen-plus",
+    "alias": "通义千问",
+    "source": "official"
+  },
+  {
+    "id": "al_0061",
+    "model_id": "qwen-plus",
+    "alias": "千问",
+    "source": "official"
+  },
+  {
+    "id": "al_0062",
+    "model_id": "qwen-3-max",
+    "alias": "通义千问 3-Max",
+    "source": "official"
+  },
+  {
+    "id": "al_0063",
+    "model_id": "qwen-3-max",
+    "alias": "qwen3-max",
+    "source": "official"
+  },
+  {
+    "id": "al_0064",
+    "model_id": "qwen-3-max",
+    "alias": "阿里通义千问",
+    "source": "official"
+  },
+  {
+    "id": "al_0065",
+    "model_id": "qwen-3-max",
+    "alias": "通义千问",
+    "source": "official"
+  },
+  {
+    "id": "al_0066",
+    "model_id": "qwen-3-max",
+    "alias": "千问",
+    "source": "official"
+  },
+  {
+    "id": "al_0067",
+    "model_id": "qwen-3-5-flash",
+    "alias": "通义千问 3.5-Flash",
+    "source": "official"
+  },
+  {
+    "id": "al_0068",
+    "model_id": "qwen-3-5-flash",
+    "alias": "qwen3.5-flash",
+    "source": "official"
+  },
+  {
+    "id": "al_0069",
+    "model_id": "qwen-3-5-flash",
+    "alias": "阿里通义千问",
+    "source": "official"
+  },
+  {
+    "id": "al_0070",
+    "model_id": "qwen-3-5-flash",
+    "alias": "通义千问",
+    "source": "official"
+  },
+  {
+    "id": "al_0071",
+    "model_id": "qwen-3-5-flash",
+    "alias": "千问",
+    "source": "official"
+  },
+  {
+    "id": "al_0072",
+    "model_id": "qwen-vl-max",
+    "alias": "通义千问 VL Max",
+    "source": "official"
+  },
+  {
+    "id": "al_0073",
+    "model_id": "qwen-vl-max",
+    "alias": "qwen-vl-max",
+    "source": "official"
+  },
+  {
+    "id": "al_0074",
+    "model_id": "qwen-vl-max",
+    "alias": "阿里通义千问",
+    "source": "official"
+  },
+  {
+    "id": "al_0075",
+    "model_id": "qwen-vl-max",
+    "alias": "通义千问",
+    "source": "official"
+  },
+  {
+    "id": "al_0076",
+    "model_id": "qwen-vl-max",
+    "alias": "千问",
+    "source": "official"
+  },
+  {
+    "id": "al_0077",
+    "model_id": "glm-5-2",
+    "alias": "glm-5.2",
+    "source": "official"
+  },
+  {
+    "id": "al_0078",
+    "model_id": "glm-5-2",
+    "alias": "智谱 GLM",
+    "source": "official"
+  },
+  {
+    "id": "al_0079",
+    "model_id": "glm-5-2",
+    "alias": "智谱",
+    "source": "official"
+  },
+  {
+    "id": "al_0080",
+    "model_id": "glm-5-2",
+    "alias": "智谱清言",
+    "source": "official"
+  },
+  {
+    "id": "al_0081",
+    "model_id": "glm-5",
+    "alias": "glm-5",
+    "source": "official"
+  },
+  {
+    "id": "al_0082",
+    "model_id": "glm-5",
+    "alias": "智谱 GLM",
+    "source": "official"
+  },
+  {
+    "id": "al_0083",
+    "model_id": "glm-5",
+    "alias": "智谱",
+    "source": "official"
+  },
+  {
+    "id": "al_0084",
+    "model_id": "glm-5",
+    "alias": "智谱清言",
+    "source": "official"
+  },
+  {
+    "id": "al_0085",
+    "model_id": "glm-5-turbo",
+    "alias": "glm-5-turbo",
+    "source": "official"
+  },
+  {
+    "id": "al_0086",
+    "model_id": "glm-5-turbo",
+    "alias": "智谱 GLM",
+    "source": "official"
+  },
+  {
+    "id": "al_0087",
+    "model_id": "glm-5-turbo",
+    "alias": "智谱",
+    "source": "official"
+  },
+  {
+    "id": "al_0088",
+    "model_id": "glm-5-turbo",
+    "alias": "智谱清言",
+    "source": "official"
+  },
+  {
+    "id": "al_0089",
+    "model_id": "kimi-k2",
+    "alias": "kimi-k2",
+    "source": "official"
+  },
+  {
+    "id": "al_0090",
+    "model_id": "kimi-k2",
+    "alias": "月之暗面 Kimi",
+    "source": "official"
+  },
+  {
+    "id": "al_0091",
+    "model_id": "kimi-k2",
+    "alias": "月之暗面",
+    "source": "official"
+  },
+  {
+    "id": "al_0092",
+    "model_id": "kimi-k2-5",
+    "alias": "kimi-k2.5",
+    "source": "official"
+  },
+  {
+    "id": "al_0093",
+    "model_id": "kimi-k2-5",
+    "alias": "月之暗面 Kimi",
+    "source": "official"
+  },
+  {
+    "id": "al_0094",
+    "model_id": "kimi-k2-5",
+    "alias": "月之暗面",
+    "source": "official"
+  },
+  {
+    "id": "al_0095",
+    "model_id": "kimi-k3",
+    "alias": "kimi-k3",
+    "source": "official"
+  },
+  {
+    "id": "al_0096",
+    "model_id": "kimi-k3",
+    "alias": "月之暗面 Kimi",
+    "source": "official"
+  },
+  {
+    "id": "al_0097",
+    "model_id": "kimi-k3",
+    "alias": "月之暗面",
+    "source": "official"
+  },
+  {
+    "id": "al_0098",
+    "model_id": "baidu-ernie-5-1",
+    "alias": "文心 5.1",
+    "source": "official"
+  },
+  {
+    "id": "al_0099",
+    "model_id": "baidu-ernie-5-1",
+    "alias": "ernie-5.1",
+    "source": "official"
+  },
+  {
+    "id": "al_0100",
+    "model_id": "baidu-ernie-5-1",
+    "alias": "百度文心",
+    "source": "official"
+  },
+  {
+    "id": "al_0101",
+    "model_id": "baidu-ernie-5-1",
+    "alias": "文心",
+    "source": "official"
+  },
+  {
+    "id": "al_0102",
+    "model_id": "baidu-ernie-4-5-turbo",
+    "alias": "文心 4.5 Turbo",
+    "source": "official"
+  },
+  {
+    "id": "al_0103",
+    "model_id": "baidu-ernie-4-5-turbo",
+    "alias": "ernie-4.5-turbo-128k",
+    "source": "official"
+  },
+  {
+    "id": "al_0104",
+    "model_id": "baidu-ernie-4-5-turbo",
+    "alias": "百度文心",
+    "source": "official"
+  },
+  {
+    "id": "al_0105",
+    "model_id": "baidu-ernie-4-5-turbo",
+    "alias": "文心",
+    "source": "official"
+  },
+  {
+    "id": "al_0106",
+    "model_id": "minimax-m2-5",
+    "alias": "minimax-m2.5",
+    "source": "official"
+  },
+  {
+    "id": "al_0107",
+    "model_id": "minimax-m2-5",
+    "alias": "MiniMax",
+    "source": "official"
+  },
+  {
+    "id": "al_0108",
+    "model_id": "minimax-m2-7",
+    "alias": "minimax-m2.7",
+    "source": "official"
+  },
+  {
+    "id": "al_0109",
+    "model_id": "minimax-m2-7",
+    "alias": "MiniMax",
+    "source": "official"
+  },
+  {
+    "id": "al_0110",
+    "model_id": "minimax-m3",
+    "alias": "minimax-m3",
+    "source": "official"
+  },
+  {
+    "id": "al_0111",
+    "model_id": "minimax-m3",
+    "alias": "MiniMax",
+    "source": "official"
+  },
+  {
+    "id": "al_0112",
+    "model_id": "mistral-large-3",
+    "alias": "mistral-large-latest",
+    "source": "official"
+  },
+  {
+    "id": "al_0113",
+    "model_id": "mistral-large-3",
+    "alias": "Mistral AI",
+    "source": "official"
+  },
+  {
+    "id": "al_0114",
+    "model_id": "mistral-small-4",
+    "alias": "mistral-small-latest",
+    "source": "official"
+  },
+  {
+    "id": "al_0115",
+    "model_id": "mistral-small-4",
+    "alias": "Mistral AI",
+    "source": "official"
+  },
+  {
+    "id": "al_0116",
+    "model_id": "mistral-codestral",
+    "alias": "codestral-latest",
+    "source": "official"
+  },
+  {
+    "id": "al_0117",
+    "model_id": "mistral-codestral",
+    "alias": "Mistral AI",
+    "source": "official"
+  },
+  {
+    "id": "al_0118",
+    "model_id": "mistral-magistral-medium",
+    "alias": "magistral-medium-latest",
+    "source": "official"
+  },
+  {
+    "id": "al_0119",
+    "model_id": "mistral-magistral-medium",
+    "alias": "Mistral AI",
+    "source": "official"
+  },
+  {
+    "id": "al_0120",
+    "model_id": "xai-grok-4-3",
+    "alias": "grok-4.3",
+    "source": "official"
+  },
+  {
+    "id": "al_0121",
+    "model_id": "xai-grok-4-3",
+    "alias": "xAI",
+    "source": "official"
+  },
+  {
+    "id": "al_0122",
+    "model_id": "xai-grok-4-3",
+    "alias": "Grok",
+    "source": "official"
+  },
+  {
+    "id": "al_0123",
+    "model_id": "xai-grok-4",
+    "alias": "grok-4",
+    "source": "official"
+  },
+  {
+    "id": "al_0124",
+    "model_id": "xai-grok-4",
+    "alias": "xAI",
+    "source": "official"
+  },
+  {
+    "id": "al_0125",
+    "model_id": "xai-grok-4",
+    "alias": "Grok",
+    "source": "official"
+  },
+  {
+    "id": "al_0126",
+    "model_id": "xai-grok-build-0-1",
+    "alias": "grok-build-0.1",
+    "source": "official"
+  },
+  {
+    "id": "al_0127",
+    "model_id": "xai-grok-build-0-1",
+    "alias": "xAI",
+    "source": "official"
+  },
+  {
+    "id": "al_0128",
+    "model_id": "xai-grok-build-0-1",
+    "alias": "Grok",
+    "source": "official"
+  },
+  {
+    "id": "al_0129",
+    "model_id": "meta-llama-4-maverick",
+    "alias": "Llama-4-Maverick",
+    "source": "official"
+  },
+  {
+    "id": "al_0130",
+    "model_id": "meta-llama-4-maverick",
+    "alias": "Meta Llama",
+    "source": "official"
+  },
+  {
+    "id": "al_0131",
+    "model_id": "meta-llama-4-maverick",
+    "alias": "脸书",
+    "source": "official"
+  },
+  {
+    "id": "al_0132",
+    "model_id": "meta-llama-4-scout",
+    "alias": "Llama-4-Scout",
+    "source": "official"
+  },
+  {
+    "id": "al_0133",
+    "model_id": "meta-llama-4-scout",
+    "alias": "Meta Llama",
+    "source": "official"
+  },
+  {
+    "id": "al_0134",
+    "model_id": "meta-llama-4-scout",
+    "alias": "脸书",
+    "source": "official"
+  },
+  {
+    "id": "al_0135",
+    "model_id": "openai-gpt-image-2",
+    "alias": "GPT-Image-2（DALL·E 4）",
+    "source": "official"
+  },
+  {
+    "id": "al_0136",
+    "model_id": "openai-gpt-image-2",
+    "alias": "gpt-image-2",
+    "source": "official"
+  },
+  {
+    "id": "al_0137",
+    "model_id": "openai-gpt-image-2",
+    "alias": "OpenAI",
+    "source": "official"
+  },
+  {
+    "id": "al_0138",
+    "model_id": "openai-gpt-image-2",
+    "alias": "ChatGPT",
+    "source": "official"
+  },
+  {
+    "id": "al_0139",
+    "model_id": "google-imagen-4",
+    "alias": "imagen-4",
+    "source": "official"
+  },
+  {
+    "id": "al_0140",
+    "model_id": "google-imagen-4",
+    "alias": "Google Gemini",
+    "source": "official"
+  },
+  {
+    "id": "al_0141",
+    "model_id": "google-imagen-4",
+    "alias": "谷歌",
+    "source": "official"
+  },
+  {
+    "id": "al_0142",
+    "model_id": "midjourney-v7",
+    "alias": "midjourney-v7",
+    "source": "official"
+  },
+  {
+    "id": "al_0143",
+    "model_id": "midjourney-v7",
+    "alias": "Midjourney",
+    "source": "official"
+  },
+  {
+    "id": "al_0144",
+    "model_id": "blackforest-flux-2",
+    "alias": "flux-2-pro",
+    "source": "official"
+  },
+  {
+    "id": "al_0145",
+    "model_id": "blackforest-flux-2",
+    "alias": "Black Forest Labs",
+    "source": "official"
+  },
+  {
+    "id": "al_0146",
+    "model_id": "stability-sd-4",
+    "alias": "stable-diffusion-4",
+    "source": "official"
+  },
+  {
+    "id": "al_0147",
+    "model_id": "stability-sd-4",
+    "alias": "Stability AI",
+    "source": "official"
+  },
+  {
+    "id": "al_0148",
+    "model_id": "adobe-firefly-4",
+    "alias": "firefly-4",
+    "source": "official"
+  },
+  {
+    "id": "al_0149",
+    "model_id": "adobe-firefly-4",
+    "alias": "Adobe Firefly",
+    "source": "official"
+  },
+  {
+    "id": "al_0150",
+    "model_id": "ideogram-3",
+    "alias": "ideogram-3",
+    "source": "official"
+  },
+  {
+    "id": "al_0151",
+    "model_id": "ideogram-3",
+    "alias": "Ideogram",
+    "source": "official"
+  },
+  {
+    "id": "al_0152",
+    "model_id": "alibaba-qwen-image",
+    "alias": "通义千问图像 Qwen-Image",
+    "source": "official"
+  },
+  {
+    "id": "al_0153",
+    "model_id": "alibaba-qwen-image",
+    "alias": "qwen-image",
+    "source": "official"
+  },
+  {
+    "id": "al_0154",
+    "model_id": "alibaba-qwen-image",
+    "alias": "阿里通义千问",
+    "source": "official"
+  },
+  {
+    "id": "al_0155",
+    "model_id": "alibaba-qwen-image",
+    "alias": "通义千问",
+    "source": "official"
+  },
+  {
+    "id": "al_0156",
+    "model_id": "alibaba-qwen-image",
+    "alias": "千问",
+    "source": "official"
+  },
+  {
+    "id": "al_0157",
+    "model_id": "openai-sora-2",
+    "alias": "sora-2",
+    "source": "official"
+  },
+  {
+    "id": "al_0158",
+    "model_id": "openai-sora-2",
+    "alias": "OpenAI",
+    "source": "official"
+  },
+  {
+    "id": "al_0159",
+    "model_id": "openai-sora-2",
+    "alias": "ChatGPT",
+    "source": "official"
+  },
+  {
+    "id": "al_0160",
+    "model_id": "google-veo-3-1",
+    "alias": "veo-3.1",
+    "source": "official"
+  },
+  {
+    "id": "al_0161",
+    "model_id": "google-veo-3-1",
+    "alias": "Google Gemini",
+    "source": "official"
+  },
+  {
+    "id": "al_0162",
+    "model_id": "google-veo-3-1",
+    "alias": "谷歌",
+    "source": "official"
+  },
+  {
+    "id": "al_0163",
+    "model_id": "google-veo-3-1-lite",
+    "alias": "veo-3.1-lite",
+    "source": "official"
+  },
+  {
+    "id": "al_0164",
+    "model_id": "google-veo-3-1-lite",
+    "alias": "Google Gemini",
+    "source": "official"
+  },
+  {
+    "id": "al_0165",
+    "model_id": "google-veo-3-1-lite",
+    "alias": "谷歌",
+    "source": "official"
+  },
+  {
+    "id": "al_0166",
+    "model_id": "kuaishou-kling-3-0",
+    "alias": "可灵 Kling 3.0",
+    "source": "official"
+  },
+  {
+    "id": "al_0167",
+    "model_id": "kuaishou-kling-3-0",
+    "alias": "kling-3.0",
+    "source": "official"
+  },
+  {
+    "id": "al_0168",
+    "model_id": "kuaishou-kling-3-0",
+    "alias": "快手可灵",
+    "source": "official"
+  },
+  {
+    "id": "al_0169",
+    "model_id": "runway-gen-4-5",
+    "alias": "gen-4.5",
+    "source": "official"
+  },
+  {
+    "id": "al_0170",
+    "model_id": "runway-gen-4-5",
+    "alias": "Runway",
+    "source": "official"
+  },
+  {
+    "id": "al_0171",
+    "model_id": "bytedance-seedance-2",
+    "alias": "seedance-2.0",
+    "source": "official"
+  },
+  {
+    "id": "al_0172",
+    "model_id": "bytedance-seedance-2",
+    "alias": "字节 Seedance",
+    "source": "official"
+  },
+  {
+    "id": "al_0173",
+    "model_id": "xai-grok-imagine-video",
+    "alias": "Grok Imagine 视频",
+    "source": "official"
+  },
+  {
+    "id": "al_0174",
+    "model_id": "xai-grok-imagine-video",
+    "alias": "grok-imagine-video",
+    "source": "official"
+  },
+  {
+    "id": "al_0175",
+    "model_id": "xai-grok-imagine-video",
+    "alias": "xAI",
+    "source": "official"
+  },
+  {
+    "id": "al_0176",
+    "model_id": "xai-grok-imagine-video",
+    "alias": "Grok",
+    "source": "official"
+  },
+  {
+    "id": "al_0177",
+    "model_id": "luma-ray-2",
+    "alias": "ray-2",
+    "source": "official"
+  },
+  {
+    "id": "al_0178",
+    "model_id": "luma-ray-2",
+    "alias": "Luma AI",
+    "source": "official"
+  },
+  {
+    "id": "al_0179",
+    "model_id": "alibaba-wan-2-1",
+    "alias": "通义万相 Wan 2.1",
+    "source": "official"
+  },
+  {
+    "id": "al_0180",
+    "model_id": "alibaba-wan-2-1",
+    "alias": "wan-2.1",
+    "source": "official"
+  },
+  {
+    "id": "al_0181",
+    "model_id": "alibaba-wan-2-1",
+    "alias": "阿里通义千问",
+    "source": "official"
+  },
+  {
+    "id": "al_0182",
+    "model_id": "alibaba-wan-2-1",
+    "alias": "通义千问",
+    "source": "official"
+  },
+  {
+    "id": "al_0183",
+    "model_id": "alibaba-wan-2-1",
+    "alias": "千问",
+    "source": "official"
+  },
+  {
+    "id": "al_0184",
+    "model_id": "glm-4-7-flash",
+    "alias": "glm-4.7-flash",
+    "source": "official"
+  },
+  {
+    "id": "al_0185",
+    "model_id": "glm-4-7-flash",
+    "alias": "智谱 GLM",
+    "source": "official"
+  },
+  {
+    "id": "al_0186",
+    "model_id": "glm-4-7-flash",
+    "alias": "智谱",
+    "source": "official"
+  },
+  {
+    "id": "al_0187",
+    "model_id": "glm-4-7-flash",
+    "alias": "智谱清言",
+    "source": "official"
+  },
+  {
+    "id": "al_0188",
+    "model_id": "glm-4-flash-250414",
+    "alias": "glm-4-flash-250414",
+    "source": "official"
+  },
+  {
+    "id": "al_0189",
+    "model_id": "glm-4-flash-250414",
+    "alias": "智谱 GLM",
+    "source": "official"
+  },
+  {
+    "id": "al_0190",
+    "model_id": "glm-4-flash-250414",
+    "alias": "智谱",
+    "source": "official"
+  },
+  {
+    "id": "al_0191",
+    "model_id": "glm-4-flash-250414",
+    "alias": "智谱清言",
+    "source": "official"
+  },
+  {
+    "id": "al_0192",
+    "model_id": "glm-4-6v-flash",
+    "alias": "glm-4.6v-flash",
+    "source": "official"
+  },
+  {
+    "id": "al_0193",
+    "model_id": "glm-4-6v-flash",
+    "alias": "智谱 GLM",
+    "source": "official"
+  },
+  {
+    "id": "al_0194",
+    "model_id": "glm-4-6v-flash",
+    "alias": "智谱",
+    "source": "official"
+  },
+  {
+    "id": "al_0195",
+    "model_id": "glm-4-6v-flash",
+    "alias": "智谱清言",
+    "source": "official"
+  },
+  {
+    "id": "al_0196",
+    "model_id": "glm-5-1",
+    "alias": "glm-5.1",
+    "source": "official"
+  },
+  {
+    "id": "al_0197",
+    "model_id": "glm-5-1",
+    "alias": "智谱 GLM",
+    "source": "official"
+  },
+  {
+    "id": "al_0198",
+    "model_id": "glm-5-1",
+    "alias": "智谱",
+    "source": "official"
+  },
+  {
+    "id": "al_0199",
+    "model_id": "glm-5-1",
+    "alias": "智谱清言",
+    "source": "official"
+  },
+  {
+    "id": "al_0200",
+    "model_id": "glm-4-7",
+    "alias": "glm-4.7",
+    "source": "official"
+  },
+  {
+    "id": "al_0201",
+    "model_id": "glm-4-7",
+    "alias": "智谱 GLM",
+    "source": "official"
+  },
+  {
+    "id": "al_0202",
+    "model_id": "glm-4-7",
+    "alias": "智谱",
+    "source": "official"
+  },
+  {
+    "id": "al_0203",
+    "model_id": "glm-4-7",
+    "alias": "智谱清言",
+    "source": "official"
+  },
+  {
+    "id": "al_0204",
+    "model_id": "glm-4-6",
+    "alias": "glm-4.6",
+    "source": "official"
+  },
+  {
+    "id": "al_0205",
+    "model_id": "glm-4-6",
+    "alias": "智谱 GLM",
+    "source": "official"
+  },
+  {
+    "id": "al_0206",
+    "model_id": "glm-4-6",
+    "alias": "智谱",
+    "source": "official"
+  },
+  {
+    "id": "al_0207",
+    "model_id": "glm-4-6",
+    "alias": "智谱清言",
+    "source": "official"
+  },
+  {
+    "id": "al_0208",
+    "model_id": "glm-4-5",
+    "alias": "glm-4.5",
+    "source": "official"
+  },
+  {
+    "id": "al_0209",
+    "model_id": "glm-4-5",
+    "alias": "智谱 GLM",
+    "source": "official"
+  },
+  {
+    "id": "al_0210",
+    "model_id": "glm-4-5",
+    "alias": "智谱",
+    "source": "official"
+  },
+  {
+    "id": "al_0211",
+    "model_id": "glm-4-5",
+    "alias": "智谱清言",
+    "source": "official"
+  },
+  {
+    "id": "al_0212",
+    "model_id": "glm-4-5-air",
+    "alias": "glm-4.5-air",
+    "source": "official"
+  },
+  {
+    "id": "al_0213",
+    "model_id": "glm-4-5-air",
+    "alias": "智谱 GLM",
+    "source": "official"
+  },
+  {
+    "id": "al_0214",
+    "model_id": "glm-4-5-air",
+    "alias": "智谱",
+    "source": "official"
+  },
+  {
+    "id": "al_0215",
+    "model_id": "glm-4-5-air",
+    "alias": "智谱清言",
+    "source": "official"
+  },
+  {
+    "id": "al_0216",
+    "model_id": "cogview-3-flash",
+    "alias": "cogview-3-flash",
+    "source": "official"
+  },
+  {
+    "id": "al_0217",
+    "model_id": "cogview-3-flash",
+    "alias": "智谱 GLM",
+    "source": "official"
+  },
+  {
+    "id": "al_0218",
+    "model_id": "cogview-3-flash",
+    "alias": "智谱",
+    "source": "official"
+  },
+  {
+    "id": "al_0219",
+    "model_id": "cogview-3-flash",
+    "alias": "智谱清言",
+    "source": "official"
+  },
+  {
+    "id": "al_0220",
+    "model_id": "cogview-4",
+    "alias": "cogview-4",
+    "source": "official"
+  },
+  {
+    "id": "al_0221",
+    "model_id": "cogview-4",
+    "alias": "智谱 GLM",
+    "source": "official"
+  },
+  {
+    "id": "al_0222",
+    "model_id": "cogview-4",
+    "alias": "智谱",
+    "source": "official"
+  },
+  {
+    "id": "al_0223",
+    "model_id": "cogview-4",
+    "alias": "智谱清言",
+    "source": "official"
+  },
+  {
+    "id": "al_0224",
+    "model_id": "cogvideox-flash",
+    "alias": "cogvideox-flash",
+    "source": "official"
+  },
+  {
+    "id": "al_0225",
+    "model_id": "cogvideox-flash",
+    "alias": "智谱 GLM",
+    "source": "official"
+  },
+  {
+    "id": "al_0226",
+    "model_id": "cogvideox-flash",
+    "alias": "智谱",
+    "source": "official"
+  },
+  {
+    "id": "al_0227",
+    "model_id": "cogvideox-flash",
+    "alias": "智谱清言",
+    "source": "official"
+  },
+  {
+    "id": "al_0228",
+    "model_id": "agnes-2-5-flash",
+    "alias": "agnes-2.5-flash",
+    "source": "official"
+  },
+  {
+    "id": "al_0229",
+    "model_id": "agnes-2-5-flash",
+    "alias": "Agnes AI",
+    "source": "official"
+  },
+  {
+    "id": "al_0230",
+    "model_id": "agnes-2-0-flash",
+    "alias": "agnes-2.0-flash",
+    "source": "official"
+  },
+  {
+    "id": "al_0231",
+    "model_id": "agnes-2-0-flash",
+    "alias": "Agnes AI",
+    "source": "official"
+  },
+  {
+    "id": "al_0232",
+    "model_id": "agnes-image-2-1-flash",
+    "alias": "agnes-image-2.1-flash",
+    "source": "official"
+  },
+  {
+    "id": "al_0233",
+    "model_id": "agnes-image-2-1-flash",
+    "alias": "Agnes AI",
+    "source": "official"
+  },
+  {
+    "id": "al_0234",
+    "model_id": "agnes-video-2-0",
+    "alias": "agnes-video-2.0",
+    "source": "official"
+  },
+  {
+    "id": "al_0235",
+    "model_id": "agnes-video-2-0",
+    "alias": "Agnes AI",
+    "source": "official"
+  },
+  {
+    "id": "al_0236",
+    "model_id": "groq-llama-3-3-70b",
+    "alias": "Llama 3.3 70B · Groq",
+    "source": "official"
+  },
+  {
+    "id": "al_0237",
+    "model_id": "groq-llama-3-3-70b",
+    "alias": "llama-3.3-70b-versatile",
+    "source": "official"
+  },
+  {
+    "id": "al_0238",
+    "model_id": "groq-llama-3-3-70b",
+    "alias": "Groq",
+    "source": "official"
+  },
+  {
+    "id": "al_0239",
+    "model_id": "groq-qwen3-32b",
+    "alias": "Qwen3-32B · Groq",
+    "source": "official"
+  },
+  {
+    "id": "al_0240",
+    "model_id": "groq-qwen3-32b",
+    "alias": "qwen3-32b",
+    "source": "official"
+  },
+  {
+    "id": "al_0241",
+    "model_id": "groq-qwen3-32b",
+    "alias": "Groq",
+    "source": "official"
+  },
+  {
+    "id": "al_0242",
+    "model_id": "groq-llama-4-scout",
+    "alias": "Llama 4 Scout · Groq",
+    "source": "official"
+  },
+  {
+    "id": "al_0243",
+    "model_id": "groq-llama-4-scout",
+    "alias": "meta-llama/llama-4-scout-17b-16e-instruct",
+    "source": "official"
+  },
+  {
+    "id": "al_0244",
+    "model_id": "groq-llama-4-scout",
+    "alias": "Groq",
+    "source": "official"
+  },
+  {
+    "id": "al_0245",
+    "model_id": "openrouter-llama-3-3-70b-free",
+    "alias": "Llama 3.3 70B · OpenRouter",
+    "source": "official"
+  },
+  {
+    "id": "al_0246",
+    "model_id": "openrouter-llama-3-3-70b-free",
+    "alias": "meta-llama/llama-3.3-70b-instruct:free",
+    "source": "official"
+  },
+  {
+    "id": "al_0247",
+    "model_id": "openrouter-llama-3-3-70b-free",
+    "alias": "OpenRouter",
+    "source": "official"
+  },
+  {
+    "id": "al_0248",
+    "model_id": "openrouter-deepseek-r1-free",
+    "alias": "DeepSeek R1 · OpenRouter",
+    "source": "official"
+  },
+  {
+    "id": "al_0249",
+    "model_id": "openrouter-deepseek-r1-free",
+    "alias": "deepseek/deepseek-r1:free",
+    "source": "official"
+  },
+  {
+    "id": "al_0250",
+    "model_id": "openrouter-deepseek-r1-free",
+    "alias": "OpenRouter",
+    "source": "official"
+  },
+  {
+    "id": "al_0251",
+    "model_id": "nvidia-nim-nemotron-70b",
+    "alias": "Nemotron-70B · NVIDIA NIM",
+    "source": "official"
+  },
+  {
+    "id": "al_0252",
+    "model_id": "nvidia-nim-nemotron-70b",
+    "alias": "nvidia/llama-3.1-nemotron-70b-instruct",
+    "source": "official"
+  },
+  {
+    "id": "al_0253",
+    "model_id": "nvidia-nim-nemotron-70b",
+    "alias": "NVIDIA NIM",
+    "source": "official"
+  },
+  {
+    "id": "al_0254",
+    "model_id": "nvidia-nim-llama-3-3-70b",
+    "alias": "Llama 3.3 70B · NVIDIA NIM",
+    "source": "official"
+  },
+  {
+    "id": "al_0255",
+    "model_id": "nvidia-nim-llama-3-3-70b",
+    "alias": "nvidia/llama-3.3-70b-instruct",
+    "source": "official"
+  },
+  {
+    "id": "al_0256",
+    "model_id": "nvidia-nim-llama-3-3-70b",
+    "alias": "NVIDIA NIM",
+    "source": "official"
+  },
+  {
+    "id": "al_0257",
+    "model_id": "mistral-small-free",
+    "alias": "mistral-small-latest",
+    "source": "official"
+  },
+  {
+    "id": "al_0258",
+    "model_id": "mistral-small-free",
+    "alias": "Mistral AI",
+    "source": "official"
+  },
+  {
+    "id": "al_0259",
+    "model_id": "groq-llama-3-1-8b-instant",
+    "alias": "Llama 3.1 8B · Groq",
+    "source": "official"
+  },
+  {
+    "id": "al_0260",
+    "model_id": "groq-llama-3-1-8b-instant",
+    "alias": "llama-3.1-8b-instant",
+    "source": "official"
+  },
+  {
+    "id": "al_0261",
+    "model_id": "groq-llama-3-1-8b-instant",
+    "alias": "Groq",
+    "source": "official"
+  },
+  {
+    "id": "al_0262",
+    "model_id": "groq-gemma-2-9b",
+    "alias": "Gemma 2 9B · Groq",
+    "source": "official"
+  },
+  {
+    "id": "al_0263",
+    "model_id": "groq-gemma-2-9b",
+    "alias": "gemma2-9b-it",
+    "source": "official"
+  },
+  {
+    "id": "al_0264",
+    "model_id": "groq-gemma-2-9b",
+    "alias": "Groq",
+    "source": "official"
+  },
+  {
+    "id": "al_0265",
+    "model_id": "groq-mixtral-8x7b",
+    "alias": "Mixtral 8x7B · Groq",
+    "source": "official"
+  },
+  {
+    "id": "al_0266",
+    "model_id": "groq-mixtral-8x7b",
+    "alias": "mixtral-8x7b-32768",
+    "source": "official"
+  },
+  {
+    "id": "al_0267",
+    "model_id": "groq-mixtral-8x7b",
+    "alias": "Groq",
+    "source": "official"
+  },
+  {
+    "id": "al_0268",
+    "model_id": "groq-whisper-large-v3",
+    "alias": "Whisper Large v3 · Groq",
+    "source": "official"
+  },
+  {
+    "id": "al_0269",
+    "model_id": "groq-whisper-large-v3",
+    "alias": "whisper-large-v3",
+    "source": "official"
+  },
+  {
+    "id": "al_0270",
+    "model_id": "groq-whisper-large-v3",
+    "alias": "Groq",
+    "source": "official"
+  },
+  {
+    "id": "al_0271",
+    "model_id": "groq-deepseek-r1-distill-70b",
+    "alias": "DeepSeek-R1-Distill 70B · Groq",
+    "source": "official"
+  },
+  {
+    "id": "al_0272",
+    "model_id": "groq-deepseek-r1-distill-70b",
+    "alias": "deepseek-r1-distill-llama-70b",
+    "source": "official"
+  },
+  {
+    "id": "al_0273",
+    "model_id": "groq-deepseek-r1-distill-70b",
+    "alias": "Groq",
+    "source": "official"
+  },
+  {
+    "id": "al_0274",
+    "model_id": "groq-llama-4-maverick",
+    "alias": "Llama 4 Maverick · Groq",
+    "source": "official"
+  },
+  {
+    "id": "al_0275",
+    "model_id": "groq-llama-4-maverick",
+    "alias": "meta-llama/llama-4-maverick-17b-128e-instruct",
+    "source": "official"
+  },
+  {
+    "id": "al_0276",
+    "model_id": "groq-llama-4-maverick",
+    "alias": "Groq",
+    "source": "official"
+  },
+  {
+    "id": "al_0277",
+    "model_id": "groq-kimi-k2",
+    "alias": "Kimi K2 · Groq",
+    "source": "official"
+  },
+  {
+    "id": "al_0278",
+    "model_id": "groq-kimi-k2",
+    "alias": "kimi-k2-instruct",
+    "source": "official"
+  },
+  {
+    "id": "al_0279",
+    "model_id": "groq-kimi-k2",
+    "alias": "Groq",
+    "source": "official"
+  },
+  {
+    "id": "al_0280",
+    "model_id": "openrouter-llama-4-maverick-free",
+    "alias": "Llama 4 Maverick · OpenRouter",
+    "source": "official"
+  },
+  {
+    "id": "al_0281",
+    "model_id": "openrouter-llama-4-maverick-free",
+    "alias": "meta-llama/llama-4-maverick:free",
+    "source": "official"
+  },
+  {
+    "id": "al_0282",
+    "model_id": "openrouter-llama-4-maverick-free",
+    "alias": "OpenRouter",
+    "source": "official"
+  },
+  {
+    "id": "al_0283",
+    "model_id": "openrouter-llama-4-scout-free",
+    "alias": "Llama 4 Scout · OpenRouter",
+    "source": "official"
+  },
+  {
+    "id": "al_0284",
+    "model_id": "openrouter-llama-4-scout-free",
+    "alias": "meta-llama/llama-4-scout:free",
+    "source": "official"
+  },
+  {
+    "id": "al_0285",
+    "model_id": "openrouter-llama-4-scout-free",
+    "alias": "OpenRouter",
+    "source": "official"
+  },
+  {
+    "id": "al_0286",
+    "model_id": "openrouter-gemma-2-9b-free",
+    "alias": "Gemma 2 9B · OpenRouter",
+    "source": "official"
+  },
+  {
+    "id": "al_0287",
+    "model_id": "openrouter-gemma-2-9b-free",
+    "alias": "google/gemma-2-9b-it:free",
+    "source": "official"
+  },
+  {
+    "id": "al_0288",
+    "model_id": "openrouter-gemma-2-9b-free",
+    "alias": "OpenRouter",
+    "source": "official"
+  },
+  {
+    "id": "al_0289",
+    "model_id": "openrouter-mistral-7b-free",
+    "alias": "Mistral 7B · OpenRouter",
+    "source": "official"
+  },
+  {
+    "id": "al_0290",
+    "model_id": "openrouter-mistral-7b-free",
+    "alias": "mistralai/mistral-7b-instruct:free",
+    "source": "official"
+  },
+  {
+    "id": "al_0291",
+    "model_id": "openrouter-mistral-7b-free",
+    "alias": "OpenRouter",
+    "source": "official"
+  },
+  {
+    "id": "al_0292",
+    "model_id": "openrouter-qwen-2-5-72b-free",
+    "alias": "Qwen2.5 72B · OpenRouter",
+    "source": "official"
+  },
+  {
+    "id": "al_0293",
+    "model_id": "openrouter-qwen-2-5-72b-free",
+    "alias": "qwen/qwen-2.5-72b-instruct:free",
+    "source": "official"
+  },
+  {
+    "id": "al_0294",
+    "model_id": "openrouter-qwen-2-5-72b-free",
+    "alias": "OpenRouter",
+    "source": "official"
+  },
+  {
+    "id": "al_0295",
+    "model_id": "openrouter-llama-3-1-8b-free",
+    "alias": "Llama 3.1 8B · OpenRouter",
+    "source": "official"
+  },
+  {
+    "id": "al_0296",
+    "model_id": "openrouter-llama-3-1-8b-free",
+    "alias": "meta-llama/llama-3.1-8b-instruct:free",
+    "source": "official"
+  },
+  {
+    "id": "al_0297",
+    "model_id": "openrouter-llama-3-1-8b-free",
+    "alias": "OpenRouter",
+    "source": "official"
+  },
+  {
+    "id": "al_0298",
+    "model_id": "openrouter-phi-3-5-mini-free",
+    "alias": "Phi-3.5 Mini · OpenRouter",
+    "source": "official"
+  },
+  {
+    "id": "al_0299",
+    "model_id": "openrouter-phi-3-5-mini-free",
+    "alias": "microsoft/phi-3.5-mini-128k-instruct:free",
+    "source": "official"
+  },
+  {
+    "id": "al_0300",
+    "model_id": "openrouter-phi-3-5-mini-free",
+    "alias": "OpenRouter",
+    "source": "official"
+  },
+  {
+    "id": "al_0301",
+    "model_id": "openrouter-gemini-2-0-flash-free",
+    "alias": "Gemini 2.0 Flash · OpenRouter",
+    "source": "official"
+  },
+  {
+    "id": "al_0302",
+    "model_id": "openrouter-gemini-2-0-flash-free",
+    "alias": "google/gemini-2.0-flash-exp:free",
+    "source": "official"
+  },
+  {
+    "id": "al_0303",
+    "model_id": "openrouter-gemini-2-0-flash-free",
+    "alias": "OpenRouter",
+    "source": "official"
+  },
+  {
+    "id": "al_0304",
+    "model_id": "nvidia-nim-llama-4-maverick",
+    "alias": "Llama 4 Maverick · NVIDIA NIM",
+    "source": "official"
+  },
+  {
+    "id": "al_0305",
+    "model_id": "nvidia-nim-llama-4-maverick",
+    "alias": "meta/llama-4-maverick",
+    "source": "official"
+  },
+  {
+    "id": "al_0306",
+    "model_id": "nvidia-nim-llama-4-maverick",
+    "alias": "NVIDIA NIM",
+    "source": "official"
+  },
+  {
+    "id": "al_0307",
+    "model_id": "nvidia-nim-mistral-small-24b",
+    "alias": "Mistral Small 24B · NVIDIA NIM",
+    "source": "official"
+  },
+  {
+    "id": "al_0308",
+    "model_id": "nvidia-nim-mistral-small-24b",
+    "alias": "mistralai/mistral-small-24b-instruct-2501",
+    "source": "official"
+  },
+  {
+    "id": "al_0309",
+    "model_id": "nvidia-nim-mistral-small-24b",
+    "alias": "NVIDIA NIM",
+    "source": "official"
+  },
+  {
+    "id": "al_0310",
+    "model_id": "nvidia-nim-deepseek-r1",
+    "alias": "DeepSeek R1 · NVIDIA NIM",
+    "source": "official"
+  },
+  {
+    "id": "al_0311",
+    "model_id": "nvidia-nim-deepseek-r1",
+    "alias": "deepseek/deepseek-r1",
+    "source": "official"
+  },
+  {
+    "id": "al_0312",
+    "model_id": "nvidia-nim-deepseek-r1",
+    "alias": "NVIDIA NIM",
+    "source": "official"
+  },
+  {
+    "id": "al_0313",
+    "model_id": "nvidia-nim-qwen3-coder-480b",
+    "alias": "Qwen3 Coder 480B · NVIDIA NIM",
+    "source": "official"
+  },
+  {
+    "id": "al_0314",
+    "model_id": "nvidia-nim-qwen3-coder-480b",
+    "alias": "qwen/qwen3-coder-480b",
+    "source": "official"
+  },
+  {
+    "id": "al_0315",
+    "model_id": "nvidia-nim-qwen3-coder-480b",
+    "alias": "NVIDIA NIM",
+    "source": "official"
+  },
+  {
+    "id": "al_0316",
+    "model_id": "nvidia-nim-nemotron-nano-9b",
+    "alias": "Nemotron Nano 9B · NVIDIA NIM",
+    "source": "official"
+  },
+  {
+    "id": "al_0317",
+    "model_id": "nvidia-nim-nemotron-nano-9b",
+    "alias": "nvidia/nemotron-nano-9b-v2",
+    "source": "official"
+  },
+  {
+    "id": "al_0318",
+    "model_id": "nvidia-nim-nemotron-nano-9b",
+    "alias": "NVIDIA NIM",
+    "source": "official"
+  },
+  {
+    "id": "al_0319",
+    "model_id": "nvidia-nim-phi-4",
+    "alias": "Phi-4 · NVIDIA NIM",
+    "source": "official"
+  },
+  {
+    "id": "al_0320",
+    "model_id": "nvidia-nim-phi-4",
+    "alias": "microsoft/phi-4",
+    "source": "official"
+  },
+  {
+    "id": "al_0321",
+    "model_id": "nvidia-nim-phi-4",
+    "alias": "NVIDIA NIM",
+    "source": "official"
+  },
+  {
+    "id": "al_0322",
+    "model_id": "nvidia-nim-gemma-2-9b",
+    "alias": "Gemma 2 9B · NVIDIA NIM",
+    "source": "official"
+  },
+  {
+    "id": "al_0323",
+    "model_id": "nvidia-nim-gemma-2-9b",
+    "alias": "google/gemma-2-9b-it",
+    "source": "official"
+  },
+  {
+    "id": "al_0324",
+    "model_id": "nvidia-nim-gemma-2-9b",
+    "alias": "NVIDIA NIM",
+    "source": "official"
+  },
+  {
+    "id": "al_0325",
+    "model_id": "anyapi-auto",
+    "alias": "AnyAPI 自动路由",
+    "source": "community"
+  },
+  {
+    "id": "al_0326",
+    "model_id": "anyapi-auto",
+    "alias": "auto",
+    "source": "community"
+  },
+  {
+    "id": "al_0327",
+    "model_id": "anyapi-auto",
+    "alias": "AnyAPI",
+    "source": "community"
+  },
+  {
+    "id": "al_0328",
+    "model_id": "bazaarlink-auto-free",
+    "alias": "auto:free",
+    "source": "community"
+  },
+  {
+    "id": "al_0329",
+    "model_id": "bazaarlink-auto-free",
+    "alias": "BazaarLink",
+    "source": "community"
+  },
+  {
+    "id": "al_0330",
+    "model_id": "requesty-auto",
+    "alias": "Requesty 路由",
+    "source": "community"
+  },
+  {
+    "id": "al_0331",
+    "model_id": "requesty-auto",
+    "alias": "auto",
+    "source": "community"
+  },
+  {
+    "id": "al_0332",
+    "model_id": "requesty-auto",
+    "alias": "Requesty",
+    "source": "community"
+  },
+  {
+    "id": "al_0333",
+    "model_id": "opencode-zen-llama33",
+    "alias": "llama-3.3-70b",
+    "source": "community"
+  },
+  {
+    "id": "al_0334",
+    "model_id": "opencode-zen-llama33",
+    "alias": "OpenCode Zen",
+    "source": "community"
+  },
+  {
+    "id": "al_0335",
+    "model_id": "opencode-zen-qwen25",
+    "alias": "qwen2.5-72b",
+    "source": "community"
+  },
+  {
+    "id": "al_0336",
+    "model_id": "opencode-zen-qwen25",
+    "alias": "OpenCode Zen",
+    "source": "community"
+  },
+  {
+    "id": "al_0337",
+    "model_id": "ovh-llama33",
+    "alias": "Llama-3.3-70B-Instruct",
+    "source": "community"
+  },
+  {
+    "id": "al_0338",
+    "model_id": "ovh-llama33",
+    "alias": "OVHcloud AI",
+    "source": "community"
+  },
+  {
+    "id": "al_0339",
+    "model_id": "ovh-deepseek-r1",
+    "alias": "OVH DeepSeek R1 蒸馏",
+    "source": "community"
+  },
+  {
+    "id": "al_0340",
+    "model_id": "ovh-deepseek-r1",
+    "alias": "DeepSeek-R1-Distill-Qwen-32B",
+    "source": "community"
+  },
+  {
+    "id": "al_0341",
+    "model_id": "ovh-deepseek-r1",
+    "alias": "OVHcloud AI",
+    "source": "community"
+  },
+  {
+    "id": "al_0342",
+    "model_id": "freeai-auto",
+    "alias": "Free.ai 自动路由",
+    "source": "community"
+  },
+  {
+    "id": "al_0343",
+    "model_id": "freeai-auto",
+    "alias": "auto",
+    "source": "community"
+  },
+  {
+    "id": "al_0344",
+    "model_id": "freeai-auto",
+    "alias": "Free.ai",
+    "source": "community"
+  },
+  {
+    "id": "al_0345",
+    "model_id": "hunyuan-turbos-latest",
+    "alias": "混元 TurboS",
+    "source": "official"
+  },
+  {
+    "id": "al_0346",
+    "model_id": "hunyuan-turbos-latest",
+    "alias": "hunyuan-turbos-latest",
+    "source": "official"
+  },
+  {
+    "id": "al_0347",
+    "model_id": "hunyuan-turbos-latest",
+    "alias": "腾讯混元",
+    "source": "official"
+  },
+  {
+    "id": "al_0348",
+    "model_id": "hunyuan-turbos-latest",
+    "alias": "混元",
+    "source": "official"
+  },
+  {
+    "id": "al_0349",
+    "model_id": "hunyuan-t1-latest",
+    "alias": "混元 T1",
+    "source": "official"
+  },
+  {
+    "id": "al_0350",
+    "model_id": "hunyuan-t1-latest",
+    "alias": "hunyuan-t1-latest",
+    "source": "official"
+  },
+  {
+    "id": "al_0351",
+    "model_id": "hunyuan-t1-latest",
+    "alias": "腾讯混元",
+    "source": "official"
+  },
+  {
+    "id": "al_0352",
+    "model_id": "hunyuan-t1-latest",
+    "alias": "混元",
+    "source": "official"
+  },
+  {
+    "id": "al_0353",
+    "model_id": "hunyuan-standard",
+    "alias": "混元 Standard",
+    "source": "official"
+  },
+  {
+    "id": "al_0354",
+    "model_id": "hunyuan-standard",
+    "alias": "hunyuan-standard",
+    "source": "official"
+  },
+  {
+    "id": "al_0355",
+    "model_id": "hunyuan-standard",
+    "alias": "腾讯混元",
+    "source": "official"
+  },
+  {
+    "id": "al_0356",
+    "model_id": "hunyuan-standard",
+    "alias": "混元",
+    "source": "official"
+  },
+  {
+    "id": "al_0357",
+    "model_id": "hunyuan-vision-1-5-instruct",
+    "alias": "混元视觉 1.5",
+    "source": "official"
+  },
+  {
+    "id": "al_0358",
+    "model_id": "hunyuan-vision-1-5-instruct",
+    "alias": "hunyuan-vision-1.5-instruct",
+    "source": "official"
+  },
+  {
+    "id": "al_0359",
+    "model_id": "hunyuan-vision-1-5-instruct",
+    "alias": "腾讯混元",
+    "source": "official"
+  },
+  {
+    "id": "al_0360",
+    "model_id": "hunyuan-vision-1-5-instruct",
+    "alias": "混元",
+    "source": "official"
+  },
+  {
+    "id": "al_0361",
+    "model_id": "hunyuan-image-3",
+    "alias": "混元图像 3.0",
+    "source": "official"
+  },
+  {
+    "id": "al_0362",
+    "model_id": "hunyuan-image-3",
+    "alias": "hunyuan-image",
+    "source": "official"
+  },
+  {
+    "id": "al_0363",
+    "model_id": "hunyuan-image-3",
+    "alias": "腾讯混元",
+    "source": "official"
+  },
+  {
+    "id": "al_0364",
+    "model_id": "hunyuan-image-3",
+    "alias": "混元",
+    "source": "official"
+  },
+  {
+    "id": "al_0365",
+    "model_id": "kuaishou-kolors",
+    "alias": "Kolors 文生图",
+    "source": "official"
+  },
+  {
+    "id": "al_0366",
+    "model_id": "kuaishou-kolors",
+    "alias": "Kwai-Kolors/Kolors",
+    "source": "official"
+  },
+  {
+    "id": "al_0367",
+    "model_id": "kuaishou-kolors",
+    "alias": "快手可灵",
+    "source": "official"
+  }
+]

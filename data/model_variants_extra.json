@@ -65,7 +65,11 @@
     "access_types": [
       "official_api",
       "free_api"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 85,
+    "data_source": "official",
+    "last_verified_at": "2026-08-05"
   },
   {
     "id": "glm-4-flash-250414",
@@ -133,7 +137,11 @@
     "access_types": [
       "official_api",
       "free_api"
-    ]
+    ],
+    "status": "archived",
+    "data_quality_score": 85,
+    "data_source": "official",
+    "last_verified_at": "2026-08-05"
   },
   {
     "id": "glm-4-6v-flash",
@@ -201,7 +209,11 @@
     "access_types": [
       "official_api",
       "free_api"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 85,
+    "data_source": "official",
+    "last_verified_at": "2026-08-05"
   },
   {
     "id": "glm-5-1",
@@ -268,7 +280,11 @@
     "role": "reasoning",
     "access_types": [
       "official_api"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 85,
+    "data_source": "official",
+    "last_verified_at": "2026-08-05"
   },
   {
     "id": "glm-4-7",
@@ -334,7 +350,11 @@
     "role": "reasoning",
     "access_types": [
       "official_api"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 85,
+    "data_source": "official",
+    "last_verified_at": "2026-08-05"
   },
   {
     "id": "glm-4-6",
@@ -399,7 +419,11 @@
     "role": "coding",
     "access_types": [
       "official_api"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 85,
+    "data_source": "official",
+    "last_verified_at": "2026-08-05"
   },
   {
     "id": "glm-4-5",
@@ -469,7 +493,11 @@
       "official_api",
       "open_source",
       "self_host"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 90,
+    "data_source": "official",
+    "last_verified_at": "2026-08-05"
   },
   {
     "id": "glm-4-5-air",
@@ -532,7 +560,11 @@
     "role": "coding",
     "access_types": [
       "official_api"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 85,
+    "data_source": "official",
+    "last_verified_at": "2026-08-05"
   },
   {
     "id": "cogview-3-flash",
@@ -605,7 +637,11 @@
     "access_types": [
       "official_api",
       "free_api"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 65,
+    "data_source": "official",
+    "last_verified_at": "2026-08-05"
   },
   {
     "id": "cogview-4",
@@ -676,7 +712,11 @@
     "role": "multimodal",
     "access_types": [
       "official_api"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 65,
+    "data_source": "official",
+    "last_verified_at": "2026-08-05"
   },
   {
     "id": "cogvideox-flash",
@@ -751,7 +791,11 @@
     "access_types": [
       "official_api",
       "free_api"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 65,
+    "data_source": "official",
+    "last_verified_at": "2026-08-05"
   },
   {
     "id": "agnes-2-5-flash",
@@ -818,7 +862,11 @@
     "access_types": [
       "official_api",
       "free_api"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 85,
+    "data_source": "official",
+    "last_verified_at": "2026-08-05"
   },
   {
     "id": "agnes-2-0-flash",
@@ -883,7 +931,11 @@
     "access_types": [
       "official_api",
       "free_api"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 85,
+    "data_source": "official",
+    "last_verified_at": "2026-08-05"
   },
   {
     "id": "agnes-image-2-1-flash",
@@ -954,7 +1006,11 @@
     "access_types": [
       "official_api",
       "free_api"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 65,
+    "data_source": "official",
+    "last_verified_at": "2026-08-05"
   },
   {
     "id": "agnes-video-2-0",
@@ -1027,7 +1083,11 @@
     "access_types": [
       "official_api",
       "free_api"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 65,
+    "data_source": "official",
+    "last_verified_at": "2026-08-05"
   },
   {
     "id": "groq-llama-3-3-70b",
@@ -1095,7 +1155,11 @@
       "open_source",
       "self_host",
       "free_api"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 90,
+    "data_source": "official",
+    "last_verified_at": "2026-08-05"
   },
   {
     "id": "groq-qwen3-32b",
@@ -1163,7 +1227,11 @@
       "open_source",
       "self_host",
       "free_api"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 90,
+    "data_source": "official",
+    "last_verified_at": "2026-08-05"
   },
   {
     "id": "groq-llama-4-scout",
@@ -1230,7 +1298,11 @@
       "open_source",
       "self_host",
       "free_api"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 90,
+    "data_source": "official",
+    "last_verified_at": "2026-08-05"
   },
   {
     "id": "openrouter-llama-3-3-70b-free",
@@ -1297,7 +1369,11 @@
       "open_source",
       "self_host",
       "free_api"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 90,
+    "data_source": "official",
+    "last_verified_at": "2026-08-05"
   },
   {
     "id": "openrouter-deepseek-r1-free",
@@ -1364,7 +1440,11 @@
       "open_source",
       "self_host",
       "free_api"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 90,
+    "data_source": "official",
+    "last_verified_at": "2026-08-05"
   },
   {
     "id": "nvidia-nim-nemotron-70b",
@@ -1431,7 +1511,11 @@
       "open_source",
       "self_host",
       "free_api"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 90,
+    "data_source": "official",
+    "last_verified_at": "2026-08-05"
   },
   {
     "id": "nvidia-nim-llama-3-3-70b",
@@ -1498,7 +1582,11 @@
       "open_source",
       "self_host",
       "free_api"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 90,
+    "data_source": "official",
+    "last_verified_at": "2026-08-05"
   },
   {
     "id": "mistral-small-free",
@@ -1562,7 +1650,11 @@
     "access_types": [
       "official_api",
       "free_api"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 85,
+    "data_source": "official",
+    "last_verified_at": "2026-08-05"
   },
   {
     "id": "groq-llama-3-1-8b-instant",
@@ -1629,7 +1721,11 @@
       "open_source",
       "self_host",
       "free_api"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 90,
+    "data_source": "official",
+    "last_verified_at": "2026-08-06"
   },
   {
     "id": "groq-gemma-2-9b",
@@ -1694,7 +1790,11 @@
       "open_source",
       "self_host",
       "free_api"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 90,
+    "data_source": "official",
+    "last_verified_at": "2026-08-06"
   },
   {
     "id": "groq-mixtral-8x7b",
@@ -1760,7 +1860,11 @@
       "open_source",
       "self_host",
       "free_api"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 90,
+    "data_source": "official",
+    "last_verified_at": "2026-08-06"
   },
   {
     "id": "groq-whisper-large-v3",
@@ -1824,7 +1928,11 @@
       "open_source",
       "self_host",
       "free_api"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 90,
+    "data_source": "official",
+    "last_verified_at": "2026-08-06"
   },
   {
     "id": "groq-deepseek-r1-distill-70b",
@@ -1890,7 +1998,11 @@
       "open_source",
       "self_host",
       "free_api"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 90,
+    "data_source": "official",
+    "last_verified_at": "2026-08-06"
   },
   {
     "id": "groq-llama-4-maverick",
@@ -1957,7 +2069,11 @@
       "open_source",
       "self_host",
       "free_api"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 90,
+    "data_source": "official",
+    "last_verified_at": "2026-08-06"
   },
   {
     "id": "groq-kimi-k2",
@@ -2023,7 +2139,11 @@
       "open_source",
       "self_host",
       "free_api"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 90,
+    "data_source": "official",
+    "last_verified_at": "2026-08-06"
   },
   {
     "id": "openrouter-llama-4-maverick-free",
@@ -2090,7 +2210,11 @@
       "open_source",
       "self_host",
       "free_api"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 90,
+    "data_source": "official",
+    "last_verified_at": "2026-08-06"
   },
   {
     "id": "openrouter-llama-4-scout-free",
@@ -2156,7 +2280,11 @@
       "open_source",
       "self_host",
       "free_api"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 90,
+    "data_source": "official",
+    "last_verified_at": "2026-08-06"
   },
   {
     "id": "openrouter-gemma-2-9b-free",
@@ -2221,7 +2349,11 @@
       "open_source",
       "self_host",
       "free_api"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 90,
+    "data_source": "official",
+    "last_verified_at": "2026-08-06"
   },
   {
     "id": "openrouter-mistral-7b-free",
@@ -2287,7 +2419,11 @@
       "open_source",
       "self_host",
       "free_api"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 90,
+    "data_source": "official",
+    "last_verified_at": "2026-08-06"
   },
   {
     "id": "openrouter-qwen-2-5-72b-free",
@@ -2353,7 +2489,11 @@
       "open_source",
       "self_host",
       "free_api"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 90,
+    "data_source": "official",
+    "last_verified_at": "2026-08-06"
   },
   {
     "id": "openrouter-llama-3-1-8b-free",
@@ -2418,7 +2558,11 @@
       "open_source",
       "self_host",
       "free_api"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 90,
+    "data_source": "official",
+    "last_verified_at": "2026-08-06"
   },
   {
     "id": "openrouter-phi-3-5-mini-free",
@@ -2483,7 +2627,11 @@
       "open_source",
       "self_host",
       "free_api"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 90,
+    "data_source": "official",
+    "last_verified_at": "2026-08-06"
   },
   {
     "id": "openrouter-gemini-2-0-flash-free",
@@ -2548,7 +2696,11 @@
     "access_types": [
       "official_api",
       "free_api"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 85,
+    "data_source": "official",
+    "last_verified_at": "2026-08-06"
   },
   {
     "id": "nvidia-nim-llama-4-maverick",
@@ -2615,7 +2767,11 @@
       "open_source",
       "self_host",
       "free_api"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 90,
+    "data_source": "official",
+    "last_verified_at": "2026-08-06"
   },
   {
     "id": "nvidia-nim-mistral-small-24b",
@@ -2681,7 +2837,11 @@
       "open_source",
       "self_host",
       "free_api"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 90,
+    "data_source": "official",
+    "last_verified_at": "2026-08-06"
   },
   {
     "id": "nvidia-nim-deepseek-r1",
@@ -2747,7 +2907,11 @@
       "open_source",
       "self_host",
       "free_api"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 90,
+    "data_source": "official",
+    "last_verified_at": "2026-08-06"
   },
   {
     "id": "nvidia-nim-qwen3-coder-480b",
@@ -2813,7 +2977,11 @@
       "open_source",
       "self_host",
       "free_api"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 90,
+    "data_source": "official",
+    "last_verified_at": "2026-08-06"
   },
   {
     "id": "nvidia-nim-nemotron-nano-9b",
@@ -2879,7 +3047,11 @@
       "open_source",
       "self_host",
       "free_api"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 90,
+    "data_source": "official",
+    "last_verified_at": "2026-08-06"
   },
   {
     "id": "nvidia-nim-phi-4",
@@ -2944,7 +3116,11 @@
       "open_source",
       "self_host",
       "free_api"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 90,
+    "data_source": "official",
+    "last_verified_at": "2026-08-06"
   },
   {
     "id": "nvidia-nim-gemma-2-9b",
@@ -3009,7 +3185,11 @@
       "open_source",
       "self_host",
       "free_api"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 90,
+    "data_source": "official",
+    "last_verified_at": "2026-08-06"
   },
   {
     "id": "anyapi-auto",
@@ -3059,7 +3239,11 @@
     "access_types": [
       "official_api",
       "free_api"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 85,
+    "data_source": "community",
+    "last_verified_at": "2026-08-06"
   },
   {
     "id": "bazaarlink-auto-free",
@@ -3108,7 +3292,11 @@
     "access_types": [
       "official_api",
       "free_api"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 85,
+    "data_source": "community",
+    "last_verified_at": "2026-08-06"
   },
   {
     "id": "requesty-auto",
@@ -3158,7 +3346,11 @@
     "access_types": [
       "official_api",
       "free_api"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 85,
+    "data_source": "community",
+    "last_verified_at": "2026-08-06"
   },
   {
     "id": "opencode-zen-llama33",
@@ -3216,7 +3408,11 @@
       "open_source",
       "self_host",
       "free_api"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 90,
+    "data_source": "community",
+    "last_verified_at": "2026-08-06"
   },
   {
     "id": "opencode-zen-qwen25",
@@ -3274,7 +3470,11 @@
       "open_source",
       "self_host",
       "free_api"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 90,
+    "data_source": "community",
+    "last_verified_at": "2026-08-06"
   },
   {
     "id": "ovh-llama33",
@@ -3327,7 +3527,11 @@
       "open_source",
       "self_host",
       "free_api"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 90,
+    "data_source": "community",
+    "last_verified_at": "2026-08-06"
   },
   {
     "id": "ovh-deepseek-r1",
@@ -3382,7 +3586,11 @@
       "open_source",
       "self_host",
       "free_api"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 90,
+    "data_source": "community",
+    "last_verified_at": "2026-08-06"
   },
   {
     "id": "freeai-auto",
@@ -3432,7 +3640,11 @@
     "access_types": [
       "official_api",
       "free_api"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 85,
+    "data_source": "community",
+    "last_verified_at": "2026-08-06"
   },
   {
     "id": "hunyuan-turbos-latest",
@@ -3488,7 +3700,11 @@
     "role": "coding",
     "access_types": [
       "official_api"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 85,
+    "data_source": "official",
+    "last_verified_at": "2026-08-06"
   },
   {
     "id": "hunyuan-t1-latest",
@@ -3543,7 +3759,11 @@
     "role": "reasoning",
     "access_types": [
       "official_api"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 85,
+    "data_source": "official",
+    "last_verified_at": "2026-08-06"
   },
   {
     "id": "hunyuan-standard",
@@ -3595,7 +3815,11 @@
     "role": "low_cost",
     "access_types": [
       "official_api"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 85,
+    "data_source": "official",
+    "last_verified_at": "2026-08-06"
   },
   {
     "id": "hunyuan-vision-1-5-instruct",
@@ -3647,7 +3871,11 @@
     "role": "general",
     "access_types": [
       "official_api"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 85,
+    "data_source": "official",
+    "last_verified_at": "2026-08-06"
   },
   {
     "id": "hunyuan-image-3",
@@ -3695,7 +3923,11 @@
     "role": "multimodal",
     "access_types": [
       "official_api"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 75,
+    "data_source": "official",
+    "last_verified_at": "2026-08-06"
   },
   {
     "id": "kuaishou-kolors",
@@ -3746,6 +3978,10 @@
       "open_source",
       "self_host",
       "free_api"
-    ]
+    ],
+    "status": "active",
+    "data_quality_score": 80,
+    "data_source": "official",
+    "last_verified_at": "2026-08-06"
   }
 ]

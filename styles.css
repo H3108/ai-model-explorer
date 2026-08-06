@@ -292,7 +292,7 @@ select { padding: 8px 12px; border-radius: var(--r-sm); }
               0 0 0 20px color-mix(in srgb, var(--green) 3%, transparent),
               0 20px 50px -16px color-mix(in srgb, var(--deep) 80%, transparent);
 }
-.visual-core b { font-size: 50px; color: var(--green); font-weight: 800; line-height: 1; }
+.visual-core b { font-size: 70px; color: var(--green); font-weight: 800; line-height: 1; padding-top: 15px;}
 .visual-core .vc-s { font-size: 17px; vertical-align: middle; margin-left: 2px; }
 .visual-core small { font-size: 10.5px; letter-spacing: .22em; color: #ffffffcc; margin-top: 8px; }
 .float-card {
