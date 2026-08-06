@@ -2283,5 +2283,249 @@
     "verified_date": "2026-08-06",
     "free": true,
     "free_note": "免费层 30K tok/天，聚合 400+ 工具，OpenAI 兼容。"
+  },
+    {
+    "id": "hunyuan-turbos-latest",
+    "family_id": "tencent-hunyuan-chat",
+    "provider_id": "tencent-hunyuan",
+    "name": "Hunyuan TurboS",
+    "name_cn": "混元 TurboS",
+    "model_id": "hunyuan-turbos-latest",
+    "one_liner_cn": "旗舰快思考模型，Mamba-MoE 混合架构，代码与 Agent 能力突出。",
+    "context_window": 128000,
+    "max_output_tokens": 16000,
+    "input_price_per_mtok": 0.11,
+    "output_price_per_mtok": 0.28,
+    "currency": "USD",
+    "vision_support": false,
+    "open_weight": false,
+    "speed_tier": "fast",
+    "model_type": [
+      "Chat",
+      "Coding",
+      "Agent"
+    ],
+    "capabilities": {
+      "reasoning": {
+        "tier": "high"
+      },
+      "coding": {
+        "tier": "high"
+      },
+      "knowledge": {
+        "tier": "high"
+      },
+      "multilingual": {}
+    },
+    "best_for": [
+      "low_cost",
+      "coding",
+      "agent"
+    ],
+    "avoid_for": [],
+    "release_date": "2025",
+    "source_url": "https://cloud.tencent.com/document/product/1729",
+    "verified": true,
+    "verified_date": "2026-08-06",
+    "free": false
+  },
+    {
+    "id": "hunyuan-t1-latest",
+    "family_id": "tencent-hunyuan-chat",
+    "provider_id": "tencent-hunyuan",
+    "name": "Hunyuan T1",
+    "name_cn": "混元 T1",
+    "model_id": "hunyuan-t1-latest",
+    "one_liner_cn": "深度思考推理模型，复杂数学、规划与逻辑强。",
+    "context_window": 32000,
+    "max_output_tokens": 64000,
+    "input_price_per_mtok": 0.5,
+    "output_price_per_mtok": 1.5,
+    "currency": "USD",
+    "vision_support": false,
+    "open_weight": false,
+    "speed_tier": "medium",
+    "model_type": [
+      "Chat",
+      "Reasoning"
+    ],
+    "capabilities": {
+      "reasoning": {
+        "tier": "very-high"
+      },
+      "coding": {
+        "tier": "medium"
+      },
+      "knowledge": {
+        "tier": "high"
+      },
+      "multilingual": {}
+    },
+    "best_for": [
+      "reasoning"
+    ],
+    "avoid_for": [
+      "low_cost"
+    ],
+    "release_date": "2025",
+    "source_url": "https://cloud.tencent.com/document/product/1729",
+    "verified": true,
+    "verified_date": "2026-08-06",
+    "free": false
+  },
+    {
+    "id": "hunyuan-standard",
+    "family_id": "tencent-hunyuan-chat",
+    "provider_id": "tencent-hunyuan",
+    "name": "Hunyuan Standard",
+    "name_cn": "混元 Standard",
+    "model_id": "hunyuan-standard",
+    "one_liner_cn": "标准性价比档，MoE 长文处理，平衡效果与价格。",
+    "context_window": 30000,
+    "max_output_tokens": 2000,
+    "input_price_per_mtok": 0.08,
+    "output_price_per_mtok": 0.2,
+    "currency": "USD",
+    "vision_support": false,
+    "open_weight": false,
+    "speed_tier": "fast",
+    "model_type": [
+      "Chat"
+    ],
+    "capabilities": {
+      "reasoning": {
+        "tier": "medium"
+      },
+      "coding": {
+        "tier": "medium"
+      },
+      "knowledge": {
+        "tier": "high"
+      },
+      "multilingual": {}
+    },
+    "best_for": [
+      "low_cost"
+    ],
+    "avoid_for": [],
+    "release_date": "2024",
+    "source_url": "https://cloud.tencent.com/document/product/1729",
+    "verified": true,
+    "verified_date": "2026-08-06",
+    "free": false
+  },
+    {
+    "id": "hunyuan-vision-1-5-instruct",
+    "family_id": "tencent-hunyuan-vision",
+    "provider_id": "tencent-hunyuan",
+    "name": "Hunyuan Vision 1.5",
+    "name_cn": "混元视觉 1.5",
+    "model_id": "hunyuan-vision-1.5-instruct",
+    "one_liner_cn": "图生文快思考模型，图像识别、分析推理、OCR 与多轮对话。",
+    "context_window": 24000,
+    "max_output_tokens": 16000,
+    "input_price_per_mtok": 0.11,
+    "output_price_per_mtok": 0.28,
+    "currency": "USD",
+    "vision_support": true,
+    "open_weight": false,
+    "speed_tier": "fast",
+    "model_type": [
+      "Chat",
+      "Vision"
+    ],
+    "capabilities": {
+      "reasoning": {
+        "tier": "medium"
+      },
+      "vision": {
+        "tier": "high"
+      },
+      "multilingual": {
+        "tier": "high"
+      }
+    },
+    "best_for": [
+      "vision"
+    ],
+    "avoid_for": [],
+    "release_date": "2025",
+    "source_url": "https://cloud.tencent.com/document/product/302/104753",
+    "verified": true,
+    "verified_date": "2026-08-06",
+    "free": false
+  },
+    {
+    "id": "hunyuan-image-3",
+    "family_id": "tencent-hunyuan-image",
+    "provider_id": "tencent-hunyuan",
+    "name": "Hunyuan Image 3.0",
+    "name_cn": "混元图像 3.0",
+    "model_id": "hunyuan-image",
+    "one_liner_cn": "文生图大模型，中文语义理解强，支持多轮交互与文本渲染。",
+    "context_window": 0,
+    "max_output_tokens": 0,
+    "input_price_per_mtok": 0,
+    "output_price_per_mtok": 0,
+    "currency": "USD",
+    "vision_support": true,
+    "open_weight": false,
+    "speed_tier": "fast",
+    "model_type": [
+      "Image"
+    ],
+    "capabilities": {
+      "image_gen": {
+        "tier": "high",
+        "basis": "中文语义与文本渲染强。"
+      }
+    },
+    "best_for": [
+      "image-gen"
+    ],
+    "avoid_for": [],
+    "release_date": "2026",
+    "source_url": "https://hunyuan.tencent.com/",
+    "verified": true,
+    "verified_date": "2026-08-06",
+    "free": false,
+    "price_note": "按张计费，约 ¥0.1/张（以腾讯云官方为准）"
+  },
+    {
+    "id": "kuaishou-kolors",
+    "family_id": "kuaishou-kolors",
+    "provider_id": "kuaishou",
+    "name": "Kolors",
+    "name_cn": "Kolors 文生图",
+    "model_id": "Kwai-Kolors/Kolors",
+    "one_liner_cn": "快手开源中英双语文生图，中文 prompt 与书法渲染强。",
+    "context_window": 0,
+    "max_output_tokens": 0,
+    "input_price_per_mtok": 0,
+    "output_price_per_mtok": 0,
+    "currency": "USD",
+    "vision_support": true,
+    "open_weight": true,
+    "speed_tier": "fast",
+    "model_type": [
+      "Image"
+    ],
+    "capabilities": {
+      "image_gen": {
+        "tier": "high",
+        "basis": "中文语义与书法渲染最佳之一。"
+      }
+    },
+    "best_for": [
+      "image-gen",
+      "chinese-prompt"
+    ],
+    "avoid_for": [],
+    "release_date": "2024",
+    "source_url": "https://github.com/Kwai-Kolors/Kolors",
+    "verified": true,
+    "verified_date": "2026-08-06",
+    "free": true,
+    "free_note": "开放权重(Apache 2.0)；经硅基流动(SiliconFlow)免费 API 调用(Kwai-Kolors/Kolors)，中文 prompt 强。"
   }
 ]

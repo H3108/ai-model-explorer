@@ -6,5 +6,13 @@
   {"term":"Reasoning","name_cn":"推理增强","description_cn":"用于数学、规划和复杂问题，模型会进行多步思考（Chain-of-Thought）。","example":"DeepSeek-R1 — 开源推理模型，数学/代码强。","verified_example":"deepseek-reasoner"},
   {"term":"Vision","name_cn":"视觉能力","description_cn":"表示图像理解或视觉输入能力；用于图片问答、文档识别等。","example":"Gemini 3.1 Pro / Qwen-VL — 多模态视觉理解。","verified_example":"gemini-3.1-pro"},
   {"term":"Thinking","name_cn":"思考模式","description_cn":"开启显式推理过程（类似 Reasoning），常用于深度推理型号。","example":"ERNIE 5.0 Thinking / Kimi K2 Thinking。","verified_example":"ernie-5.0-thinking-preview"},
-  {"term":"Lite / Flash-Lite","name_cn":"极简低成本版本","description_cn":"在最便宜档位提供高吞吐，适合大规模简单分类与提取。","example":"Gemini 3.1 Flash-Lite — 全场最便宜之一。","verified_example":"gemini-3.1-flash-lite"}
+  {"term":"Lite / Flash-Lite","name_cn":"极简低成本版本","description_cn":"在最便宜档位提供高吞吐，适合大规模简单分类与提取。","example":"Gemini 3.1 Flash-Lite — 全场最便宜之一。","verified_example":"gemini-3.1-flash-lite"},
+  {"term":"Max / Ultra / Large","name_cn":"超大旗舰档","description_cn":"产品线中的最强定位：能力最高、最贵、通常最慢，适合对质量极度敏感的任务。","example":"Claude Opus 4 — 旗舰深度推理与 Agent。","verified_example":"claude-opus-4"},
+  {"term":"Turbo","name_cn":"提速版本","description_cn":"在接近标准能力下显著降低延迟、提升吞吐的版本，性价比高于旗舰。","example":"GPT-4 Turbo — 快且强，适合生产。","verified_example":"gpt-4-turbo"},
+  {"term":"Preview / Beta","name_cn":"预览/测试版本","description_cn":"尚未定稿的预览模型，能力可能变动、价格常有优惠，适合提前试用。","example":"Gemini 2.5 Pro Preview — 新版抢先体验。","verified_example":"gemini-2.5-pro-preview"},
+  {"term":"MoE","name_cn":"混合专家架构","description_cn":"Mixture of Experts，推理时只激活部分参数，兼顾大模型能力与低算力成本。","example":"DeepSeek-V3 — 671B MoE，激活仅 37B。","verified_example":"deepseek-v3"},
+  {"term":"VL / Omni","name_cn":"视觉语言/全模态","description_cn":"VL 指视觉-语言多模态；Omni 指文字/图像/语音等统一模态。","example":"Qwen2.5-VL-72B — 图像理解多模态。","verified_example":"qwen2.5-vl-72b"},
+  {"term":"7B / 70B / 671B","name_cn":"参数规模","description_cn":"型号名里的数字常代表参数量级，粗略对应能力档：越大通常越强但更慢更贵。","example":"Llama 3.1 70B — 中大型通用模型。","verified_example":"llama-3.1-70b"},
+  {"term":"Embedding / Rerank","name_cn":"向量化/重排序","description_cn":"Embedding 把文本转为向量用于检索；Rerank 对检索结果再排序，均非对话模型。","example":"text-embedding-3-large — 向量检索。","verified_example":"text-embedding-3-large"},
+  {"term":"Coder / Code","name_cn":"编码专用线","description_cn":"针对代码生成与补全优化的型号，通常编程基准显著强于同档通用模型。","example":"Qwen2.5-Coder-32B — 开源编码强模型。","verified_example":"qwen2.5-coder-32b"}
 ]

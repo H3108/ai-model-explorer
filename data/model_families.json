@@ -49,5 +49,9 @@
     "name": "Mixtral",
     "name_cn": "Mixtral 系列",
     "description_cn": "Mistral 的 MoE 开放权重模型。"
-  }
+  },
+  {"id":"tencent-hunyuan-chat","provider_id":"tencent-hunyuan","name":"Hunyuan Chat","name_cn":"混元对话系列","description_cn":"覆盖快思考 TurboS、深度推理 T1 与标准 Standard。"},
+  {"id":"tencent-hunyuan-vision","provider_id":"tencent-hunyuan","name":"Hunyuan Vision","name_cn":"混元视觉系列","description_cn":"图生文多模态理解模型。"},
+  {"id":"tencent-hunyuan-image","provider_id":"tencent-hunyuan","name":"Hunyuan Image","name_cn":"混元图像系列","description_cn":"文生图大模型，中文语义强。"},
+  {"id":"kuaishou-kolors","provider_id":"kuaishou","name":"Kolors","name_cn":"Kolors 图像系列","description_cn":"快手开源中英双语文生图模型。"}
 ]
