@@ -104,6 +104,13 @@ function priceLabel(v) {
   if (v.input_price_per_mtok == null) return '未公开'
   return `${cur(v.currency)}${v.input_price_per_mtok} / ${cur(v.currency)}${v.output_price_per_mtok}`
 }
+// 对比表价格列：免费/带说明的型号后加一个可悬停或点击的信息点，展开 free_note
+function priceCell(v) {
+  const label = priceLabel(v)
+  if (!v.free_note) return esc(label)
+  const dot = `<i class="free-info" tabindex="0" role="button" aria-label="获取说明">i<span class="free-tip">${esc(v.free_note)}</span></i>`
+  return `<span class="price-cell">${esc(label)}${dot}</span>`
+}
 function priceValue(v) {
   if (v.media_pricing && v.media_pricing.price != null) return v.media_pricing.price * 40
   if (v.input_price_per_mtok == null) return Number.MAX_SAFE_INTEGER
@@ -370,7 +377,7 @@ function familyTableHTML(f) {
           `<b>${esc(v.name_cn || v.name)}</b><small>${esc(v.model_id || v.id)}</small>`,
           modBadge(v),
           esc([v.max_resolution, v.max_duration_sec ? v.max_duration_sec + 's' : null].filter(Boolean).join(' · ') || '—'),
-          priceLabel(v),
+          priceCell(v),
           esc(SPEED_CN[v.speed_tier] || v.speed_tier || '—'),
           `<span class="cell-desc">${esc(v.one_liner_cn || '')}</span>`,
         ]
@@ -378,7 +385,7 @@ function familyTableHTML(f) {
           `<b>${esc(v.name_cn || v.name)}</b><small>${esc(v.model_id || v.id)}</small>`,
           modBadge(v),
           ctxShort(v.context_window),
-          priceLabel(v),
+          priceCell(v),
           esc(SPEED_CN[v.speed_tier] || v.speed_tier || '—'),
           tierPill(v, 'reasoning'),
           tierPill(v, 'coding'),
@@ -696,11 +703,10 @@ function specCards(v) {
       statCard('最高分辨率', esc(v.max_resolution || '—')),
       statCard('最长时长', v.max_duration_sec ? v.max_duration_sec + ' 秒' : '—'),
       statCard('原生音频', v.has_audio == null ? '—' : v.has_audio ? '支持' : '不支持'),
-      statCard('单价', v.free ? '免费' : (m.price != null ? priceLabel(v) : '未公开'), v.free ? (v.free_note || '') : (m.note || '')),
+      statCard('单价', v.free ? '免费' : (m.price != null ? priceLabel(v) : '未公开'), v.free ? '' : (m.note || '')),
       statCard('速度档', esc(SPEED_CN[v.speed_tier] || v.speed_tier || '—')),
       statCard('开放权重', v.open_weight ? '是' : '否'),
       statCard('发布', esc(v.release_date || '—')),
-      v.free_note ? statCard('获取方式', esc(v.free_note)) : '',
     ].join('')
   }
   return [
@@ -712,7 +718,6 @@ function specCards(v) {
     statCard('视觉输入', v.vision_support ? '支持' : '不支持'),
     statCard('参数规模', esc(v.params || '未公开')),
     statCard('开放权重', v.open_weight ? '是' : '否'),
-    v.free ? statCard('免费说明', esc(v.free_note || '免费可用')) : (v.free_note ? statCard('获取方式', esc(v.free_note)) : ''),
   ].join('')
 }
 function namingBlock(v) {
@@ -885,6 +890,13 @@ function bindGlobalEvents() {
     }
   })
   document.addEventListener('click', (e) => {
+    // 对比表「免费信息点」：点击展开/收起说明，且不触发整行跳转
+    const freeInfo = e.target.closest('.free-info')
+    if (freeInfo) {
+      e.preventDefault()
+      freeInfo.classList.toggle('active')
+      return
+    }
     // 返回
     const back = e.target.closest('[data-back]')
     if (back) {

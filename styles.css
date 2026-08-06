@@ -449,6 +449,33 @@ select { padding: 8px 12px; border-radius: var(--r-sm); }
   padding: 2px 8px; border-radius: 999px; cursor: default;
 }
 .free-badge.sm { font-size: 10px; padding: 1px 6px; }
+/* 对比表价格列：免费/带说明型号后的「信息点」+ 悬停/点击浮层 */
+.price-cell { position: relative; display: inline-flex; align-items: center; gap: 5px; }
+.free-info {
+  position: relative;
+  width: 15px; height: 15px; flex: none;
+  border-radius: 50%;
+  background: var(--green-600, var(--green)); color: #fff;
+  font-style: normal; font-size: 10px; font-weight: 700; line-height: 15px; text-align: center;
+  cursor: pointer; user-select: none; outline: none;
+}
+.free-info:hover, .free-info:focus, .free-info.active { box-shadow: 0 0 0 3px #baf17a55; }
+.free-tip {
+  display: none;
+  position: absolute; left: calc(100% + 8px); top: 50%; transform: translateY(-50%);
+  width: 230px; max-width: 70vw;
+  background: var(--deep); color: #fff;
+  font-size: 12px; font-weight: 400; line-height: 1.55; text-align: left;
+  padding: 8px 10px; border-radius: 8px; z-index: 60;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, .22);
+}
+.free-tip::after {
+  content: ''; position: absolute; right: 100%; top: 50%; transform: translateY(-50%);
+  border: 6px solid transparent; border-right-color: var(--deep);
+}
+.free-info:hover .free-tip,
+.free-info:focus .free-tip,
+.free-info.active .free-tip { display: block; }
 /* 厂商类型徽章：免费 API / 托管网关 */
 .cat-badge {
   display: inline-flex; align-items: center;
