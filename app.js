@@ -276,6 +276,7 @@ function providerCard(p) {
 function filteredProviders() {
   const q = state.providerSearch.trim().toLowerCase()
   return state.providers.filter((p) => {
+    if (p.category === 'gateway') return false
     const f = state.providerFilter
     if (f === 'US' && p.country !== 'US') return false
     if (f === 'CN' && p.country !== 'CN') return false
@@ -303,7 +304,7 @@ function viewProviders() {
         ${seg('providerModality', state.providerModality, 'providerModality', [['all', '全部模态'], ['text', '文本'], ['image', '图像'], ['video', '视频']])}
       </div>
     </div>
-    <p class="notice">数据于 2026-08-05 联网核实，价格与能力以厂商官方为准。</p>
+    <p class="notice">数据于 2026-08-05 联网核实，价格与能力以厂商官方为准。托管网关（Groq / OpenRouter / NVIDIA NIM）已移至导航「托管网关」专页。</p>
     <div class="provider-grid" id="provider-grid">${providerGridHTML()}</div>
   </div>`
 }
@@ -509,12 +510,6 @@ function viewBrowse() {
     `<button class="${state.browsePrice === k ? 'selected' : ''}" data-value="${k}">${label}</button>`
   return `<div class="wrap page">
     ${pageHead({ eyebrow: '02 / 能力筛选', title: '按<em>能力</em>找模型', desc: '左边勾选你需要的能力与硬性条件，右边实时匹配并排序，找到最合适的型号。' })}
-    <div class="gateway-note">
-      <span class="gn-title">免费 API 网关</span>
-      <p>这些厂商把多家模型聚合成<strong>一个免费 API key</strong>调用（免信用卡）：</p>
-      <div class="gn-chips">${state.providers.filter((p) => p.category === 'gateway').map((p) => `<a class="gn-chip" href="#provider/${p.id}">${logoHTML(p, 'xs')}<span>${esc(p.name_cn || p.name)}</span><em class="gn-host">托管</em></a>`).join('')}</div>
-      <small>在上方「价格」选 <b>免费</b> 即可看到它们；或前往 <a class="gn-link" href="#gateways">托管网关专页 →</a></small>
-    </div>
     <div class="browse-layout">
       <aside class="filter-panel">
         <div class="fp-block"><h4>模态</h4><div class="segmented" data-seg="browseModality">${modBtn('all', '全部')}${modBtn('text', '文本')}${modBtn('image', '图像')}${modBtn('video', '视频')}</div></div>
@@ -570,7 +565,7 @@ function recommendationHTML() {
 }
 function viewMatcher() {
   const taskBtn = (t) =>
-    `<button class="task-option ${state.selectedTask === t.id ? 'selected' : ''}" data-task="${t.id}"><span>${t.icon || '◎'}</span><b>${esc(t.name_cn)}</b><small>${esc(t.description_cn)}</small></button>`
+    `<button class="task-option ${state.selectedTask === t.id ? 'selected' : ''}" data-task="${t.id}"><span class="to-ico">${t.icon || '◎'}</span><span class="to-text"><b>${esc(t.name_cn)}</b><small>${esc(t.description_cn)}</small></span></button>`
   const segBtn = (group, cur, val, label) =>
     `<button class="${cur === val ? 'selected' : ''}" data-value="${val}">${label}</button>`
   return `<div class="matcher-page">
@@ -750,21 +745,8 @@ function viewModel(id) {
 // ---------- 视图：托管网关 ----------
 function viewGateways() {
   const gw = state.providers.filter((p) => p.category === 'gateway')
-  const gwCard = (p) => {
-    const vs = variantsOfProvider(p.id)
-    return `<div class="gw-card">
-      <div class="gw-head">${logoHTML(p, 'md')}<div><h3>${esc(p.name_cn || p.name)}</h3>${catBadge(p)}</div></div>
-      <p class="gw-desc">${esc(p.description_cn || '')}</p>
-      <div class="gw-models">${vs
-        .map(
-          (v) =>
-            `<a class="gw-model" href="#model/${encodeURIComponent(v.id)}">${modBadge(v)}<b>${esc(v.name_cn || v.name)}</b>${v.free ? ' <span class="free-badge sm">免费</span>' : ''}<small>${esc(v.model_id || '')}</small></a>`,
-        )
-        .join('')}</div>
-    </div>`
-  }
   return `<div class="wrap page">
-    ${pageHead({ eyebrow: '05 / 托管网关', title: '第三方<em>托管网关</em>', desc: '把多家厂商的模型聚合到一个 API key 下调用——统一接口、免信用卡、即开即用。' })}
+    ${pageHead({ eyebrow: '05 / 托管网关', title: '第三方<em>托管网关</em>', desc: '把多家厂商的模型聚合到一个 API key 下调用——统一接口、免信用卡、即开即用。点卡片进入对应网关的系列与型号。' })}
     <div class="gw-intro">
       <div class="gw-pros"><h4>适合你，如果…</h4><ul>
         <li>想用多家模型，但不想逐家注册、管理密钥</li>
@@ -777,7 +759,8 @@ function viewGateways() {
         <li>模型版本与官方同步可能有延迟</li>
       </ul></div>
     </div>
-    <div class="gw-grid">${gw.map(gwCard).join('')}</div>
+    <p class="notice">下方卡片与「厂商地图」完全一致：点击任意卡片进入该网关的系列与型号列表。</p>
+    <div class="provider-grid">${gw.map(providerCard).join('')}</div>
     <p class="notice">本页仅收录「真·免费 API」的托管网关（免信用卡、可程序化调用）。各厂商自带免费模型见对应厂商页与浏览页「价格 = 免费」。</p>
   </div>`
 }
