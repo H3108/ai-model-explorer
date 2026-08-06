@@ -53,7 +53,19 @@
     "verified": true,
     "verified_date": "2026-08-05",
     "free": true,
-    "free_note": "智谱开放平台永久免费 API（每模型 1 并发请求），200K 上下文。"
+    "free_note": "智谱开放平台永久免费 API（每模型 1 并发请求），200K 上下文。",
+    "aliases": [
+      "glm-4.7-flash",
+      "智谱 GLM",
+      "智谱",
+      "智谱清言"
+    ],
+    "cost_tier": "free",
+    "role": "coding",
+    "access_types": [
+      "official_api",
+      "free_api"
+    ]
   },
   {
     "id": "glm-4-flash-250414",
@@ -109,7 +121,19 @@
     "verified": true,
     "verified_date": "2026-08-05",
     "free": true,
-    "free_note": "智谱开放平台永久免费 API，128K 上下文。"
+    "free_note": "智谱开放平台永久免费 API，128K 上下文。",
+    "aliases": [
+      "glm-4-flash-250414",
+      "智谱 GLM",
+      "智谱",
+      "智谱清言"
+    ],
+    "cost_tier": "free",
+    "role": "coding",
+    "access_types": [
+      "official_api",
+      "free_api"
+    ]
   },
   {
     "id": "glm-4-6v-flash",
@@ -165,7 +189,19 @@
     "verified": true,
     "verified_date": "2026-08-05",
     "free": true,
-    "free_note": "智谱开放平台永久免费视觉模型。"
+    "free_note": "智谱开放平台永久免费视觉模型。",
+    "aliases": [
+      "glm-4.6v-flash",
+      "智谱 GLM",
+      "智谱",
+      "智谱清言"
+    ],
+    "cost_tier": "free",
+    "role": "low_cost",
+    "access_types": [
+      "official_api",
+      "free_api"
+    ]
   },
   {
     "id": "glm-5-1",
@@ -221,7 +257,18 @@
     "release_date": "2026",
     "source_url": "https://docs.z.ai/guides/overview/pricing",
     "verified": true,
-    "verified_date": "2026-08-05"
+    "verified_date": "2026-08-05",
+    "aliases": [
+      "glm-5.1",
+      "智谱 GLM",
+      "智谱",
+      "智谱清言"
+    ],
+    "cost_tier": "production",
+    "role": "reasoning",
+    "access_types": [
+      "official_api"
+    ]
   },
   {
     "id": "glm-4-7",
@@ -276,7 +323,18 @@
     "release_date": "2026",
     "source_url": "https://docs.z.ai/guides/overview/pricing",
     "verified": true,
-    "verified_date": "2026-08-05"
+    "verified_date": "2026-08-05",
+    "aliases": [
+      "glm-4.7",
+      "智谱 GLM",
+      "智谱",
+      "智谱清言"
+    ],
+    "cost_tier": "cost_effective",
+    "role": "reasoning",
+    "access_types": [
+      "official_api"
+    ]
   },
   {
     "id": "glm-4-6",
@@ -330,7 +388,18 @@
     "release_date": "2026",
     "source_url": "https://docs.z.ai/guides/overview/pricing",
     "verified": true,
-    "verified_date": "2026-08-05"
+    "verified_date": "2026-08-05",
+    "aliases": [
+      "glm-4.6",
+      "智谱 GLM",
+      "智谱",
+      "智谱清言"
+    ],
+    "cost_tier": "cost_effective",
+    "role": "coding",
+    "access_types": [
+      "official_api"
+    ]
   },
   {
     "id": "glm-4-5",
@@ -387,7 +456,20 @@
     "release_date": "2026",
     "source_url": "https://docs.z.ai/guides/overview/pricing",
     "verified": true,
-    "verified_date": "2026-08-05"
+    "verified_date": "2026-08-05",
+    "aliases": [
+      "glm-4.5",
+      "智谱 GLM",
+      "智谱",
+      "智谱清言"
+    ],
+    "cost_tier": "cost_effective",
+    "role": "reasoning",
+    "access_types": [
+      "official_api",
+      "open_source",
+      "self_host"
+    ]
   },
   {
     "id": "glm-4-5-air",
@@ -439,7 +521,18 @@
     "release_date": "2026",
     "source_url": "https://docs.z.ai/guides/overview/pricing",
     "verified": true,
-    "verified_date": "2026-08-05"
+    "verified_date": "2026-08-05",
+    "aliases": [
+      "glm-4.5-air",
+      "智谱 GLM",
+      "智谱",
+      "智谱清言"
+    ],
+    "cost_tier": "cost_effective",
+    "role": "coding",
+    "access_types": [
+      "official_api"
+    ]
   },
   {
     "id": "cogview-3-flash",
@@ -500,7 +593,19 @@
     "verified": true,
     "verified_date": "2026-08-05",
     "free": true,
-    "free_note": "智谱开放平台免费图像生成模型，ZhipuAI SDK / OpenAI 兼容接口零成本调用。"
+    "free_note": "智谱开放平台免费图像生成模型，ZhipuAI SDK / OpenAI 兼容接口零成本调用。",
+    "aliases": [
+      "cogview-3-flash",
+      "智谱 GLM",
+      "智谱",
+      "智谱清言"
+    ],
+    "cost_tier": "free",
+    "role": "multimodal",
+    "access_types": [
+      "official_api",
+      "free_api"
+    ]
   },
   {
     "id": "cogview-4",
@@ -560,7 +665,18 @@
     "release_date": "2026",
     "source_url": "https://docs.bigmodel.cn/cn/guide/models/cogview-4",
     "verified": true,
-    "verified_date": "2026-08-05"
+    "verified_date": "2026-08-05",
+    "aliases": [
+      "cogview-4",
+      "智谱 GLM",
+      "智谱",
+      "智谱清言"
+    ],
+    "cost_tier": "production",
+    "role": "multimodal",
+    "access_types": [
+      "official_api"
+    ]
   },
   {
     "id": "cogvideox-flash",
@@ -623,7 +739,19 @@
     "verified": true,
     "verified_date": "2026-08-05",
     "free": true,
-    "free_note": "智谱开放平台免费视频生成模型，API key 零成本调用。"
+    "free_note": "智谱开放平台免费视频生成模型，API key 零成本调用。",
+    "aliases": [
+      "cogvideox-flash",
+      "智谱 GLM",
+      "智谱",
+      "智谱清言"
+    ],
+    "cost_tier": "free",
+    "role": "multimodal",
+    "access_types": [
+      "official_api",
+      "free_api"
+    ]
   },
   {
     "id": "agnes-2-5-flash",
@@ -680,7 +808,17 @@
     "verified": true,
     "verified_date": "2026-08-05",
     "free": true,
-    "free_note": "Agnes AI 永久免费 API（OpenAI 兼容，1M 上下文，文本/图像/视频全模态）。"
+    "free_note": "Agnes AI 永久免费 API（OpenAI 兼容，1M 上下文，文本/图像/视频全模态）。",
+    "aliases": [
+      "agnes-2.5-flash",
+      "Agnes AI"
+    ],
+    "cost_tier": "free",
+    "role": "reasoning",
+    "access_types": [
+      "official_api",
+      "free_api"
+    ]
   },
   {
     "id": "agnes-2-0-flash",
@@ -735,7 +873,17 @@
     "verified": true,
     "verified_date": "2026-08-05",
     "free": true,
-    "free_note": "Agnes AI 免费 API（2.0 兼容版）。"
+    "free_note": "Agnes AI 免费 API（2.0 兼容版）。",
+    "aliases": [
+      "agnes-2.0-flash",
+      "Agnes AI"
+    ],
+    "cost_tier": "free",
+    "role": "coding",
+    "access_types": [
+      "official_api",
+      "free_api"
+    ]
   },
   {
     "id": "agnes-image-2-1-flash",
@@ -796,7 +944,17 @@
     "verified": true,
     "verified_date": "2026-08-05",
     "free": true,
-    "free_note": "Agnes AI 免费图像生成 API。"
+    "free_note": "Agnes AI 免费图像生成 API。",
+    "aliases": [
+      "agnes-image-2.1-flash",
+      "Agnes AI"
+    ],
+    "cost_tier": "free",
+    "role": "multimodal",
+    "access_types": [
+      "official_api",
+      "free_api"
+    ]
   },
   {
     "id": "agnes-video-2-0",
@@ -859,7 +1017,17 @@
     "verified": true,
     "verified_date": "2026-08-05",
     "free": true,
-    "free_note": "Agnes AI 免费视频生成 API。"
+    "free_note": "Agnes AI 免费视频生成 API。",
+    "aliases": [
+      "agnes-video-2.0",
+      "Agnes AI"
+    ],
+    "cost_tier": "free",
+    "role": "multimodal",
+    "access_types": [
+      "official_api",
+      "free_api"
+    ]
   },
   {
     "id": "groq-llama-3-3-70b",
@@ -914,7 +1082,20 @@
     "verified": true,
     "verified_date": "2026-08-05",
     "free": true,
-    "free_note": "Groq 免费开发者层（约 30 RPM），LPU 极速推理。"
+    "free_note": "Groq 免费开发者层（约 30 RPM），LPU 极速推理。",
+    "aliases": [
+      "Llama 3.3 70B · Groq",
+      "llama-3.3-70b-versatile",
+      "Groq"
+    ],
+    "cost_tier": "free",
+    "role": "reasoning",
+    "access_types": [
+      "official_api",
+      "open_source",
+      "self_host",
+      "free_api"
+    ]
   },
   {
     "id": "groq-qwen3-32b",
@@ -969,7 +1150,20 @@
     "verified": true,
     "verified_date": "2026-08-05",
     "free": true,
-    "free_note": "Groq 免费开发者层托管 Qwen3-32B。"
+    "free_note": "Groq 免费开发者层托管 Qwen3-32B。",
+    "aliases": [
+      "Qwen3-32B · Groq",
+      "qwen3-32b",
+      "Groq"
+    ],
+    "cost_tier": "free",
+    "role": "reasoning",
+    "access_types": [
+      "official_api",
+      "open_source",
+      "self_host",
+      "free_api"
+    ]
   },
   {
     "id": "groq-llama-4-scout",
@@ -1023,7 +1217,20 @@
     "verified": true,
     "verified_date": "2026-08-05",
     "free": true,
-    "free_note": "Groq 免费开发者层托管 Llama 4 Scout。"
+    "free_note": "Groq 免费开发者层托管 Llama 4 Scout。",
+    "aliases": [
+      "Llama 4 Scout · Groq",
+      "meta-llama/llama-4-scout-17b-16e-instruct",
+      "Groq"
+    ],
+    "cost_tier": "free",
+    "role": "low_cost",
+    "access_types": [
+      "official_api",
+      "open_source",
+      "self_host",
+      "free_api"
+    ]
   },
   {
     "id": "openrouter-llama-3-3-70b-free",
@@ -1077,7 +1284,20 @@
     "verified": true,
     "verified_date": "2026-08-05",
     "free": true,
-    "free_note": "OpenRouter 免费路由模型（50 请求/日）。"
+    "free_note": "OpenRouter 免费路由模型（50 请求/日）。",
+    "aliases": [
+      "Llama 3.3 70B · OpenRouter",
+      "meta-llama/llama-3.3-70b-instruct:free",
+      "OpenRouter"
+    ],
+    "cost_tier": "free",
+    "role": "coding",
+    "access_types": [
+      "official_api",
+      "open_source",
+      "self_host",
+      "free_api"
+    ]
   },
   {
     "id": "openrouter-deepseek-r1-free",
@@ -1131,7 +1351,20 @@
     "verified": true,
     "verified_date": "2026-08-05",
     "free": true,
-    "free_note": "OpenRouter 免费路由 DeepSeek R1。"
+    "free_note": "OpenRouter 免费路由 DeepSeek R1。",
+    "aliases": [
+      "DeepSeek R1 · OpenRouter",
+      "deepseek/deepseek-r1:free",
+      "OpenRouter"
+    ],
+    "cost_tier": "free",
+    "role": "reasoning",
+    "access_types": [
+      "official_api",
+      "open_source",
+      "self_host",
+      "free_api"
+    ]
   },
   {
     "id": "nvidia-nim-nemotron-70b",
@@ -1185,7 +1418,20 @@
     "verified": true,
     "verified_date": "2026-08-05",
     "free": true,
-    "free_note": "NVIDIA NIM 免费推理微服务（约 40 RPM）。"
+    "free_note": "NVIDIA NIM 免费推理微服务（约 40 RPM）。",
+    "aliases": [
+      "Nemotron-70B · NVIDIA NIM",
+      "nvidia/llama-3.1-nemotron-70b-instruct",
+      "NVIDIA NIM"
+    ],
+    "cost_tier": "free",
+    "role": "coding",
+    "access_types": [
+      "official_api",
+      "open_source",
+      "self_host",
+      "free_api"
+    ]
   },
   {
     "id": "nvidia-nim-llama-3-3-70b",
@@ -1239,7 +1485,20 @@
     "verified": true,
     "verified_date": "2026-08-05",
     "free": true,
-    "free_note": "NVIDIA NIM 免费推理微服务托管 Llama 3.3 70B。"
+    "free_note": "NVIDIA NIM 免费推理微服务托管 Llama 3.3 70B。",
+    "aliases": [
+      "Llama 3.3 70B · NVIDIA NIM",
+      "nvidia/llama-3.3-70b-instruct",
+      "NVIDIA NIM"
+    ],
+    "cost_tier": "free",
+    "role": "coding",
+    "access_types": [
+      "official_api",
+      "open_source",
+      "self_host",
+      "free_api"
+    ]
   },
   {
     "id": "mistral-small-free",
@@ -1293,7 +1552,17 @@
     "verified": true,
     "verified_date": "2026-08-05",
     "free": true,
-    "free_note": "Mistral 免费 Experiment 层（Small 模型，需同意数据训练）。"
+    "free_note": "Mistral 免费 Experiment 层（Small 模型，需同意数据训练）。",
+    "aliases": [
+      "mistral-small-latest",
+      "Mistral AI"
+    ],
+    "cost_tier": "free",
+    "role": "reasoning",
+    "access_types": [
+      "official_api",
+      "free_api"
+    ]
   },
   {
     "id": "groq-llama-3-1-8b-instant",
@@ -1347,7 +1616,20 @@
     "verified_date": "2026-08-06",
     "free": true,
     "free_note": "Groq 免费开发者层托管 Llama 3.1 8B（14,400 RPD）。",
-    "family_id": "meta-llama"
+    "family_id": "meta-llama",
+    "aliases": [
+      "Llama 3.1 8B · Groq",
+      "llama-3.1-8b-instant",
+      "Groq"
+    ],
+    "cost_tier": "free",
+    "role": "coding",
+    "access_types": [
+      "official_api",
+      "open_source",
+      "self_host",
+      "free_api"
+    ]
   },
   {
     "id": "groq-gemma-2-9b",
@@ -1399,7 +1681,20 @@
     "verified_date": "2026-08-06",
     "free": true,
     "free_note": "Groq 免费开发者层托管 Gemma 2 9B。",
-    "family_id": "google-gemma"
+    "family_id": "google-gemma",
+    "aliases": [
+      "Gemma 2 9B · Groq",
+      "gemma2-9b-it",
+      "Groq"
+    ],
+    "cost_tier": "free",
+    "role": "low_cost",
+    "access_types": [
+      "official_api",
+      "open_source",
+      "self_host",
+      "free_api"
+    ]
   },
   {
     "id": "groq-mixtral-8x7b",
@@ -1452,7 +1747,20 @@
     "verified_date": "2026-08-06",
     "free": true,
     "free_note": "Groq 免费开发者层托管 Mixtral 8x7B。",
-    "family_id": "mistral-mixtral"
+    "family_id": "mistral-mixtral",
+    "aliases": [
+      "Mixtral 8x7B · Groq",
+      "mixtral-8x7b-32768",
+      "Groq"
+    ],
+    "cost_tier": "free",
+    "role": "coding",
+    "access_types": [
+      "official_api",
+      "open_source",
+      "self_host",
+      "free_api"
+    ]
   },
   {
     "id": "groq-whisper-large-v3",
@@ -1503,7 +1811,20 @@
     "verified": true,
     "verified_date": "2026-08-06",
     "free": true,
-    "free_note": "Groq 免费开发者层 Whisper 语音转文字（20 RPM）。"
+    "free_note": "Groq 免费开发者层 Whisper 语音转文字（20 RPM）。",
+    "aliases": [
+      "Whisper Large v3 · Groq",
+      "whisper-large-v3",
+      "Groq"
+    ],
+    "cost_tier": "free",
+    "role": "low_cost",
+    "access_types": [
+      "official_api",
+      "open_source",
+      "self_host",
+      "free_api"
+    ]
   },
   {
     "id": "groq-deepseek-r1-distill-70b",
@@ -1556,7 +1877,20 @@
     "verified_date": "2026-08-06",
     "free": true,
     "free_note": "Groq 免费开发者层托管 DeepSeek R1 蒸馏版。",
-    "family_id": "deepseek-deepseek"
+    "family_id": "deepseek-deepseek",
+    "aliases": [
+      "DeepSeek-R1-Distill 70B · Groq",
+      "deepseek-r1-distill-llama-70b",
+      "Groq"
+    ],
+    "cost_tier": "free",
+    "role": "reasoning",
+    "access_types": [
+      "official_api",
+      "open_source",
+      "self_host",
+      "free_api"
+    ]
   },
   {
     "id": "groq-llama-4-maverick",
@@ -1610,7 +1944,20 @@
     "verified_date": "2026-08-06",
     "free": true,
     "free_note": "Groq 免费开发者层托管 Llama 4 Maverick。",
-    "family_id": "meta-llama"
+    "family_id": "meta-llama",
+    "aliases": [
+      "Llama 4 Maverick · Groq",
+      "meta-llama/llama-4-maverick-17b-128e-instruct",
+      "Groq"
+    ],
+    "cost_tier": "free",
+    "role": "low_cost",
+    "access_types": [
+      "official_api",
+      "open_source",
+      "self_host",
+      "free_api"
+    ]
   },
   {
     "id": "groq-kimi-k2",
@@ -1663,7 +2010,20 @@
     "verified_date": "2026-08-06",
     "free": true,
     "free_note": "Groq 免费开发者层托管 Kimi K2（262K 上下文）。",
-    "family_id": "moonshot-kimi"
+    "family_id": "moonshot-kimi",
+    "aliases": [
+      "Kimi K2 · Groq",
+      "kimi-k2-instruct",
+      "Groq"
+    ],
+    "cost_tier": "free",
+    "role": "coding",
+    "access_types": [
+      "official_api",
+      "open_source",
+      "self_host",
+      "free_api"
+    ]
   },
   {
     "id": "openrouter-llama-4-maverick-free",
@@ -1717,7 +2077,20 @@
     "verified_date": "2026-08-06",
     "free": true,
     "free_note": "OpenRouter 免费路由模型（约 20 RPM）。",
-    "family_id": "meta-llama"
+    "family_id": "meta-llama",
+    "aliases": [
+      "Llama 4 Maverick · OpenRouter",
+      "meta-llama/llama-4-maverick:free",
+      "OpenRouter"
+    ],
+    "cost_tier": "free",
+    "role": "low_cost",
+    "access_types": [
+      "official_api",
+      "open_source",
+      "self_host",
+      "free_api"
+    ]
   },
   {
     "id": "openrouter-llama-4-scout-free",
@@ -1770,7 +2143,20 @@
     "verified_date": "2026-08-06",
     "free": true,
     "free_note": "OpenRouter 免费路由模型（约 20 RPM）。",
-    "family_id": "meta-llama"
+    "family_id": "meta-llama",
+    "aliases": [
+      "Llama 4 Scout · OpenRouter",
+      "meta-llama/llama-4-scout:free",
+      "OpenRouter"
+    ],
+    "cost_tier": "free",
+    "role": "low_cost",
+    "access_types": [
+      "official_api",
+      "open_source",
+      "self_host",
+      "free_api"
+    ]
   },
   {
     "id": "openrouter-gemma-2-9b-free",
@@ -1822,7 +2208,20 @@
     "verified_date": "2026-08-06",
     "free": true,
     "free_note": "OpenRouter 免费路由模型（约 30 RPM）。",
-    "family_id": "google-gemma"
+    "family_id": "google-gemma",
+    "aliases": [
+      "Gemma 2 9B · OpenRouter",
+      "google/gemma-2-9b-it:free",
+      "OpenRouter"
+    ],
+    "cost_tier": "free",
+    "role": "low_cost",
+    "access_types": [
+      "official_api",
+      "open_source",
+      "self_host",
+      "free_api"
+    ]
   },
   {
     "id": "openrouter-mistral-7b-free",
@@ -1875,7 +2274,20 @@
     "verified_date": "2026-08-06",
     "free": true,
     "free_note": "OpenRouter 免费路由模型（约 60 RPM）。",
-    "family_id": "mistral-mixtral"
+    "family_id": "mistral-mixtral",
+    "aliases": [
+      "Mistral 7B · OpenRouter",
+      "mistralai/mistral-7b-instruct:free",
+      "OpenRouter"
+    ],
+    "cost_tier": "free",
+    "role": "coding",
+    "access_types": [
+      "official_api",
+      "open_source",
+      "self_host",
+      "free_api"
+    ]
   },
   {
     "id": "openrouter-qwen-2-5-72b-free",
@@ -1928,7 +2340,20 @@
     "verified_date": "2026-08-06",
     "free": true,
     "free_note": "OpenRouter 免费路由模型（约 20 RPM）。",
-    "family_id": "qwen-qwen"
+    "family_id": "qwen-qwen",
+    "aliases": [
+      "Qwen2.5 72B · OpenRouter",
+      "qwen/qwen-2.5-72b-instruct:free",
+      "OpenRouter"
+    ],
+    "cost_tier": "free",
+    "role": "coding",
+    "access_types": [
+      "official_api",
+      "open_source",
+      "self_host",
+      "free_api"
+    ]
   },
   {
     "id": "openrouter-llama-3-1-8b-free",
@@ -1980,7 +2405,20 @@
     "verified_date": "2026-08-06",
     "free": true,
     "free_note": "OpenRouter 免费路由模型（约 20 RPM）。",
-    "family_id": "meta-llama"
+    "family_id": "meta-llama",
+    "aliases": [
+      "Llama 3.1 8B · OpenRouter",
+      "meta-llama/llama-3.1-8b-instruct:free",
+      "OpenRouter"
+    ],
+    "cost_tier": "free",
+    "role": "low_cost",
+    "access_types": [
+      "official_api",
+      "open_source",
+      "self_host",
+      "free_api"
+    ]
   },
   {
     "id": "openrouter-phi-3-5-mini-free",
@@ -2032,7 +2470,20 @@
     "verified_date": "2026-08-06",
     "free": true,
     "free_note": "OpenRouter 免费路由模型（约 20 RPM）。",
-    "family_id": "microsoft-phi"
+    "family_id": "microsoft-phi",
+    "aliases": [
+      "Phi-3.5 Mini · OpenRouter",
+      "microsoft/phi-3.5-mini-128k-instruct:free",
+      "OpenRouter"
+    ],
+    "cost_tier": "free",
+    "role": "low_cost",
+    "access_types": [
+      "official_api",
+      "open_source",
+      "self_host",
+      "free_api"
+    ]
   },
   {
     "id": "openrouter-gemini-2-0-flash-free",
@@ -2086,7 +2537,18 @@
     "verified_date": "2026-08-06",
     "free": true,
     "free_note": "OpenRouter 免费路由模型（约 15 RPM）。",
-    "family_id": "google-gemini"
+    "family_id": "google-gemini",
+    "aliases": [
+      "Gemini 2.0 Flash · OpenRouter",
+      "google/gemini-2.0-flash-exp:free",
+      "OpenRouter"
+    ],
+    "cost_tier": "free",
+    "role": "low_cost",
+    "access_types": [
+      "official_api",
+      "free_api"
+    ]
   },
   {
     "id": "nvidia-nim-llama-4-maverick",
@@ -2140,7 +2602,20 @@
     "verified_date": "2026-08-06",
     "free": true,
     "free_note": "NVIDIA NIM 免费推理微服务托管 Llama 4 Maverick。",
-    "family_id": "meta-llama"
+    "family_id": "meta-llama",
+    "aliases": [
+      "Llama 4 Maverick · NVIDIA NIM",
+      "meta/llama-4-maverick",
+      "NVIDIA NIM"
+    ],
+    "cost_tier": "free",
+    "role": "low_cost",
+    "access_types": [
+      "official_api",
+      "open_source",
+      "self_host",
+      "free_api"
+    ]
   },
   {
     "id": "nvidia-nim-mistral-small-24b",
@@ -2193,7 +2668,20 @@
     "verified_date": "2026-08-06",
     "free": true,
     "free_note": "NVIDIA NIM 免费推理微服务托管 Mistral Small 24B。",
-    "family_id": "mistral-mistral"
+    "family_id": "mistral-mistral",
+    "aliases": [
+      "Mistral Small 24B · NVIDIA NIM",
+      "mistralai/mistral-small-24b-instruct-2501",
+      "NVIDIA NIM"
+    ],
+    "cost_tier": "free",
+    "role": "coding",
+    "access_types": [
+      "official_api",
+      "open_source",
+      "self_host",
+      "free_api"
+    ]
   },
   {
     "id": "nvidia-nim-deepseek-r1",
@@ -2246,7 +2734,20 @@
     "verified_date": "2026-08-06",
     "free": true,
     "free_note": "NVIDIA NIM 免费推理微服务托管 DeepSeek R1。",
-    "family_id": "deepseek-deepseek"
+    "family_id": "deepseek-deepseek",
+    "aliases": [
+      "DeepSeek R1 · NVIDIA NIM",
+      "deepseek/deepseek-r1",
+      "NVIDIA NIM"
+    ],
+    "cost_tier": "free",
+    "role": "reasoning",
+    "access_types": [
+      "official_api",
+      "open_source",
+      "self_host",
+      "free_api"
+    ]
   },
   {
     "id": "nvidia-nim-qwen3-coder-480b",
@@ -2299,7 +2800,20 @@
     "verified_date": "2026-08-06",
     "free": true,
     "free_note": "NVIDIA NIM 免费推理微服务托管 Qwen3 Coder 480B。",
-    "family_id": "qwen-qwen"
+    "family_id": "qwen-qwen",
+    "aliases": [
+      "Qwen3 Coder 480B · NVIDIA NIM",
+      "qwen/qwen3-coder-480b",
+      "NVIDIA NIM"
+    ],
+    "cost_tier": "free",
+    "role": "coding",
+    "access_types": [
+      "official_api",
+      "open_source",
+      "self_host",
+      "free_api"
+    ]
   },
   {
     "id": "nvidia-nim-nemotron-nano-9b",
@@ -2352,7 +2866,20 @@
     "verified_date": "2026-08-06",
     "free": true,
     "free_note": "NVIDIA NIM 免费推理微服务托管 Nemotron Nano 9B。",
-    "family_id": "nvidia-nim"
+    "family_id": "nvidia-nim",
+    "aliases": [
+      "Nemotron Nano 9B · NVIDIA NIM",
+      "nvidia/nemotron-nano-9b-v2",
+      "NVIDIA NIM"
+    ],
+    "cost_tier": "free",
+    "role": "reasoning",
+    "access_types": [
+      "official_api",
+      "open_source",
+      "self_host",
+      "free_api"
+    ]
   },
   {
     "id": "nvidia-nim-phi-4",
@@ -2404,7 +2931,20 @@
     "verified_date": "2026-08-06",
     "free": true,
     "free_note": "NVIDIA NIM 免费推理微服务托管 Phi-4。",
-    "family_id": "microsoft-phi"
+    "family_id": "microsoft-phi",
+    "aliases": [
+      "Phi-4 · NVIDIA NIM",
+      "microsoft/phi-4",
+      "NVIDIA NIM"
+    ],
+    "cost_tier": "free",
+    "role": "low_cost",
+    "access_types": [
+      "official_api",
+      "open_source",
+      "self_host",
+      "free_api"
+    ]
   },
   {
     "id": "nvidia-nim-gemma-2-9b",
@@ -2456,7 +2996,20 @@
     "verified_date": "2026-08-06",
     "free": true,
     "free_note": "NVIDIA NIM 免费推理微服务托管 Gemma 2 9B。",
-    "family_id": "google-gemma"
+    "family_id": "google-gemma",
+    "aliases": [
+      "Gemma 2 9B · NVIDIA NIM",
+      "google/gemma-2-9b-it",
+      "NVIDIA NIM"
+    ],
+    "cost_tier": "free",
+    "role": "low_cost",
+    "access_types": [
+      "official_api",
+      "open_source",
+      "self_host",
+      "free_api"
+    ]
   },
   {
     "id": "anyapi-auto",
@@ -2495,7 +3048,18 @@
     "verified": true,
     "verified_date": "2026-08-06",
     "free": true,
-    "free_note": "免费层 100K tok/天，auto 路由到 400+ 模型中最优的一个。"
+    "free_note": "免费层 100K tok/天，auto 路由到 400+ 模型中最优的一个。",
+    "aliases": [
+      "AnyAPI 自动路由",
+      "auto",
+      "AnyAPI"
+    ],
+    "cost_tier": "free",
+    "role": "low_cost",
+    "access_types": [
+      "official_api",
+      "free_api"
+    ]
   },
   {
     "id": "bazaarlink-auto-free",
@@ -2534,7 +3098,17 @@
     "verified": true,
     "verified_date": "2026-08-06",
     "free": true,
-    "free_note": "免费层 10 RPM / 130 req/天，auto:free 路由多模型。"
+    "free_note": "免费层 10 RPM / 130 req/天，auto:free 路由多模型。",
+    "aliases": [
+      "auto:free",
+      "BazaarLink"
+    ],
+    "cost_tier": "free",
+    "role": "low_cost",
+    "access_types": [
+      "official_api",
+      "free_api"
+    ]
   },
   {
     "id": "requesty-auto",
@@ -2573,7 +3147,18 @@
     "verified": true,
     "verified_date": "2026-08-06",
     "free": true,
-    "free_note": "免费试用 200 req/天，兼容 Claude Code 路由。"
+    "free_note": "免费试用 200 req/天，兼容 Claude Code 路由。",
+    "aliases": [
+      "Requesty 路由",
+      "auto",
+      "Requesty"
+    ],
+    "cost_tier": "free",
+    "role": "low_cost",
+    "access_types": [
+      "official_api",
+      "free_api"
+    ]
   },
   {
     "id": "opencode-zen-llama33",
@@ -2619,7 +3204,19 @@
     "verified": true,
     "verified_date": "2026-08-06",
     "free": true,
-    "free_note": "网关免费模型之一（共 7 个），Llama 3.3 70B。"
+    "free_note": "网关免费模型之一（共 7 个），Llama 3.3 70B。",
+    "aliases": [
+      "llama-3.3-70b",
+      "OpenCode Zen"
+    ],
+    "cost_tier": "free",
+    "role": "coding",
+    "access_types": [
+      "official_api",
+      "open_source",
+      "self_host",
+      "free_api"
+    ]
   },
   {
     "id": "opencode-zen-qwen25",
@@ -2665,7 +3262,19 @@
     "verified": true,
     "verified_date": "2026-08-06",
     "free": true,
-    "free_note": "网关免费模型之一（共 7 个），Qwen2.5 72B。"
+    "free_note": "网关免费模型之一（共 7 个），Qwen2.5 72B。",
+    "aliases": [
+      "qwen2.5-72b",
+      "OpenCode Zen"
+    ],
+    "cost_tier": "free",
+    "role": "coding",
+    "access_types": [
+      "official_api",
+      "open_source",
+      "self_host",
+      "free_api"
+    ]
   },
   {
     "id": "ovh-llama33",
@@ -2706,7 +3315,19 @@
     "verified": true,
     "verified_date": "2026-08-06",
     "free": true,
-    "free_note": "匿名免费层 12 RPM，欧盟 GDPR 合规，无需注册即可调用。"
+    "free_note": "匿名免费层 12 RPM，欧盟 GDPR 合规，无需注册即可调用。",
+    "aliases": [
+      "Llama-3.3-70B-Instruct",
+      "OVHcloud AI"
+    ],
+    "cost_tier": "free",
+    "role": "low_cost",
+    "access_types": [
+      "official_api",
+      "open_source",
+      "self_host",
+      "free_api"
+    ]
   },
   {
     "id": "ovh-deepseek-r1",
@@ -2748,7 +3369,20 @@
     "verified": true,
     "verified_date": "2026-08-06",
     "free": true,
-    "free_note": "匿名免费层含 DeepSeek R1 蒸馏版，欧盟合规。"
+    "free_note": "匿名免费层含 DeepSeek R1 蒸馏版，欧盟合规。",
+    "aliases": [
+      "OVH DeepSeek R1 蒸馏",
+      "DeepSeek-R1-Distill-Qwen-32B",
+      "OVHcloud AI"
+    ],
+    "cost_tier": "free",
+    "role": "reasoning",
+    "access_types": [
+      "official_api",
+      "open_source",
+      "self_host",
+      "free_api"
+    ]
   },
   {
     "id": "freeai-auto",
@@ -2787,7 +3421,18 @@
     "verified": true,
     "verified_date": "2026-08-06",
     "free": true,
-    "free_note": "免费层 30K tok/天，聚合 400+ 工具，OpenAI 兼容。"
+    "free_note": "免费层 30K tok/天，聚合 400+ 工具，OpenAI 兼容。",
+    "aliases": [
+      "Free.ai 自动路由",
+      "auto",
+      "Free.ai"
+    ],
+    "cost_tier": "free",
+    "role": "low_cost",
+    "access_types": [
+      "official_api",
+      "free_api"
+    ]
   },
   {
     "id": "hunyuan-turbos-latest",
@@ -2832,7 +3477,18 @@
     "source_url": "https://cloud.tencent.com/document/product/1729",
     "verified": true,
     "verified_date": "2026-08-06",
-    "free": false
+    "free": false,
+    "aliases": [
+      "混元 TurboS",
+      "hunyuan-turbos-latest",
+      "腾讯混元",
+      "混元"
+    ],
+    "cost_tier": "cost_effective",
+    "role": "coding",
+    "access_types": [
+      "official_api"
+    ]
   },
   {
     "id": "hunyuan-t1-latest",
@@ -2876,7 +3532,18 @@
     "source_url": "https://cloud.tencent.com/document/product/1729",
     "verified": true,
     "verified_date": "2026-08-06",
-    "free": false
+    "free": false,
+    "aliases": [
+      "混元 T1",
+      "hunyuan-t1-latest",
+      "腾讯混元",
+      "混元"
+    ],
+    "cost_tier": "cost_effective",
+    "role": "reasoning",
+    "access_types": [
+      "official_api"
+    ]
   },
   {
     "id": "hunyuan-standard",
@@ -2917,7 +3584,18 @@
     "source_url": "https://cloud.tencent.com/document/product/1729",
     "verified": true,
     "verified_date": "2026-08-06",
-    "free": false
+    "free": false,
+    "aliases": [
+      "混元 Standard",
+      "hunyuan-standard",
+      "腾讯混元",
+      "混元"
+    ],
+    "cost_tier": "cost_effective",
+    "role": "low_cost",
+    "access_types": [
+      "official_api"
+    ]
   },
   {
     "id": "hunyuan-vision-1-5-instruct",
@@ -2958,7 +3636,18 @@
     "source_url": "https://cloud.tencent.com/document/product/302/104753",
     "verified": true,
     "verified_date": "2026-08-06",
-    "free": false
+    "free": false,
+    "aliases": [
+      "混元视觉 1.5",
+      "hunyuan-vision-1.5-instruct",
+      "腾讯混元",
+      "混元"
+    ],
+    "cost_tier": "cost_effective",
+    "role": "general",
+    "access_types": [
+      "official_api"
+    ]
   },
   {
     "id": "hunyuan-image-3",
@@ -2995,7 +3684,18 @@
     "verified_date": "2026-08-06",
     "free": false,
     "price_note": "按张计费，约 ¥0.1/张（以腾讯云官方为准）",
-    "media_type": "image"
+    "media_type": "image",
+    "aliases": [
+      "混元图像 3.0",
+      "hunyuan-image",
+      "腾讯混元",
+      "混元"
+    ],
+    "cost_tier": "cost_effective",
+    "role": "multimodal",
+    "access_types": [
+      "official_api"
+    ]
   },
   {
     "id": "kuaishou-kolors",
@@ -3033,6 +3733,19 @@
     "verified_date": "2026-08-06",
     "free": true,
     "free_note": "开放权重(Apache 2.0)；经硅基流动(SiliconFlow)免费 API 调用(Kwai-Kolors/Kolors)，中文 prompt 强。",
-    "media_type": "image"
+    "media_type": "image",
+    "aliases": [
+      "Kolors 文生图",
+      "Kwai-Kolors/Kolors",
+      "快手可灵"
+    ],
+    "cost_tier": "free",
+    "role": "multimodal",
+    "access_types": [
+      "official_api",
+      "open_source",
+      "self_host",
+      "free_api"
+    ]
   }
 ]

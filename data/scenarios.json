@@ -1,0 +1,120 @@
+[
+  {
+    "id": "chat",
+    "name_cn": "日常聊天",
+    "icon": "✦",
+    "description_cn": "问答、总结、翻译、写作。",
+    "task_ids": [
+      "chat"
+    ]
+  },
+  {
+    "id": "coding",
+    "name_cn": "写代码",
+    "icon": "⌘",
+    "description_cn": "生成、审查、重构代码。",
+    "task_ids": [
+      "coding"
+    ]
+  },
+  {
+    "id": "agent",
+    "name_cn": "开发 Agent",
+    "icon": "⚙",
+    "description_cn": "规划、工具调用、多步任务。",
+    "task_ids": [
+      "agent"
+    ]
+  },
+  {
+    "id": "reasoning",
+    "name_cn": "复杂推理",
+    "icon": "✜",
+    "description_cn": "数学、规划、科研。",
+    "task_ids": [
+      "reasoning"
+    ]
+  },
+  {
+    "id": "writing",
+    "name_cn": "内容创作",
+    "icon": "✎",
+    "description_cn": "长文、文案、报告。",
+    "task_ids": [
+      "writing"
+    ]
+  },
+  {
+    "id": "image_gen",
+    "name_cn": "图片生成",
+    "icon": "◉",
+    "description_cn": "文生图、图生图。",
+    "task_ids": [
+      "image"
+    ]
+  },
+  {
+    "id": "image_und",
+    "name_cn": "图片理解",
+    "icon": "◉",
+    "description_cn": "看图问答、文档分析。",
+    "task_ids": [
+      "image_understanding"
+    ]
+  },
+  {
+    "id": "video",
+    "name_cn": "视频生成",
+    "icon": "↗",
+    "description_cn": "文/图到视频。",
+    "task_ids": [
+      "video"
+    ]
+  },
+  {
+    "id": "doc",
+    "name_cn": "文档分析",
+    "icon": "▤",
+    "description_cn": "长文档、代码库、资料阅读。",
+    "task_ids": [
+      "long_context",
+      "knowledge"
+    ]
+  },
+  {
+    "id": "local",
+    "name_cn": "本地部署",
+    "icon": "⌂",
+    "description_cn": "开放权重、私有化。",
+    "task_ids": [
+      "local"
+    ]
+  },
+  {
+    "id": "low_cost",
+    "name_cn": "寻找低成本 API",
+    "icon": "♧",
+    "description_cn": "高性价比模型。",
+    "task_ids": [
+      "low_cost"
+    ]
+  },
+  {
+    "id": "learning",
+    "name_cn": "学习 AI",
+    "icon": "✺",
+    "description_cn": "概念理解、答疑入门。",
+    "task_ids": [
+      "learning"
+    ]
+  },
+  {
+    "id": "enterprise",
+    "name_cn": "企业应用",
+    "icon": "▣",
+    "description_cn": "RAG、流程自动化。",
+    "task_ids": [
+      "enterprise"
+    ]
+  }
+]

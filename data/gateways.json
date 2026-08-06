@@ -1,0 +1,192 @@
+[
+  {
+    "id": "groq",
+    "name": "Groq",
+    "name_cn": "Groq",
+    "logo_file": "assets/logos/groq.svg",
+    "country": "US",
+    "website": "https://groq.com/",
+    "api_docs": "https://console.groq.com/docs",
+    "api_base_url": "https://api.groq.com/openai/v1",
+    "api_style": "openai",
+    "brand_color": "#F55036",
+    "description_cn": "LPU 极速推理，免费层托管 Llama/Qwen/GPT-OSS。",
+    "source": "official",
+    "last_verified": "2026-08-05",
+    "models": [
+      "groq-llama-3-3-70b",
+      "groq-qwen3-32b",
+      "groq-llama-4-scout",
+      "groq-llama-3-1-8b-instant",
+      "groq-gemma-2-9b",
+      "groq-mixtral-8x7b",
+      "groq-whisper-large-v3",
+      "groq-deepseek-r1-distill-70b",
+      "groq-llama-4-maverick",
+      "groq-kimi-k2"
+    ]
+  },
+  {
+    "id": "openrouter",
+    "name": "OpenRouter",
+    "name_cn": "OpenRouter",
+    "logo_file": "assets/logos/openrouter.svg",
+    "country": "US",
+    "website": "https://openrouter.ai/",
+    "api_docs": "https://openrouter.ai/docs",
+    "api_base_url": "https://openrouter.ai/api/v1",
+    "api_style": "openai",
+    "brand_color": "#1A1A1A",
+    "description_cn": "一个 API key 路由多家模型，含 20+ 免费模型。",
+    "source": "official",
+    "last_verified": "2026-08-05",
+    "models": [
+      "openrouter-llama-3-3-70b-free",
+      "openrouter-deepseek-r1-free",
+      "openrouter-llama-4-maverick-free",
+      "openrouter-llama-4-scout-free",
+      "openrouter-gemma-2-9b-free",
+      "openrouter-mistral-7b-free",
+      "openrouter-qwen-2-5-72b-free",
+      "openrouter-llama-3-1-8b-free",
+      "openrouter-phi-3-5-mini-free",
+      "openrouter-gemini-2-0-flash-free"
+    ]
+  },
+  {
+    "id": "nvidia-nim",
+    "name": "NVIDIA NIM",
+    "name_cn": "NVIDIA NIM",
+    "logo_file": "assets/logos/nvidia-nim.svg",
+    "country": "US",
+    "website": "https://build.nvidia.com/",
+    "api_docs": "https://docs.api.nvidia.com/nim",
+    "api_base_url": "https://integrate.api.nvidia.com/v1",
+    "api_style": "openai",
+    "brand_color": "#76B900",
+    "description_cn": "免费推理微服务，托管 Nemotron/Llama/Qwen/DeepSeek。",
+    "source": "official",
+    "last_verified": "2026-08-05",
+    "models": [
+      "nvidia-nim-nemotron-70b",
+      "nvidia-nim-llama-3-3-70b",
+      "nvidia-nim-llama-4-maverick",
+      "nvidia-nim-mistral-small-24b",
+      "nvidia-nim-deepseek-r1",
+      "nvidia-nim-qwen3-coder-480b",
+      "nvidia-nim-nemotron-nano-9b",
+      "nvidia-nim-phi-4",
+      "nvidia-nim-gemma-2-9b"
+    ]
+  },
+  {
+    "id": "anyapi",
+    "name": "AnyAPI",
+    "name_cn": "AnyAPI",
+    "logo_file": "assets/logos/anyapi.svg",
+    "country": "US",
+    "website": "https://anyapi.ai/",
+    "api_docs": "https://docs.anyapi.ai/",
+    "api_base_url": "https://api.anyapi.ai/v1",
+    "api_style": "openai",
+    "brand_color": "#6366F1",
+    "description_cn": "聚合 400+ 模型，一个 API key 免费试用，自动路由最优模型。",
+    "source": "awesome-free-models",
+    "last_verified": "2026-08-06",
+    "models": [
+      "anyapi-auto"
+    ]
+  },
+  {
+    "id": "bazaarlink",
+    "name": "BazaarLink",
+    "name_cn": "BazaarLink",
+    "logo_file": "assets/logos/bazaarlink.svg",
+    "country": "US",
+    "website": "https://bazaarlink.ai/",
+    "api_docs": "https://docs.bazaarlink.ai/",
+    "api_base_url": "https://api.bazaarlink.ai/v1",
+    "api_style": "openai",
+    "brand_color": "#0EA5E9",
+    "description_cn": "OpenAI 兼容网关，auto:free 路由多模型，免费额度即用。",
+    "source": "awesome-free-models",
+    "last_verified": "2026-08-06",
+    "models": [
+      "bazaarlink-auto-free"
+    ]
+  },
+  {
+    "id": "requesty",
+    "name": "Requesty",
+    "name_cn": "Requesty",
+    "logo_file": "assets/logos/requesty.svg",
+    "country": "US",
+    "website": "https://requesty.ai/",
+    "api_docs": "https://docs.requesty.ai/",
+    "api_base_url": "https://router.requesty.ai/v1",
+    "api_style": "openai",
+    "brand_color": "#8B5CF6",
+    "description_cn": "模型路由网关，兼容 Claude Code，免费试用额度。",
+    "source": "awesome-free-models",
+    "last_verified": "2026-08-06",
+    "models": [
+      "requesty-auto"
+    ]
+  },
+  {
+    "id": "opencode-zen",
+    "name": "OpenCode Zen",
+    "name_cn": "OpenCode Zen",
+    "logo_file": "assets/logos/opencode-zen.svg",
+    "country": "US",
+    "website": "https://opencode.ai/",
+    "api_docs": "https://docs.opencode.ai/",
+    "api_base_url": "https://api.opencode.ai/v1",
+    "api_style": "openai",
+    "brand_color": "#14B8A6",
+    "description_cn": "网关式开放模型托管，含多款免费模型可直接调用。",
+    "source": "awesome-free-models",
+    "last_verified": "2026-08-06",
+    "models": [
+      "opencode-zen-llama33",
+      "opencode-zen-qwen25"
+    ]
+  },
+  {
+    "id": "ovh-ai",
+    "name": "OVHcloud AI Endpoints",
+    "name_cn": "OVHcloud AI",
+    "logo_file": "assets/logos/ovh-ai.svg",
+    "country": "FR",
+    "website": "https://endpoints.ai.cloud.ovh.net/",
+    "api_docs": "https://docs.ovh.com/ai/",
+    "api_base_url": "https://endpoint.ai.cloud.ovh.net/api/openai/v1",
+    "api_style": "openai",
+    "brand_color": "#123F6F",
+    "description_cn": "欧盟 GDPR 合规网关，匿名免费层 12 RPM，含文本与图像。",
+    "source": "awesome-free-models",
+    "last_verified": "2026-08-06",
+    "models": [
+      "ovh-llama33",
+      "ovh-deepseek-r1"
+    ]
+  },
+  {
+    "id": "freeai",
+    "name": "Free.ai",
+    "name_cn": "Free.ai",
+    "logo_file": "assets/logos/freeai.svg",
+    "country": "US",
+    "website": "https://free.ai/",
+    "api_docs": "https://docs.free.ai/",
+    "api_base_url": "https://api.free.ai/v1",
+    "api_style": "openai",
+    "brand_color": "#EC4899",
+    "description_cn": "聚合 400+ 工具，免费层 30K tok/天，OpenAI 兼容。",
+    "source": "awesome-free-models",
+    "last_verified": "2026-08-06",
+    "models": [
+      "freeai-auto"
+    ]
+  }
+]

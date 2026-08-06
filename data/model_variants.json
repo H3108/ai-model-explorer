@@ -56,7 +56,17 @@
     "release_date": "2026",
     "source_url": "https://platform.openai.com/docs/pricing",
     "verified": true,
-    "verified_date": "2026-08-05"
+    "verified_date": "2026-08-05",
+    "aliases": [
+      "gpt-5.5",
+      "OpenAI",
+      "ChatGPT"
+    ],
+    "cost_tier": "production",
+    "role": "reasoning",
+    "access_types": [
+      "official_api"
+    ]
   },
   {
     "id": "openai-gpt-5-4",
@@ -114,7 +124,17 @@
     "release_date": "2026",
     "source_url": "https://platform.openai.com/docs/pricing",
     "verified": true,
-    "verified_date": "2026-08-05"
+    "verified_date": "2026-08-05",
+    "aliases": [
+      "gpt-5.4",
+      "OpenAI",
+      "ChatGPT"
+    ],
+    "cost_tier": "production",
+    "role": "reasoning",
+    "access_types": [
+      "official_api"
+    ]
   },
   {
     "id": "openai-gpt-5-4-mini",
@@ -170,7 +190,17 @@
     "release_date": "2026",
     "source_url": "https://platform.openai.com/docs/pricing",
     "verified": true,
-    "verified_date": "2026-08-05"
+    "verified_date": "2026-08-05",
+    "aliases": [
+      "gpt-5.4-mini",
+      "OpenAI",
+      "ChatGPT"
+    ],
+    "cost_tier": "production",
+    "role": "reasoning",
+    "access_types": [
+      "official_api"
+    ]
   },
   {
     "id": "openai-gpt-5-4-nano",
@@ -226,7 +256,17 @@
     "release_date": "2026",
     "source_url": "https://platform.openai.com/docs/pricing",
     "verified": true,
-    "verified_date": "2026-08-05"
+    "verified_date": "2026-08-05",
+    "aliases": [
+      "gpt-5.4-nano",
+      "OpenAI",
+      "ChatGPT"
+    ],
+    "cost_tier": "cost_effective",
+    "role": "coding",
+    "access_types": [
+      "official_api"
+    ]
   },
   {
     "id": "openai-gpt-5-5-pro",
@@ -282,7 +322,17 @@
     "release_date": "2026",
     "source_url": "https://platform.openai.com/docs/pricing",
     "verified": true,
-    "verified_date": "2026-08-05"
+    "verified_date": "2026-08-05",
+    "aliases": [
+      "gpt-5.5-pro",
+      "OpenAI",
+      "ChatGPT"
+    ],
+    "cost_tier": "production",
+    "role": "reasoning",
+    "access_types": [
+      "official_api"
+    ]
   },
   {
     "id": "anthropic-fable-5",
@@ -341,7 +391,17 @@
     "release_date": "2026-06",
     "source_url": "https://docs.anthropic.com/en/docs/about-claude/models",
     "verified": true,
-    "verified_date": "2026-08-05"
+    "verified_date": "2026-08-05",
+    "aliases": [
+      "claude-fable-5",
+      "Anthropic",
+      "Claude"
+    ],
+    "cost_tier": "production",
+    "role": "reasoning",
+    "access_types": [
+      "official_api"
+    ]
   },
   {
     "id": "anthropic-opus-5",
@@ -399,7 +459,17 @@
     "release_date": "2026",
     "source_url": "https://docs.anthropic.com/en/docs/about-claude/models",
     "verified": true,
-    "verified_date": "2026-08-05"
+    "verified_date": "2026-08-05",
+    "aliases": [
+      "claude-opus-5",
+      "Anthropic",
+      "Claude"
+    ],
+    "cost_tier": "production",
+    "role": "reasoning",
+    "access_types": [
+      "official_api"
+    ]
   },
   {
     "id": "anthropic-sonnet-5",
@@ -455,7 +525,17 @@
     "release_date": "2026",
     "source_url": "https://docs.anthropic.com/en/docs/about-claude/models",
     "verified": true,
-    "verified_date": "2026-08-05"
+    "verified_date": "2026-08-05",
+    "aliases": [
+      "claude-sonnet-5",
+      "Anthropic",
+      "Claude"
+    ],
+    "cost_tier": "production",
+    "role": "reasoning",
+    "access_types": [
+      "official_api"
+    ]
   },
   {
     "id": "anthropic-haiku-4-5",
@@ -510,7 +590,17 @@
     "release_date": "2025-10",
     "source_url": "https://docs.anthropic.com/en/docs/about-claude/models",
     "verified": true,
-    "verified_date": "2026-08-05"
+    "verified_date": "2026-08-05",
+    "aliases": [
+      "claude-haiku-4-5-20251001",
+      "Anthropic",
+      "Claude"
+    ],
+    "cost_tier": "production",
+    "role": "coding",
+    "access_types": [
+      "official_api"
+    ]
   },
   {
     "id": "google-gemini-3-1-pro",
@@ -570,7 +660,17 @@
     "source_url": "https://ai.google.dev/gemini-api/docs/pricing",
     "verified": true,
     "verified_date": "2026-08-05",
-    "price_note": "≤200K 上下文 $2/$12；>200K 升至 $4/$18。"
+    "price_note": "≤200K 上下文 $2/$12；>200K 升至 $4/$18。",
+    "aliases": [
+      "gemini-3.1-pro",
+      "Google Gemini",
+      "谷歌"
+    ],
+    "cost_tier": "production",
+    "role": "reasoning",
+    "access_types": [
+      "official_api"
+    ]
   },
   {
     "id": "google-gemini-3-5-flash",
@@ -628,7 +728,17 @@
     "verified": true,
     "verified_date": "2026-08-05",
     "free": false,
-    "free_note": "Gemini 提供限速率免费 API 层（Google AI Studio / 免费 API key）；按本站口径不计入「免费」筛选"
+    "free_note": "Gemini 提供限速率免费 API 层（Google AI Studio / 免费 API key）；按本站口径不计入「免费」筛选",
+    "aliases": [
+      "gemini-3.5-flash",
+      "Google Gemini",
+      "谷歌"
+    ],
+    "cost_tier": "production",
+    "role": "reasoning",
+    "access_types": [
+      "official_api"
+    ]
   },
   {
     "id": "google-gemini-3-flash",
@@ -684,7 +794,17 @@
     "verified": true,
     "verified_date": "2026-08-05",
     "free": false,
-    "free_note": "Gemini 提供限速率免费 API 层（Google AI Studio / 免费 API key）；按本站口径不计入「免费」筛选"
+    "free_note": "Gemini 提供限速率免费 API 层（Google AI Studio / 免费 API key）；按本站口径不计入「免费」筛选",
+    "aliases": [
+      "gemini-3-flash",
+      "Google Gemini",
+      "谷歌"
+    ],
+    "cost_tier": "cost_effective",
+    "role": "reasoning",
+    "access_types": [
+      "official_api"
+    ]
   },
   {
     "id": "google-gemini-3-1-flash-lite",
@@ -742,7 +862,17 @@
     "verified": true,
     "verified_date": "2026-08-05",
     "free": false,
-    "free_note": "Gemini 提供限速率免费 API 层（Google AI Studio / 免费 API key）；按本站口径不计入「免费」筛选"
+    "free_note": "Gemini 提供限速率免费 API 层（Google AI Studio / 免费 API key）；按本站口径不计入「免费」筛选",
+    "aliases": [
+      "gemini-3.1-flash-lite",
+      "Google Gemini",
+      "谷歌"
+    ],
+    "cost_tier": "cost_effective",
+    "role": "coding",
+    "access_types": [
+      "official_api"
+    ]
   },
   {
     "id": "google-gemini-2-5-pro",
@@ -798,7 +928,18 @@
     "source_url": "https://ai.google.dev/gemini-api/docs/pricing",
     "verified": true,
     "verified_date": "2026-08-05",
-    "price_note": "计划 2026-10-16 退役，建议新项目用 3.x。"
+    "price_note": "计划 2026-10-16 退役，建议新项目用 3.x。",
+    "aliases": [
+      "Gemini 2.5 Pro（旧版）",
+      "gemini-2.5-pro",
+      "Google Gemini",
+      "谷歌"
+    ],
+    "cost_tier": "production",
+    "role": "reasoning",
+    "access_types": [
+      "official_api"
+    ]
   },
   {
     "id": "deepseek-v3",
@@ -855,7 +996,19 @@
     "source_url": "https://www.deepseek.ai/deepseek-api",
     "verified": true,
     "verified_date": "2026-08-05",
-    "free_note": "chat.deepseek.com 完全免费；API 新用户赠 $5 额度"
+    "free_note": "chat.deepseek.com 完全免费；API 新用户赠 $5 额度",
+    "aliases": [
+      "deepseek-chat",
+      "DeepSeek",
+      "深度求索"
+    ],
+    "cost_tier": "cost_effective",
+    "role": "coding",
+    "access_types": [
+      "official_api",
+      "open_source",
+      "self_host"
+    ]
   },
   {
     "id": "deepseek-v3-2",
@@ -913,7 +1066,20 @@
     "source_url": "https://www.deepseek.ai/deepseek-api",
     "verified": true,
     "verified_date": "2026-08-05",
-    "free_note": "官网对话免费；API 新用户赠金"
+    "free_note": "官网对话免费；API 新用户赠金",
+    "aliases": [
+      "DeepSeek-V3.2（统一模型）",
+      "deepseek-v3.2",
+      "DeepSeek",
+      "深度求索"
+    ],
+    "cost_tier": "cost_effective",
+    "role": "reasoning",
+    "access_types": [
+      "official_api",
+      "open_source",
+      "self_host"
+    ]
   },
   {
     "id": "deepseek-r1",
@@ -972,7 +1138,19 @@
     "source_url": "https://www.deepseek.ai/deepseek-api",
     "verified": true,
     "verified_date": "2026-08-05",
-    "free_note": "chat.deepseek.com 完全免费；API 新用户赠 $5 额度（推理）"
+    "free_note": "chat.deepseek.com 完全免费；API 新用户赠 $5 额度（推理）",
+    "aliases": [
+      "deepseek-reasoner",
+      "DeepSeek",
+      "深度求索"
+    ],
+    "cost_tier": "cost_effective",
+    "role": "reasoning",
+    "access_types": [
+      "official_api",
+      "open_source",
+      "self_host"
+    ]
   },
   {
     "id": "deepseek-coder",
@@ -1027,7 +1205,19 @@
     "source_url": "https://www.deepseek.ai/deepseek-api",
     "verified": true,
     "verified_date": "2026-08-05",
-    "free_note": "DeepSeek 开放模型，官网/API 免费可用"
+    "free_note": "DeepSeek 开放模型，官网/API 免费可用",
+    "aliases": [
+      "deepseek-coder",
+      "DeepSeek",
+      "深度求索"
+    ],
+    "cost_tier": "cost_effective",
+    "role": "coding",
+    "access_types": [
+      "official_api",
+      "open_source",
+      "self_host"
+    ]
   },
   {
     "id": "qwen-plus",
@@ -1084,7 +1274,19 @@
     "source_url": "https://qwen-ai.com/pricing",
     "verified": true,
     "verified_date": "2026-08-05",
-    "free_note": "通义千问网页版免费；阿里云百炼 API 每模型赠免费额度"
+    "free_note": "通义千问网页版免费；阿里云百炼 API 每模型赠免费额度",
+    "aliases": [
+      "通义千问 Plus",
+      "qwen-plus",
+      "阿里通义千问",
+      "通义千问",
+      "千问"
+    ],
+    "cost_tier": "cost_effective",
+    "role": "reasoning",
+    "access_types": [
+      "official_api"
+    ]
   },
   {
     "id": "qwen-3-max",
@@ -1141,7 +1343,19 @@
     "source_url": "https://qwen-ai.com/pricing",
     "verified": true,
     "verified_date": "2026-08-05",
-    "free_note": "通义千问网页版免费；阿里云百炼 API 赠免费额度"
+    "free_note": "通义千问网页版免费；阿里云百炼 API 赠免费额度",
+    "aliases": [
+      "通义千问 3-Max",
+      "qwen3-max",
+      "阿里通义千问",
+      "通义千问",
+      "千问"
+    ],
+    "cost_tier": "production",
+    "role": "reasoning",
+    "access_types": [
+      "official_api"
+    ]
   },
   {
     "id": "qwen-3-5-flash",
@@ -1197,7 +1411,19 @@
     "source_url": "https://qwen-ai.com/pricing",
     "verified": true,
     "verified_date": "2026-08-05",
-    "free_note": "通义千问网页版免费；阿里云百炼 API 赠免费额度"
+    "free_note": "通义千问网页版免费；阿里云百炼 API 赠免费额度",
+    "aliases": [
+      "通义千问 3.5-Flash",
+      "qwen3.5-flash",
+      "阿里通义千问",
+      "通义千问",
+      "千问"
+    ],
+    "cost_tier": "cost_effective",
+    "role": "coding",
+    "access_types": [
+      "official_api"
+    ]
   },
   {
     "id": "qwen-vl-max",
@@ -1251,7 +1477,19 @@
     "verified": true,
     "verified_date": "2026-08-05",
     "price_note": "视觉模型价格以阿里云官方 CNY 计价为准，本表暂未填入精确数值。",
-    "free_note": "通义千问 VL 网页版免费；API 赠免费额度"
+    "free_note": "通义千问 VL 网页版免费；API 赠免费额度",
+    "aliases": [
+      "通义千问 VL Max",
+      "qwen-vl-max",
+      "阿里通义千问",
+      "通义千问",
+      "千问"
+    ],
+    "cost_tier": "production",
+    "role": "general",
+    "access_types": [
+      "official_api"
+    ]
   },
   {
     "id": "glm-5-2",
@@ -1309,7 +1547,18 @@
     "source_url": "https://llmcostcalc.com/cloud/zhipu",
     "verified": true,
     "verified_date": "2026-08-05",
-    "free_note": "智谱清言网页版免费；BigModel 开放平台赠免费额度"
+    "free_note": "智谱清言网页版免费；BigModel 开放平台赠免费额度",
+    "aliases": [
+      "glm-5.2",
+      "智谱 GLM",
+      "智谱",
+      "智谱清言"
+    ],
+    "cost_tier": "production",
+    "role": "reasoning",
+    "access_types": [
+      "official_api"
+    ]
   },
   {
     "id": "glm-5",
@@ -1366,7 +1615,20 @@
     "source_url": "https://llmcostcalc.com/cloud/zhipu",
     "verified": true,
     "verified_date": "2026-08-05",
-    "free_note": "智谱清言网页版免费；BigModel 开放平台赠免费额度"
+    "free_note": "智谱清言网页版免费；BigModel 开放平台赠免费额度",
+    "aliases": [
+      "glm-5",
+      "智谱 GLM",
+      "智谱",
+      "智谱清言"
+    ],
+    "cost_tier": "production",
+    "role": "reasoning",
+    "access_types": [
+      "official_api",
+      "open_source",
+      "self_host"
+    ]
   },
   {
     "id": "glm-5-turbo",
@@ -1422,7 +1684,18 @@
     "source_url": "https://llmcostcalc.com/cloud/zhipu",
     "verified": true,
     "verified_date": "2026-08-05",
-    "free_note": "智谱清言网页版免费；BigModel 开放平台赠免费额度"
+    "free_note": "智谱清言网页版免费；BigModel 开放平台赠免费额度",
+    "aliases": [
+      "glm-5-turbo",
+      "智谱 GLM",
+      "智谱",
+      "智谱清言"
+    ],
+    "cost_tier": "production",
+    "role": "reasoning",
+    "access_types": [
+      "official_api"
+    ]
   },
   {
     "id": "kimi-k2",
@@ -1480,7 +1753,17 @@
     "source_url": "https://tokenmix.ai/blog/kimi-k2-api-pricing-tiers-2026",
     "verified": true,
     "verified_date": "2026-08-05",
-    "free_note": "Kimi 网页版完全免费（长上下文）；API 新用户赠额度"
+    "free_note": "Kimi 网页版完全免费（长上下文）；API 新用户赠额度",
+    "aliases": [
+      "kimi-k2",
+      "月之暗面 Kimi",
+      "月之暗面"
+    ],
+    "cost_tier": "cost_effective",
+    "role": "reasoning",
+    "access_types": [
+      "official_api"
+    ]
   },
   {
     "id": "kimi-k2-5",
@@ -1538,7 +1821,17 @@
     "source_url": "https://tokenmix.ai/blog/kimi-k2-api-pricing-tiers-2026",
     "verified": true,
     "verified_date": "2026-08-05",
-    "free_note": "Kimi 网页版完全免费；API 新用户赠额度"
+    "free_note": "Kimi 网页版完全免费；API 新用户赠额度",
+    "aliases": [
+      "kimi-k2.5",
+      "月之暗面 Kimi",
+      "月之暗面"
+    ],
+    "cost_tier": "cost_effective",
+    "role": "reasoning",
+    "access_types": [
+      "official_api"
+    ]
   },
   {
     "id": "kimi-k3",
@@ -1597,7 +1890,17 @@
     "source_url": "https://cloudprice.net/models/moonshot-kimi-k2-preview",
     "verified": true,
     "verified_date": "2026-08-05",
-    "free_note": "Kimi 网页版完全免费；API 新用户赠额度"
+    "free_note": "Kimi 网页版完全免费；API 新用户赠额度",
+    "aliases": [
+      "kimi-k3",
+      "月之暗面 Kimi",
+      "月之暗面"
+    ],
+    "cost_tier": "production",
+    "role": "reasoning",
+    "access_types": [
+      "official_api"
+    ]
   },
   {
     "id": "baidu-ernie-5-1",
@@ -1655,7 +1958,18 @@
     "source_url": "https://intl.cloud.baidu.com/en/doc/qianfan/s/Jm8r1826a-intl-en",
     "verified": true,
     "verified_date": "2026-08-05",
-    "price_note": "按上下文分档：≤32K 输入 ¥4 / 输出 ¥18；32K–128K 输入 ¥6 / 输出 ¥22（每百万 tokens，人民币）。"
+    "price_note": "按上下文分档：≤32K 输入 ¥4 / 输出 ¥18；32K–128K 输入 ¥6 / 输出 ¥22（每百万 tokens，人民币）。",
+    "aliases": [
+      "文心 5.1",
+      "ernie-5.1",
+      "百度文心",
+      "文心"
+    ],
+    "cost_tier": "production",
+    "role": "reasoning",
+    "access_types": [
+      "official_api"
+    ]
   },
   {
     "id": "baidu-ernie-4-5-turbo",
@@ -1711,7 +2025,20 @@
     "verified": true,
     "verified_date": "2026-08-05",
     "price_note": "¥0.8 / ¥3.2 每百万 tokens（人民币）；ERNIE 4.5 提供开放权重版本。",
-    "free_note": "百度千帆 ERNIE-Speed/3.5 永久免费；4.5-Turbo 有免费额度"
+    "free_note": "百度千帆 ERNIE-Speed/3.5 永久免费；4.5-Turbo 有免费额度",
+    "aliases": [
+      "文心 4.5 Turbo",
+      "ernie-4.5-turbo-128k",
+      "百度文心",
+      "文心"
+    ],
+    "cost_tier": "production",
+    "role": "coding",
+    "access_types": [
+      "official_api",
+      "open_source",
+      "self_host"
+    ]
   },
   {
     "id": "minimax-m2-5",
@@ -1769,7 +2096,16 @@
     "source_url": "https://llmgateway.io/providers/minimax",
     "verified": true,
     "verified_date": "2026-08-05",
-    "free_note": "MiniMax 网页版免费；开放平台赠免费额度"
+    "free_note": "MiniMax 网页版免费；开放平台赠免费额度",
+    "aliases": [
+      "minimax-m2.5",
+      "MiniMax"
+    ],
+    "cost_tier": "cost_effective",
+    "role": "reasoning",
+    "access_types": [
+      "official_api"
+    ]
   },
   {
     "id": "minimax-m2-7",
@@ -1826,7 +2162,16 @@
     "source_url": "https://llmgateway.io/providers/minimax",
     "verified": true,
     "verified_date": "2026-08-05",
-    "free_note": "MiniMax 网页版免费；开放平台赠免费额度"
+    "free_note": "MiniMax 网页版免费；开放平台赠免费额度",
+    "aliases": [
+      "minimax-m2.7",
+      "MiniMax"
+    ],
+    "cost_tier": "cost_effective",
+    "role": "reasoning",
+    "access_types": [
+      "official_api"
+    ]
   },
   {
     "id": "minimax-m3",
@@ -1884,7 +2229,16 @@
     "source_url": "https://llmgateway.io/providers/minimax",
     "verified": true,
     "verified_date": "2026-08-05",
-    "free_note": "MiniMax 网页版免费；开放平台赠免费额度"
+    "free_note": "MiniMax 网页版免费；开放平台赠免费额度",
+    "aliases": [
+      "minimax-m3",
+      "MiniMax"
+    ],
+    "cost_tier": "cost_effective",
+    "role": "reasoning",
+    "access_types": [
+      "official_api"
+    ]
   },
   {
     "id": "mistral-large-3",
@@ -1942,7 +2296,18 @@
     "release_date": "2026",
     "source_url": "https://mistral.ai/pricing/api/",
     "verified": true,
-    "verified_date": "2026-08-05"
+    "verified_date": "2026-08-05",
+    "aliases": [
+      "mistral-large-latest",
+      "Mistral AI"
+    ],
+    "cost_tier": "cost_effective",
+    "role": "reasoning",
+    "access_types": [
+      "official_api",
+      "open_source",
+      "self_host"
+    ]
   },
   {
     "id": "mistral-small-4",
@@ -1997,7 +2362,18 @@
     "release_date": "2026",
     "source_url": "https://mistral.ai/pricing/api/",
     "verified": true,
-    "verified_date": "2026-08-05"
+    "verified_date": "2026-08-05",
+    "aliases": [
+      "mistral-small-latest",
+      "Mistral AI"
+    ],
+    "cost_tier": "cost_effective",
+    "role": "coding",
+    "access_types": [
+      "official_api",
+      "open_source",
+      "self_host"
+    ]
   },
   {
     "id": "mistral-codestral",
@@ -2051,7 +2427,18 @@
     "release_date": "2025",
     "source_url": "https://mistral.ai/pricing/api/",
     "verified": true,
-    "verified_date": "2026-08-05"
+    "verified_date": "2026-08-05",
+    "aliases": [
+      "codestral-latest",
+      "Mistral AI"
+    ],
+    "cost_tier": "cost_effective",
+    "role": "coding",
+    "access_types": [
+      "official_api",
+      "open_source",
+      "self_host"
+    ]
   },
   {
     "id": "mistral-magistral-medium",
@@ -2104,7 +2491,16 @@
     "release_date": "2026",
     "source_url": "https://mistral.ai/pricing/api/",
     "verified": true,
-    "verified_date": "2026-08-05"
+    "verified_date": "2026-08-05",
+    "aliases": [
+      "magistral-medium-latest",
+      "Mistral AI"
+    ],
+    "cost_tier": "production",
+    "role": "reasoning",
+    "access_types": [
+      "official_api"
+    ]
   },
   {
     "id": "xai-grok-4-3",
@@ -2163,7 +2559,17 @@
     "source_url": "https://docs.x.ai/developers/pricing",
     "verified": true,
     "verified_date": "2026-08-05",
-    "free_note": "x.com 网页版 Grok 免费（API 付费）"
+    "free_note": "x.com 网页版 Grok 免费（API 付费）",
+    "aliases": [
+      "grok-4.3",
+      "xAI",
+      "Grok"
+    ],
+    "cost_tier": "production",
+    "role": "reasoning",
+    "access_types": [
+      "official_api"
+    ]
   },
   {
     "id": "xai-grok-4",
@@ -2219,7 +2625,17 @@
     "source_url": "https://docs.x.ai/developers/pricing",
     "verified": true,
     "verified_date": "2026-08-05",
-    "free_note": "x.com 网页版 Grok 免费（API 付费）"
+    "free_note": "x.com 网页版 Grok 免费（API 付费）",
+    "aliases": [
+      "grok-4",
+      "xAI",
+      "Grok"
+    ],
+    "cost_tier": "production",
+    "role": "reasoning",
+    "access_types": [
+      "official_api"
+    ]
   },
   {
     "id": "xai-grok-build-0-1",
@@ -2273,7 +2689,17 @@
     "release_date": "2026",
     "source_url": "https://docs.x.ai/developers/pricing",
     "verified": true,
-    "verified_date": "2026-08-05"
+    "verified_date": "2026-08-05",
+    "aliases": [
+      "grok-build-0.1",
+      "xAI",
+      "Grok"
+    ],
+    "cost_tier": "cost_effective",
+    "role": "coding",
+    "access_types": [
+      "official_api"
+    ]
   },
   {
     "id": "meta-llama-4-maverick",
@@ -2333,7 +2759,19 @@
     "verified": true,
     "verified_date": "2026-08-05",
     "price_note": "开放权重；托管价因供应商而异（Together/Fireworks 等约 $0.17/$0.50 每百万 tokens）。",
-    "free_note": "开放权重，可自部署（无授权费）"
+    "free_note": "开放权重，可自部署（无授权费）",
+    "aliases": [
+      "Llama-4-Maverick",
+      "Meta Llama",
+      "脸书"
+    ],
+    "cost_tier": "cost_effective",
+    "role": "coding",
+    "access_types": [
+      "official_api",
+      "open_source",
+      "self_host"
+    ]
   },
   {
     "id": "meta-llama-4-scout",
@@ -2392,7 +2830,19 @@
     "verified": true,
     "verified_date": "2026-08-05",
     "price_note": "原生 10M 上下文；托管价约 $0.08/$0.30 每百万 tokens（Together 等）。",
-    "free_note": "开放权重，可自部署（无授权费）"
+    "free_note": "开放权重，可自部署（无授权费）",
+    "aliases": [
+      "Llama-4-Scout",
+      "Meta Llama",
+      "脸书"
+    ],
+    "cost_tier": "cost_effective",
+    "role": "coding",
+    "access_types": [
+      "official_api",
+      "open_source",
+      "self_host"
+    ]
   },
   {
     "id": "openai-gpt-image-2",
@@ -2450,7 +2900,18 @@
     "release_date": "2026",
     "source_url": "https://platform.openai.com/docs/features/image-generation",
     "verified": true,
-    "verified_date": "2026-08-05"
+    "verified_date": "2026-08-05",
+    "aliases": [
+      "GPT-Image-2（DALL·E 4）",
+      "gpt-image-2",
+      "OpenAI",
+      "ChatGPT"
+    ],
+    "cost_tier": "production",
+    "role": "multimodal",
+    "access_types": [
+      "official_api"
+    ]
   },
   {
     "id": "google-imagen-4",
@@ -2508,7 +2969,17 @@
     "release_date": "2026",
     "source_url": "https://ai.google.dev/gemini-api/docs/models#imagen",
     "verified": true,
-    "verified_date": "2026-08-05"
+    "verified_date": "2026-08-05",
+    "aliases": [
+      "imagen-4",
+      "Google Gemini",
+      "谷歌"
+    ],
+    "cost_tier": "production",
+    "role": "multimodal",
+    "access_types": [
+      "official_api"
+    ]
   },
   {
     "id": "midjourney-v7",
@@ -2566,7 +3037,16 @@
     "release_date": "2026",
     "source_url": "https://www.midjourney.com/",
     "verified": true,
-    "verified_date": "2026-08-05"
+    "verified_date": "2026-08-05",
+    "aliases": [
+      "midjourney-v7",
+      "Midjourney"
+    ],
+    "cost_tier": "production",
+    "role": "multimodal",
+    "access_types": [
+      "official_api"
+    ]
   },
   {
     "id": "blackforest-flux-2",
@@ -2626,7 +3106,18 @@
     "source_url": "https://blackforestlabs.ai/",
     "verified": true,
     "verified_date": "2026-08-05",
-    "free_note": "FLUX 开放权重，可本地部署（无授权费）"
+    "free_note": "FLUX 开放权重，可本地部署（无授权费）",
+    "aliases": [
+      "flux-2-pro",
+      "Black Forest Labs"
+    ],
+    "cost_tier": "production",
+    "role": "multimodal",
+    "access_types": [
+      "official_api",
+      "open_source",
+      "self_host"
+    ]
   },
   {
     "id": "stability-sd-4",
@@ -2686,7 +3177,18 @@
     "source_url": "https://stability.ai/",
     "verified": true,
     "verified_date": "2026-08-05",
-    "free_note": "Stable Diffusion 开放权重，可本地部署（无授权费）"
+    "free_note": "Stable Diffusion 开放权重，可本地部署（无授权费）",
+    "aliases": [
+      "stable-diffusion-4",
+      "Stability AI"
+    ],
+    "cost_tier": "production",
+    "role": "multimodal",
+    "access_types": [
+      "official_api",
+      "open_source",
+      "self_host"
+    ]
   },
   {
     "id": "adobe-firefly-4",
@@ -2745,7 +3247,16 @@
     "source_url": "https://www.adobe.com/products/firefly.html",
     "verified": true,
     "verified_date": "2026-08-05",
-    "free_note": "Firefly 网页版免费额度"
+    "free_note": "Firefly 网页版免费额度",
+    "aliases": [
+      "firefly-4",
+      "Adobe Firefly"
+    ],
+    "cost_tier": "production",
+    "role": "multimodal",
+    "access_types": [
+      "official_api"
+    ]
   },
   {
     "id": "ideogram-3",
@@ -2803,7 +3314,16 @@
     "release_date": "2026",
     "source_url": "https://ideogram.ai/",
     "verified": true,
-    "verified_date": "2026-08-05"
+    "verified_date": "2026-08-05",
+    "aliases": [
+      "ideogram-3",
+      "Ideogram"
+    ],
+    "cost_tier": "production",
+    "role": "multimodal",
+    "access_types": [
+      "official_api"
+    ]
   },
   {
     "id": "alibaba-qwen-image",
@@ -2863,7 +3383,21 @@
     "source_url": "https://help.aliyun.com/zh/model-studio/",
     "verified": true,
     "verified_date": "2026-08-05",
-    "free_note": "通义万相网页版免费文生图"
+    "free_note": "通义万相网页版免费文生图",
+    "aliases": [
+      "通义千问图像 Qwen-Image",
+      "qwen-image",
+      "阿里通义千问",
+      "通义千问",
+      "千问"
+    ],
+    "cost_tier": "production",
+    "role": "multimodal",
+    "access_types": [
+      "official_api",
+      "open_source",
+      "self_host"
+    ]
   },
   {
     "id": "openai-sora-2",
@@ -2923,7 +3457,17 @@
     "release_date": "2025-12",
     "source_url": "https://openai.com/sora",
     "verified": true,
-    "verified_date": "2026-08-05"
+    "verified_date": "2026-08-05",
+    "aliases": [
+      "sora-2",
+      "OpenAI",
+      "ChatGPT"
+    ],
+    "cost_tier": "production",
+    "role": "multimodal",
+    "access_types": [
+      "official_api"
+    ]
   },
   {
     "id": "google-veo-3-1",
@@ -2983,7 +3527,17 @@
     "release_date": "2026-01",
     "source_url": "https://deepmind.google/models/veo/",
     "verified": true,
-    "verified_date": "2026-08-05"
+    "verified_date": "2026-08-05",
+    "aliases": [
+      "veo-3.1",
+      "Google Gemini",
+      "谷歌"
+    ],
+    "cost_tier": "production",
+    "role": "multimodal",
+    "access_types": [
+      "official_api"
+    ]
   },
   {
     "id": "google-veo-3-1-lite",
@@ -3044,7 +3598,17 @@
     "release_date": "2026-03",
     "source_url": "https://deepmind.google/models/veo/",
     "verified": true,
-    "verified_date": "2026-08-05"
+    "verified_date": "2026-08-05",
+    "aliases": [
+      "veo-3.1-lite",
+      "Google Gemini",
+      "谷歌"
+    ],
+    "cost_tier": "production",
+    "role": "multimodal",
+    "access_types": [
+      "official_api"
+    ]
   },
   {
     "id": "kuaishou-kling-3-0",
@@ -3104,7 +3668,17 @@
     "release_date": "2026",
     "source_url": "https://klingai.com/",
     "verified": true,
-    "verified_date": "2026-08-05"
+    "verified_date": "2026-08-05",
+    "aliases": [
+      "可灵 Kling 3.0",
+      "kling-3.0",
+      "快手可灵"
+    ],
+    "cost_tier": "production",
+    "role": "multimodal",
+    "access_types": [
+      "official_api"
+    ]
   },
   {
     "id": "runway-gen-4-5",
@@ -3165,7 +3739,16 @@
     "source_url": "https://runwayml.com/",
     "verified": true,
     "verified_date": "2026-08-05",
-    "free_note": "Runway 新用户赠 125 credits"
+    "free_note": "Runway 新用户赠 125 credits",
+    "aliases": [
+      "gen-4.5",
+      "Runway"
+    ],
+    "cost_tier": "production",
+    "role": "multimodal",
+    "access_types": [
+      "official_api"
+    ]
   },
   {
     "id": "bytedance-seedance-2",
@@ -3226,7 +3809,16 @@
     "source_url": "https://seedance.ai/",
     "verified": true,
     "verified_date": "2026-08-05",
-    "free_note": "火山方舟赠免费额度（视频生成）"
+    "free_note": "火山方舟赠免费额度（视频生成）",
+    "aliases": [
+      "seedance-2.0",
+      "字节 Seedance"
+    ],
+    "cost_tier": "production",
+    "role": "multimodal",
+    "access_types": [
+      "official_api"
+    ]
   },
   {
     "id": "xai-grok-imagine-video",
@@ -3288,7 +3880,18 @@
     "source_url": "https://x.ai/news/grok-imagine",
     "verified": true,
     "verified_date": "2026-08-05",
-    "free_note": "x.com 网页版 Grok 免费生成（API 付费）"
+    "free_note": "x.com 网页版 Grok 免费生成（API 付费）",
+    "aliases": [
+      "Grok Imagine 视频",
+      "grok-imagine-video",
+      "xAI",
+      "Grok"
+    ],
+    "cost_tier": "production",
+    "role": "multimodal",
+    "access_types": [
+      "official_api"
+    ]
   },
   {
     "id": "luma-ray-2",
@@ -3349,7 +3952,16 @@
     "source_url": "https://lumalabs.ai/",
     "verified": true,
     "verified_date": "2026-08-05",
-    "free_note": "Luma 网页版免费额度"
+    "free_note": "Luma 网页版免费额度",
+    "aliases": [
+      "ray-2",
+      "Luma AI"
+    ],
+    "cost_tier": "production",
+    "role": "multimodal",
+    "access_types": [
+      "official_api"
+    ]
   },
   {
     "id": "alibaba-wan-2-1",
@@ -3410,6 +4022,20 @@
     "release_date": "2025",
     "source_url": "https://github.com/Wan-Video/Wan2.1",
     "verified": true,
-    "verified_date": "2026-08-05"
+    "verified_date": "2026-08-05",
+    "aliases": [
+      "通义万相 Wan 2.1",
+      "wan-2.1",
+      "阿里通义千问",
+      "通义千问",
+      "千问"
+    ],
+    "cost_tier": "production",
+    "role": "multimodal",
+    "access_types": [
+      "official_api",
+      "open_source",
+      "self_host"
+    ]
   }
 ]
