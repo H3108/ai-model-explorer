@@ -15,15 +15,38 @@
     "vision_support": false,
     "open_weight": false,
     "speed_tier": "fast",
-    "model_type": ["Chat", "Coding", "Agent"],
+    "model_type": [
+      "Chat",
+      "Coding",
+      "Agent"
+    ],
     "capabilities": {
-      "reasoning": {"tier": "medium", "basis": "Flash 档推理中上。"},
-      "coding": {"tier": "high", "basis": "免费档编码强。"},
-      "agent": {"tier": "high", "basis": "支持多步工具编排。"},
-      "knowledge": {"tier": "high", "basis": "中文知识强。"},
-      "multilingual": {"tier": "high", "basis": "中英强。"}
+      "reasoning": {
+        "tier": "medium",
+        "basis": "Flash 档推理中上。"
+      },
+      "coding": {
+        "tier": "high",
+        "basis": "免费档编码强。"
+      },
+      "agent": {
+        "tier": "high",
+        "basis": "支持多步工具编排。"
+      },
+      "knowledge": {
+        "tier": "high",
+        "basis": "中文知识强。"
+      },
+      "multilingual": {
+        "tier": "high",
+        "basis": "中英强。"
+      }
     },
-    "best_for": ["coding", "agent", "low_cost"],
+    "best_for": [
+      "coding",
+      "agent",
+      "low_cost"
+    ],
     "avoid_for": [],
     "release_date": "2026",
     "source_url": "https://docs.z.ai/guides/overview/pricing",
@@ -48,16 +71,39 @@
     "vision_support": false,
     "open_weight": false,
     "speed_tier": "fast",
-    "model_type": ["Chat", "Coding"],
+    "model_type": [
+      "Chat",
+      "Coding"
+    ],
     "capabilities": {
-      "reasoning": {"tier": "medium", "basis": "通用推理。"},
-      "coding": {"tier": "medium", "basis": "通用编码。"},
-      "agent": {"tier": "medium", "basis": "支持工具调用。"},
-      "knowledge": {"tier": "medium", "basis": "中英知识。"},
-      "multilingual": {"tier": "high", "basis": "多语言支持。"}
+      "reasoning": {
+        "tier": "medium",
+        "basis": "通用推理。"
+      },
+      "coding": {
+        "tier": "medium",
+        "basis": "通用编码。"
+      },
+      "agent": {
+        "tier": "medium",
+        "basis": "支持工具调用。"
+      },
+      "knowledge": {
+        "tier": "medium",
+        "basis": "中英知识。"
+      },
+      "multilingual": {
+        "tier": "high",
+        "basis": "多语言支持。"
+      }
     },
-    "best_for": ["low_cost", "chat"],
-    "avoid_for": ["reasoning"],
+    "best_for": [
+      "low_cost",
+      "chat"
+    ],
+    "avoid_for": [
+      "reasoning"
+    ],
     "release_date": "2026",
     "source_url": "https://docs.z.ai/guides/overview/pricing",
     "verified": true,
@@ -81,16 +127,39 @@
     "vision_support": true,
     "open_weight": false,
     "speed_tier": "fast",
-    "model_type": ["Chat", "Vision"],
+    "model_type": [
+      "Chat",
+      "Vision"
+    ],
     "capabilities": {
-      "reasoning": {"tier": "low-medium", "basis": "视觉理解为主。"},
-      "coding": {"tier": "low", "basis": "非编码定位。"},
-      "agent": {"tier": "low", "basis": "非 Agent 定位。"},
-      "knowledge": {"tier": "medium", "basis": "图像理解。"},
-      "multilingual": {"tier": "high", "basis": "多语言提示。"}
+      "reasoning": {
+        "tier": "low-medium",
+        "basis": "视觉理解为主。"
+      },
+      "coding": {
+        "tier": "low",
+        "basis": "非编码定位。"
+      },
+      "agent": {
+        "tier": "low",
+        "basis": "非 Agent 定位。"
+      },
+      "knowledge": {
+        "tier": "medium",
+        "basis": "图像理解。"
+      },
+      "multilingual": {
+        "tier": "high",
+        "basis": "多语言提示。"
+      }
     },
-    "best_for": ["low_cost", "image"],
-    "avoid_for": ["coding"],
+    "best_for": [
+      "low_cost",
+      "image"
+    ],
+    "avoid_for": [
+      "coding"
+    ],
     "release_date": "2026",
     "source_url": "https://docs.z.ai/guides/overview/pricing",
     "verified": true,
@@ -114,16 +183,41 @@
     "vision_support": false,
     "open_weight": false,
     "speed_tier": "medium",
-    "model_type": ["Chat", "Reasoning", "Coding", "Agent"],
+    "model_type": [
+      "Chat",
+      "Reasoning",
+      "Coding",
+      "Agent"
+    ],
     "capabilities": {
-      "reasoning": {"tier": "high", "basis": "次旗舰推理。"},
-      "coding": {"tier": "high", "basis": "编码强。"},
-      "agent": {"tier": "high", "basis": "长程 agentic 工程。"},
-      "knowledge": {"tier": "high", "basis": "中文知识强。"},
-      "multilingual": {"tier": "medium", "basis": "中英强。"}
+      "reasoning": {
+        "tier": "high",
+        "basis": "次旗舰推理。"
+      },
+      "coding": {
+        "tier": "high",
+        "basis": "编码强。"
+      },
+      "agent": {
+        "tier": "high",
+        "basis": "长程 agentic 工程。"
+      },
+      "knowledge": {
+        "tier": "high",
+        "basis": "中文知识强。"
+      },
+      "multilingual": {
+        "tier": "medium",
+        "basis": "中英强。"
+      }
     },
-    "best_for": ["agent", "reasoning"],
-    "avoid_for": ["low_cost"],
+    "best_for": [
+      "agent",
+      "reasoning"
+    ],
+    "avoid_for": [
+      "low_cost"
+    ],
     "release_date": "2026",
     "source_url": "https://docs.z.ai/guides/overview/pricing",
     "verified": true,
@@ -145,16 +239,40 @@
     "vision_support": false,
     "open_weight": false,
     "speed_tier": "medium",
-    "model_type": ["Chat", "Reasoning", "Coding"],
+    "model_type": [
+      "Chat",
+      "Reasoning",
+      "Coding"
+    ],
     "capabilities": {
-      "reasoning": {"tier": "high", "basis": "强通用推理。"},
-      "coding": {"tier": "high", "basis": "编码强。"},
-      "agent": {"tier": "medium", "basis": "工具调用可用。"},
-      "knowledge": {"tier": "high", "basis": "中文知识强。"},
-      "multilingual": {"tier": "medium", "basis": "中英强。"}
+      "reasoning": {
+        "tier": "high",
+        "basis": "强通用推理。"
+      },
+      "coding": {
+        "tier": "high",
+        "basis": "编码强。"
+      },
+      "agent": {
+        "tier": "medium",
+        "basis": "工具调用可用。"
+      },
+      "knowledge": {
+        "tier": "high",
+        "basis": "中文知识强。"
+      },
+      "multilingual": {
+        "tier": "medium",
+        "basis": "中英强。"
+      }
     },
-    "best_for": ["reasoning", "coding"],
-    "avoid_for": ["low_cost"],
+    "best_for": [
+      "reasoning",
+      "coding"
+    ],
+    "avoid_for": [
+      "low_cost"
+    ],
     "release_date": "2026",
     "source_url": "https://docs.z.ai/guides/overview/pricing",
     "verified": true,
@@ -176,16 +294,39 @@
     "vision_support": false,
     "open_weight": false,
     "speed_tier": "medium",
-    "model_type": ["Chat", "Coding"],
+    "model_type": [
+      "Chat",
+      "Coding"
+    ],
     "capabilities": {
-      "reasoning": {"tier": "high", "basis": "推理强。"},
-      "coding": {"tier": "high", "basis": "编码强。"},
-      "agent": {"tier": "medium", "basis": "工具调用。"},
-      "knowledge": {"tier": "high", "basis": "中文知识强。"},
-      "multilingual": {"tier": "medium", "basis": "中英强。"}
+      "reasoning": {
+        "tier": "high",
+        "basis": "推理强。"
+      },
+      "coding": {
+        "tier": "high",
+        "basis": "编码强。"
+      },
+      "agent": {
+        "tier": "medium",
+        "basis": "工具调用。"
+      },
+      "knowledge": {
+        "tier": "high",
+        "basis": "中文知识强。"
+      },
+      "multilingual": {
+        "tier": "medium",
+        "basis": "中英强。"
+      }
     },
-    "best_for": ["coding", "reasoning"],
-    "avoid_for": ["low_cost"],
+    "best_for": [
+      "coding",
+      "reasoning"
+    ],
+    "avoid_for": [
+      "low_cost"
+    ],
     "release_date": "2026",
     "source_url": "https://docs.z.ai/guides/overview/pricing",
     "verified": true,
@@ -207,16 +348,42 @@
     "vision_support": false,
     "open_weight": true,
     "speed_tier": "medium",
-    "model_type": ["Chat", "Reasoning", "Coding", "Agent"],
+    "model_type": [
+      "Chat",
+      "Reasoning",
+      "Coding",
+      "Agent"
+    ],
     "capabilities": {
-      "reasoning": {"tier": "high", "basis": "开源 MoE，长上下文推理。"},
-      "coding": {"tier": "high", "basis": "编码强。"},
-      "agent": {"tier": "high", "basis": "多步工具编排。"},
-      "knowledge": {"tier": "high", "basis": "中文知识强。"},
-      "multilingual": {"tier": "medium", "basis": "中英强。"}
+      "reasoning": {
+        "tier": "high",
+        "basis": "开源 MoE，长上下文推理。"
+      },
+      "coding": {
+        "tier": "high",
+        "basis": "编码强。"
+      },
+      "agent": {
+        "tier": "high",
+        "basis": "多步工具编排。"
+      },
+      "knowledge": {
+        "tier": "high",
+        "basis": "中文知识强。"
+      },
+      "multilingual": {
+        "tier": "medium",
+        "basis": "中英强。"
+      }
     },
-    "best_for": ["coding", "agent", "local"],
-    "avoid_for": ["low_cost"],
+    "best_for": [
+      "coding",
+      "agent",
+      "local"
+    ],
+    "avoid_for": [
+      "low_cost"
+    ],
     "release_date": "2026",
     "source_url": "https://docs.z.ai/guides/overview/pricing",
     "verified": true,
@@ -238,15 +405,36 @@
     "vision_support": false,
     "open_weight": false,
     "speed_tier": "fast",
-    "model_type": ["Chat", "Coding"],
+    "model_type": [
+      "Chat",
+      "Coding"
+    ],
     "capabilities": {
-      "reasoning": {"tier": "medium", "basis": "性价比推理。"},
-      "coding": {"tier": "high", "basis": "编码强。"},
-      "agent": {"tier": "medium", "basis": "工具调用。"},
-      "knowledge": {"tier": "medium", "basis": "中英知识。"},
-      "multilingual": {"tier": "medium", "basis": "中英强。"}
+      "reasoning": {
+        "tier": "medium",
+        "basis": "性价比推理。"
+      },
+      "coding": {
+        "tier": "high",
+        "basis": "编码强。"
+      },
+      "agent": {
+        "tier": "medium",
+        "basis": "工具调用。"
+      },
+      "knowledge": {
+        "tier": "medium",
+        "basis": "中英知识。"
+      },
+      "multilingual": {
+        "tier": "medium",
+        "basis": "中英强。"
+      }
     },
-    "best_for": ["low_cost", "coding"],
+    "best_for": [
+      "low_cost",
+      "coding"
+    ],
     "avoid_for": [],
     "release_date": "2026",
     "source_url": "https://docs.z.ai/guides/overview/pricing",
@@ -269,15 +457,35 @@
     "vision_support": false,
     "open_weight": false,
     "speed_tier": "fast",
-    "model_type": ["Image"],
+    "model_type": [
+      "Image"
+    ],
     "capabilities": {
-      "reasoning": {"tier": "low", "basis": "生成模型，非推理定位。"},
-      "coding": {"tier": "low", "basis": "非编码模型。"},
-      "agent": {"tier": "low", "basis": "非 Agent 定位。"},
-      "knowledge": {"tier": "medium", "basis": "依赖提示词理解生成。"},
-      "multilingual": {"tier": "high", "basis": "支持多语言提示词。"}
+      "reasoning": {
+        "tier": "low",
+        "basis": "生成模型，非推理定位。"
+      },
+      "coding": {
+        "tier": "low",
+        "basis": "非编码模型。"
+      },
+      "agent": {
+        "tier": "low",
+        "basis": "非 Agent 定位。"
+      },
+      "knowledge": {
+        "tier": "medium",
+        "basis": "依赖提示词理解生成。"
+      },
+      "multilingual": {
+        "tier": "high",
+        "basis": "支持多语言提示词。"
+      }
     },
-    "best_for": ["image", "low_cost"],
+    "best_for": [
+      "image",
+      "low_cost"
+    ],
     "avoid_for": [],
     "media_type": "image",
     "max_resolution": "1024x1024",
@@ -310,16 +518,37 @@
     "vision_support": false,
     "open_weight": false,
     "speed_tier": "medium",
-    "model_type": ["Image"],
+    "model_type": [
+      "Image"
+    ],
     "capabilities": {
-      "reasoning": {"tier": "low", "basis": "生成模型，非推理定位。"},
-      "coding": {"tier": "low", "basis": "非编码模型。"},
-      "agent": {"tier": "low", "basis": "非 Agent 定位。"},
-      "knowledge": {"tier": "medium", "basis": "依赖提示词理解生成。"},
-      "multilingual": {"tier": "high", "basis": "支持多语言提示词。"}
+      "reasoning": {
+        "tier": "low",
+        "basis": "生成模型，非推理定位。"
+      },
+      "coding": {
+        "tier": "low",
+        "basis": "非编码模型。"
+      },
+      "agent": {
+        "tier": "low",
+        "basis": "非 Agent 定位。"
+      },
+      "knowledge": {
+        "tier": "medium",
+        "basis": "依赖提示词理解生成。"
+      },
+      "multilingual": {
+        "tier": "high",
+        "basis": "支持多语言提示词。"
+      }
     },
-    "best_for": ["image"],
-    "avoid_for": ["low_cost"],
+    "best_for": [
+      "image"
+    ],
+    "avoid_for": [
+      "low_cost"
+    ],
     "media_type": "image",
     "max_resolution": "2048x2048",
     "media_pricing": {
@@ -349,15 +578,35 @@
     "vision_support": false,
     "open_weight": false,
     "speed_tier": "fast",
-    "model_type": ["Video"],
+    "model_type": [
+      "Video"
+    ],
     "capabilities": {
-      "reasoning": {"tier": "low", "basis": "生成模型，非推理定位。"},
-      "coding": {"tier": "low", "basis": "非编码模型。"},
-      "agent": {"tier": "low", "basis": "非 Agent 定位。"},
-      "knowledge": {"tier": "medium", "basis": "依赖提示词理解生成。"},
-      "multilingual": {"tier": "high", "basis": "支持多语言提示词。"}
+      "reasoning": {
+        "tier": "low",
+        "basis": "生成模型，非推理定位。"
+      },
+      "coding": {
+        "tier": "low",
+        "basis": "非编码模型。"
+      },
+      "agent": {
+        "tier": "low",
+        "basis": "非 Agent 定位。"
+      },
+      "knowledge": {
+        "tier": "medium",
+        "basis": "依赖提示词理解生成。"
+      },
+      "multilingual": {
+        "tier": "high",
+        "basis": "支持多语言提示词。"
+      }
     },
-    "best_for": ["video", "low_cost"],
+    "best_for": [
+      "video",
+      "low_cost"
+    ],
     "avoid_for": [],
     "media_type": "video",
     "max_resolution": "720p",
@@ -392,15 +641,39 @@
     "vision_support": true,
     "open_weight": false,
     "speed_tier": "fast",
-    "model_type": ["Chat", "Coding", "Vision", "Reasoning"],
+    "model_type": [
+      "Chat",
+      "Coding",
+      "Vision",
+      "Reasoning"
+    ],
     "capabilities": {
-      "reasoning": {"tier": "medium-high", "basis": "2.5 代推理升级。"},
-      "coding": {"tier": "high", "basis": "默认编码与 agentic 工作流模型。"},
-      "agent": {"tier": "high", "basis": "规划、工具调用、多步任务。"},
-      "knowledge": {"tier": "high", "basis": "多模态理解。"},
-      "multilingual": {"tier": "high", "basis": "中英等多语言。"}
+      "reasoning": {
+        "tier": "medium-high",
+        "basis": "2.5 代推理升级。"
+      },
+      "coding": {
+        "tier": "high",
+        "basis": "默认编码与 agentic 工作流模型。"
+      },
+      "agent": {
+        "tier": "high",
+        "basis": "规划、工具调用、多步任务。"
+      },
+      "knowledge": {
+        "tier": "high",
+        "basis": "多模态理解。"
+      },
+      "multilingual": {
+        "tier": "high",
+        "basis": "中英等多语言。"
+      }
     },
-    "best_for": ["coding", "agent", "low_cost"],
+    "best_for": [
+      "coding",
+      "agent",
+      "low_cost"
+    ],
     "avoid_for": [],
     "release_date": "2026",
     "source_url": "https://www.agnes-ai.com/doc/agnes-25-flash",
@@ -425,15 +698,37 @@
     "vision_support": true,
     "open_weight": false,
     "speed_tier": "fast",
-    "model_type": ["Chat", "Coding", "Vision"],
+    "model_type": [
+      "Chat",
+      "Coding",
+      "Vision"
+    ],
     "capabilities": {
-      "reasoning": {"tier": "medium", "basis": "通用推理。"},
-      "coding": {"tier": "medium", "basis": "通用编码。"},
-      "agent": {"tier": "medium", "basis": "工具调用可用。"},
-      "knowledge": {"tier": "high", "basis": "多模态理解。"},
-      "multilingual": {"tier": "high", "basis": "多语言支持。"}
+      "reasoning": {
+        "tier": "medium",
+        "basis": "通用推理。"
+      },
+      "coding": {
+        "tier": "medium",
+        "basis": "通用编码。"
+      },
+      "agent": {
+        "tier": "medium",
+        "basis": "工具调用可用。"
+      },
+      "knowledge": {
+        "tier": "high",
+        "basis": "多模态理解。"
+      },
+      "multilingual": {
+        "tier": "high",
+        "basis": "多语言支持。"
+      }
     },
-    "best_for": ["low_cost", "chat"],
+    "best_for": [
+      "low_cost",
+      "chat"
+    ],
     "avoid_for": [],
     "release_date": "2026",
     "source_url": "https://www.agnes-ai.com/",
@@ -458,15 +753,35 @@
     "vision_support": false,
     "open_weight": false,
     "speed_tier": "fast",
-    "model_type": ["Image"],
+    "model_type": [
+      "Image"
+    ],
     "capabilities": {
-      "reasoning": {"tier": "low", "basis": "生成模型，非推理定位。"},
-      "coding": {"tier": "low", "basis": "非编码模型。"},
-      "agent": {"tier": "low", "basis": "非 Agent 定位。"},
-      "knowledge": {"tier": "medium", "basis": "依赖提示词理解生成。"},
-      "multilingual": {"tier": "high", "basis": "中文提示词识别好。"}
+      "reasoning": {
+        "tier": "low",
+        "basis": "生成模型，非推理定位。"
+      },
+      "coding": {
+        "tier": "low",
+        "basis": "非编码模型。"
+      },
+      "agent": {
+        "tier": "low",
+        "basis": "非 Agent 定位。"
+      },
+      "knowledge": {
+        "tier": "medium",
+        "basis": "依赖提示词理解生成。"
+      },
+      "multilingual": {
+        "tier": "high",
+        "basis": "中文提示词识别好。"
+      }
     },
-    "best_for": ["image", "low_cost"],
+    "best_for": [
+      "image",
+      "low_cost"
+    ],
     "avoid_for": [],
     "media_type": "image",
     "max_resolution": "4K",
@@ -499,15 +814,35 @@
     "vision_support": false,
     "open_weight": false,
     "speed_tier": "fast",
-    "model_type": ["Video"],
+    "model_type": [
+      "Video"
+    ],
     "capabilities": {
-      "reasoning": {"tier": "low", "basis": "生成模型，非推理定位。"},
-      "coding": {"tier": "low", "basis": "非编码模型。"},
-      "agent": {"tier": "low", "basis": "非 Agent 定位。"},
-      "knowledge": {"tier": "medium", "basis": "依赖提示词理解生成。"},
-      "multilingual": {"tier": "high", "basis": "支持多语言提示词。"}
+      "reasoning": {
+        "tier": "low",
+        "basis": "生成模型，非推理定位。"
+      },
+      "coding": {
+        "tier": "low",
+        "basis": "非编码模型。"
+      },
+      "agent": {
+        "tier": "low",
+        "basis": "非 Agent 定位。"
+      },
+      "knowledge": {
+        "tier": "medium",
+        "basis": "依赖提示词理解生成。"
+      },
+      "multilingual": {
+        "tier": "high",
+        "basis": "支持多语言提示词。"
+      }
     },
-    "best_for": ["video", "low_cost"],
+    "best_for": [
+      "video",
+      "low_cost"
+    ],
     "avoid_for": [],
     "media_type": "video",
     "max_resolution": "1080p",
@@ -542,15 +877,37 @@
     "vision_support": false,
     "open_weight": true,
     "speed_tier": "fastest",
-    "model_type": ["Chat", "Coding", "Reasoning"],
+    "model_type": [
+      "Chat",
+      "Coding",
+      "Reasoning"
+    ],
     "capabilities": {
-      "reasoning": {"tier": "medium", "basis": "70B 通用推理。"},
-      "coding": {"tier": "high", "basis": "编码强。"},
-      "agent": {"tier": "medium", "basis": "工具调用可用。"},
-      "knowledge": {"tier": "high", "basis": "知识面广。"},
-      "multilingual": {"tier": "high", "basis": "多语言支持。"}
+      "reasoning": {
+        "tier": "medium",
+        "basis": "70B 通用推理。"
+      },
+      "coding": {
+        "tier": "high",
+        "basis": "编码强。"
+      },
+      "agent": {
+        "tier": "medium",
+        "basis": "工具调用可用。"
+      },
+      "knowledge": {
+        "tier": "high",
+        "basis": "知识面广。"
+      },
+      "multilingual": {
+        "tier": "high",
+        "basis": "多语言支持。"
+      }
     },
-    "best_for": ["low_cost", "coding"],
+    "best_for": [
+      "low_cost",
+      "coding"
+    ],
     "avoid_for": [],
     "release_date": "2026",
     "source_url": "https://console.groq.com/docs",
@@ -575,15 +932,37 @@
     "vision_support": false,
     "open_weight": true,
     "speed_tier": "fastest",
-    "model_type": ["Chat", "Coding", "Reasoning"],
+    "model_type": [
+      "Chat",
+      "Coding",
+      "Reasoning"
+    ],
     "capabilities": {
-      "reasoning": {"tier": "medium-high", "basis": "32B 推理强。"},
-      "coding": {"tier": "high", "basis": "编码强。"},
-      "agent": {"tier": "medium", "basis": "工具调用可用。"},
-      "knowledge": {"tier": "high", "basis": "中英知识强。"},
-      "multilingual": {"tier": "high", "basis": "中英等多语言。"}
+      "reasoning": {
+        "tier": "medium-high",
+        "basis": "32B 推理强。"
+      },
+      "coding": {
+        "tier": "high",
+        "basis": "编码强。"
+      },
+      "agent": {
+        "tier": "medium",
+        "basis": "工具调用可用。"
+      },
+      "knowledge": {
+        "tier": "high",
+        "basis": "中英知识强。"
+      },
+      "multilingual": {
+        "tier": "high",
+        "basis": "中英等多语言。"
+      }
     },
-    "best_for": ["low_cost", "coding"],
+    "best_for": [
+      "low_cost",
+      "coding"
+    ],
     "avoid_for": [],
     "release_date": "2026",
     "source_url": "https://console.groq.com/docs",
@@ -608,15 +987,36 @@
     "vision_support": true,
     "open_weight": true,
     "speed_tier": "fastest",
-    "model_type": ["Chat", "Vision"],
+    "model_type": [
+      "Chat",
+      "Vision"
+    ],
     "capabilities": {
-      "reasoning": {"tier": "medium", "basis": "通用推理。"},
-      "coding": {"tier": "medium", "basis": "通用编码。"},
-      "agent": {"tier": "medium", "basis": "工具调用可用。"},
-      "knowledge": {"tier": "high", "basis": "知识面广。"},
-      "multilingual": {"tier": "high", "basis": "多语言支持。"}
+      "reasoning": {
+        "tier": "medium",
+        "basis": "通用推理。"
+      },
+      "coding": {
+        "tier": "medium",
+        "basis": "通用编码。"
+      },
+      "agent": {
+        "tier": "medium",
+        "basis": "工具调用可用。"
+      },
+      "knowledge": {
+        "tier": "high",
+        "basis": "知识面广。"
+      },
+      "multilingual": {
+        "tier": "high",
+        "basis": "多语言支持。"
+      }
     },
-    "best_for": ["low_cost", "image"],
+    "best_for": [
+      "low_cost",
+      "image"
+    ],
     "avoid_for": [],
     "release_date": "2026",
     "source_url": "https://console.groq.com/docs",
@@ -641,15 +1041,36 @@
     "vision_support": false,
     "open_weight": true,
     "speed_tier": "fast",
-    "model_type": ["Chat", "Coding"],
+    "model_type": [
+      "Chat",
+      "Coding"
+    ],
     "capabilities": {
-      "reasoning": {"tier": "medium", "basis": "70B 通用推理。"},
-      "coding": {"tier": "high", "basis": "编码强。"},
-      "agent": {"tier": "medium", "basis": "工具调用可用。"},
-      "knowledge": {"tier": "high", "basis": "知识面广。"},
-      "multilingual": {"tier": "high", "basis": "多语言支持。"}
+      "reasoning": {
+        "tier": "medium",
+        "basis": "70B 通用推理。"
+      },
+      "coding": {
+        "tier": "high",
+        "basis": "编码强。"
+      },
+      "agent": {
+        "tier": "medium",
+        "basis": "工具调用可用。"
+      },
+      "knowledge": {
+        "tier": "high",
+        "basis": "知识面广。"
+      },
+      "multilingual": {
+        "tier": "high",
+        "basis": "多语言支持。"
+      }
     },
-    "best_for": ["low_cost", "coding"],
+    "best_for": [
+      "low_cost",
+      "coding"
+    ],
     "avoid_for": [],
     "release_date": "2026",
     "source_url": "https://openrouter.ai/docs",
@@ -674,15 +1095,36 @@
     "vision_support": false,
     "open_weight": true,
     "speed_tier": "fast",
-    "model_type": ["Chat", "Reasoning"],
+    "model_type": [
+      "Chat",
+      "Reasoning"
+    ],
     "capabilities": {
-      "reasoning": {"tier": "high", "basis": "R1 强推理。"},
-      "coding": {"tier": "high", "basis": "编码强。"},
-      "agent": {"tier": "medium", "basis": "工具调用可用。"},
-      "knowledge": {"tier": "high", "basis": "知识面广。"},
-      "multilingual": {"tier": "high", "basis": "中英等多语言。"}
+      "reasoning": {
+        "tier": "high",
+        "basis": "R1 强推理。"
+      },
+      "coding": {
+        "tier": "high",
+        "basis": "编码强。"
+      },
+      "agent": {
+        "tier": "medium",
+        "basis": "工具调用可用。"
+      },
+      "knowledge": {
+        "tier": "high",
+        "basis": "知识面广。"
+      },
+      "multilingual": {
+        "tier": "high",
+        "basis": "中英等多语言。"
+      }
     },
-    "best_for": ["reasoning", "low_cost"],
+    "best_for": [
+      "reasoning",
+      "low_cost"
+    ],
     "avoid_for": [],
     "release_date": "2026",
     "source_url": "https://openrouter.ai/docs",
@@ -707,15 +1149,36 @@
     "vision_support": false,
     "open_weight": true,
     "speed_tier": "fast",
-    "model_type": ["Chat", "Coding"],
+    "model_type": [
+      "Chat",
+      "Coding"
+    ],
     "capabilities": {
-      "reasoning": {"tier": "medium", "basis": "70B 通用推理。"},
-      "coding": {"tier": "high", "basis": "编码强。"},
-      "agent": {"tier": "medium", "basis": "工具调用可用。"},
-      "knowledge": {"tier": "high", "basis": "知识面广。"},
-      "multilingual": {"tier": "high", "basis": "多语言支持。"}
+      "reasoning": {
+        "tier": "medium",
+        "basis": "70B 通用推理。"
+      },
+      "coding": {
+        "tier": "high",
+        "basis": "编码强。"
+      },
+      "agent": {
+        "tier": "medium",
+        "basis": "工具调用可用。"
+      },
+      "knowledge": {
+        "tier": "high",
+        "basis": "知识面广。"
+      },
+      "multilingual": {
+        "tier": "high",
+        "basis": "多语言支持。"
+      }
     },
-    "best_for": ["low_cost", "coding"],
+    "best_for": [
+      "low_cost",
+      "coding"
+    ],
     "avoid_for": [],
     "release_date": "2026",
     "source_url": "https://build.nvidia.com/",
@@ -740,15 +1203,36 @@
     "vision_support": false,
     "open_weight": true,
     "speed_tier": "fast",
-    "model_type": ["Chat", "Coding"],
+    "model_type": [
+      "Chat",
+      "Coding"
+    ],
     "capabilities": {
-      "reasoning": {"tier": "medium", "basis": "70B 通用推理。"},
-      "coding": {"tier": "high", "basis": "编码强。"},
-      "agent": {"tier": "medium", "basis": "工具调用可用。"},
-      "knowledge": {"tier": "high", "basis": "知识面广。"},
-      "multilingual": {"tier": "high", "basis": "多语言支持。"}
+      "reasoning": {
+        "tier": "medium",
+        "basis": "70B 通用推理。"
+      },
+      "coding": {
+        "tier": "high",
+        "basis": "编码强。"
+      },
+      "agent": {
+        "tier": "medium",
+        "basis": "工具调用可用。"
+      },
+      "knowledge": {
+        "tier": "high",
+        "basis": "知识面广。"
+      },
+      "multilingual": {
+        "tier": "high",
+        "basis": "多语言支持。"
+      }
     },
-    "best_for": ["low_cost", "coding"],
+    "best_for": [
+      "low_cost",
+      "coding"
+    ],
     "avoid_for": [],
     "release_date": "2026",
     "source_url": "https://build.nvidia.com/",
@@ -773,15 +1257,36 @@
     "vision_support": false,
     "open_weight": false,
     "speed_tier": "fast",
-    "model_type": ["Chat", "Reasoning"],
+    "model_type": [
+      "Chat",
+      "Reasoning"
+    ],
     "capabilities": {
-      "reasoning": {"tier": "medium", "basis": "通用推理。"},
-      "coding": {"tier": "medium", "basis": "通用编码。"},
-      "agent": {"tier": "medium", "basis": "工具调用可用。"},
-      "knowledge": {"tier": "high", "basis": "知识面广。"},
-      "multilingual": {"tier": "high", "basis": "多语言支持。"}
+      "reasoning": {
+        "tier": "medium",
+        "basis": "通用推理。"
+      },
+      "coding": {
+        "tier": "medium",
+        "basis": "通用编码。"
+      },
+      "agent": {
+        "tier": "medium",
+        "basis": "工具调用可用。"
+      },
+      "knowledge": {
+        "tier": "high",
+        "basis": "知识面广。"
+      },
+      "multilingual": {
+        "tier": "high",
+        "basis": "多语言支持。"
+      }
     },
-    "best_for": ["low_cost", "chat"],
+    "best_for": [
+      "low_cost",
+      "chat"
+    ],
     "avoid_for": [],
     "release_date": "2026",
     "source_url": "https://docs.mistral.ai/",
@@ -1953,7 +2458,7 @@
     "free_note": "NVIDIA NIM 免费推理微服务托管 Gemma 2 9B。",
     "family_id": "google-gemma"
   },
-    {
+  {
     "id": "anyapi-auto",
     "provider_id": "anyapi",
     "name": "AnyAPI Auto",
@@ -1992,7 +2497,7 @@
     "free": true,
     "free_note": "免费层 100K tok/天，auto 路由到 400+ 模型中最优的一个。"
   },
-    {
+  {
     "id": "bazaarlink-auto-free",
     "provider_id": "bazaarlink",
     "name": "BazaarLink auto:free",
@@ -2031,7 +2536,7 @@
     "free": true,
     "free_note": "免费层 10 RPM / 130 req/天，auto:free 路由多模型。"
   },
-    {
+  {
     "id": "requesty-auto",
     "provider_id": "requesty",
     "name": "Requesty Auto",
@@ -2070,7 +2575,7 @@
     "free": true,
     "free_note": "免费试用 200 req/天，兼容 Claude Code 路由。"
   },
-    {
+  {
     "id": "opencode-zen-llama33",
     "provider_id": "opencode-zen",
     "family_id": "meta-llama",
@@ -2116,7 +2621,7 @@
     "free": true,
     "free_note": "网关免费模型之一（共 7 个），Llama 3.3 70B。"
   },
-    {
+  {
     "id": "opencode-zen-qwen25",
     "provider_id": "opencode-zen",
     "family_id": "qwen-qwen",
@@ -2162,7 +2667,7 @@
     "free": true,
     "free_note": "网关免费模型之一（共 7 个），Qwen2.5 72B。"
   },
-    {
+  {
     "id": "ovh-llama33",
     "provider_id": "ovh-ai",
     "family_id": "meta-llama",
@@ -2203,7 +2708,7 @@
     "free": true,
     "free_note": "匿名免费层 12 RPM，欧盟 GDPR 合规，无需注册即可调用。"
   },
-    {
+  {
     "id": "ovh-deepseek-r1",
     "provider_id": "ovh-ai",
     "family_id": "deepseek-deepseek",
@@ -2245,7 +2750,7 @@
     "free": true,
     "free_note": "匿名免费层含 DeepSeek R1 蒸馏版，欧盟合规。"
   },
-    {
+  {
     "id": "freeai-auto",
     "provider_id": "freeai",
     "name": "Free.ai Auto",
@@ -2284,7 +2789,7 @@
     "free": true,
     "free_note": "免费层 30K tok/天，聚合 400+ 工具，OpenAI 兼容。"
   },
-    {
+  {
     "id": "hunyuan-turbos-latest",
     "family_id": "tencent-hunyuan-chat",
     "provider_id": "tencent-hunyuan",
@@ -2329,7 +2834,7 @@
     "verified_date": "2026-08-06",
     "free": false
   },
-    {
+  {
     "id": "hunyuan-t1-latest",
     "family_id": "tencent-hunyuan-chat",
     "provider_id": "tencent-hunyuan",
@@ -2373,7 +2878,7 @@
     "verified_date": "2026-08-06",
     "free": false
   },
-    {
+  {
     "id": "hunyuan-standard",
     "family_id": "tencent-hunyuan-chat",
     "provider_id": "tencent-hunyuan",
@@ -2414,7 +2919,7 @@
     "verified_date": "2026-08-06",
     "free": false
   },
-    {
+  {
     "id": "hunyuan-vision-1-5-instruct",
     "family_id": "tencent-hunyuan-vision",
     "provider_id": "tencent-hunyuan",
@@ -2455,7 +2960,7 @@
     "verified_date": "2026-08-06",
     "free": false
   },
-    {
+  {
     "id": "hunyuan-image-3",
     "family_id": "tencent-hunyuan-image",
     "provider_id": "tencent-hunyuan",
@@ -2468,7 +2973,7 @@
     "input_price_per_mtok": 0,
     "output_price_per_mtok": 0,
     "currency": "USD",
-    "vision_support": true,
+    "vision_support": false,
     "open_weight": false,
     "speed_tier": "fast",
     "model_type": [
@@ -2489,9 +2994,10 @@
     "verified": true,
     "verified_date": "2026-08-06",
     "free": false,
-    "price_note": "按张计费，约 ¥0.1/张（以腾讯云官方为准）"
+    "price_note": "按张计费，约 ¥0.1/张（以腾讯云官方为准）",
+    "media_type": "image"
   },
-    {
+  {
     "id": "kuaishou-kolors",
     "family_id": "kuaishou-kolors",
     "provider_id": "kuaishou",
@@ -2504,7 +3010,7 @@
     "input_price_per_mtok": 0,
     "output_price_per_mtok": 0,
     "currency": "USD",
-    "vision_support": true,
+    "vision_support": false,
     "open_weight": true,
     "speed_tier": "fast",
     "model_type": [
@@ -2526,6 +3032,7 @@
     "verified": true,
     "verified_date": "2026-08-06",
     "free": true,
-    "free_note": "开放权重(Apache 2.0)；经硅基流动(SiliconFlow)免费 API 调用(Kwai-Kolors/Kolors)，中文 prompt 强。"
+    "free_note": "开放权重(Apache 2.0)；经硅基流动(SiliconFlow)免费 API 调用(Kwai-Kolors/Kolors)，中文 prompt 强。",
+    "media_type": "image"
   }
 ]
