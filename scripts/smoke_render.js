@@ -30,7 +30,7 @@ async function main() {
 
   const code = fs.readFileSync(path.join(ROOT, 'app.js'), 'utf8')
   window.eval(code)
-  await new Promise((r) => setTimeout(r, 120))
+  await new Promise((r) => setTimeout(r, 250))
 
   const app = window.document.querySelector('#app')
   const goto = async (hash) => {

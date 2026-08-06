@@ -337,6 +337,30 @@ select { padding: 8px 12px; border-radius: var(--r-sm); }
 .entry-card p { margin: 0; color: var(--muted); font-size: 13.5px; flex: 1; }
 .entry-card i { font-style: normal; font-size: 13px; color: var(--green-600); font-weight: 600; }
 
+/* V4 首页模块：场景推荐 / 成本入口 */
+.scene-grid { display: flex; flex-wrap: wrap; gap: 10px; }
+.scene-chip {
+  display: inline-flex; align-items: center; gap: 7px; text-decoration: none;
+  background: var(--card); border: 1px solid var(--line); border-radius: 999px;
+  padding: 9px 15px; font-size: 13.5px; font-weight: 600; color: var(--deep);
+  transition: transform .14s, box-shadow .14s, border-color .14s, background .14s;
+}
+.scene-chip:hover { transform: translateY(-2px); border-color: var(--green-600); box-shadow: var(--sh-2); background: var(--soft); }
+.sc-ico { font-size: 15px; color: var(--green-600); }
+.cost-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.cost-card {
+  display: flex; flex-direction: column; gap: 4px; text-decoration: none;
+  background: var(--card); border: 1px solid var(--line); border-left: 3px solid var(--green-600);
+  border-radius: var(--r-md); padding: 18px 20px; transition: transform .14s, box-shadow .14s;
+}
+.cost-card:hover { transform: translateY(-3px); box-shadow: var(--sh-3); }
+.cost-card b { font-size: 15.5px; color: var(--deep); }
+.cost-card small { color: var(--muted); font-size: 12.5px; }
+.cost-card.c-free { border-left-color: var(--green-600); }
+.cost-card.c-low { border-left-color: var(--orange); }
+.cost-card.c-std { border-left-color: var(--deep); }
+@media (max-width: 720px) { .cost-grid { grid-template-columns: 1fr; } }
+
 /* ---------------- 厂商卡片 ---------------- */
 .provider-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 18px; }
 .provider-card {
@@ -565,6 +589,26 @@ select { padding: 8px 12px; border-radius: var(--r-sm); }
 
 /* ---------------- 浏览页 ---------------- */
 .browse-layout { display: grid; grid-template-columns: 268px 1fr; gap: 26px; align-items: start; }
+.browse-tabs { display: flex; gap: 8px; margin-bottom: 18px; }
+.b-tab {
+  font-size: 13.5px; font-weight: 600; color: var(--muted); background: var(--card);
+  border: 1px solid var(--line); border-radius: 999px; padding: 8px 16px; cursor: pointer;
+  transition: all .14s;
+}
+.b-tab:hover { border-color: var(--green-600); color: var(--deep); }
+.b-tab.on { background: var(--deep); color: #fff; border-color: var(--deep); }
+.scene-tab { display: flex; flex-direction: column; gap: 18px; }
+.task-tiles { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 12px; }
+.task-tile {
+  display: flex; flex-direction: column; gap: 4px; text-align: left; cursor: pointer;
+  background: var(--card); border: 1px solid var(--line); border-radius: var(--r-md); padding: 14px 16px;
+  transition: transform .14s, box-shadow .14s, border-color .14s;
+}
+.task-tile:hover { transform: translateY(-2px); box-shadow: var(--sh-2); border-color: var(--green-600); }
+.task-tile.on { border-color: var(--deep); box-shadow: 0 0 0 1px var(--deep); }
+.tt-ico { font-size: 18px; color: var(--green-600); margin-bottom: 4px; }
+.task-tile b { font-size: 14px; color: var(--deep); }
+.task-tile small { font-size: 11.5px; color: var(--muted); line-height: 1.4; }
 .filter-panel {
   background: var(--card); border: 1px solid var(--line); border-radius: var(--r-lg);
   padding: 20px; position: sticky; top: 92px; display: flex; flex-direction: column; gap: 20px;
@@ -701,6 +745,13 @@ select { padding: 8px 12px; border-radius: var(--r-sm); }
 }
 .api-fact b { font-size: 11px; color: var(--muted); font-weight: 700; }
 .api-fact code { font-size: 12.5px; color: var(--deep); word-break: break-all; }
+.api-feat span { display: flex; flex-wrap: wrap; gap: 5px; }
+.feat {
+  font-style: normal; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 999px;
+  background: var(--paper); color: var(--muted); border: 1px solid var(--line);
+}
+.feat.on { background: color-mix(in srgb, var(--green) 16%, transparent); color: var(--deep); border-color: var(--green-600); }
+.feat.dim { opacity: .7; }
 .code-tabs { display: flex; gap: 6px; align-items: center; margin-bottom: 10px; }
 .code-tab {
   border: 1px solid var(--line); background: var(--card); border-radius: 999px;

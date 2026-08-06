@@ -40,6 +40,8 @@ const TRAITS = [
 
 const state = {
   providers: [], families: [], variants: [], tasks: [], recommendations: [], naming: [],
+  // V4 新增数据层
+  gateways: [], scenarios: [], apiAccess: [],
   // 厂商列表
   providerFilter: 'all', providerModality: 'all', providerSearch: '',
   // 系列页
@@ -69,6 +71,19 @@ async function loadData() {
     if (Array.isArray(extra) && extra.length) state.variants = state.variants.concat(extra)
   } catch (e) {
     console.warn('增量模型加载失败：', e)
+  }
+  // V4 数据层（独立实体）
+  try {
+    const [gw, sc, api] = await Promise.all([
+      fetch('./data/gateways.json').then((r) => (r.ok ? r.json() : [])),
+      fetch('./data/scenarios.json').then((r) => (r.ok ? r.json() : [])),
+      fetch('./data/api_access.json').then((r) => (r.ok ? r.json() : [])),
+    ])
+    state.gateways = Array.isArray(gw) ? gw : []
+    state.scenarios = Array.isArray(sc) ? sc : []
+    state.apiAccess = Array.isArray(api) ? api : []
+  } catch (e) {
+    console.warn('V4 数据加载失败：', e)
   }
   state.selectedTask = state.tasks[0]?.id || null
   state.browseTask = state.tasks[0]?.id || null
@@ -132,6 +147,18 @@ function catBadge(p, extraCls = '') {
   const map = { free: ['免费 API', 'cat-free'], gateway: ['托管网关', 'cat-gateway'] }
   const [label, cls] = map[p.category] || [p.category, '']
   return `<span class="cat-badge ${cls} ${extraCls}" title="${esc(p.category === 'gateway' ? '第三方托管网关：聚合多家模型，一个 API key 调用' : '可 API key 调用的真·免费模型')}">${esc(label)}</span>`
+}
+const apiAccessOf = (v) => state.apiAccess.find((a) => a.id === v.id) || null
+const capCn = (k) => (CAP_DIMS.find((c) => c.key === k) || {}).cn || k
+// V4 全文搜索匹配：模型名/中文名/别名/厂商/能力/使用场景
+function variantMatches(v, q) {
+  if (!q) return true
+  const hay = [v.name, v.name_cn, v.model_id, v.one_liner_cn, (v.aliases || []).join(' '), capCn(v.role)]
+    .filter(Boolean).join(' ').toLowerCase()
+  if (hay.includes(q)) return true
+  if ((v.capabilities || {}) && Object.keys(v.capabilities).some((k) => capCn(k).includes(q))) return true
+  if (state.scenarios.some((s) => s.name_cn.toLowerCase().includes(q) && (s.task_ids || []).some((tid) => (v.best_for || []).includes(tid)))) return true
+  return false
 }
 function modBadge(v, extraCls = '') {
   const m = MODALITY[modalityOf(v)]
@@ -206,6 +233,27 @@ function emptyBox(text) {
   return `<div class="empty-box"><span>✦</span><p>${esc(text)}</p></div>`
 }
 
+// ---------- V4 首页模块：场景推荐 / 成本入口 ----------
+function sceneModuleHTML() {
+  const chips = state.scenarios.map((s) => `<a class="scene-chip" href="#matcher" data-task="${esc(s.task_ids[0] || s.id)}"><span class="sc-ico">${s.icon || '✦'}</span>${esc(s.name_cn)}</a>`).join('')
+  return `<section class="section wrap v4-scene">
+    <div class="heading"><div><span class="eyebrow">场景推荐</span><h2>你想用 AI 做什么？</h2></div><p>点一个场景，直接给出适合该任务的推荐模型。</p></div>
+    <div class="scene-grid">${chips}</div>
+  </section>`
+}
+function costModuleHTML() {
+  const items = [
+    { k: 'free', label: '免费模型', desc: '免信用卡·可 API 调用', cls: 'c-free' },
+    { k: 'low', label: '低成本模型', desc: '高性价比·个人项目', cls: 'c-low' },
+    { k: 'standard', label: '商业模型', desc: '生产级·企业应用', cls: 'c-std' },
+  ]
+  const cards = items.map((i) => `<a class="cost-card ${i.cls}" href="#browse" data-cost="${i.k}"><b>${esc(i.label)}</b><small>${esc(i.desc)}</small></a>`).join('')
+  return `<section class="section wrap v4-cost">
+    <div class="heading"><div><span class="eyebrow">按成本选</span><h2>你的预算是？</h2></div><p>免费体验、低成本开发，还是标准商业模型。</p></div>
+    <div class="cost-grid">${cards}</div>
+  </section>`
+}
+
 // ---------- 视图：首页 ----------
 function viewHome() {
   const scoreOf = {}
@@ -256,8 +304,11 @@ function viewHome() {
     </div>
   </section>
 
+  ${sceneModuleHTML()}
+  ${costModuleHTML()}
+
   <section class="section wrap">
-    <div class="heading"><div><span class="eyebrow">热门模型</span><h2>大家都在看的模型</h2></div><p>按各场景推荐评分聚合，挑出当前最受关注的型号。</p></div>
+    <div class="heading"><div><span class="eyebrow">当前主流模型</span><h2>大家都在看的模型</h2></div><p>按各场景推荐评分聚合，挑出当前最受关注的型号（非排行榜）。</p></div>
     <div class="card-grid">${hot.map((v) => modelCard(v, `<span class="hot-flag">热度 ${scoreOf[v.id]}</span>`)).join('')}</div>
   </section>`
 }
@@ -288,7 +339,7 @@ function filteredProviders() {
     if (state.providerModality !== 'all' && !vs.some((v) => modalityOf(v) === state.providerModality)) return false
     if (!q) return true
     if ((p.name_cn || p.name).toLowerCase().includes(q) || (p.name || '').toLowerCase().includes(q)) return true
-    return vs.some((v) => `${v.name} ${v.name_cn} ${v.one_liner_cn || ''}`.toLowerCase().includes(q))
+    return vs.some((v) => variantMatches(v, q))
   })
 }
 function providerGridHTML() {
@@ -487,7 +538,15 @@ function matchModels() {
   else scored.sort((a, b) => b.score - a.score || priceValue(a.v) - priceValue(b.v))
   return scored
 }
+function sceneTabHTML() {
+  const tiles = (state.scenarios || [])
+    .map((s) => `<button class="task-tile ${state.browseTask === s.task_ids[0] ? 'on' : ''}" data-browse-task="${esc(s.task_ids[0] || s.id)}"><span class="tt-ico">${s.icon || '✦'}</span><b>${esc(s.name_cn)}</b><small>${esc(s.description_cn || '')}</small></button>`)
+    .join('')
+  const results = state.browseTask ? recommendationHTML(state.browseTask) : `<div class="empty-box"><span>✦</span><p>选择一个场景，查看为该任务推荐的模型。</p></div>`
+  return `<div class="scene-tab"><div class="task-tiles">${tiles}</div><div class="browse-results" id="browse-results-inner">${results}</div></div>`
+}
 function browseResultsHTML() {
+  if (state.browseTab === 'scene') return sceneTabHTML()
   const scored = matchModels()
   if (!scored.length) return emptyBox('没有同时满足这些条件的模型，试着减少几个筛选项。')
   const top = scored.slice(0, 24)
@@ -525,6 +584,10 @@ function viewBrowse() {
     `<button class="${state.browsePrice === k ? 'selected' : ''}" data-value="${k}">${label}</button>`
   return `<div class="wrap page">
     ${pageHead({ eyebrow: '02 / 能力筛选', title: '按<em>能力</em>找模型', desc: '左边勾选你需要的能力与硬性条件，右边即时过滤并排序，找到最合适的型号。' })}
+    <div class="browse-tabs">
+      <button class="b-tab ${state.browseTab === 'capability' ? 'on' : ''}" data-tab="capability">按能力筛选</button>
+      <button class="b-tab ${state.browseTab === 'scene' ? 'on' : ''}" data-tab="scene">按场景选</button>
+    </div>
     <div class="browse-layout">
       <aside class="filter-panel">
         <div class="fp-block"><h4>模态</h4><div class="segmented" data-seg="browseModality">${modBtn('all', '全部')}${modBtn('text', '文本')}${modBtn('image', '图像')}${modBtn('video', '视频')}</div></div>
@@ -549,9 +612,9 @@ function rankCandidates(ids) {
   else arr.sort((a, b) => b.r.score - a.r.score)
   return arr
 }
-function recommendationHTML() {
-  const task = byId(state.tasks, 'id', state.selectedTask)
-  const rec = state.recommendations.find((r) => r.task_id === state.selectedTask)
+function recommendationHTML(taskId = state.selectedTask) {
+  const task = byId(state.tasks, 'id', taskId)
+  const rec = state.recommendations.find((r) => r.task_id === taskId)
   if (!task || !rec) return `<div class="empty-box"><span>✦</span><p>该任务暂无推荐数据。</p></div>`
   const ranked = rankCandidates(rec.model_ids)
   const hint =
@@ -652,10 +715,17 @@ function apiBlockHTML(v) {
   const p = providerOf(v)
   const base = p.api_base_url || 'http://localhost:8000/v1'
   const ex = codeExamples(v)
+  const aa = apiAccessOf(v)
+  const acc = aa ? aa.accesses[0] : null
+  const feats = (acc && acc.features) || []
+  const hasTool = feats.includes('tool_calling') || !!(v.capabilities && v.capabilities.agent && v.capabilities.agent.tier)
+  const hasStream = feats.includes('streaming')
   const facts = `<div class="api-facts">
-    <div class="api-fact"><b>接入地址</b><code>${esc(p.api_base_url || '（自托管）')}</code></div>
+    <div class="api-fact"><b>接入地址</b><code>${esc(acc ? acc.base_url : (p.api_base_url || '（自托管）'))}</code></div>
     <div class="api-fact"><b>模型 ID</b><code>${esc(v.model_id || v.id)}</code></div>
-    <div class="api-fact"><b>接口风格</b><code>${esc(API_STYLE_CN[p.api_style] || p.api_style || '—')}</code></div>
+    <div class="api-fact"><b>接口协议</b><code>${esc(API_STYLE_CN[acc ? acc.protocol : p.api_style] || (acc ? acc.protocol : p.api_style) || '—')}</code></div>
+    <div class="api-fact"><b>认证方式</b><code>${esc((acc && acc.auth_type) || 'api_key')}</code></div>
+    <div class="api-fact api-feat"><b>能力支持</b><span>${hasTool ? '<i class="feat on">Tool Calling</i>' : ''}${hasStream ? '<i class="feat on">Streaming</i>' : ''}<i class="feat dim">Structured Output（见官方文档）</i></span></div>
   </div>`
   if (ex.note) return `<div class="api-block">${facts}<p class="muted">${ex.note}</p></div>`
   const note = ex.isLocal
@@ -933,6 +1003,36 @@ function bindGlobalEvents() {
     if (freeInfo) {
       e.preventDefault()
       freeInfo.classList.toggle('active')
+      return
+    }
+    // V4 首页场景芯片 → 预选任务进入任务选择器
+    const sceneChip = e.target.closest('[data-task]')
+    if (sceneChip) {
+      state.selectedTask = sceneChip.dataset.task
+      if (parseHash().name === 'matcher') render()
+      else location.hash = 'matcher'
+      return
+    }
+    // V4 首页成本入口 → 预置价格筛选进入浏览页
+    const costChip = e.target.closest('[data-cost]')
+    if (costChip) {
+      state.browsePrice = costChip.dataset.cost
+      if (parseHash().name === 'browse') { refreshBrowse(); document.querySelectorAll('[data-seg="browsePrice"] button').forEach((b) => b.classList.toggle('selected', b.dataset.value === costChip.dataset.cost)) }
+      else location.hash = 'browse'
+      return
+    }
+    // V4 浏览页：能力/场景 标签切换
+    const tabBtn = e.target.closest('[data-tab]')
+    if (tabBtn) {
+      state.browseTab = tabBtn.dataset.tab
+      render()
+      return
+    }
+    // V4 浏览页场景 tab：选中场景 → 渲染该任务推荐
+    const bt = e.target.closest('[data-browse-task]')
+    if (bt) {
+      state.browseTask = bt.dataset.browseTask
+      render()
       return
     }
     // 返回
