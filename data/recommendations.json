@@ -4,9 +4,11 @@
     "task_id": "chat",
     "label": "AI 聊天推荐",
     "model_ids": [
-      {"id": "anthropic-sonnet-5", "score": 5, "reason": "速度与智能最佳平衡，日常问答稳定。"},
-      {"id": "openai-gpt-5-4", "score": 5, "reason": "编码与专业工作强，通用性好。"},
-      {"id": "anthropic-haiku-4-5", "score": 4, "reason": "最快最便宜，高并发聊天首选。"}
+      {"id": "anthropic-sonnet-5", "score": 5, "reason": "速度与智能均衡，日常问答与长对话稳定，1M 上下文。"},
+      {"id": "openai-gpt-5-4", "score": 5, "reason": "通用性强、指令遵循好，覆盖绝大多数聊天场景。"},
+      {"id": "deepseek-v3", "score": 4, "reason": "极便宜且中文好，高频聊天成本最低（网页版亦免费）。"},
+      {"id": "qwen-3-5-flash", "score": 4, "reason": "最便宜的 1M 上下文之一，中文与多语流畅。"},
+      {"id": "agnes-2-5-flash", "score": 4, "reason": "免信用卡免费 API，1M 上下文，轻量聊天零成本。"}
     ]
   },
   {
@@ -14,9 +16,11 @@
     "task_id": "coding",
     "label": "写代码推荐",
     "model_ids": [
-      {"id": "anthropic-sonnet-5", "score": 5, "reason": "编码强且均衡，agentic 友好。"},
-      {"id": "openai-gpt-5-5", "score": 5, "reason": "旗舰编码与专业工作定位。"},
-      {"id": "deepseek-v3", "score": 4, "reason": "代码强且极便宜，中文好。"}
+      {"id": "anthropic-sonnet-5", "score": 5, "reason": "编码强且均衡，agentic 编码友好。"},
+      {"id": "openai-gpt-5-5", "score": 5, "reason": "旗舰编码与专业工作定位，工具调用稳。"},
+      {"id": "deepseek-v3", "score": 4, "reason": "代码强且极便宜，中文注释质量高。"},
+      {"id": "glm-4-7-flash", "score": 4, "reason": "智谱免费 API，编码能力达 high，零成本写代码。"},
+      {"id": "mistral-codestral", "score": 4, "reason": "Mistral 免费 Experiment 层，专注代码补全（需同意数据训练）。"}
     ]
   },
   {
@@ -24,9 +28,11 @@
     "task_id": "agent",
     "label": "Agent 开发推荐",
     "model_ids": [
-      {"id": "anthropic-fable-5", "score": 5, "reason": "官方最強，面向长程 agent。"},
-      {"id": "anthropic-opus-5", "score": 5, "reason": "复杂 agentic 编码与企业工作。"},
-      {"id": "xai-grok-4-3", "score": 4, "reason": "agentic 工具调用强，实时检索。"}
+      {"id": "anthropic-fable-5", "score": 5, "reason": "最强推理与编码，面向长程 agent。"},
+      {"id": "openai-gpt-5-5", "score": 5, "reason": "工具调用与多步任务稳定，生态成熟。"},
+      {"id": "anthropic-opus-5", "score": 4, "reason": "复杂 agentic 编码与企业级工作流。"},
+      {"id": "deepseek-r1", "score": 4, "reason": "开源 CoT 推理，可自托管做 agent 规划。"},
+      {"id": "xai-grok-4-3", "score": 4, "reason": "实时检索 + 工具调用强，适合带联网的 agent。"}
     ]
   },
   {
@@ -34,11 +40,13 @@
     "task_id": "image",
     "label": "图片生成推荐",
     "model_ids": [
-      {"id": "openai-gpt-image-2", "score": 5, "reason": "OpenAI 生态，ChatGPT 原生，提示词理解强。"},
-      {"id": "google-imagen-4", "score": 5, "reason": "照片级真实，图像内文字渲染最佳。"},
-      {"id": "blackforest-flux-2", "score": 4, "reason": "开放权重可自托管，API 便宜，质量高。"}
+      {"id": "openai-gpt-image-2", "score": 5, "reason": "ChatGPT 原生，提示词理解强、可控性高。"},
+      {"id": "google-imagen-4", "score": 5, "reason": "照片级真实感，图像内文字渲染最佳。"},
+      {"id": "blackforest-flux-2", "score": 4, "reason": "开放权重可自托管，质量高、风格灵活。"},
+      {"id": "cogview-3-flash", "score": 4, "reason": "智谱免费图像生成，ZhipuAI SDK / OpenAI 兼容零成本。"},
+      {"id": "agnes-image-2-1-flash", "score": 4, "reason": "Agnes 免费文生图 API，免信用卡。"}
     ],
-    "note": "Midjourney V7 艺术质量最佳但无公开 API；Stable Diffusion 4 / Qwen-Image 可本地开源部署。"
+    "note": "Midjourney V7 艺术质量最佳但无公开 API；Stable Diffusion / Qwen-Image 可本地开源部署。"
   },
   {
     "id": "rec-image-understanding",
@@ -46,8 +54,10 @@
     "label": "图片理解推荐",
     "model_ids": [
       {"id": "google-gemini-3-1-pro", "score": 5, "reason": "多模态与长上下文，视觉理解强。"},
-      {"id": "qwen-vl-max", "score": 4, "reason": "视觉多模态，文档/图片问答。"},
-      {"id": "meta-llama-4-maverick", "score": 4, "reason": "开放权重多模态，可自托管。"}
+      {"id": "qwen-vl-max", "score": 4, "reason": "视觉多模态，文档/图片问答，中文好（网页版免费）。"},
+      {"id": "meta-llama-4-maverick", "score": 4, "reason": "开放权重多模态，可自托管保护数据。"},
+      {"id": "glm-4-6v-flash", "score": 4, "reason": "智谱免费视觉模型，图片理解零成本。"},
+      {"id": "agnes-2-5-flash", "score": 4, "reason": "免费全模态，图片理解 + 1M 上下文。"}
     ]
   },
   {
@@ -56,19 +66,23 @@
     "label": "视频生成推荐",
     "model_ids": [
       {"id": "google-veo-3-1", "score": 5, "reason": "4K + 空间音频，技术最完整，企业首选。"},
-      {"id": "openai-sora-2", "score": 4, "reason": "电影感与物理模拟最强（API 将于 2026-09-24 关停，注意风险）。"},
-      {"id": "kuaishou-kling-3-0", "score": 4, "reason": "4K@60fps，免费额度，性价比高。"}
+      {"id": "openai-sora-2", "score": 4, "reason": "电影感与物理模拟强（API 尚不稳定，生产建议 Veo / Kling 兜底）。"},
+      {"id": "kuaishou-kling-3-0", "score": 4, "reason": "4K@60fps，含免费额度，性价比高。"},
+      {"id": "cogvideox-flash", "score": 4, "reason": "智谱免费视频生成，API key 零成本。"},
+      {"id": "agnes-video-2-0", "score": 4, "reason": "Agnes 免费文生视频，免信用卡。"}
     ],
-    "note": "Runway Gen-4.5 创意控制最强、Seedance 2.0 性价比高、Grok Imagine 最便宜含音频；Sora 2 API 计划 2026-09-24 关停。"
+    "note": "Runway Gen-4.5 创意控制最强、Seedance 2.0 性价比高、Grok Imagine 最便宜且含音频；Sora 2 电影感强但 API 尚不稳定。"
   },
   {
     "id": "rec-local",
     "task_id": "local",
     "label": "本地部署推荐",
     "model_ids": [
-      {"id": "meta-llama-4-scout", "score": 5, "reason": "开放权重，10M 超长上下文，私有化首选。"},
-      {"id": "meta-llama-4-maverick", "score": 5, "reason": "开放权重多模态，1M 上下文。"},
-      {"id": "deepseek-r1", "score": 4, "reason": "MIT 开源推理模型，可自托管。"}
+      {"id": "meta-llama-4-scout", "score": 5, "reason": "开放权重，原生 10M 上下文，私有化首选。"},
+      {"id": "meta-llama-4-maverick", "score": 5, "reason": "开放权重多模态，1M 上下文，可自托管。"},
+      {"id": "deepseek-r1", "score": 4, "reason": "MIT 开源推理模型，可本地部署做复杂推理。"},
+      {"id": "blackforest-flux-2", "score": 4, "reason": "FLUX 开放权重，本地生图无授权费。"},
+      {"id": "deepseek-v3", "score": 4, "reason": "DeepSeek 开源权重，本地部署成本低的通用模型。"}
     ]
   },
   {
@@ -76,9 +90,11 @@
     "task_id": "low_cost",
     "label": "低成本 API 推荐",
     "model_ids": [
-      {"id": "deepseek-v3", "score": 5, "reason": "$0.27/$1.10 每百万 tokens，代码强。"},
-      {"id": "qwen-3-5-flash", "score": 5, "reason": "$0.10/$0.40，最便宜的 1M 上下文之一。"},
-      {"id": "openai-gpt-5-4-nano", "score": 4, "reason": "$0.20/$1.25，最快最便宜的 GPT。"}
+      {"id": "deepseek-v3", "score": 5, "reason": "¥0.27/1.1 每百万 token，代码强。"},
+      {"id": "qwen-3-5-flash", "score": 5, "reason": "¥0.1/0.4，最便宜的 1M 上下文之一。"},
+      {"id": "openai-gpt-5-4-nano", "score": 4, "reason": "¥0.2/1.25，最快最便宜的 GPT。"},
+      {"id": "glm-4-flash-250414", "score": 4, "reason": "智谱永久免费 API，零成本。"},
+      {"id": "agnes-2-5-flash", "score": 4, "reason": "免信用卡免费，1M 上下文零成本。"}
     ]
   },
   {
@@ -86,9 +102,11 @@
     "task_id": "reasoning",
     "label": "复杂推理推荐",
     "model_ids": [
-      {"id": "openai-gpt-5-5-pro", "score": 5, "reason": "最高推理投入，复杂任务最强。"},
-      {"id": "anthropic-fable-5", "score": 5, "reason": "官方最強广泛发布模型。"},
-      {"id": "deepseek-r1", "score": 4, "reason": "开源 CoT 推理，数学/代码强且便宜。"}
+      {"id": "openai-gpt-5-5-pro", "score": 5, "reason": "最高推理投入，复杂任务最强（价格高）。"},
+      {"id": "anthropic-fable-5", "score": 5, "reason": "官方最强广泛发布模型，推理与编码顶尖。"},
+      {"id": "deepseek-r1", "score": 4, "reason": "开源 CoT 推理，数学/代码强且便宜。"},
+      {"id": "google-gemini-3-1-pro", "score": 4, "reason": "多模态推理，支持长链思考。"},
+      {"id": "glm-4-7-flash", "score": 4, "reason": "智谱免费 API，编码/推理可用，零成本试算。"}
     ]
   },
   {
@@ -98,7 +116,9 @@
     "model_ids": [
       {"id": "meta-llama-4-scout", "score": 5, "reason": "原生 10M 上下文，长文档/代码库首选。"},
       {"id": "google-gemini-2-5-pro", "score": 5, "reason": "2M 上下文，上代旗舰仍可用。"},
-      {"id": "openai-gpt-5-5", "score": 4, "reason": "1M 上下文，综合能力强。"}
+      {"id": "openai-gpt-5-5", "score": 4, "reason": "1M 上下文，综合能力强。"},
+      {"id": "google-gemini-3-1-pro", "score": 4, "reason": "多模态长上下文，RAG 友好。"},
+      {"id": "agnes-2-5-flash", "score": 4, "reason": "免费 1M 上下文，长文档处理零成本。"}
     ]
   },
   {
@@ -107,8 +127,10 @@
     "label": "企业知识库推荐",
     "model_ids": [
       {"id": "google-gemini-3-1-pro", "score": 5, "reason": "多模态长上下文，RAG 与检索强。"},
-      {"id": "mistral-large-3", "score": 4, "reason": "多语（EU）与数据驻留，企业友好。"},
-      {"id": "openai-gpt-5-5", "score": 4, "reason": "1M 上下文，综合能力强。"}
+      {"id": "mistral-large-3", "score": 4, "reason": "EU 数据驻留与企业合规友好。"},
+      {"id": "openai-gpt-5-5", "score": 4, "reason": "企业生态成熟，1M 上下文综合强。"},
+      {"id": "qwen-3-max", "score": 4, "reason": "中文企业场景强，262K 上下文。"},
+      {"id": "deepseek-v3", "score": 4, "reason": "成本敏感型知识库，编码类问答质量高。"}
     ]
   },
   {
@@ -118,7 +140,9 @@
     "model_ids": [
       {"id": "anthropic-sonnet-5", "score": 5, "reason": "文风自然、长文结构稳定，适合成稿。"},
       {"id": "openai-gpt-5-4", "score": 5, "reason": "通用写作与润色强，指令遵循好。"},
-      {"id": "google-gemini-3-1-pro", "score": 4, "reason": "长上下文，多语与长文 Draft 友好。"}
+      {"id": "google-gemini-3-1-pro", "score": 4, "reason": "长上下文，多语与长文 Draft 友好。"},
+      {"id": "kimi-k2-5", "score": 4, "reason": "长文写作与中文好，网页版免费。"},
+      {"id": "qwen-3-max", "score": 4, "reason": "中文写作流畅，企业友好。"}
     ]
   },
   {
@@ -126,9 +150,11 @@
     "task_id": "learning",
     "label": "学习 AI 推荐",
     "model_ids": [
-      {"id": "anthropic-haiku-4-5", "score": 5, "reason": "解释清晰、响应快，入门答疑首选。"},
+      {"id": "anthropic-haiku-4-5", "score": 5, "reason": "解释清晰、响应快，入门答疑首选（¥1/5）。"},
       {"id": "openai-gpt-5-4", "score": 5, "reason": "通用知识广，概念讲解到位。"},
-      {"id": "deepseek-v3", "score": 4, "reason": "中文好且极便宜，适合高频练习。"}
+      {"id": "deepseek-v3", "score": 4, "reason": "中文好且极便宜，适合高频练习。"},
+      {"id": "glm-4-flash-250414", "score": 4, "reason": "智谱永久免费，零成本练手。"},
+      {"id": "agnes-2-5-flash", "score": 4, "reason": "免信用卡免费，1M 上下文答疑。"}
     ]
   },
   {
@@ -138,7 +164,9 @@
     "model_ids": [
       {"id": "google-gemini-3-1-pro", "score": 5, "reason": "多模态长上下文，RAG 与检索强。"},
       {"id": "mistral-large-3", "score": 5, "reason": "EU 数据驻留与企业合规友好。"},
-      {"id": "openai-gpt-5-5", "score": 4, "reason": "1M 上下文，综合能力强。"}
+      {"id": "openai-gpt-5-5", "score": 4, "reason": "企业生态成熟，1M 上下文综合强。"},
+      {"id": "qwen-3-max", "score": 4, "reason": "中文企业场景强，国内合规。"},
+      {"id": "meta-llama-4-maverick", "score": 4, "reason": "开放权重可自托管，满足数据不出域要求。"}
     ]
   }
 ]
