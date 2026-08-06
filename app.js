@@ -347,9 +347,14 @@ function viewProvider(id) {
       ${statCard('API Base URL', p.api_base_url ? `<code>${esc(p.api_base_url)}</code>` : '自托管 / 无公开 API')}
       ${statCard('接口风格', esc(API_STYLE_CN[p.api_style] || p.api_style || '—'))}
     </div>
+    ${fs.length ? `
     <h2 class="sec-title">模型系列</h2>
     <p class="sec-sub">系列是理解一家厂商的最短路径：同一系列共享定位与训练思路，差别只在档位。</p>
-    <div class="family-grid">${fs.length ? fs.map(famCard).join('') : emptyBox('该厂商暂无收录系列。')}</div>
+    <div class="family-grid">${fs.map(famCard).join('')}</div>` : ''}
+    ${vs.length ? `
+    <h2 class="sec-title">全部型号</h2>
+    <p class="sec-sub">该厂商收录的所有可调用型号，点卡片查看详情、价格与能力。</p>
+    <div class="card-grid">${vs.map((v) => modelCard(v)).join('')}</div>` : emptyBox('该厂商暂无收录型号。')}
   </div>`
 }
 
@@ -570,7 +575,7 @@ function viewMatcher() {
     `<button class="${cur === val ? 'selected' : ''}" data-value="${val}">${label}</button>`
   return `<div class="matcher-page">
     <div class="wrap page">
-      ${pageHead({ eyebrow: '03 / 任务匹配', title: '告诉我，你想做什么？', desc: '选择任务、预算和偏好，得到带理由的推荐列表。' })}
+      ${pageHead({ eyebrow: '03 / 任务匹配', title: '告诉我，<em>你想做什么？</em>', desc: '选择任务、预算和偏好，得到带理由的推荐列表。' })}
       <div class="matcher-layout">
         <div class="matcher-form">
           <label>我想要</label>
