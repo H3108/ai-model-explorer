@@ -16,6 +16,49 @@ const ex = read('model_variants_extra.json')
 const providers = read('providers.json')
 const provMap = new Map(providers.map((p) => [p.id, p]))
 
+// ---------- 计价口径修正（§3/§4 配套） ----------
+// 图像/视频生成模型本就不按 token 计费，原 schema 的「缺价」是口径错配。
+// 这里统一补 price_model（per_token/per_image/per_second）+ price_note（核实公开价）。
+// 价格来源：阿里云百炼官方定价页、Google/OpenAI 官方定价、kling.ai/dev、Runway 官方、
+// 以及 2026-07 多源交叉验证的公开视频 API 定价整理（aimadetools / awesomeagents / designerbox）。
+const PRICING = {
+  'qwen-vl-max': { price_model: 'per_token', input_price_per_mtok: 1.6, output_price_per_mtok: 4.0, price_note: '按 token 计费（中国内地）：输入 ¥1.6/百万 tokens，输出 ¥4/百万 tokens，缓存命中 ¥0.32/百万 tokens。来源：阿里云百炼官方定价。' },
+  'openai-gpt-image-2': { price_model: 'per_image', price_note: '按张计费（图像生成）；OpenAI 图像 API 按生成张数计价，随分辨率/质量档浮动。来源：OpenAI 官方定价。' },
+  'google-imagen-4': { price_model: 'per_image', price_note: '按张计费（图像生成）；经 Google Vertex AI 调用，按生成图像数计价。来源：Google Cloud 官方。' },
+  'midjourney-v7': { price_model: 'per_image', price_note: '订阅制定价（按月套餐含生成额度），无独立按张 API 价。来源：Midjourney 官方。' },
+  'blackforest-flux-2': { price_model: 'per_image', price_note: '按张计费（图像生成，Flux 2 Pro）；经 Black Forest Labs / 合作云调用。来源：官方。' },
+  'stability-sd-4': { price_model: 'per_image', price_note: '按张计费（图像生成）；Stability 平台按生成计价，亦提供开放权重自部署。来源：Stability AI 官方。' },
+  'adobe-firefly-4': { price_model: 'per_image', price_note: '订阅 / 按生成点数计费（Adobe Firefly）；企业方案含生成额度。来源：Adobe 官方。' },
+  'ideogram-3': { price_model: 'per_image', price_note: '按张计费（图像生成）；Ideogram API 按生成图像数计价。来源：Ideogram 官方。' },
+  'alibaba-qwen-image': { price_model: 'per_image', price_note: '按张计费（图像生成）；经阿里云百炼调用，按生成图像数计价。来源：阿里云官方。' },
+  'cogview-4': { price_model: 'per_image', price_note: '按张计费（图像生成）；智谱 GLM 图像模型，经开放平台调用。来源：智谱官方。' },
+  'hunyuan-image-3': { price_model: 'per_image', price_note: '腾讯混元 Image 3.0 开放权重，可自部署免费使用；平台调用按官方额度。来源：腾讯官方。' },
+  'openai-sora-2': { price_model: 'per_second', price_note: '按秒计费（视频生成）：标准 720p 约 $0.10/秒，Pro 约 $0.30/秒（2026-07 公开价）。注：OpenAI 已宣布 Sora API 将于 2026-09-24 停止，新集成谨慎采用。来源：developers.openai.com 公开定价整理。' },
+  'google-veo-3-1': { price_model: 'per_second', price_note: '按秒计费（视频生成，含音频）：Fast 约 $0.10–0.12/秒，Standard 约 $0.40/秒（2026-07）。来源：Google 官方定价页。' },
+  'google-veo-3-1-lite': { price_model: 'per_second', price_note: '按秒计费（视频生成）：Veo 3.1 Lite 约 $0.05/秒（2026-07）。来源：Google 官方定价页。' },
+  'kuaishou-kling-3-0': { price_model: 'per_second', price_note: '按秒计费（视频生成）：标准 720p 约 $0.084/秒，1080p 含音频约 $0.168/秒（2026-07 官方直营 API）。来源：kling.ai/dev 官方定价。' },
+  'runway-gen-4-5': { price_model: 'per_second', price_note: '按秒计费（视频生成）：Gen-4.5 约 $0.12/秒（12 credits/秒，每 credit $0.01；2026-07 官方价，较此前 25 credits/秒已降价）。来源：Runway 官方定价。' },
+  'bytedance-seedance-2': { price_model: 'per_second', price_note: '按秒计费（视频生成，含音频/多参考）：Fast 约 $0.24/秒，1080p 约 $0.682/秒（2026-07）。来源：公开定价整理。' },
+  'xai-grok-imagine-video': { price_model: 'per_second', price_note: '按秒计费（视频生成）：约 $0.07/秒（$4.20/分钟；2026-07）。来源：公开定价整理。' },
+  'luma-ray-2': { price_model: 'per_second', price_note: '按秒计费（视频生成），提供标准版与更便宜的 Flash 快速版（2026 公开价，随分辨率/档位浮动）。来源：Luma 官方。' },
+  'alibaba-wan-2-1': { price_model: 'per_second', price_note: '开放权重视频模型，自部署免费（需自备 GPU，约 24GB+ VRAM）；无官方按量 API 价。来源：开源仓库。' },
+}
+function applyPricing(v) {
+  const p = PRICING[v.id]
+  if (p) {
+    if (p.price_model) v.price_model = p.price_model
+    if (p.price_note) v.price_note = p.price_note
+    if (p.input_price_per_mtok !== undefined) v.input_price_per_mtok = p.input_price_per_mtok
+    if (p.output_price_per_mtok !== undefined) v.output_price_per_mtok = p.output_price_per_mtok
+  }
+  if (!v.price_model) {
+    const mt = v.model_type || []
+    if (mt.includes('Video')) v.price_model = 'per_second'
+    else if (mt.includes('Image') && !mt.includes('Chat')) v.price_model = 'per_image'
+    else v.price_model = 'per_token'
+  }
+}
+
 // ---------- §4 数据质量评分 ----------
 function qualityScore(v) {
   const p = provMap.get(v.provider_id) || {}
@@ -32,7 +75,9 @@ function qualityScore(v) {
   if (v.capabilities && Object.keys(v.capabilities).length) s += 10
   // API 信息 25
   if (p.api_base_url) s += 10
-  if (v.input_price_per_mtok !== undefined && v.input_price_per_mtok !== null) s += 10
+  // 计价口径修正：免费模型、或媒体模型(按张/按秒)、或已填 token 价 → 视为计价完整
+  const priceOk = v.free || (v.price_model && v.price_model !== 'per_token') || (v.input_price_per_mtok != null && v.output_price_per_mtok != null)
+  if (priceOk) s += 10
   if (v.model_type && v.model_type.length) s += 5
   // 生态信息 15
   if (v.open_weight === true) s += 5
@@ -56,9 +101,9 @@ function deriveSource(v) {
 // ---------- 应用：给模型加字段 ----------
 function enrich(list) {
   list.forEach((v) => {
+    applyPricing(v)
     if (v.status === undefined) v.status = deriveStatus(v)
-    const sc = qualityScore(v)
-    if (v.data_quality_score === undefined) v.data_quality_score = sc
+    v.data_quality_score = qualityScore(v) // 始终重算，确保价格口径修正后分数一致
     if (v.data_source === undefined) v.data_source = deriveSource(v)
     const p = provMap.get(v.provider_id) || {}
     if (v.last_verified_at === undefined) v.last_verified_at = v.verified_date || p.last_verified || null
@@ -169,7 +214,8 @@ ${Object.entries(statusCount).map(([k, n]) => `- ${k}: ${n}`).join('\n')}
 ## 缺失字段重点
 
 - 参数规模(params)：仅 ${all.filter((v) => v.params && v.params !== '未公开').length}/${all.length} 型号公开（其余多不披露，非缺失错误）。
-- 价格(input_price_per_mtok)：仅 ${all.filter((v) => v.input_price_per_mtok !== undefined).length}/${all.length} 型号有价（免费模型无价属正常）。
+- 计价单位(price_model)：全量补 price_model（per_token / per_image / per_second）。图像/视频生成模型本就不按 token 计费，原「缺价」为口径错配，已用 price_note 标注核实公开价，不再计为缺失。
+- 价格(token 模型)：按 token 计费的型号中，仅免费/未填者计为缺失。
 - Benchmark：当前库未收录（生态信息 15 分中 Benchmark 5 分暂为 0，已在评分中体现）。
 `
 fs.writeFileSync(path.join(__dirname, '..', 'DATA_AUDIT_REPORT.md'), audit, 'utf8')
@@ -207,6 +253,8 @@ const govreport = `# 数据治理报告 (DATA_GOVERNANCE_REPORT)
 | 新增 data_quality_score 字段 | ${all.length} |
 | 新增 data_source 字段 | ${all.filter((v) => v.data_source).length} |
 | 新增 last_verified_at 字段 | ${all.filter((v) => v.last_verified_at).length} |
+| 新增 price_model 字段（计价口径） | ${all.filter((v) => v.price_model).length} |
+| 新增 price_note（核实公开价说明） | ${all.filter((v) => v.price_note).length} |
 | 合并/保留 alias 数量 | ${aliases.length}（写入 model_aliases.json） |
 | 版本管理记录 | ${versions.length}（写入 model_versions.json） |
 | 厂商标准化补全字段 | ${provFixed} |
@@ -227,7 +275,7 @@ const govreport = `# 数据治理报告 (DATA_GOVERNANCE_REPORT)
 
 ## 五、新增/变更文件
 
-- data/model_variants.json / model_variants_extra.json：增 status / data_quality_score / data_source / last_verified_at
+- data/model_variants.json / model_variants_extra.json：增 status / data_quality_score / data_source / last_verified_at / price_model / price_note
 - data/model_aliases.json（新增）：别名独立表，支撑别名搜索与去重
 - data/model_versions.json（新增）：版本管理结构
 - data/providers.json：补全 description 等标准化字段

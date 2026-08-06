@@ -70,7 +70,8 @@
     "status": "active",
     "data_quality_score": 85,
     "data_source": "official",
-    "last_verified_at": "2026-08-05"
+    "last_verified_at": "2026-08-05",
+    "price_model": "per_token"
   },
   {
     "id": "openai-gpt-5-4",
@@ -142,7 +143,8 @@
     "status": "active",
     "data_quality_score": 85,
     "data_source": "official",
-    "last_verified_at": "2026-08-05"
+    "last_verified_at": "2026-08-05",
+    "price_model": "per_token"
   },
   {
     "id": "openai-gpt-5-4-mini",
@@ -212,7 +214,8 @@
     "status": "active",
     "data_quality_score": 85,
     "data_source": "official",
-    "last_verified_at": "2026-08-05"
+    "last_verified_at": "2026-08-05",
+    "price_model": "per_token"
   },
   {
     "id": "openai-gpt-5-4-nano",
@@ -282,7 +285,8 @@
     "status": "active",
     "data_quality_score": 85,
     "data_source": "official",
-    "last_verified_at": "2026-08-05"
+    "last_verified_at": "2026-08-05",
+    "price_model": "per_token"
   },
   {
     "id": "openai-gpt-5-5-pro",
@@ -352,7 +356,8 @@
     "status": "active",
     "data_quality_score": 85,
     "data_source": "official",
-    "last_verified_at": "2026-08-05"
+    "last_verified_at": "2026-08-05",
+    "price_model": "per_token"
   },
   {
     "id": "anthropic-fable-5",
@@ -425,7 +430,8 @@
     "status": "active",
     "data_quality_score": 85,
     "data_source": "official",
-    "last_verified_at": "2026-08-05"
+    "last_verified_at": "2026-08-05",
+    "price_model": "per_token"
   },
   {
     "id": "anthropic-opus-5",
@@ -497,7 +503,8 @@
     "status": "active",
     "data_quality_score": 85,
     "data_source": "official",
-    "last_verified_at": "2026-08-05"
+    "last_verified_at": "2026-08-05",
+    "price_model": "per_token"
   },
   {
     "id": "anthropic-sonnet-5",
@@ -567,7 +574,8 @@
     "status": "active",
     "data_quality_score": 85,
     "data_source": "official",
-    "last_verified_at": "2026-08-05"
+    "last_verified_at": "2026-08-05",
+    "price_model": "per_token"
   },
   {
     "id": "anthropic-haiku-4-5",
@@ -636,7 +644,8 @@
     "status": "active",
     "data_quality_score": 85,
     "data_source": "official",
-    "last_verified_at": "2026-08-05"
+    "last_verified_at": "2026-08-05",
+    "price_model": "per_token"
   },
   {
     "id": "google-gemini-3-1-pro",
@@ -710,7 +719,8 @@
     "status": "active",
     "data_quality_score": 85,
     "data_source": "official",
-    "last_verified_at": "2026-08-05"
+    "last_verified_at": "2026-08-05",
+    "price_model": "per_token"
   },
   {
     "id": "google-gemini-3-5-flash",
@@ -782,7 +792,8 @@
     "status": "active",
     "data_quality_score": 85,
     "data_source": "official",
-    "last_verified_at": "2026-08-05"
+    "last_verified_at": "2026-08-05",
+    "price_model": "per_token"
   },
   {
     "id": "google-gemini-3-flash",
@@ -852,7 +863,8 @@
     "status": "active",
     "data_quality_score": 85,
     "data_source": "official",
-    "last_verified_at": "2026-08-05"
+    "last_verified_at": "2026-08-05",
+    "price_model": "per_token"
   },
   {
     "id": "google-gemini-3-1-flash-lite",
@@ -924,7 +936,8 @@
     "status": "active",
     "data_quality_score": 85,
     "data_source": "official",
-    "last_verified_at": "2026-08-05"
+    "last_verified_at": "2026-08-05",
+    "price_model": "per_token"
   },
   {
     "id": "google-gemini-2-5-pro",
@@ -995,7 +1008,8 @@
     "status": "active",
     "data_quality_score": 85,
     "data_source": "official",
-    "last_verified_at": "2026-08-05"
+    "last_verified_at": "2026-08-05",
+    "price_model": "per_token"
   },
   {
     "id": "deepseek-v3",
@@ -1068,7 +1082,8 @@
     "status": "active",
     "data_quality_score": 95,
     "data_source": "official",
-    "last_verified_at": "2026-08-05"
+    "last_verified_at": "2026-08-05",
+    "price_model": "per_token"
   },
   {
     "id": "deepseek-v3-2",
@@ -1143,7 +1158,8 @@
     "status": "active",
     "data_quality_score": 95,
     "data_source": "official",
-    "last_verified_at": "2026-08-05"
+    "last_verified_at": "2026-08-05",
+    "price_model": "per_token"
   },
   {
     "id": "deepseek-r1",
@@ -1218,7 +1234,8 @@
     "status": "active",
     "data_quality_score": 95,
     "data_source": "official",
-    "last_verified_at": "2026-08-05"
+    "last_verified_at": "2026-08-05",
+    "price_model": "per_token"
   },
   {
     "id": "deepseek-coder",
@@ -1289,7 +1306,8 @@
     "status": "active",
     "data_quality_score": 90,
     "data_source": "official",
-    "last_verified_at": "2026-08-05"
+    "last_verified_at": "2026-08-05",
+    "price_model": "per_token"
   },
   {
     "id": "qwen-plus",
@@ -1362,7 +1380,8 @@
     "status": "active",
     "data_quality_score": 85,
     "data_source": "official",
-    "last_verified_at": "2026-08-05"
+    "last_verified_at": "2026-08-05",
+    "price_model": "per_token"
   },
   {
     "id": "qwen-3-max",
@@ -1435,7 +1454,8 @@
     "status": "active",
     "data_quality_score": 85,
     "data_source": "official",
-    "last_verified_at": "2026-08-05"
+    "last_verified_at": "2026-08-05",
+    "price_model": "per_token"
   },
   {
     "id": "qwen-3-5-flash",
@@ -1507,7 +1527,8 @@
     "status": "active",
     "data_quality_score": 85,
     "data_source": "official",
-    "last_verified_at": "2026-08-05"
+    "last_verified_at": "2026-08-05",
+    "price_model": "per_token"
   },
   {
     "id": "qwen-vl-max",
@@ -1519,8 +1540,8 @@
     "one_liner_cn": "视觉多模态理解模型，图片与文档问答。",
     "context_window": 128000,
     "max_output_tokens": 16000,
-    "input_price_per_mtok": null,
-    "output_price_per_mtok": null,
+    "input_price_per_mtok": 1.6,
+    "output_price_per_mtok": 4,
     "currency": "CNY",
     "vision_support": true,
     "open_weight": false,
@@ -1560,7 +1581,7 @@
     "source_url": "https://help.aliyun.com/zh/model-studio/",
     "verified": true,
     "verified_date": "2026-08-05",
-    "price_note": "视觉模型价格以阿里云官方 CNY 计价为准，本表暂未填入精确数值。",
+    "price_note": "按 token 计费（中国内地）：输入 ¥1.6/百万 tokens，输出 ¥4/百万 tokens，缓存命中 ¥0.32/百万 tokens。来源：阿里云百炼官方定价。",
     "free_note": "通义千问 VL 网页版免费；API 赠免费额度",
     "aliases": [
       "通义千问 VL Max",
@@ -1575,9 +1596,10 @@
       "official_api"
     ],
     "status": "active",
-    "data_quality_score": 75,
+    "data_quality_score": 85,
     "data_source": "official",
-    "last_verified_at": "2026-08-05"
+    "last_verified_at": "2026-08-05",
+    "price_model": "per_token"
   },
   {
     "id": "glm-5-2",
@@ -1650,7 +1672,8 @@
     "status": "active",
     "data_quality_score": 85,
     "data_source": "official",
-    "last_verified_at": "2026-08-05"
+    "last_verified_at": "2026-08-05",
+    "price_model": "per_token"
   },
   {
     "id": "glm-5",
@@ -1724,7 +1747,8 @@
     "status": "active",
     "data_quality_score": 90,
     "data_source": "official",
-    "last_verified_at": "2026-08-05"
+    "last_verified_at": "2026-08-05",
+    "price_model": "per_token"
   },
   {
     "id": "glm-5-turbo",
@@ -1795,7 +1819,8 @@
     "status": "active",
     "data_quality_score": 85,
     "data_source": "official",
-    "last_verified_at": "2026-08-05"
+    "last_verified_at": "2026-08-05",
+    "price_model": "per_token"
   },
   {
     "id": "kimi-k2",
@@ -1867,7 +1892,8 @@
     "status": "active",
     "data_quality_score": 85,
     "data_source": "official",
-    "last_verified_at": "2026-08-05"
+    "last_verified_at": "2026-08-05",
+    "price_model": "per_token"
   },
   {
     "id": "kimi-k2-5",
@@ -1939,7 +1965,8 @@
     "status": "active",
     "data_quality_score": 85,
     "data_source": "official",
-    "last_verified_at": "2026-08-05"
+    "last_verified_at": "2026-08-05",
+    "price_model": "per_token"
   },
   {
     "id": "kimi-k3",
@@ -2012,7 +2039,8 @@
     "status": "active",
     "data_quality_score": 85,
     "data_source": "official",
-    "last_verified_at": "2026-08-05"
+    "last_verified_at": "2026-08-05",
+    "price_model": "per_token"
   },
   {
     "id": "baidu-ernie-5-1",
@@ -2085,7 +2113,8 @@
     "status": "active",
     "data_quality_score": 85,
     "data_source": "official",
-    "last_verified_at": "2026-08-05"
+    "last_verified_at": "2026-08-05",
+    "price_model": "per_token"
   },
   {
     "id": "baidu-ernie-4-5-turbo",
@@ -2158,7 +2187,8 @@
     "status": "active",
     "data_quality_score": 90,
     "data_source": "official",
-    "last_verified_at": "2026-08-05"
+    "last_verified_at": "2026-08-05",
+    "price_model": "per_token"
   },
   {
     "id": "minimax-m2-5",
@@ -2229,7 +2259,8 @@
     "status": "active",
     "data_quality_score": 85,
     "data_source": "official",
-    "last_verified_at": "2026-08-05"
+    "last_verified_at": "2026-08-05",
+    "price_model": "per_token"
   },
   {
     "id": "minimax-m2-7",
@@ -2299,7 +2330,8 @@
     "status": "active",
     "data_quality_score": 85,
     "data_source": "official",
-    "last_verified_at": "2026-08-05"
+    "last_verified_at": "2026-08-05",
+    "price_model": "per_token"
   },
   {
     "id": "minimax-m3",
@@ -2370,7 +2402,8 @@
     "status": "active",
     "data_quality_score": 85,
     "data_source": "official",
-    "last_verified_at": "2026-08-05"
+    "last_verified_at": "2026-08-05",
+    "price_model": "per_token"
   },
   {
     "id": "mistral-large-3",
@@ -2443,7 +2476,8 @@
     "status": "active",
     "data_quality_score": 90,
     "data_source": "official",
-    "last_verified_at": "2026-08-05"
+    "last_verified_at": "2026-08-05",
+    "price_model": "per_token"
   },
   {
     "id": "mistral-small-4",
@@ -2513,7 +2547,8 @@
     "status": "active",
     "data_quality_score": 90,
     "data_source": "official",
-    "last_verified_at": "2026-08-05"
+    "last_verified_at": "2026-08-05",
+    "price_model": "per_token"
   },
   {
     "id": "mistral-codestral",
@@ -2582,7 +2617,8 @@
     "status": "active",
     "data_quality_score": 90,
     "data_source": "official",
-    "last_verified_at": "2026-08-05"
+    "last_verified_at": "2026-08-05",
+    "price_model": "per_token"
   },
   {
     "id": "mistral-magistral-medium",
@@ -2648,7 +2684,8 @@
     "status": "active",
     "data_quality_score": 85,
     "data_source": "official",
-    "last_verified_at": "2026-08-05"
+    "last_verified_at": "2026-08-05",
+    "price_model": "per_token"
   },
   {
     "id": "xai-grok-4-3",
@@ -2721,7 +2758,8 @@
     "status": "active",
     "data_quality_score": 85,
     "data_source": "official",
-    "last_verified_at": "2026-08-05"
+    "last_verified_at": "2026-08-05",
+    "price_model": "per_token"
   },
   {
     "id": "xai-grok-4",
@@ -2791,7 +2829,8 @@
     "status": "active",
     "data_quality_score": 85,
     "data_source": "official",
-    "last_verified_at": "2026-08-05"
+    "last_verified_at": "2026-08-05",
+    "price_model": "per_token"
   },
   {
     "id": "xai-grok-build-0-1",
@@ -2859,7 +2898,8 @@
     "status": "active",
     "data_quality_score": 85,
     "data_source": "official",
-    "last_verified_at": "2026-08-05"
+    "last_verified_at": "2026-08-05",
+    "price_model": "per_token"
   },
   {
     "id": "meta-llama-4-maverick",
@@ -2935,7 +2975,8 @@
     "status": "active",
     "data_quality_score": 85,
     "data_source": "official",
-    "last_verified_at": "2026-08-05"
+    "last_verified_at": "2026-08-05",
+    "price_model": "per_token"
   },
   {
     "id": "meta-llama-4-scout",
@@ -3010,7 +3051,8 @@
     "status": "active",
     "data_quality_score": 85,
     "data_source": "official",
-    "last_verified_at": "2026-08-05"
+    "last_verified_at": "2026-08-05",
+    "price_model": "per_token"
   },
   {
     "id": "openai-gpt-image-2",
@@ -3081,9 +3123,11 @@
       "official_api"
     ],
     "status": "active",
-    "data_quality_score": 65,
+    "data_quality_score": 75,
     "data_source": "official",
-    "last_verified_at": "2026-08-05"
+    "last_verified_at": "2026-08-05",
+    "price_model": "per_image",
+    "price_note": "按张计费（图像生成）；OpenAI 图像 API 按生成张数计价，随分辨率/质量档浮动。来源：OpenAI 官方定价。"
   },
   {
     "id": "google-imagen-4",
@@ -3153,9 +3197,11 @@
       "official_api"
     ],
     "status": "active",
-    "data_quality_score": 65,
+    "data_quality_score": 75,
     "data_source": "official",
-    "last_verified_at": "2026-08-05"
+    "last_verified_at": "2026-08-05",
+    "price_model": "per_image",
+    "price_note": "按张计费（图像生成）；经 Google Vertex AI 调用，按生成图像数计价。来源：Google Cloud 官方。"
   },
   {
     "id": "midjourney-v7",
@@ -3224,9 +3270,11 @@
       "official_api"
     ],
     "status": "active",
-    "data_quality_score": 55,
+    "data_quality_score": 65,
     "data_source": "official",
-    "last_verified_at": "2026-08-05"
+    "last_verified_at": "2026-08-05",
+    "price_model": "per_image",
+    "price_note": "订阅制定价（按月套餐含生成额度），无独立按张 API 价。来源：Midjourney 官方。"
   },
   {
     "id": "blackforest-flux-2",
@@ -3299,9 +3347,11 @@
       "self_host"
     ],
     "status": "active",
-    "data_quality_score": 70,
+    "data_quality_score": 80,
     "data_source": "official",
-    "last_verified_at": "2026-08-05"
+    "last_verified_at": "2026-08-05",
+    "price_model": "per_image",
+    "price_note": "按张计费（图像生成，Flux 2 Pro）；经 Black Forest Labs / 合作云调用。来源：官方。"
   },
   {
     "id": "stability-sd-4",
@@ -3374,9 +3424,11 @@
       "self_host"
     ],
     "status": "active",
-    "data_quality_score": 70,
+    "data_quality_score": 80,
     "data_source": "official",
-    "last_verified_at": "2026-08-05"
+    "last_verified_at": "2026-08-05",
+    "price_model": "per_image",
+    "price_note": "按张计费（图像生成）；Stability 平台按生成计价，亦提供开放权重自部署。来源：Stability AI 官方。"
   },
   {
     "id": "adobe-firefly-4",
@@ -3446,9 +3498,11 @@
       "official_api"
     ],
     "status": "active",
-    "data_quality_score": 65,
+    "data_quality_score": 75,
     "data_source": "official",
-    "last_verified_at": "2026-08-05"
+    "last_verified_at": "2026-08-05",
+    "price_model": "per_image",
+    "price_note": "订阅 / 按生成点数计费（Adobe Firefly）；企业方案含生成额度。来源：Adobe 官方。"
   },
   {
     "id": "ideogram-3",
@@ -3517,9 +3571,11 @@
       "official_api"
     ],
     "status": "active",
-    "data_quality_score": 65,
+    "data_quality_score": 75,
     "data_source": "official",
-    "last_verified_at": "2026-08-05"
+    "last_verified_at": "2026-08-05",
+    "price_model": "per_image",
+    "price_note": "按张计费（图像生成）；Ideogram API 按生成图像数计价。来源：Ideogram 官方。"
   },
   {
     "id": "alibaba-qwen-image",
@@ -3595,9 +3651,11 @@
       "self_host"
     ],
     "status": "active",
-    "data_quality_score": 70,
+    "data_quality_score": 80,
     "data_source": "official",
-    "last_verified_at": "2026-08-05"
+    "last_verified_at": "2026-08-05",
+    "price_model": "per_image",
+    "price_note": "按张计费（图像生成）；经阿里云百炼调用，按生成图像数计价。来源：阿里云官方。"
   },
   {
     "id": "openai-sora-2",
@@ -3669,9 +3727,11 @@
       "official_api"
     ],
     "status": "active",
-    "data_quality_score": 65,
+    "data_quality_score": 75,
     "data_source": "official",
-    "last_verified_at": "2026-08-05"
+    "last_verified_at": "2026-08-05",
+    "price_model": "per_second",
+    "price_note": "按秒计费（视频生成）：标准 720p 约 $0.10/秒，Pro 约 $0.30/秒（2026-07 公开价）。注：OpenAI 已宣布 Sora API 将于 2026-09-24 停止，新集成谨慎采用。来源：developers.openai.com 公开定价整理。"
   },
   {
     "id": "google-veo-3-1",
@@ -3743,9 +3803,11 @@
       "official_api"
     ],
     "status": "active",
-    "data_quality_score": 65,
+    "data_quality_score": 75,
     "data_source": "official",
-    "last_verified_at": "2026-08-05"
+    "last_verified_at": "2026-08-05",
+    "price_model": "per_second",
+    "price_note": "按秒计费（视频生成，含音频）：Fast 约 $0.10–0.12/秒，Standard 约 $0.40/秒（2026-07）。来源：Google 官方定价页。"
   },
   {
     "id": "google-veo-3-1-lite",
@@ -3818,9 +3880,11 @@
       "official_api"
     ],
     "status": "active",
-    "data_quality_score": 65,
+    "data_quality_score": 75,
     "data_source": "official",
-    "last_verified_at": "2026-08-05"
+    "last_verified_at": "2026-08-05",
+    "price_model": "per_second",
+    "price_note": "按秒计费（视频生成）：Veo 3.1 Lite 约 $0.05/秒（2026-07）。来源：Google 官方定价页。"
   },
   {
     "id": "kuaishou-kling-3-0",
@@ -3892,9 +3956,11 @@
       "official_api"
     ],
     "status": "active",
-    "data_quality_score": 65,
+    "data_quality_score": 75,
     "data_source": "official",
-    "last_verified_at": "2026-08-05"
+    "last_verified_at": "2026-08-05",
+    "price_model": "per_second",
+    "price_note": "按秒计费（视频生成）：标准 720p 约 $0.084/秒，1080p 含音频约 $0.168/秒（2026-07 官方直营 API）。来源：kling.ai/dev 官方定价。"
   },
   {
     "id": "runway-gen-4-5",
@@ -3966,9 +4032,11 @@
       "official_api"
     ],
     "status": "active",
-    "data_quality_score": 65,
+    "data_quality_score": 75,
     "data_source": "official",
-    "last_verified_at": "2026-08-05"
+    "last_verified_at": "2026-08-05",
+    "price_model": "per_second",
+    "price_note": "按秒计费（视频生成）：Gen-4.5 约 $0.12/秒（12 credits/秒，每 credit $0.01；2026-07 官方价，较此前 25 credits/秒已降价）。来源：Runway 官方定价。"
   },
   {
     "id": "bytedance-seedance-2",
@@ -4040,9 +4108,11 @@
       "official_api"
     ],
     "status": "active",
-    "data_quality_score": 65,
+    "data_quality_score": 75,
     "data_source": "official",
-    "last_verified_at": "2026-08-05"
+    "last_verified_at": "2026-08-05",
+    "price_model": "per_second",
+    "price_note": "按秒计费（视频生成，含音频/多参考）：Fast 约 $0.24/秒，1080p 约 $0.682/秒（2026-07）。来源：公开定价整理。"
   },
   {
     "id": "xai-grok-imagine-video",
@@ -4117,9 +4187,11 @@
       "official_api"
     ],
     "status": "active",
-    "data_quality_score": 65,
+    "data_quality_score": 75,
     "data_source": "official",
-    "last_verified_at": "2026-08-05"
+    "last_verified_at": "2026-08-05",
+    "price_model": "per_second",
+    "price_note": "按秒计费（视频生成）：约 $0.07/秒（$4.20/分钟；2026-07）。来源：公开定价整理。"
   },
   {
     "id": "luma-ray-2",
@@ -4191,9 +4263,11 @@
       "official_api"
     ],
     "status": "active",
-    "data_quality_score": 65,
+    "data_quality_score": 75,
     "data_source": "official",
-    "last_verified_at": "2026-08-05"
+    "last_verified_at": "2026-08-05",
+    "price_model": "per_second",
+    "price_note": "按秒计费（视频生成），提供标准版与更便宜的 Flash 快速版（2026 公开价，随分辨率/档位浮动）。来源：Luma 官方。"
   },
   {
     "id": "alibaba-wan-2-1",
@@ -4270,8 +4344,10 @@
       "self_host"
     ],
     "status": "active",
-    "data_quality_score": 70,
+    "data_quality_score": 80,
     "data_source": "official",
-    "last_verified_at": "2026-08-05"
+    "last_verified_at": "2026-08-05",
+    "price_model": "per_second",
+    "price_note": "开放权重视频模型，自部署免费（需自备 GPU，约 24GB+ VRAM）；无官方按量 API 价。来源：开源仓库。"
   }
 ]

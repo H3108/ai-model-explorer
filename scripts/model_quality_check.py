@@ -6,7 +6,7 @@ Model Explorer 每日数据质量检查 (MODEL_EXPLORER_DATA_GOVERNANCE_V1.md §
   - 新模型（相对上一次快照）
   - 模型更新（release_date / last_verified_at 变化）
   - API 变化（缺 api_base_url 的型号）
-  - 价格变化（非免费型号缺价格）
+  - 价格变化（仅按 token 计费的「非免费」型号缺价格；媒体模型按 price_model 区分，不计缺失）
   - 废弃模型（status=deprecated/unknown）
   - 数据异常（score<50 / 缺 source_url / 缺 capabilities）
 
@@ -56,9 +56,10 @@ def main():
         p = providers.get(v.get("provider_id"))
         if p and not p.get("api_base_url"):
             issues.append(f"{mid}: 厂商 {p.get('name')} 无 api_base_url")
-        # 价格变化（非免费缺价）
-        if not v.get("free") and v.get("input_price_per_mtok") is None:
-            issues.append(f"{mid}: 非免费型号缺价格")
+        # 价格变化（仅按 token 计费的「非免费」型号缺价才算缺失；媒体模型按 price_model 区分）
+        pm = v.get("price_model", "per_token")
+        if not v.get("free") and pm == "per_token" and v.get("input_price_per_mtok") is None:
+            issues.append(f"{mid}: 非免费 token 型号缺价格")
 
     # 新模型：对比上次快照
     snap = {}

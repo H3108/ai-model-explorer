@@ -718,6 +718,19 @@ function codeExamples(v) {
     isLocal,
   }
 }
+function priceBlock(v) {
+  if (!v.price_model) return ''
+  const LBL = { per_token: '按 Token 计费', per_image: '按张计费（图像生成）', per_second: '按秒计费（视频生成）' }
+  let detail = ''
+  if (v.price_model === 'per_token') {
+    if (v.free) detail = '免费模型（无 token 价）'
+    else if (v.input_price_per_mtok != null) detail = `输入 ¥${v.input_price_per_mtok}/百万 tokens · 输出 ¥${v.output_price_per_mtok}/百万 tokens`
+    else detail = '价格未公开'
+  } else {
+    detail = v.price_note || ''
+  }
+  return `<div class="api-price"><b>${LBL[v.price_model] || v.price_model}</b>${detail ? `<span>${esc(detail)}</span>` : ''}</div>`
+}
 function apiBlockHTML(v) {
   const p = providerOf(v)
   const base = p.api_base_url || 'http://localhost:8000/v1'
@@ -734,13 +747,14 @@ function apiBlockHTML(v) {
     <div class="api-fact"><b>认证方式</b><code>${esc((acc && acc.auth_type) || 'api_key')}</code></div>
     <div class="api-fact api-feat"><b>能力支持</b><span>${hasTool ? '<i class="feat on">Tool Calling</i>' : ''}${hasStream ? '<i class="feat on">Streaming</i>' : ''}<i class="feat dim">Structured Output（见官方文档）</i></span></div>
   </div>`
-  if (ex.note) return `<div class="api-block">${facts}<p class="muted">${ex.note}</p></div>`
+  const price = priceBlock(v)
+  if (ex.note) return `<div class="api-block">${facts}${price}<p class="muted">${ex.note}</p></div>`
   const note = ex.isLocal
     ? '<p class="muted">开放权重模型：将 Base URL 换成你自托管的推理服务（vLLM / Ollama 默认监听 <code>http://localhost:8000/v1</code>）。</p>'
     : ''
   const tab = (label, key) => `<button class="code-tab${key === 'py' ? ' selected' : ''}" data-code-tab="${key}">${label}</button>`
   const pre = (key, code) => `<pre class="code-block${key === 'py' ? '' : ' hidden'}" data-code="${key}"><code>${esc(code)}</code></pre>`
-  return `<div class="api-block">${facts}${note}
+  return `<div class="api-block">${facts}${price}${note}
     <div class="code-tabs">${tab('Python', 'py')}${tab('JavaScript', 'js')}${tab('curl', 'curl')}<button class="copy-btn" data-copy>复制</button></div>
     ${pre('py', ex.py)}${pre('js', ex.js)}${pre('curl', ex.curl)}</div>`
 }

@@ -18,8 +18,8 @@
 
 ## 二、数据质量结果
 
-- 平均质量评分：**83**
-- 等级数量：A=42 / B=58 / C=18 / D=0
+- 平均质量评分：**85**
+- 等级数量：A=42 / B=75 / C=1 / D=0
 - 字段完整率：89%
 
 ## 三、数据处理结果
@@ -30,9 +30,11 @@
 | 新增 data_quality_score 字段 | 118 |
 | 新增 data_source 字段 | 118 |
 | 新增 last_verified_at 字段 | 118 |
+| 新增 price_model 字段（计价口径） | 118 |
+| 新增 price_note（核实公开价说明） | 26 |
 | 合并/保留 alias 数量 | 367（写入 model_aliases.json） |
 | 版本管理记录 | 118（写入 model_versions.json） |
-| 厂商标准化补全字段 | 32 |
+| 厂商标准化补全字段 | 0 |
 | 修复字段 | 0（无错误字段需修复，仅补全治理所需新字段） |
 
 ## 四、体系落地对照（验收标准）
@@ -50,7 +52,7 @@
 
 ## 五、新增/变更文件
 
-- data/model_variants.json / model_variants_extra.json：增 status / data_quality_score / data_source / last_verified_at
+- data/model_variants.json / model_variants_extra.json：增 status / data_quality_score / data_source / last_verified_at / price_model / price_note
 - data/model_aliases.json（新增）：别名独立表，支撑别名搜索与去重
 - data/model_versions.json（新增）：版本管理结构
 - data/providers.json：补全 description 等标准化字段

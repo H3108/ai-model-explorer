@@ -69,7 +69,8 @@
     "status": "active",
     "data_quality_score": 85,
     "data_source": "official",
-    "last_verified_at": "2026-08-05"
+    "last_verified_at": "2026-08-05",
+    "price_model": "per_token"
   },
   {
     "id": "glm-4-flash-250414",
@@ -141,7 +142,8 @@
     "status": "archived",
     "data_quality_score": 85,
     "data_source": "official",
-    "last_verified_at": "2026-08-05"
+    "last_verified_at": "2026-08-05",
+    "price_model": "per_token"
   },
   {
     "id": "glm-4-6v-flash",
@@ -213,7 +215,8 @@
     "status": "active",
     "data_quality_score": 85,
     "data_source": "official",
-    "last_verified_at": "2026-08-05"
+    "last_verified_at": "2026-08-05",
+    "price_model": "per_token"
   },
   {
     "id": "glm-5-1",
@@ -284,7 +287,8 @@
     "status": "active",
     "data_quality_score": 85,
     "data_source": "official",
-    "last_verified_at": "2026-08-05"
+    "last_verified_at": "2026-08-05",
+    "price_model": "per_token"
   },
   {
     "id": "glm-4-7",
@@ -354,7 +358,8 @@
     "status": "active",
     "data_quality_score": 85,
     "data_source": "official",
-    "last_verified_at": "2026-08-05"
+    "last_verified_at": "2026-08-05",
+    "price_model": "per_token"
   },
   {
     "id": "glm-4-6",
@@ -423,7 +428,8 @@
     "status": "active",
     "data_quality_score": 85,
     "data_source": "official",
-    "last_verified_at": "2026-08-05"
+    "last_verified_at": "2026-08-05",
+    "price_model": "per_token"
   },
   {
     "id": "glm-4-5",
@@ -497,7 +503,8 @@
     "status": "active",
     "data_quality_score": 90,
     "data_source": "official",
-    "last_verified_at": "2026-08-05"
+    "last_verified_at": "2026-08-05",
+    "price_model": "per_token"
   },
   {
     "id": "glm-4-5-air",
@@ -564,7 +571,8 @@
     "status": "active",
     "data_quality_score": 85,
     "data_source": "official",
-    "last_verified_at": "2026-08-05"
+    "last_verified_at": "2026-08-05",
+    "price_model": "per_token"
   },
   {
     "id": "cogview-3-flash",
@@ -639,9 +647,10 @@
       "free_api"
     ],
     "status": "active",
-    "data_quality_score": 65,
+    "data_quality_score": 75,
     "data_source": "official",
-    "last_verified_at": "2026-08-05"
+    "last_verified_at": "2026-08-05",
+    "price_model": "per_image"
   },
   {
     "id": "cogview-4",
@@ -714,9 +723,11 @@
       "official_api"
     ],
     "status": "active",
-    "data_quality_score": 65,
+    "data_quality_score": 75,
     "data_source": "official",
-    "last_verified_at": "2026-08-05"
+    "last_verified_at": "2026-08-05",
+    "price_model": "per_image",
+    "price_note": "按张计费（图像生成）；智谱 GLM 图像模型，经开放平台调用。来源：智谱官方。"
   },
   {
     "id": "cogvideox-flash",
@@ -793,9 +804,10 @@
       "free_api"
     ],
     "status": "active",
-    "data_quality_score": 65,
+    "data_quality_score": 75,
     "data_source": "official",
-    "last_verified_at": "2026-08-05"
+    "last_verified_at": "2026-08-05",
+    "price_model": "per_second"
   },
   {
     "id": "agnes-2-5-flash",
@@ -866,7 +878,8 @@
     "status": "active",
     "data_quality_score": 85,
     "data_source": "official",
-    "last_verified_at": "2026-08-05"
+    "last_verified_at": "2026-08-05",
+    "price_model": "per_token"
   },
   {
     "id": "agnes-2-0-flash",
@@ -935,7 +948,8 @@
     "status": "active",
     "data_quality_score": 85,
     "data_source": "official",
-    "last_verified_at": "2026-08-05"
+    "last_verified_at": "2026-08-05",
+    "price_model": "per_token"
   },
   {
     "id": "agnes-image-2-1-flash",
@@ -1008,9 +1022,10 @@
       "free_api"
     ],
     "status": "active",
-    "data_quality_score": 65,
+    "data_quality_score": 75,
     "data_source": "official",
-    "last_verified_at": "2026-08-05"
+    "last_verified_at": "2026-08-05",
+    "price_model": "per_image"
   },
   {
     "id": "agnes-video-2-0",
@@ -1085,9 +1100,10 @@
       "free_api"
     ],
     "status": "active",
-    "data_quality_score": 65,
+    "data_quality_score": 75,
     "data_source": "official",
-    "last_verified_at": "2026-08-05"
+    "last_verified_at": "2026-08-05",
+    "price_model": "per_second"
   },
   {
     "id": "groq-llama-3-3-70b",
@@ -1159,7 +1175,8 @@
     "status": "active",
     "data_quality_score": 90,
     "data_source": "official",
-    "last_verified_at": "2026-08-05"
+    "last_verified_at": "2026-08-05",
+    "price_model": "per_token"
   },
   {
     "id": "groq-qwen3-32b",
@@ -1231,7 +1248,8 @@
     "status": "active",
     "data_quality_score": 90,
     "data_source": "official",
-    "last_verified_at": "2026-08-05"
+    "last_verified_at": "2026-08-05",
+    "price_model": "per_token"
   },
   {
     "id": "groq-llama-4-scout",
@@ -1302,7 +1320,8 @@
     "status": "active",
     "data_quality_score": 90,
     "data_source": "official",
-    "last_verified_at": "2026-08-05"
+    "last_verified_at": "2026-08-05",
+    "price_model": "per_token"
   },
   {
     "id": "openrouter-llama-3-3-70b-free",
@@ -1373,7 +1392,8 @@
     "status": "active",
     "data_quality_score": 90,
     "data_source": "official",
-    "last_verified_at": "2026-08-05"
+    "last_verified_at": "2026-08-05",
+    "price_model": "per_token"
   },
   {
     "id": "openrouter-deepseek-r1-free",
@@ -1444,7 +1464,8 @@
     "status": "active",
     "data_quality_score": 90,
     "data_source": "official",
-    "last_verified_at": "2026-08-05"
+    "last_verified_at": "2026-08-05",
+    "price_model": "per_token"
   },
   {
     "id": "nvidia-nim-nemotron-70b",
@@ -1515,7 +1536,8 @@
     "status": "active",
     "data_quality_score": 90,
     "data_source": "official",
-    "last_verified_at": "2026-08-05"
+    "last_verified_at": "2026-08-05",
+    "price_model": "per_token"
   },
   {
     "id": "nvidia-nim-llama-3-3-70b",
@@ -1586,7 +1608,8 @@
     "status": "active",
     "data_quality_score": 90,
     "data_source": "official",
-    "last_verified_at": "2026-08-05"
+    "last_verified_at": "2026-08-05",
+    "price_model": "per_token"
   },
   {
     "id": "mistral-small-free",
@@ -1654,7 +1677,8 @@
     "status": "active",
     "data_quality_score": 85,
     "data_source": "official",
-    "last_verified_at": "2026-08-05"
+    "last_verified_at": "2026-08-05",
+    "price_model": "per_token"
   },
   {
     "id": "groq-llama-3-1-8b-instant",
@@ -1725,7 +1749,8 @@
     "status": "active",
     "data_quality_score": 90,
     "data_source": "official",
-    "last_verified_at": "2026-08-06"
+    "last_verified_at": "2026-08-06",
+    "price_model": "per_token"
   },
   {
     "id": "groq-gemma-2-9b",
@@ -1794,7 +1819,8 @@
     "status": "active",
     "data_quality_score": 90,
     "data_source": "official",
-    "last_verified_at": "2026-08-06"
+    "last_verified_at": "2026-08-06",
+    "price_model": "per_token"
   },
   {
     "id": "groq-mixtral-8x7b",
@@ -1864,7 +1890,8 @@
     "status": "active",
     "data_quality_score": 90,
     "data_source": "official",
-    "last_verified_at": "2026-08-06"
+    "last_verified_at": "2026-08-06",
+    "price_model": "per_token"
   },
   {
     "id": "groq-whisper-large-v3",
@@ -1932,7 +1959,8 @@
     "status": "active",
     "data_quality_score": 90,
     "data_source": "official",
-    "last_verified_at": "2026-08-06"
+    "last_verified_at": "2026-08-06",
+    "price_model": "per_token"
   },
   {
     "id": "groq-deepseek-r1-distill-70b",
@@ -2002,7 +2030,8 @@
     "status": "active",
     "data_quality_score": 90,
     "data_source": "official",
-    "last_verified_at": "2026-08-06"
+    "last_verified_at": "2026-08-06",
+    "price_model": "per_token"
   },
   {
     "id": "groq-llama-4-maverick",
@@ -2073,7 +2102,8 @@
     "status": "active",
     "data_quality_score": 90,
     "data_source": "official",
-    "last_verified_at": "2026-08-06"
+    "last_verified_at": "2026-08-06",
+    "price_model": "per_token"
   },
   {
     "id": "groq-kimi-k2",
@@ -2143,7 +2173,8 @@
     "status": "active",
     "data_quality_score": 90,
     "data_source": "official",
-    "last_verified_at": "2026-08-06"
+    "last_verified_at": "2026-08-06",
+    "price_model": "per_token"
   },
   {
     "id": "openrouter-llama-4-maverick-free",
@@ -2214,7 +2245,8 @@
     "status": "active",
     "data_quality_score": 90,
     "data_source": "official",
-    "last_verified_at": "2026-08-06"
+    "last_verified_at": "2026-08-06",
+    "price_model": "per_token"
   },
   {
     "id": "openrouter-llama-4-scout-free",
@@ -2284,7 +2316,8 @@
     "status": "active",
     "data_quality_score": 90,
     "data_source": "official",
-    "last_verified_at": "2026-08-06"
+    "last_verified_at": "2026-08-06",
+    "price_model": "per_token"
   },
   {
     "id": "openrouter-gemma-2-9b-free",
@@ -2353,7 +2386,8 @@
     "status": "active",
     "data_quality_score": 90,
     "data_source": "official",
-    "last_verified_at": "2026-08-06"
+    "last_verified_at": "2026-08-06",
+    "price_model": "per_token"
   },
   {
     "id": "openrouter-mistral-7b-free",
@@ -2423,7 +2457,8 @@
     "status": "active",
     "data_quality_score": 90,
     "data_source": "official",
-    "last_verified_at": "2026-08-06"
+    "last_verified_at": "2026-08-06",
+    "price_model": "per_token"
   },
   {
     "id": "openrouter-qwen-2-5-72b-free",
@@ -2493,7 +2528,8 @@
     "status": "active",
     "data_quality_score": 90,
     "data_source": "official",
-    "last_verified_at": "2026-08-06"
+    "last_verified_at": "2026-08-06",
+    "price_model": "per_token"
   },
   {
     "id": "openrouter-llama-3-1-8b-free",
@@ -2562,7 +2598,8 @@
     "status": "active",
     "data_quality_score": 90,
     "data_source": "official",
-    "last_verified_at": "2026-08-06"
+    "last_verified_at": "2026-08-06",
+    "price_model": "per_token"
   },
   {
     "id": "openrouter-phi-3-5-mini-free",
@@ -2631,7 +2668,8 @@
     "status": "active",
     "data_quality_score": 90,
     "data_source": "official",
-    "last_verified_at": "2026-08-06"
+    "last_verified_at": "2026-08-06",
+    "price_model": "per_token"
   },
   {
     "id": "openrouter-gemini-2-0-flash-free",
@@ -2700,7 +2738,8 @@
     "status": "active",
     "data_quality_score": 85,
     "data_source": "official",
-    "last_verified_at": "2026-08-06"
+    "last_verified_at": "2026-08-06",
+    "price_model": "per_token"
   },
   {
     "id": "nvidia-nim-llama-4-maverick",
@@ -2771,7 +2810,8 @@
     "status": "active",
     "data_quality_score": 90,
     "data_source": "official",
-    "last_verified_at": "2026-08-06"
+    "last_verified_at": "2026-08-06",
+    "price_model": "per_token"
   },
   {
     "id": "nvidia-nim-mistral-small-24b",
@@ -2841,7 +2881,8 @@
     "status": "active",
     "data_quality_score": 90,
     "data_source": "official",
-    "last_verified_at": "2026-08-06"
+    "last_verified_at": "2026-08-06",
+    "price_model": "per_token"
   },
   {
     "id": "nvidia-nim-deepseek-r1",
@@ -2911,7 +2952,8 @@
     "status": "active",
     "data_quality_score": 90,
     "data_source": "official",
-    "last_verified_at": "2026-08-06"
+    "last_verified_at": "2026-08-06",
+    "price_model": "per_token"
   },
   {
     "id": "nvidia-nim-qwen3-coder-480b",
@@ -2981,7 +3023,8 @@
     "status": "active",
     "data_quality_score": 90,
     "data_source": "official",
-    "last_verified_at": "2026-08-06"
+    "last_verified_at": "2026-08-06",
+    "price_model": "per_token"
   },
   {
     "id": "nvidia-nim-nemotron-nano-9b",
@@ -3051,7 +3094,8 @@
     "status": "active",
     "data_quality_score": 90,
     "data_source": "official",
-    "last_verified_at": "2026-08-06"
+    "last_verified_at": "2026-08-06",
+    "price_model": "per_token"
   },
   {
     "id": "nvidia-nim-phi-4",
@@ -3120,7 +3164,8 @@
     "status": "active",
     "data_quality_score": 90,
     "data_source": "official",
-    "last_verified_at": "2026-08-06"
+    "last_verified_at": "2026-08-06",
+    "price_model": "per_token"
   },
   {
     "id": "nvidia-nim-gemma-2-9b",
@@ -3189,7 +3234,8 @@
     "status": "active",
     "data_quality_score": 90,
     "data_source": "official",
-    "last_verified_at": "2026-08-06"
+    "last_verified_at": "2026-08-06",
+    "price_model": "per_token"
   },
   {
     "id": "anyapi-auto",
@@ -3243,7 +3289,8 @@
     "status": "active",
     "data_quality_score": 85,
     "data_source": "community",
-    "last_verified_at": "2026-08-06"
+    "last_verified_at": "2026-08-06",
+    "price_model": "per_token"
   },
   {
     "id": "bazaarlink-auto-free",
@@ -3296,7 +3343,8 @@
     "status": "active",
     "data_quality_score": 85,
     "data_source": "community",
-    "last_verified_at": "2026-08-06"
+    "last_verified_at": "2026-08-06",
+    "price_model": "per_token"
   },
   {
     "id": "requesty-auto",
@@ -3350,7 +3398,8 @@
     "status": "active",
     "data_quality_score": 85,
     "data_source": "community",
-    "last_verified_at": "2026-08-06"
+    "last_verified_at": "2026-08-06",
+    "price_model": "per_token"
   },
   {
     "id": "opencode-zen-llama33",
@@ -3412,7 +3461,8 @@
     "status": "active",
     "data_quality_score": 90,
     "data_source": "community",
-    "last_verified_at": "2026-08-06"
+    "last_verified_at": "2026-08-06",
+    "price_model": "per_token"
   },
   {
     "id": "opencode-zen-qwen25",
@@ -3474,7 +3524,8 @@
     "status": "active",
     "data_quality_score": 90,
     "data_source": "community",
-    "last_verified_at": "2026-08-06"
+    "last_verified_at": "2026-08-06",
+    "price_model": "per_token"
   },
   {
     "id": "ovh-llama33",
@@ -3531,7 +3582,8 @@
     "status": "active",
     "data_quality_score": 90,
     "data_source": "community",
-    "last_verified_at": "2026-08-06"
+    "last_verified_at": "2026-08-06",
+    "price_model": "per_token"
   },
   {
     "id": "ovh-deepseek-r1",
@@ -3590,7 +3642,8 @@
     "status": "active",
     "data_quality_score": 90,
     "data_source": "community",
-    "last_verified_at": "2026-08-06"
+    "last_verified_at": "2026-08-06",
+    "price_model": "per_token"
   },
   {
     "id": "freeai-auto",
@@ -3644,7 +3697,8 @@
     "status": "active",
     "data_quality_score": 85,
     "data_source": "community",
-    "last_verified_at": "2026-08-06"
+    "last_verified_at": "2026-08-06",
+    "price_model": "per_token"
   },
   {
     "id": "hunyuan-turbos-latest",
@@ -3704,7 +3758,8 @@
     "status": "active",
     "data_quality_score": 85,
     "data_source": "official",
-    "last_verified_at": "2026-08-06"
+    "last_verified_at": "2026-08-06",
+    "price_model": "per_token"
   },
   {
     "id": "hunyuan-t1-latest",
@@ -3763,7 +3818,8 @@
     "status": "active",
     "data_quality_score": 85,
     "data_source": "official",
-    "last_verified_at": "2026-08-06"
+    "last_verified_at": "2026-08-06",
+    "price_model": "per_token"
   },
   {
     "id": "hunyuan-standard",
@@ -3819,7 +3875,8 @@
     "status": "active",
     "data_quality_score": 85,
     "data_source": "official",
-    "last_verified_at": "2026-08-06"
+    "last_verified_at": "2026-08-06",
+    "price_model": "per_token"
   },
   {
     "id": "hunyuan-vision-1-5-instruct",
@@ -3875,7 +3932,8 @@
     "status": "active",
     "data_quality_score": 85,
     "data_source": "official",
-    "last_verified_at": "2026-08-06"
+    "last_verified_at": "2026-08-06",
+    "price_model": "per_token"
   },
   {
     "id": "hunyuan-image-3",
@@ -3911,7 +3969,7 @@
     "verified": true,
     "verified_date": "2026-08-06",
     "free": false,
-    "price_note": "按张计费，约 ¥0.1/张（以腾讯云官方为准）",
+    "price_note": "腾讯混元 Image 3.0 开放权重，可自部署免费使用；平台调用按官方额度。来源：腾讯官方。",
     "media_type": "image",
     "aliases": [
       "混元图像 3.0",
@@ -3927,7 +3985,8 @@
     "status": "active",
     "data_quality_score": 75,
     "data_source": "official",
-    "last_verified_at": "2026-08-06"
+    "last_verified_at": "2026-08-06",
+    "price_model": "per_image"
   },
   {
     "id": "kuaishou-kolors",
@@ -3982,6 +4041,7 @@
     "status": "active",
     "data_quality_score": 80,
     "data_source": "official",
-    "last_verified_at": "2026-08-06"
+    "last_verified_at": "2026-08-06",
+    "price_model": "per_image"
   }
 ]

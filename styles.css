@@ -746,6 +746,13 @@ select { padding: 8px 12px; border-radius: var(--r-sm); }
 .api-fact b { font-size: 11px; color: var(--muted); font-weight: 700; }
 .api-fact code { font-size: 12.5px; color: var(--deep); word-break: break-all; }
 .api-feat span { display: flex; flex-wrap: wrap; gap: 5px; }
+.api-price {
+  display: flex; flex-direction: column; gap: 4px; margin: 14px 0 4px;
+  background: var(--paper); border-left: 3px solid var(--green-600, #173e35);
+  border-radius: var(--r-sm); padding: 10px 13px;
+}
+.api-price b { font-size: 11.5px; color: var(--green-600); font-weight: 700; letter-spacing: .02em; }
+.api-price span { font-size: 12.5px; color: var(--deep); line-height: 1.5; }
 .feat {
   font-style: normal; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 999px;
   background: var(--paper); color: var(--muted); border: 1px solid var(--line);
