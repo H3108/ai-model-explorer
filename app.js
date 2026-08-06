@@ -754,7 +754,7 @@ function viewModel(id) {
 function viewGateways() {
   const gw = state.providers.filter((p) => p.category === 'gateway')
   return `<div class="wrap page">
-    ${pageHead({ eyebrow: '05 / 托管网关', title: '第三方<em>托管网关</em>', desc: '把多家厂商的模型聚合到一个 API key 下调用——统一接口、即开即用。点卡片进入对应网关的系列与型号。' })}
+    ${pageHead({ eyebrow: '04 / 托管网关', title: '第三方<em>托管网关</em>', desc: '把多家厂商的模型聚合到一个 API key 下调用——统一接口、即开即用。点卡片进入对应网关的系列与型号。' })}
     <div class="gw-intro">
       <div class="gw-pros"><h4>适合你，如果…</h4><ul>
         <li>想用多家模型，但不想逐家注册、管理密钥</li>
@@ -774,7 +774,7 @@ function viewGateways() {
 
 function viewGlossary() {
   return `<div class="wrap page">
-    ${pageHead({ eyebrow: '04 / 命名词典', title: '模型名称，<em>其实有规律。</em>', desc: '不再被 Mini、Pro、Flash 搞混。快速理解型号后缀代表什么。' })}
+    ${pageHead({ eyebrow: '05 / 命名词典', title: '模型名称，<em>其实有规律。</em>', desc: '不再被 Mini、Pro、Flash 搞混。快速理解型号后缀代表什么。' })}
     <div class="glossary-grid">${state.naming
       .map((i) => `<article class="glossary-card"><span class="naming-term">${esc(i.term)}</span><b>${esc(i.name_cn)}</b><p>${esc(i.description_cn)}</p><small>例：${esc(i.example)}</small></article>`)
       .join('')}</div>
