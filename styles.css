@@ -258,31 +258,56 @@ select { padding: 8px 12px; border-radius: var(--r-sm); }
 .home-search { margin-top: 22px; max-width: 460px; }
 .home-search input { width: 100%; }
 
-.hero-visual { position: relative; height: 380px; }
-.orbit { position: absolute; border-radius: 50%; border: 1px dashed var(--line); }
-.orbit-a { inset: 24px; }
-.orbit-b { inset: 74px; border-style: solid; }
-.visual-core {
-  position: absolute; inset: 120px; border-radius: 50%;
-  background: var(--deep); color: #fff;
-  display: grid; place-items: center; text-align: center;
+.hero-visual { position: relative; height: 420px; display: grid; place-items: center; }
+.hero-visual::before {
+  content: ""; position: absolute; width: 360px; height: 360px; border-radius: 50%;
+  background: radial-gradient(circle at 50% 45%, color-mix(in srgb, var(--green) 20%, transparent), transparent 60%);
+  filter: blur(4px);
 }
-.visual-core b { font-size: 40px; color: var(--green); font-weight: 800; line-height: 1; }
-.visual-core small { font-size: 9px; letter-spacing: .18em; color: #ffffffb0; display: block; margin-top: 6px; }
+.orbit {
+  position: absolute; top: 50%; left: 50%;
+  border-radius: 50%; border: 1px dashed color-mix(in srgb, var(--green) 26%, var(--line));
+}
+.orbit-a { width: 360px; height: 360px; transform: translate(-50%, -50%); }
+.orbit-b {
+  width: 264px; height: 264px; transform: translate(-50%, -50%);
+  border-style: solid; border-color: color-mix(in srgb, var(--green) 22%, transparent);
+  animation: orbit-spin 30s linear infinite;
+}
+.orbit-c {
+  width: 452px; height: 452px; transform: translate(-50%, -50%);
+  border: 1px dotted color-mix(in srgb, var(--green) 16%, var(--line)); opacity: .6;
+}
+.orbit-dot { position: absolute; width: 11px; height: 11px; border-radius: 50%; background: var(--green); box-shadow: 0 0 0 5px color-mix(in srgb, var(--green) 26%, transparent); }
+.orbit-dot.d1 { top: -6px; left: 50%; transform: translateX(-50%); }
+.orbit-dot.d2 { bottom: -6px; left: 50%; transform: translateX(-50%); background: var(--orange); box-shadow: 0 0 0 5px color-mix(in srgb, var(--orange) 26%, transparent); }
+.orbit-dot.d3 { top: 50%; left: -6px; transform: translateY(-50%); width: 8px; height: 8px; background: var(--purple); box-shadow: 0 0 0 4px color-mix(in srgb, var(--purple) 26%, transparent); }
+.visual-core {
+  position: relative; z-index: 2;
+  width: 156px; height: 156px; border-radius: 50%;
+  background: radial-gradient(circle at 50% 32%, #1f4d42, var(--deep) 72%);
+  color: #fff; display: grid; place-items: center; text-align: center;
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--green) 36%, transparent), 0 22px 54px -20px color-mix(in srgb, var(--deep) 72%, transparent);
+}
+.visual-core b { font-size: 48px; color: var(--green); font-weight: 800; line-height: 1; }
+.visual-core .vc-s { font-size: 22px; vertical-align: top; margin-left: 1px; }
+.visual-core small { font-size: 11px; letter-spacing: .14em; color: #ffffffcc; margin-top: 9px; }
 .float-card {
-  position: absolute; background: var(--card); border: 1px solid var(--line);
+  position: absolute; z-index: 3; background: var(--card); border: 1px solid var(--line);
   border-radius: var(--r-md); padding: 10px 14px; box-shadow: var(--sh-2);
-  display: flex; flex-direction: column; gap: 2px;
+  display: flex; flex-direction: column; gap: 2px; border-left: 3px solid var(--green);
 }
 .float-card b { font-size: 12.5px; }
 .float-card small { font-size: 11px; color: var(--muted); }
-.f-one { top: 12px; left: -6px; }
-.f-two { bottom: 30px; right: -10px; }
-.f-three { bottom: 6px; left: 20px; }
+.float-card.f-one { top: 10px; left: -8px; border-left-color: var(--green); }
+.float-card.f-two { bottom: 26px; right: -12px; border-left-color: var(--orange); }
+.float-card.f-three { bottom: 4px; left: 14px; border-left-color: var(--purple); }
 .dot { width: 7px; height: 7px; border-radius: 50%; display: block; margin-bottom: 4px; }
 .dot.green { background: var(--green); }
 .dot.orange { background: var(--orange); }
 .dot.purple { background: var(--purple); }
+@keyframes orbit-spin { to { transform: translate(-50%, -50%) rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .orbit-b { animation: none; } }
 
 .proof {
   display: grid; grid-template-columns: repeat(4, 1fr);

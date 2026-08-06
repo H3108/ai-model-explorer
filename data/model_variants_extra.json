@@ -1952,5 +1952,336 @@
     "free": true,
     "free_note": "NVIDIA NIM 免费推理微服务托管 Gemma 2 9B。",
     "family_id": "google-gemma"
+  },
+    {
+    "id": "anyapi-auto",
+    "provider_id": "anyapi",
+    "name": "AnyAPI Auto",
+    "name_cn": "AnyAPI 自动路由",
+    "model_id": "auto",
+    "one_liner_cn": "免费层 100K tok/天，auto 路由到 400+ 模型中最优的一个。",
+    "context_window": 128000,
+    "max_output_tokens": 8192,
+    "input_price_per_mtok": 0,
+    "output_price_per_mtok": 0,
+    "currency": "USD",
+    "vision_support": false,
+    "open_weight": false,
+    "speed_tier": "fast",
+    "model_type": [
+      "Chat"
+    ],
+    "capabilities": {
+      "reasoning": {
+        "tier": "medium",
+        "basis": "路由到多家通用模型。"
+      },
+      "multilingual": {
+        "tier": "high",
+        "basis": "多语言支持。"
+      }
+    },
+    "best_for": [
+      "low_cost"
+    ],
+    "avoid_for": [],
+    "release_date": "2026",
+    "source_url": "https://docs.anyapi.ai/",
+    "verified": true,
+    "verified_date": "2026-08-06",
+    "free": true,
+    "free_note": "免费层 100K tok/天，auto 路由到 400+ 模型中最优的一个。"
+  },
+    {
+    "id": "bazaarlink-auto-free",
+    "provider_id": "bazaarlink",
+    "name": "BazaarLink auto:free",
+    "name_cn": "BazaarLink auto:free",
+    "model_id": "auto:free",
+    "one_liner_cn": "免费层 10 RPM / 130 req/天，auto:free 路由多模型。",
+    "context_window": 128000,
+    "max_output_tokens": 8192,
+    "input_price_per_mtok": 0,
+    "output_price_per_mtok": 0,
+    "currency": "USD",
+    "vision_support": false,
+    "open_weight": false,
+    "speed_tier": "fast",
+    "model_type": [
+      "Chat"
+    ],
+    "capabilities": {
+      "reasoning": {
+        "tier": "medium",
+        "basis": "路由到多家通用模型。"
+      },
+      "multilingual": {
+        "tier": "high",
+        "basis": "多语言支持。"
+      }
+    },
+    "best_for": [
+      "low_cost"
+    ],
+    "avoid_for": [],
+    "release_date": "2026",
+    "source_url": "https://docs.bazaarlink.ai/",
+    "verified": true,
+    "verified_date": "2026-08-06",
+    "free": true,
+    "free_note": "免费层 10 RPM / 130 req/天，auto:free 路由多模型。"
+  },
+    {
+    "id": "requesty-auto",
+    "provider_id": "requesty",
+    "name": "Requesty Auto",
+    "name_cn": "Requesty 路由",
+    "model_id": "auto",
+    "one_liner_cn": "免费试用 200 req/天，兼容 Claude Code 路由。",
+    "context_window": 200000,
+    "max_output_tokens": 8192,
+    "input_price_per_mtok": 0,
+    "output_price_per_mtok": 0,
+    "currency": "USD",
+    "vision_support": false,
+    "open_weight": false,
+    "speed_tier": "fast",
+    "model_type": [
+      "Chat"
+    ],
+    "capabilities": {
+      "reasoning": {
+        "tier": "medium",
+        "basis": "路由到多家通用模型。"
+      },
+      "multilingual": {
+        "tier": "high",
+        "basis": "多语言支持。"
+      }
+    },
+    "best_for": [
+      "low_cost"
+    ],
+    "avoid_for": [],
+    "release_date": "2026",
+    "source_url": "https://docs.requesty.ai/",
+    "verified": true,
+    "verified_date": "2026-08-06",
+    "free": true,
+    "free_note": "免费试用 200 req/天，兼容 Claude Code 路由。"
+  },
+    {
+    "id": "opencode-zen-llama33",
+    "provider_id": "opencode-zen",
+    "family_id": "meta-llama",
+    "name": "Zen Llama 3.3 70B",
+    "name_cn": "Zen Llama 3.3 70B",
+    "model_id": "llama-3.3-70b",
+    "one_liner_cn": "网关免费模型之一（共 7 个），Llama 3.3 70B。",
+    "context_window": 128000,
+    "max_output_tokens": 32768,
+    "input_price_per_mtok": 0,
+    "output_price_per_mtok": 0,
+    "currency": "USD",
+    "vision_support": false,
+    "open_weight": true,
+    "speed_tier": "fast",
+    "model_type": [
+      "Chat",
+      "Coding"
+    ],
+    "capabilities": {
+      "reasoning": {
+        "tier": "medium",
+        "basis": "70B 通用推理。"
+      },
+      "coding": {
+        "tier": "high",
+        "basis": "编码强。"
+      },
+      "multilingual": {
+        "tier": "high",
+        "basis": "多语言支持。"
+      }
+    },
+    "best_for": [
+      "low_cost",
+      "coding"
+    ],
+    "avoid_for": [],
+    "release_date": "2026",
+    "source_url": "https://docs.opencode.ai/",
+    "verified": true,
+    "verified_date": "2026-08-06",
+    "free": true,
+    "free_note": "网关免费模型之一（共 7 个），Llama 3.3 70B。"
+  },
+    {
+    "id": "opencode-zen-qwen25",
+    "provider_id": "opencode-zen",
+    "family_id": "qwen-qwen",
+    "name": "Zen Qwen2.5 72B",
+    "name_cn": "Zen Qwen2.5 72B",
+    "model_id": "qwen2.5-72b",
+    "one_liner_cn": "网关免费模型之一，Qwen2.5 72B。",
+    "context_window": 128000,
+    "max_output_tokens": 16384,
+    "input_price_per_mtok": 0,
+    "output_price_per_mtok": 0,
+    "currency": "USD",
+    "vision_support": false,
+    "open_weight": true,
+    "speed_tier": "fast",
+    "model_type": [
+      "Chat",
+      "Coding"
+    ],
+    "capabilities": {
+      "reasoning": {
+        "tier": "medium",
+        "basis": "72B 通用推理。"
+      },
+      "coding": {
+        "tier": "high",
+        "basis": "编码强。"
+      },
+      "multilingual": {
+        "tier": "high",
+        "basis": "中文与多语言支持。"
+      }
+    },
+    "best_for": [
+      "low_cost",
+      "coding"
+    ],
+    "avoid_for": [],
+    "release_date": "2026",
+    "source_url": "https://docs.opencode.ai/",
+    "verified": true,
+    "verified_date": "2026-08-06",
+    "free": true,
+    "free_note": "网关免费模型之一（共 7 个），Qwen2.5 72B。"
+  },
+    {
+    "id": "ovh-llama33",
+    "provider_id": "ovh-ai",
+    "family_id": "meta-llama",
+    "name": "OVH Llama 3.3 70B",
+    "name_cn": "OVH Llama 3.3 70B",
+    "model_id": "Llama-3.3-70B-Instruct",
+    "one_liner_cn": "匿名免费层 12 RPM，欧盟 GDPR 合规，无需注册。",
+    "context_window": 131072,
+    "max_output_tokens": 4096,
+    "input_price_per_mtok": 0,
+    "output_price_per_mtok": 0,
+    "currency": "USD",
+    "vision_support": false,
+    "open_weight": true,
+    "speed_tier": "fast",
+    "model_type": [
+      "Chat"
+    ],
+    "capabilities": {
+      "reasoning": {
+        "tier": "medium",
+        "basis": "70B 通用推理。"
+      },
+      "multilingual": {
+        "tier": "high",
+        "basis": "多语言支持。"
+      }
+    },
+    "best_for": [
+      "low_cost",
+      "gdpr"
+    ],
+    "avoid_for": [],
+    "release_date": "2026",
+    "source_url": "https://endpoints.ai.cloud.ovh.net/",
+    "verified": true,
+    "verified_date": "2026-08-06",
+    "free": true,
+    "free_note": "匿名免费层 12 RPM，欧盟 GDPR 合规，无需注册即可调用。"
+  },
+    {
+    "id": "ovh-deepseek-r1",
+    "provider_id": "ovh-ai",
+    "family_id": "deepseek-deepseek",
+    "name": "OVH DeepSeek R1 Distill",
+    "name_cn": "OVH DeepSeek R1 蒸馏",
+    "model_id": "DeepSeek-R1-Distill-Qwen-32B",
+    "one_liner_cn": "匿名免费层含 DeepSeek R1 蒸馏版，欧盟合规。",
+    "context_window": 128000,
+    "max_output_tokens": 8192,
+    "input_price_per_mtok": 0,
+    "output_price_per_mtok": 0,
+    "currency": "USD",
+    "vision_support": false,
+    "open_weight": true,
+    "speed_tier": "fast",
+    "model_type": [
+      "Chat",
+      "Reasoning"
+    ],
+    "capabilities": {
+      "reasoning": {
+        "tier": "high",
+        "basis": "R1 蒸馏推理。"
+      },
+      "multilingual": {
+        "tier": "medium",
+        "basis": "多语言支持。"
+      }
+    },
+    "best_for": [
+      "low_cost",
+      "reasoning"
+    ],
+    "avoid_for": [],
+    "release_date": "2026",
+    "source_url": "https://endpoints.ai.cloud.ovh.net/",
+    "verified": true,
+    "verified_date": "2026-08-06",
+    "free": true,
+    "free_note": "匿名免费层含 DeepSeek R1 蒸馏版，欧盟合规。"
+  },
+    {
+    "id": "freeai-auto",
+    "provider_id": "freeai",
+    "name": "Free.ai Auto",
+    "name_cn": "Free.ai 自动路由",
+    "model_id": "auto",
+    "one_liner_cn": "免费层 30K tok/天，聚合 400+ 工具。",
+    "context_window": 128000,
+    "max_output_tokens": 8192,
+    "input_price_per_mtok": 0,
+    "output_price_per_mtok": 0,
+    "currency": "USD",
+    "vision_support": false,
+    "open_weight": false,
+    "speed_tier": "fast",
+    "model_type": [
+      "Chat"
+    ],
+    "capabilities": {
+      "reasoning": {
+        "tier": "medium",
+        "basis": "路由到多家通用模型。"
+      },
+      "multilingual": {
+        "tier": "high",
+        "basis": "多语言支持。"
+      }
+    },
+    "best_for": [
+      "low_cost"
+    ],
+    "avoid_for": [],
+    "release_date": "2026",
+    "source_url": "https://docs.free.ai/",
+    "verified": true,
+    "verified_date": "2026-08-06",
+    "free": true,
+    "free_note": "免费层 30K tok/天，聚合 400+ 工具，OpenAI 兼容。"
   }
 ]

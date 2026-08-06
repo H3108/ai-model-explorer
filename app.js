@@ -230,10 +230,12 @@ function viewHome() {
       <div class="mod-legend">${mix}</div>
     </div>
     <div class="hero-visual">
-      <div class="orbit orbit-a"></div><div class="orbit orbit-b"></div>
-      <div class="visual-core"><b>30</b><small>秒级<br>选型</small></div>
-      <div class="float-card f-one"><i class="dot green"></i><b>任务</b><small>写代码 Agent</small></div>
-      <div class="float-card f-two"><i class="dot orange"></i><b>推荐前 3</b><small>理由清晰可见</small></div>
+      <div class="orbit orbit-a"></div>
+      <div class="orbit orbit-c"></div>
+      <div class="orbit orbit-b"><span class="orbit-dot d1"></span><span class="orbit-dot d2"></span><span class="orbit-dot d3"></span></div>
+      <div class="visual-core"><b>30<span class="vc-s">s</span></b><small>秒级选型</small></div>
+      <div class="float-card f-one"><i class="dot green"></i><b>14 类任务</b><small>说需求即推荐</small></div>
+      <div class="float-card f-two"><i class="dot orange"></i><b>推荐前 7</b><small>带理由·可排序</small></div>
       <div class="float-card f-three"><i class="dot purple"></i><b>模型族</b><small>系列 → 型号</small></div>
     </div>
   </section>
