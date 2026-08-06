@@ -767,7 +767,7 @@
       {
         "vendor": "meta",
         "access_type": "official_api",
-        "base_url": null,
+        "base_url": "https://api.llama.com/compat/v1",
         "protocol": "openai",
         "auth_type": "api_key",
         "model_id": "Llama-4-Maverick",
@@ -786,7 +786,7 @@
       {
         "vendor": "meta",
         "access_type": "official_api",
-        "base_url": null,
+        "base_url": "https://api.llama.com/compat/v1",
         "protocol": "openai",
         "auth_type": "api_key",
         "model_id": "Llama-4-Scout",
@@ -841,10 +841,11 @@
       {
         "vendor": "midjourney",
         "access_type": "official_api",
-        "base_url": null,
+        "base_url": "https://www.midjourney.com",
         "protocol": "provider_specific",
         "auth_type": "api_key",
         "model_id": "midjourney-v7",
+        "api_note": "Midjourney 暂无官方公开 REST API（截至 2026-05）。官方访问渠道为 web app（midjourney.com）与 Discord bot（/imagine 等命令）。如需程序化接入须走第三方代理（按图计费或自备订阅），请自行评估 TOS 风险。",
         "features": [
           "tool_calling"
         ]

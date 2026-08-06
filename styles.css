@@ -753,6 +753,33 @@ select { padding: 8px 12px; border-radius: var(--r-sm); }
 }
 .api-price b { font-size: 11.5px; color: var(--green-600); font-weight: 700; letter-spacing: .02em; }
 .api-price span { font-size: 12.5px; color: var(--deep); line-height: 1.5; }
+.api-note {
+  margin: 12px 0 2px; padding: 10px 13px; border-radius: var(--r-sm);
+  background: color-mix(in srgb, #e8a33d 14%, transparent); border-left: 3px solid #e8a33d;
+  font-size: 12.5px; line-height: 1.55; color: var(--deep);
+}
+.grade-badge {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-width: 20px; height: 20px; padding: 0 5px; border-radius: 6px;
+  font-size: 11px; font-weight: 800; line-height: 1; letter-spacing: .02em;
+  background: var(--paper); color: var(--muted); border: 1px solid var(--line);
+}
+.grade-badge.g-A { background: color-mix(in srgb, var(--green) 20%, transparent); color: var(--deep); border-color: var(--green-600); }
+.grade-badge.g-B { background: color-mix(in srgb, #7fb3ff 18%, transparent); color: var(--deep); border-color: #4f8de0; }
+.grade-badge.g-C { background: color-mix(in srgb, #e8a33d 18%, transparent); color: var(--deep); border-color: #e8a33d; }
+.grade-badge.g-D { background: color-mix(in srgb, #e06b6b 18%, transparent); color: var(--deep); border-color: #e06b6b; }
+.eco-box { display: flex; flex-direction: column; gap: 2px; border: 1px solid var(--line); border-radius: var(--r-lg); overflow: hidden; }
+.eco-row { display: grid; grid-template-columns: 110px 1fr; gap: 12px; padding: 11px 15px; align-items: start; border-bottom: 1px solid var(--line); }
+.eco-row:last-child { border-bottom: none; }
+.eco-row > b { font-size: 12px; color: var(--muted); font-weight: 700; padding-top: 2px; }
+.eco-row > span { font-size: 13px; color: var(--deep); line-height: 1.6; }
+.eco-links { display: flex; flex-wrap: wrap; gap: 8px; }
+.eco-link { color: var(--green-600); font-weight: 600; text-decoration: none; border-bottom: 1px dashed color-mix(in srgb, var(--green-600) 50%, transparent); }
+.eco-link:hover { color: var(--deep); }
+.bench-list { list-style: none; display: flex; flex-direction: column; gap: 6px; margin: 0; padding: 0; }
+.bench-list li { display: flex; gap: 8px; flex-wrap: wrap; }
+.bench-list b { font-size: 13px; color: var(--deep); }
+.bench-list span { font-size: 12px; color: var(--muted); }
 .feat {
   font-style: normal; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 999px;
   background: var(--paper); color: var(--muted); border: 1px solid var(--line);

@@ -47,7 +47,7 @@ const state = {
   // 系列页
   familySort: 'default',
   // 浏览页
-  browseTab: 'capability', browseModality: 'all', browseCaps: [], browseTraits: [], browseSort: 'match', browsePrice: 'all',
+  browseTab: 'capability', browseModality: 'all', browseCaps: [], browseTraits: [], browseSort: 'match', browsePrice: 'all', browseBill: 'all',
   browseTask: null,
   // 匹配器
   selectedTask: null, budget: 'balanced', speed: 'balanced',
@@ -209,6 +209,13 @@ function capBar(dim, cap) {
   </div>`
 }
 // 模型卡（列表/网格通用）
+// 数据质量评级（阈值与 scripts/governance_v1.js 的 grade() 一致：A≥90 / B≥70 / C≥50 / D<50）
+const GRADE_CN = { A: '优', B: '良', C: '中', D: '待补' }
+const gradeOf = (v) => { const s = v.data_quality_score || 0; return s >= 90 ? 'A' : s >= 70 ? 'B' : s >= 50 ? 'C' : 'D' }
+const gradeBadge = (v) => {
+  const g = gradeOf(v)
+  return `<span class="grade-badge g-${g}" title="数据质量 ${v.data_quality_score || 0} 分（${GRADE_CN[g]}）">${g}</span>`
+}
 function modelCard(v, extra = '') {
   const p = providerOf(v)
   const f = familyOf(v)
@@ -222,7 +229,7 @@ function modelCard(v, extra = '') {
       ? `<span>${ctxShort(v.context_window)} 上下文</span><span>${priceTxt}</span>`
       : `<span>${esc(v.max_resolution || v.max_duration_sec ? (v.max_resolution || v.max_duration_sec + 's') : '—')}</span><span>${priceTxt}</span>`
   return `<a class="model-card" href="#model/${encodeURIComponent(v.id)}">
-    <div class="mc-top">${logoHTML(p, 'sm')}${modBadge(v)}${free}${extra}</div>
+    <div class="mc-top">${logoHTML(p, 'sm')}${modBadge(v)}${free}${gradeBadge(v)}${extra}</div>
     <b class="mc-name">${esc(v.name_cn || v.name)}</b>
     <small class="mc-from">${esc(p.name_cn || p.name)}${famName(v) ? ' · ' + esc(famName(v)) : ''}</small>
     <p class="mc-desc">${esc(v.one_liner_cn || '')}</p>
@@ -261,7 +268,7 @@ function viewHome() {
   // V4 治理 §11：推荐排序以数据质量分为主键、推荐热度为辅（质量优先，热度破平）
   const hot = Object.entries(scoreOf)
     .map(([id, heat]) => ({ v: variantById(id), heat }))
-    .filter((x) => x.v)
+    .filter((x) => x.v && gradeOf(x.v) !== 'D') // 治理 v2.0：D 级彻底降权，不进首页热门
     .sort((a, b) => {
       const qa = a.v.data_quality_score || 0
       const qb = b.v.data_quality_score || 0
@@ -518,6 +525,7 @@ function matchModels() {
   if (state.browsePrice === 'free') list = list.filter((v) => v.free)
   else if (state.browsePrice === 'low') list = list.filter((v) => v.free !== true && v.input_price_per_mtok != null && v.input_price_per_mtok <= 1)
   else if (state.browsePrice === 'standard') list = list.filter((v) => v.free !== true && v.input_price_per_mtok != null && v.input_price_per_mtok > 1)
+  if (state.browseBill !== 'all') list = list.filter((v) => v.price_model === state.browseBill)
   state.browseTraits.forEach((k) => {
     const t = TRAITS.find((x) => x.key === k)
     if (t) list = list.filter(t.test)
@@ -589,6 +597,8 @@ function viewBrowse() {
     `<button class="${state.browseModality === k ? 'selected' : ''}" data-value="${k}">${label}</button>`
   const priceBtn = (k, label) =>
     `<button class="${state.browsePrice === k ? 'selected' : ''}" data-value="${k}">${label}</button>`
+  const billBtn = (k, label) =>
+    `<button class="${state.browseBill === k ? 'selected' : ''}" data-value="${k}">${label}</button>`
   return `<div class="wrap page">
     ${pageHead({ eyebrow: '02 / 能力筛选', title: '按<em>能力</em>找模型', desc: '左边勾选你需要的能力与硬性条件，右边即时过滤并排序，找到最合适的型号。' })}
     <div class="browse-tabs">
@@ -599,6 +609,7 @@ function viewBrowse() {
       <aside class="filter-panel">
         <div class="fp-block"><h4>模态</h4><div class="segmented" data-seg="browseModality">${modBtn('all', '全部')}${modBtn('text', '文本')}${modBtn('image', '图像')}${modBtn('video', '视频')}</div></div>
         <div class="fp-block"><h4>价格<small>按付费方式筛选</small></h4><div class="segmented" data-seg="browsePrice">${priceBtn('all', '全部')}${priceBtn('free', '免费')}${priceBtn('low', '低成本')}${priceBtn('standard', '标准价')}</div></div>
+        <div class="fp-block"><h4>计费方式<small>按计价单位筛选</small></h4><div class="segmented" data-seg="browseBill">${billBtn('all', '全部')}${billBtn('per_token', '按 Token')}${billBtn('per_image', '按张')}${billBtn('per_second', '按秒')}</div></div>
         <div class="fp-block"><h4>能力维度<small>多选，逐条过滤</small></h4><div class="chip-wrap">${CAP_DIMS.map(capChip).join('')}</div></div>
         <div class="fp-block"><h4>硬性条件<small>多选，逐条过滤</small></h4><div class="chip-wrap">${TRAITS.map(traitChip).join('')}</div></div>
         <div class="fp-block"><h4>排序</h4><div class="segmented" data-seg="browseSort"><button class="${state.browseSort === 'match' ? 'selected' : ''}" data-value="match">匹配度</button><button class="${state.browseSort === 'price' ? 'selected' : ''}" data-value="price">价格</button><button class="${state.browseSort === 'context' ? 'selected' : ''}" data-value="context">上下文</button></div></div>
@@ -748,13 +759,14 @@ function apiBlockHTML(v) {
     <div class="api-fact api-feat"><b>能力支持</b><span>${hasTool ? '<i class="feat on">Tool Calling</i>' : ''}${hasStream ? '<i class="feat on">Streaming</i>' : ''}<i class="feat dim">Structured Output（见官方文档）</i></span></div>
   </div>`
   const price = priceBlock(v)
-  if (ex.note) return `<div class="api-block">${facts}${price}<p class="muted">${ex.note}</p></div>`
+  const apiNote = (acc && acc.api_note) ? `<p class="api-note">⚠ ${esc(acc.api_note)}</p>` : ''
+  if (ex.note) return `<div class="api-block">${facts}${price}${apiNote}<p class="muted">${ex.note}</p></div>`
   const note = ex.isLocal
     ? '<p class="muted">开放权重模型：将 Base URL 换成你自托管的推理服务（vLLM / Ollama 默认监听 <code>http://localhost:8000/v1</code>）。</p>'
     : ''
   const tab = (label, key) => `<button class="code-tab${key === 'py' ? ' selected' : ''}" data-code-tab="${key}">${label}</button>`
   const pre = (key, code) => `<pre class="code-block${key === 'py' ? '' : ' hidden'}" data-code="${key}"><code>${esc(code)}</code></pre>`
-  return `<div class="api-block">${facts}${price}${note}
+  return `<div class="api-block">${facts}${price}${apiNote}${note}
     <div class="code-tabs">${tab('Python', 'py')}${tab('JavaScript', 'js')}${tab('curl', 'curl')}<button class="copy-btn" data-copy>复制</button></div>
     ${pre('py', ex.py)}${pre('js', ex.js)}${pre('curl', ex.curl)}</div>`
 }
@@ -825,6 +837,28 @@ function paramInsight(v) {
     .map((it) => `<article class="insight-card"><div class="insight-top"><span class="insight-k">${esc(it.k)}</span><span class="insight-band">${esc(it.band)}</span></div><b class="insight-val">${esc(it.v)}</b><p>${esc(it.desc)}</p>${it.tip ? `<small class="insight-tip">${esc(it.tip)}</small>` : ''}</article>`)
     .join('')}</div></section>`
 }
+// 治理 v2.0「模型生态与基准」区块：开放权重仓库 + 实时基准看板（不写死分数，避免编造）
+function ecoBlock(v) {
+  const g = gradeOf(v)
+  const benchLinks = [
+    { n: 'Artificial Analysis', u: 'https://artificialanalysis.ai/models' },
+    { n: 'LMArena', u: 'https://lmarena.ai/leaderboard' },
+  ]
+  const repo = v.repo_url
+  const bench = (v.benchmarks && v.benchmarks.length)
+    ? `<ul class="bench-list">${v.benchmarks.map((b) => `<li><b>${esc(b.name)}</b><span>${esc(b.score)}${b.source ? ` · <a href="${esc(b.source)}" target="_blank" rel="noopener">来源↗</a>` : ''}</span></li>`).join('')}</ul>`
+    : '<p class="muted">本站不写死基准分数（避免过时/编造）；请用下方实时看板核对最新表现。</p>'
+  const links = benchLinks.map((l) => `<a class="eco-link" href="${esc(l.u)}" target="_blank" rel="noopener">${esc(l.n)} ↗</a>`).join('')
+  const repoEl = repo ? `<a class="eco-link" href="${esc(repo)}" target="_blank" rel="noopener">官方仓库 / 模型页 ↗</a>` : '<span class="muted">闭源模型，无公开仓库</span>'
+  const qNote = ['C', 'D'].includes(g) ? ' · <span class="muted">完整度偏低，建议以官方文档为准</span>' : ''
+  return `<section class="detail-sec"><h3>模型生态与基准<small>开放权重与第三方基准看板</small></h3>
+    <div class="eco-box">
+      <div class="eco-row"><b>数据质量</b><span>${gradeBadge(v)} ${v.data_quality_score || 0} 分${qNote}</span></div>
+      <div class="eco-row"><b>官方仓库</b><span>${repoEl}</span></div>
+      <div class="eco-row"><b>实时基准</b><span class="eco-links">${links}</span></div>
+      <div class="eco-row"><b>本站基准记录</b><span>${bench}</span></div>
+    </div></section>`
+}
 function namingBlock(v) {
   const hay = `${v.name || ''} ${v.name_cn || ''} ${v.model_id || ''}`.toLowerCase()
   const hits = state.naming.filter((n) => hay.includes(n.term.toLowerCase()))
@@ -859,7 +893,7 @@ function viewModel(id) {
       <div class="eh-main">
         <span class="eyebrow"><a class="crumb" href="#provider/${encodeURIComponent(p.id)}">${esc(p.name_cn || p.name)}</a>${f ? ` · <a class="crumb" href="#family/${encodeURIComponent(f.id)}">${esc(f.name_cn || f.name || '')}</a>` : ''}</span>
         <h1>${esc(v.name_cn || v.name)}</h1>
-        <div class="eh-tags">${modBadge(v)}<span class="tag mono">${esc(v.model_id || v.id)}</span>${v.open_weight ? '<span class="tag tag-open">开放权重</span>' : ''}</div>
+        <div class="eh-tags">${modBadge(v)}${gradeBadge(v)}<span class="tag mono">${esc(v.model_id || v.id)}</span>${v.open_weight ? '<span class="tag tag-open">开放权重</span>' : ''}</div>
         <p class="lead">${esc(v.one_liner_cn || '')}</p>
         ${tags.length ? `<div class="cap-tags">${tags.map((t) => `<span class="cap-tag">${esc(t)}</span>`).join('')}</div>` : ''}
       </div>
@@ -880,6 +914,8 @@ function viewModel(id) {
     </section>
 
     <section class="detail-sec"><h3>API 调用</h3>${apiBlockHTML(v)}</section>
+
+    ${ecoBlock(v)}
 
     ${namingBlock(v)}
     ${relatedBlock(v)}
@@ -1106,6 +1142,7 @@ function bindGlobalEvents() {
       state.browseModality = 'all'
       state.browseSort = 'match'
       state.browsePrice = 'all'
+      state.browseBill = 'all'
       render()
       return
     }

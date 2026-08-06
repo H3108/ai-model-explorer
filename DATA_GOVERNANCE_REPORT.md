@@ -64,3 +64,24 @@
 - 接入自动爬取补充 Benchmark / 开源地址，补齐生态 15 分缺口。
 - 对 C/D 级型号降权或归档，提升首页推荐质量。
 - 建立模型推荐算法与智能路由评分（依赖本治理产出的 score / cost_tier / access_types）。
+
+## 七、v2.0 实施记录（已完成）
+
+> 对应 §六 后续建议；脚本 `scripts/governance_v2.js` 可重跑。
+
+### 1) API 缺口补全（api_base_url）
+- `api_access.json` 3 个模型级缺口全部闭合：
+  - `meta-llama-4-maverick` / `meta-llama-4-scout`：`base_url = https://api.llama.com/compat/v1`（Meta 官方 Llama API，OpenAI 兼容，已多源核实）。
+  - `midjourney-v7`：**无官方公开 REST API**（截至 2026-05，第三方目录 api.midjourney.com 非官方）。诚实记录：base_url 指向官方 web app（midjourney.com），并在条目加 `api_note` 说明「官方渠道为 web app + Discord bot，程序化接入须走第三方代理」。详情页新增 `api_note` 黄色提示框渲染。
+- `providers.json` 厂商级 `api_base_url` 缺口同步闭合：`meta` 填官方 Llama API；`midjourney` 填官方 web app。`model_quality_check.py` 由「问题 3」降为「问题 0」。
+
+### 2) C 级降权（数据质量可见化）
+- 评级阈值与治理脚本一致：A≥90 / B≥70 / C≥50 / D<50。现状 A=42 / B=75 / **C=1（midjourney-v7, 65 分）/ D=0**。
+- 模型卡片与详情页头部新增等级徽章（A 绿 / B 蓝 / C 橙 / D 红）。
+- 首页热门模型：`gradeOf==='D'` 直接排除（降权）；C 级因按质量分排序自然靠后。
+- 详情页「模型生态与基准」区块对 C/D 标注「完整度偏低，建议以官方文档为准」。
+
+### 3) Benchmark / 生态接入
+- 49 个开放权重模型补齐 `repo_url`（官方 HuggingFace 组织页：meta-llama / deepseek-ai / Qwen / mistralai / black-forest-labs / stabilityai / Kwai-Kolors；其余走 HuggingFace 搜索兜底，避免错链）。
+- 全量 118 型号加 `benchmarks` 字段（schema 就绪，留待接入实时基准）。
+- 详情页新增「模型生态与基准」区块：数据质量 + 官方仓库 + 实时基准看板（Artificial Analysis / LMArena 外链）+ 本站基准记录（不写死分数，避免过时/编造）。

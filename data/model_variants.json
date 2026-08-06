@@ -71,7 +71,8 @@
     "data_quality_score": 85,
     "data_source": "official",
     "last_verified_at": "2026-08-05",
-    "price_model": "per_token"
+    "price_model": "per_token",
+    "benchmarks": []
   },
   {
     "id": "openai-gpt-5-4",
@@ -144,7 +145,8 @@
     "data_quality_score": 85,
     "data_source": "official",
     "last_verified_at": "2026-08-05",
-    "price_model": "per_token"
+    "price_model": "per_token",
+    "benchmarks": []
   },
   {
     "id": "openai-gpt-5-4-mini",
@@ -215,7 +217,8 @@
     "data_quality_score": 85,
     "data_source": "official",
     "last_verified_at": "2026-08-05",
-    "price_model": "per_token"
+    "price_model": "per_token",
+    "benchmarks": []
   },
   {
     "id": "openai-gpt-5-4-nano",
@@ -286,7 +289,8 @@
     "data_quality_score": 85,
     "data_source": "official",
     "last_verified_at": "2026-08-05",
-    "price_model": "per_token"
+    "price_model": "per_token",
+    "benchmarks": []
   },
   {
     "id": "openai-gpt-5-5-pro",
@@ -357,7 +361,8 @@
     "data_quality_score": 85,
     "data_source": "official",
     "last_verified_at": "2026-08-05",
-    "price_model": "per_token"
+    "price_model": "per_token",
+    "benchmarks": []
   },
   {
     "id": "anthropic-fable-5",
@@ -431,7 +436,8 @@
     "data_quality_score": 85,
     "data_source": "official",
     "last_verified_at": "2026-08-05",
-    "price_model": "per_token"
+    "price_model": "per_token",
+    "benchmarks": []
   },
   {
     "id": "anthropic-opus-5",
@@ -504,7 +510,8 @@
     "data_quality_score": 85,
     "data_source": "official",
     "last_verified_at": "2026-08-05",
-    "price_model": "per_token"
+    "price_model": "per_token",
+    "benchmarks": []
   },
   {
     "id": "anthropic-sonnet-5",
@@ -575,7 +582,8 @@
     "data_quality_score": 85,
     "data_source": "official",
     "last_verified_at": "2026-08-05",
-    "price_model": "per_token"
+    "price_model": "per_token",
+    "benchmarks": []
   },
   {
     "id": "anthropic-haiku-4-5",
@@ -645,7 +653,8 @@
     "data_quality_score": 85,
     "data_source": "official",
     "last_verified_at": "2026-08-05",
-    "price_model": "per_token"
+    "price_model": "per_token",
+    "benchmarks": []
   },
   {
     "id": "google-gemini-3-1-pro",
@@ -720,7 +729,8 @@
     "data_quality_score": 85,
     "data_source": "official",
     "last_verified_at": "2026-08-05",
-    "price_model": "per_token"
+    "price_model": "per_token",
+    "benchmarks": []
   },
   {
     "id": "google-gemini-3-5-flash",
@@ -793,7 +803,8 @@
     "data_quality_score": 85,
     "data_source": "official",
     "last_verified_at": "2026-08-05",
-    "price_model": "per_token"
+    "price_model": "per_token",
+    "benchmarks": []
   },
   {
     "id": "google-gemini-3-flash",
@@ -864,7 +875,8 @@
     "data_quality_score": 85,
     "data_source": "official",
     "last_verified_at": "2026-08-05",
-    "price_model": "per_token"
+    "price_model": "per_token",
+    "benchmarks": []
   },
   {
     "id": "google-gemini-3-1-flash-lite",
@@ -937,7 +949,8 @@
     "data_quality_score": 85,
     "data_source": "official",
     "last_verified_at": "2026-08-05",
-    "price_model": "per_token"
+    "price_model": "per_token",
+    "benchmarks": []
   },
   {
     "id": "google-gemini-2-5-pro",
@@ -1009,7 +1022,8 @@
     "data_quality_score": 85,
     "data_source": "official",
     "last_verified_at": "2026-08-05",
-    "price_model": "per_token"
+    "price_model": "per_token",
+    "benchmarks": []
   },
   {
     "id": "deepseek-v3",
@@ -1083,7 +1097,9 @@
     "data_quality_score": 95,
     "data_source": "official",
     "last_verified_at": "2026-08-05",
-    "price_model": "per_token"
+    "price_model": "per_token",
+    "repo_url": "https://huggingface.co/deepseek-ai",
+    "benchmarks": []
   },
   {
     "id": "deepseek-v3-2",
@@ -1159,7 +1175,9 @@
     "data_quality_score": 95,
     "data_source": "official",
     "last_verified_at": "2026-08-05",
-    "price_model": "per_token"
+    "price_model": "per_token",
+    "repo_url": "https://huggingface.co/deepseek-ai",
+    "benchmarks": []
   },
   {
     "id": "deepseek-r1",
@@ -1235,7 +1253,9 @@
     "data_quality_score": 95,
     "data_source": "official",
     "last_verified_at": "2026-08-05",
-    "price_model": "per_token"
+    "price_model": "per_token",
+    "repo_url": "https://huggingface.co/deepseek-ai",
+    "benchmarks": []
   },
   {
     "id": "deepseek-coder",
@@ -1307,7 +1327,9 @@
     "data_quality_score": 90,
     "data_source": "official",
     "last_verified_at": "2026-08-05",
-    "price_model": "per_token"
+    "price_model": "per_token",
+    "repo_url": "https://huggingface.co/deepseek-ai",
+    "benchmarks": []
   },
   {
     "id": "qwen-plus",
@@ -1381,7 +1403,8 @@
     "data_quality_score": 85,
     "data_source": "official",
     "last_verified_at": "2026-08-05",
-    "price_model": "per_token"
+    "price_model": "per_token",
+    "benchmarks": []
   },
   {
     "id": "qwen-3-max",
@@ -1455,7 +1478,8 @@
     "data_quality_score": 85,
     "data_source": "official",
     "last_verified_at": "2026-08-05",
-    "price_model": "per_token"
+    "price_model": "per_token",
+    "benchmarks": []
   },
   {
     "id": "qwen-3-5-flash",
@@ -1528,7 +1552,8 @@
     "data_quality_score": 85,
     "data_source": "official",
     "last_verified_at": "2026-08-05",
-    "price_model": "per_token"
+    "price_model": "per_token",
+    "benchmarks": []
   },
   {
     "id": "qwen-vl-max",
@@ -1599,7 +1624,8 @@
     "data_quality_score": 85,
     "data_source": "official",
     "last_verified_at": "2026-08-05",
-    "price_model": "per_token"
+    "price_model": "per_token",
+    "benchmarks": []
   },
   {
     "id": "glm-5-2",
@@ -1673,7 +1699,8 @@
     "data_quality_score": 85,
     "data_source": "official",
     "last_verified_at": "2026-08-05",
-    "price_model": "per_token"
+    "price_model": "per_token",
+    "benchmarks": []
   },
   {
     "id": "glm-5",
@@ -1748,7 +1775,9 @@
     "data_quality_score": 90,
     "data_source": "official",
     "last_verified_at": "2026-08-05",
-    "price_model": "per_token"
+    "price_model": "per_token",
+    "repo_url": "https://huggingface.co/models?search=GLM-5",
+    "benchmarks": []
   },
   {
     "id": "glm-5-turbo",
@@ -1820,7 +1849,8 @@
     "data_quality_score": 85,
     "data_source": "official",
     "last_verified_at": "2026-08-05",
-    "price_model": "per_token"
+    "price_model": "per_token",
+    "benchmarks": []
   },
   {
     "id": "kimi-k2",
@@ -1893,7 +1923,8 @@
     "data_quality_score": 85,
     "data_source": "official",
     "last_verified_at": "2026-08-05",
-    "price_model": "per_token"
+    "price_model": "per_token",
+    "benchmarks": []
   },
   {
     "id": "kimi-k2-5",
@@ -1966,7 +1997,8 @@
     "data_quality_score": 85,
     "data_source": "official",
     "last_verified_at": "2026-08-05",
-    "price_model": "per_token"
+    "price_model": "per_token",
+    "benchmarks": []
   },
   {
     "id": "kimi-k3",
@@ -2040,7 +2072,8 @@
     "data_quality_score": 85,
     "data_source": "official",
     "last_verified_at": "2026-08-05",
-    "price_model": "per_token"
+    "price_model": "per_token",
+    "benchmarks": []
   },
   {
     "id": "baidu-ernie-5-1",
@@ -2114,7 +2147,8 @@
     "data_quality_score": 85,
     "data_source": "official",
     "last_verified_at": "2026-08-05",
-    "price_model": "per_token"
+    "price_model": "per_token",
+    "benchmarks": []
   },
   {
     "id": "baidu-ernie-4-5-turbo",
@@ -2188,7 +2222,9 @@
     "data_quality_score": 90,
     "data_source": "official",
     "last_verified_at": "2026-08-05",
-    "price_model": "per_token"
+    "price_model": "per_token",
+    "repo_url": "https://huggingface.co/models?search=ERNIE%204.5%20Turbo",
+    "benchmarks": []
   },
   {
     "id": "minimax-m2-5",
@@ -2260,7 +2296,8 @@
     "data_quality_score": 85,
     "data_source": "official",
     "last_verified_at": "2026-08-05",
-    "price_model": "per_token"
+    "price_model": "per_token",
+    "benchmarks": []
   },
   {
     "id": "minimax-m2-7",
@@ -2331,7 +2368,8 @@
     "data_quality_score": 85,
     "data_source": "official",
     "last_verified_at": "2026-08-05",
-    "price_model": "per_token"
+    "price_model": "per_token",
+    "benchmarks": []
   },
   {
     "id": "minimax-m3",
@@ -2403,7 +2441,8 @@
     "data_quality_score": 85,
     "data_source": "official",
     "last_verified_at": "2026-08-05",
-    "price_model": "per_token"
+    "price_model": "per_token",
+    "benchmarks": []
   },
   {
     "id": "mistral-large-3",
@@ -2477,7 +2516,9 @@
     "data_quality_score": 90,
     "data_source": "official",
     "last_verified_at": "2026-08-05",
-    "price_model": "per_token"
+    "price_model": "per_token",
+    "repo_url": "https://huggingface.co/mistralai",
+    "benchmarks": []
   },
   {
     "id": "mistral-small-4",
@@ -2548,7 +2589,9 @@
     "data_quality_score": 90,
     "data_source": "official",
     "last_verified_at": "2026-08-05",
-    "price_model": "per_token"
+    "price_model": "per_token",
+    "repo_url": "https://huggingface.co/mistralai",
+    "benchmarks": []
   },
   {
     "id": "mistral-codestral",
@@ -2618,7 +2661,9 @@
     "data_quality_score": 90,
     "data_source": "official",
     "last_verified_at": "2026-08-05",
-    "price_model": "per_token"
+    "price_model": "per_token",
+    "repo_url": "https://huggingface.co/mistralai",
+    "benchmarks": []
   },
   {
     "id": "mistral-magistral-medium",
@@ -2685,7 +2730,8 @@
     "data_quality_score": 85,
     "data_source": "official",
     "last_verified_at": "2026-08-05",
-    "price_model": "per_token"
+    "price_model": "per_token",
+    "benchmarks": []
   },
   {
     "id": "xai-grok-4-3",
@@ -2759,7 +2805,8 @@
     "data_quality_score": 85,
     "data_source": "official",
     "last_verified_at": "2026-08-05",
-    "price_model": "per_token"
+    "price_model": "per_token",
+    "benchmarks": []
   },
   {
     "id": "xai-grok-4",
@@ -2830,7 +2877,8 @@
     "data_quality_score": 85,
     "data_source": "official",
     "last_verified_at": "2026-08-05",
-    "price_model": "per_token"
+    "price_model": "per_token",
+    "benchmarks": []
   },
   {
     "id": "xai-grok-build-0-1",
@@ -2899,7 +2947,8 @@
     "data_quality_score": 85,
     "data_source": "official",
     "last_verified_at": "2026-08-05",
-    "price_model": "per_token"
+    "price_model": "per_token",
+    "benchmarks": []
   },
   {
     "id": "meta-llama-4-maverick",
@@ -2976,7 +3025,9 @@
     "data_quality_score": 85,
     "data_source": "official",
     "last_verified_at": "2026-08-05",
-    "price_model": "per_token"
+    "price_model": "per_token",
+    "repo_url": "https://huggingface.co/meta-llama",
+    "benchmarks": []
   },
   {
     "id": "meta-llama-4-scout",
@@ -3052,7 +3103,9 @@
     "data_quality_score": 85,
     "data_source": "official",
     "last_verified_at": "2026-08-05",
-    "price_model": "per_token"
+    "price_model": "per_token",
+    "repo_url": "https://huggingface.co/meta-llama",
+    "benchmarks": []
   },
   {
     "id": "openai-gpt-image-2",
@@ -3127,7 +3180,8 @@
     "data_source": "official",
     "last_verified_at": "2026-08-05",
     "price_model": "per_image",
-    "price_note": "按张计费（图像生成）；OpenAI 图像 API 按生成张数计价，随分辨率/质量档浮动。来源：OpenAI 官方定价。"
+    "price_note": "按张计费（图像生成）；OpenAI 图像 API 按生成张数计价，随分辨率/质量档浮动。来源：OpenAI 官方定价。",
+    "benchmarks": []
   },
   {
     "id": "google-imagen-4",
@@ -3201,7 +3255,8 @@
     "data_source": "official",
     "last_verified_at": "2026-08-05",
     "price_model": "per_image",
-    "price_note": "按张计费（图像生成）；经 Google Vertex AI 调用，按生成图像数计价。来源：Google Cloud 官方。"
+    "price_note": "按张计费（图像生成）；经 Google Vertex AI 调用，按生成图像数计价。来源：Google Cloud 官方。",
+    "benchmarks": []
   },
   {
     "id": "midjourney-v7",
@@ -3274,7 +3329,8 @@
     "data_source": "official",
     "last_verified_at": "2026-08-05",
     "price_model": "per_image",
-    "price_note": "订阅制定价（按月套餐含生成额度），无独立按张 API 价。来源：Midjourney 官方。"
+    "price_note": "订阅制定价（按月套餐含生成额度），无独立按张 API 价。来源：Midjourney 官方。",
+    "benchmarks": []
   },
   {
     "id": "blackforest-flux-2",
@@ -3351,7 +3407,9 @@
     "data_source": "official",
     "last_verified_at": "2026-08-05",
     "price_model": "per_image",
-    "price_note": "按张计费（图像生成，Flux 2 Pro）；经 Black Forest Labs / 合作云调用。来源：官方。"
+    "price_note": "按张计费（图像生成，Flux 2 Pro）；经 Black Forest Labs / 合作云调用。来源：官方。",
+    "repo_url": "https://huggingface.co/black-forest-labs",
+    "benchmarks": []
   },
   {
     "id": "stability-sd-4",
@@ -3428,7 +3486,9 @@
     "data_source": "official",
     "last_verified_at": "2026-08-05",
     "price_model": "per_image",
-    "price_note": "按张计费（图像生成）；Stability 平台按生成计价，亦提供开放权重自部署。来源：Stability AI 官方。"
+    "price_note": "按张计费（图像生成）；Stability 平台按生成计价，亦提供开放权重自部署。来源：Stability AI 官方。",
+    "repo_url": "https://huggingface.co/stabilityai",
+    "benchmarks": []
   },
   {
     "id": "adobe-firefly-4",
@@ -3502,7 +3562,8 @@
     "data_source": "official",
     "last_verified_at": "2026-08-05",
     "price_model": "per_image",
-    "price_note": "订阅 / 按生成点数计费（Adobe Firefly）；企业方案含生成额度。来源：Adobe 官方。"
+    "price_note": "订阅 / 按生成点数计费（Adobe Firefly）；企业方案含生成额度。来源：Adobe 官方。",
+    "benchmarks": []
   },
   {
     "id": "ideogram-3",
@@ -3575,7 +3636,8 @@
     "data_source": "official",
     "last_verified_at": "2026-08-05",
     "price_model": "per_image",
-    "price_note": "按张计费（图像生成）；Ideogram API 按生成图像数计价。来源：Ideogram 官方。"
+    "price_note": "按张计费（图像生成）；Ideogram API 按生成图像数计价。来源：Ideogram 官方。",
+    "benchmarks": []
   },
   {
     "id": "alibaba-qwen-image",
@@ -3655,7 +3717,9 @@
     "data_source": "official",
     "last_verified_at": "2026-08-05",
     "price_model": "per_image",
-    "price_note": "按张计费（图像生成）；经阿里云百炼调用，按生成图像数计价。来源：阿里云官方。"
+    "price_note": "按张计费（图像生成）；经阿里云百炼调用，按生成图像数计价。来源：阿里云官方。",
+    "repo_url": "https://huggingface.co/Qwen",
+    "benchmarks": []
   },
   {
     "id": "openai-sora-2",
@@ -3731,7 +3795,8 @@
     "data_source": "official",
     "last_verified_at": "2026-08-05",
     "price_model": "per_second",
-    "price_note": "按秒计费（视频生成）：标准 720p 约 $0.10/秒，Pro 约 $0.30/秒（2026-07 公开价）。注：OpenAI 已宣布 Sora API 将于 2026-09-24 停止，新集成谨慎采用。来源：developers.openai.com 公开定价整理。"
+    "price_note": "按秒计费（视频生成）：标准 720p 约 $0.10/秒，Pro 约 $0.30/秒（2026-07 公开价）。注：OpenAI 已宣布 Sora API 将于 2026-09-24 停止，新集成谨慎采用。来源：developers.openai.com 公开定价整理。",
+    "benchmarks": []
   },
   {
     "id": "google-veo-3-1",
@@ -3807,7 +3872,8 @@
     "data_source": "official",
     "last_verified_at": "2026-08-05",
     "price_model": "per_second",
-    "price_note": "按秒计费（视频生成，含音频）：Fast 约 $0.10–0.12/秒，Standard 约 $0.40/秒（2026-07）。来源：Google 官方定价页。"
+    "price_note": "按秒计费（视频生成，含音频）：Fast 约 $0.10–0.12/秒，Standard 约 $0.40/秒（2026-07）。来源：Google 官方定价页。",
+    "benchmarks": []
   },
   {
     "id": "google-veo-3-1-lite",
@@ -3884,7 +3950,8 @@
     "data_source": "official",
     "last_verified_at": "2026-08-05",
     "price_model": "per_second",
-    "price_note": "按秒计费（视频生成）：Veo 3.1 Lite 约 $0.05/秒（2026-07）。来源：Google 官方定价页。"
+    "price_note": "按秒计费（视频生成）：Veo 3.1 Lite 约 $0.05/秒（2026-07）。来源：Google 官方定价页。",
+    "benchmarks": []
   },
   {
     "id": "kuaishou-kling-3-0",
@@ -3960,7 +4027,8 @@
     "data_source": "official",
     "last_verified_at": "2026-08-05",
     "price_model": "per_second",
-    "price_note": "按秒计费（视频生成）：标准 720p 约 $0.084/秒，1080p 含音频约 $0.168/秒（2026-07 官方直营 API）。来源：kling.ai/dev 官方定价。"
+    "price_note": "按秒计费（视频生成）：标准 720p 约 $0.084/秒，1080p 含音频约 $0.168/秒（2026-07 官方直营 API）。来源：kling.ai/dev 官方定价。",
+    "benchmarks": []
   },
   {
     "id": "runway-gen-4-5",
@@ -4036,7 +4104,8 @@
     "data_source": "official",
     "last_verified_at": "2026-08-05",
     "price_model": "per_second",
-    "price_note": "按秒计费（视频生成）：Gen-4.5 约 $0.12/秒（12 credits/秒，每 credit $0.01；2026-07 官方价，较此前 25 credits/秒已降价）。来源：Runway 官方定价。"
+    "price_note": "按秒计费（视频生成）：Gen-4.5 约 $0.12/秒（12 credits/秒，每 credit $0.01；2026-07 官方价，较此前 25 credits/秒已降价）。来源：Runway 官方定价。",
+    "benchmarks": []
   },
   {
     "id": "bytedance-seedance-2",
@@ -4112,7 +4181,8 @@
     "data_source": "official",
     "last_verified_at": "2026-08-05",
     "price_model": "per_second",
-    "price_note": "按秒计费（视频生成，含音频/多参考）：Fast 约 $0.24/秒，1080p 约 $0.682/秒（2026-07）。来源：公开定价整理。"
+    "price_note": "按秒计费（视频生成，含音频/多参考）：Fast 约 $0.24/秒，1080p 约 $0.682/秒（2026-07）。来源：公开定价整理。",
+    "benchmarks": []
   },
   {
     "id": "xai-grok-imagine-video",
@@ -4191,7 +4261,8 @@
     "data_source": "official",
     "last_verified_at": "2026-08-05",
     "price_model": "per_second",
-    "price_note": "按秒计费（视频生成）：约 $0.07/秒（$4.20/分钟；2026-07）。来源：公开定价整理。"
+    "price_note": "按秒计费（视频生成）：约 $0.07/秒（$4.20/分钟；2026-07）。来源：公开定价整理。",
+    "benchmarks": []
   },
   {
     "id": "luma-ray-2",
@@ -4267,7 +4338,8 @@
     "data_source": "official",
     "last_verified_at": "2026-08-05",
     "price_model": "per_second",
-    "price_note": "按秒计费（视频生成），提供标准版与更便宜的 Flash 快速版（2026 公开价，随分辨率/档位浮动）。来源：Luma 官方。"
+    "price_note": "按秒计费（视频生成），提供标准版与更便宜的 Flash 快速版（2026 公开价，随分辨率/档位浮动）。来源：Luma 官方。",
+    "benchmarks": []
   },
   {
     "id": "alibaba-wan-2-1",
@@ -4348,6 +4420,8 @@
     "data_source": "official",
     "last_verified_at": "2026-08-05",
     "price_model": "per_second",
-    "price_note": "开放权重视频模型，自部署免费（需自备 GPU，约 24GB+ VRAM）；无官方按量 API 价。来源：开源仓库。"
+    "price_note": "开放权重视频模型，自部署免费（需自备 GPU，约 24GB+ VRAM）；无官方按量 API 价。来源：开源仓库。",
+    "repo_url": "https://huggingface.co/Qwen",
+    "benchmarks": []
   }
 ]
