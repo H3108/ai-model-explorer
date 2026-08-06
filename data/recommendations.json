@@ -8,7 +8,7 @@
       {"id": "openai-gpt-5-4", "score": 5, "reason": "通用性强、指令遵循好，覆盖绝大多数聊天场景。"},
       {"id": "deepseek-v3", "score": 4, "reason": "极便宜且中文好，高频聊天成本最低（¥0.27/1.1）。"},
       {"id": "qwen-3-5-flash", "score": 4, "reason": "最便宜的 1M 上下文之一（¥0.1/0.4），中文多语流畅。"},
-      {"id": "agnes-2-5-flash", "score": 4, "reason": "免信用卡免费 API，1M 上下文，轻量聊天零成本。"},
+      {"id": "agnes-2-5-flash", "score": 4, "reason": "免费 API，1M 上下文，轻量聊天零成本。"},
       {"id": "glm-4-flash-250414", "score": 4, "reason": "智谱永久免费 API，零成本高频聊天。"},
       {"id": "kimi-k2-5", "score": 4, "reason": "中文长文对话强，262K 上下文，月之暗面。"}
     ]
@@ -50,7 +50,7 @@
       {"id": "google-imagen-4", "score": 5, "reason": "照片级真实感，图像内文字渲染最佳（¥0.06/张）。"},
       {"id": "blackforest-flux-2", "score": 4, "reason": "开放权重可自托管，质量高、风格灵活。"},
       {"id": "cogview-3-flash", "score": 4, "reason": "智谱免费图像生成，ZhipuAI SDK / OpenAI 兼容零成本。"},
-      {"id": "agnes-image-2-1-flash", "score": 4, "reason": "Agnes 免费文生图 API，免信用卡。"},
+      {"id": "agnes-image-2-1-flash", "score": 4, "reason": "Agnes 免费文生图 API。"},
       {"id": "cogview-4", "score": 4, "reason": "智谱付费 CogView-4，¥0.01/张，质量高于 Flash。"},
       {"id": "ideogram-3", "score": 3, "reason": "文字渲染与海报 / Logo 设计强。"}
     ],
@@ -79,7 +79,7 @@
       {"id": "openai-sora-2", "score": 4, "reason": "电影感与物理模拟强（API 尚不稳定，生产建议 Veo / Kling 兜底）。"},
       {"id": "kuaishou-kling-3-0", "score": 4, "reason": "4K@60fps，含免费额度，性价比高（¥0.13/秒）。"},
       {"id": "cogvideox-flash", "score": 4, "reason": "智谱免费视频生成，API key 零成本。"},
-      {"id": "agnes-video-2-0", "score": 4, "reason": "Agnes 免费文生视频，免信用卡。"},
+      {"id": "agnes-video-2-0", "score": 4, "reason": "Agnes 免费文生视频。"},
       {"id": "bytedance-seedance-2", "score": 4, "reason": "字节 Seedance 2.0，¥0.27/秒，性价比高。"},
       {"id": "google-veo-3-1-lite", "score": 3, "reason": "Veo 3.1 Lite，¥0.05/秒，低成本试水。"}
     ],
@@ -108,7 +108,7 @@
       {"id": "qwen-3-5-flash", "score": 5, "reason": "¥0.1/0.4，最便宜的 1M 上下文之一。"},
       {"id": "openai-gpt-5-4-nano", "score": 4, "reason": "¥0.2/1.25，最快最便宜的 GPT。"},
       {"id": "glm-4-flash-250414", "score": 4, "reason": "智谱永久免费 API，零成本。"},
-      {"id": "agnes-2-5-flash", "score": 4, "reason": "免信用卡免费，1M 上下文零成本。"},
+      {"id": "agnes-2-5-flash", "score": 4, "reason": "免费，1M 上下文零成本。"},
       {"id": "google-gemini-3-flash", "score": 4, "reason": "¥0.5/3，1M 上下文高性价比多语模型。"},
       {"id": "mistral-small-free", "score": 4, "reason": "Mistral 免费层，零成本轻量调用。"}
     ]
@@ -178,7 +178,7 @@
       {"id": "openai-gpt-5-4", "score": 5, "reason": "通用知识广，概念讲解到位。"},
       {"id": "deepseek-v3", "score": 4, "reason": "中文好且极便宜，适合高频练习。"},
       {"id": "glm-4-flash-250414", "score": 4, "reason": "智谱永久免费，零成本练手。"},
-      {"id": "agnes-2-5-flash", "score": 4, "reason": "免信用卡免费，1M 上下文答疑。"},
+      {"id": "agnes-2-5-flash", "score": 4, "reason": "免费，1M 上下文答疑。"},
       {"id": "qwen-3-5-flash", "score": 4, "reason": "极便宜 1M 上下文，高频答疑零压力。"},
       {"id": "kimi-k2-5", "score": 4, "reason": "中文讲解清晰，262K 上下文。"}
     ]

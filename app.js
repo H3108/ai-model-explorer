@@ -86,6 +86,7 @@ const familiesOfProvider = (pid) => state.families.filter((f) => f.provider_id =
 const variantsOfFamily = (fid) => state.variants.filter((v) => v.family_id === fid)
 const providerOf = (v) => providerById(v.provider_id)
 const familyOf = (v) => familyById(v.family_id)
+const famName = (v) => { const f = familyOf(v); return f ? (f.name_cn || f.name || '') : '' }
 const modalityOf = (v) => (v.media_type === 'video' ? 'video' : v.media_type === 'image' ? 'image' : 'text')
 
 // ---------- 格式化 ----------
@@ -130,7 +131,7 @@ function catBadge(p, extraCls = '') {
   if (!p.category) return ''
   const map = { free: ['免费 API', 'cat-free'], gateway: ['托管网关', 'cat-gateway'] }
   const [label, cls] = map[p.category] || [p.category, '']
-  return `<span class="cat-badge ${cls} ${extraCls}" title="${esc(p.category === 'gateway' ? '第三方托管网关：聚合多家模型，一个 API key 调用' : '免信用卡、可 API key 调用的真·免费模型')}">${esc(label)}</span>`
+  return `<span class="cat-badge ${cls} ${extraCls}" title="${esc(p.category === 'gateway' ? '第三方托管网关：聚合多家模型，一个 API key 调用' : '可 API key 调用的真·免费模型')}">${esc(label)}</span>`
 }
 function modBadge(v, extraCls = '') {
   const m = MODALITY[modalityOf(v)]
@@ -196,7 +197,7 @@ function modelCard(v, extra = '') {
   return `<a class="model-card" href="#model/${encodeURIComponent(v.id)}">
     <div class="mc-top">${logoHTML(p, 'sm')}${modBadge(v)}${free}${extra}</div>
     <b class="mc-name">${esc(v.name_cn || v.name)}</b>
-    <small class="mc-from">${esc(p.name_cn || p.name)} · ${esc(f.name_cn || f.name || '')}</small>
+    <small class="mc-from">${esc(p.name_cn || p.name)}${famName(v) ? ' · ' + esc(famName(v)) : ''}</small>
     <p class="mc-desc">${esc(v.one_liner_cn || '')}</p>
     <div class="mc-meta">${meta}</div>
   </a>`
@@ -558,7 +559,7 @@ function recommendationHTML() {
       ({ r, v }, i) => `<a class="result-row" href="#model/${encodeURIComponent(v.id)}">
     <span class="rank">0${i + 1}</span>
     ${logoHTML(providerOf(v), 'sm')}
-    <span class="result-main"><b>${esc(v.name_cn || v.name)}</b><small>${esc(providerOf(v).name_cn || '')} · ${esc(familyOf(v).name_cn || '')}</small></span>
+    <span class="result-main"><b>${esc(v.name_cn || v.name)}</b><small>${esc(providerOf(v).name_cn || '')}${famName(v) ? ' · ' + esc(famName(v)) : ''}</small></span>
     ${modBadge(v)}${v.free ? ' <span class="free-badge sm">免费</span>' : ''}
     <span class="result-reason">${esc(r.reason)}</span>
     <span class="score-pill">${r.score}/5</span>
@@ -710,11 +711,11 @@ function viewModel(id) {
   const avoid = (v.avoid_for || []).map((t) => `<li class="no">${esc(taskName(t))}</li>`).join('')
   const tags = capTags(v)
   return `<div class="wrap page detail-page">
-    <button class="back-link" data-back="#family/${encodeURIComponent(v.family_id)}">← 返回</button>
+    <button class="back-link" data-back="${f ? '#family/' + encodeURIComponent(f.id) : '#provider/' + encodeURIComponent(p.id)}">← 返回</button>
     <header class="entity-head model-head" style="--brand:${esc(p.brand_color)}">
       ${logoHTML(p, 'lg')}
       <div class="eh-main">
-        <span class="eyebrow"><a class="crumb" href="#provider/${encodeURIComponent(p.id)}">${esc(p.name_cn || p.name)}</a> · <a class="crumb" href="#family/${encodeURIComponent(f.id)}">${esc(f.name_cn || f.name || '')}</a></span>
+        <span class="eyebrow"><a class="crumb" href="#provider/${encodeURIComponent(p.id)}">${esc(p.name_cn || p.name)}</a>${f ? ` · <a class="crumb" href="#family/${encodeURIComponent(f.id)}">${esc(f.name_cn || f.name || '')}</a>` : ''}</span>
         <h1>${esc(v.name_cn || v.name)}</h1>
         <div class="eh-tags">${modBadge(v)}<span class="tag mono">${esc(v.model_id || v.id)}</span>${v.open_weight ? '<span class="tag tag-open">开放权重</span>' : ''}</div>
         <p class="lead">${esc(v.one_liner_cn || '')}</p>
@@ -751,7 +752,7 @@ function viewModel(id) {
 function viewGateways() {
   const gw = state.providers.filter((p) => p.category === 'gateway')
   return `<div class="wrap page">
-    ${pageHead({ eyebrow: '05 / 托管网关', title: '第三方<em>托管网关</em>', desc: '把多家厂商的模型聚合到一个 API key 下调用——统一接口、免信用卡、即开即用。点卡片进入对应网关的系列与型号。' })}
+    ${pageHead({ eyebrow: '05 / 托管网关', title: '第三方<em>托管网关</em>', desc: '把多家厂商的模型聚合到一个 API key 下调用——统一接口、即开即用。点卡片进入对应网关的系列与型号。' })}
     <div class="gw-intro">
       <div class="gw-pros"><h4>适合你，如果…</h4><ul>
         <li>想用多家模型，但不想逐家注册、管理密钥</li>
@@ -766,7 +767,7 @@ function viewGateways() {
     </div>
     <p class="notice">下方卡片与「厂商地图」完全一致：点击任意卡片进入该网关的系列与型号列表。</p>
     <div class="provider-grid">${gw.map(providerCard).join('')}</div>
-    <p class="notice">本页仅收录「真·免费 API」的托管网关（免信用卡、可程序化调用）。各厂商自带免费模型见对应厂商页与浏览页「价格 = 免费」。</p>
+    <p class="notice">本页仅收录「真·免费 API」的托管网关（可程序化调用）。各厂商自带免费模型见对应厂商页与浏览页「价格 = 免费」。</p>
   </div>`
 }
 

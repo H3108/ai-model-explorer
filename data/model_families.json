@@ -35,5 +35,19 @@
   {"id":"agnes-flash","provider_id":"agnes","name":"Agnes Flash","name_cn":"Agnes Flash 系列","description_cn":"Agnes AI 免费文本/视觉/推理全模态模型（2.5 / 2.0 Flash，1M 上下文）。"},
   {"id":"agnes-image","provider_id":"agnes","name":"Agnes Image","name_cn":"Agnes Image 系列","description_cn":"Agnes AI 免费文生图模型（4K 输出，中文提示友好）。"},
   {"id":"agnes-video","provider_id":"agnes","name":"Agnes Video","name_cn":"Agnes Video 系列","description_cn":"Agnes AI 免费文生视频模型（720P/1080P，含原生音频）。"},
-  {"id":"nvidia-nim","provider_id":"nvidia-nim","name":"NVIDIA NIM","name_cn":"NVIDIA NIM 系列","description_cn":"NVIDIA 免费推理微服务托管的模型。"}
+  {"id":"nvidia-nim","provider_id":"nvidia-nim","name":"NVIDIA NIM","name_cn":"NVIDIA NIM 系列","description_cn":"NVIDIA 免费推理微服务托管的模型。"} ,
+  {
+    "id": "google-gemma",
+    "provider_id": "google",
+    "name": "Gemma",
+    "name_cn": "Gemma 系列",
+    "description_cn": "Google 的开放权重 Gemma 模型，覆盖文本与多模态。"
+  },
+  {
+    "id": "mistral-mixtral",
+    "provider_id": "mistral",
+    "name": "Mixtral",
+    "name_cn": "Mixtral 系列",
+    "description_cn": "Mistral 的 MoE 开放权重模型。"
+  }
 ]

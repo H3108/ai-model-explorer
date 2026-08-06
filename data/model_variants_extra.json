@@ -30,7 +30,7 @@
     "verified": true,
     "verified_date": "2026-08-05",
     "free": true,
-    "free_note": "智谱开放平台永久免费 API（免信用卡，每模型 1 并发请求），200K 上下文。"
+    "free_note": "智谱开放平台永久免费 API（每模型 1 并发请求），200K 上下文。"
   },
   {
     "id": "glm-4-flash-250414",
@@ -63,7 +63,7 @@
     "verified": true,
     "verified_date": "2026-08-05",
     "free": true,
-    "free_note": "智谱开放平台永久免费 API（免信用卡），128K 上下文。"
+    "free_note": "智谱开放平台永久免费 API，128K 上下文。"
   },
   {
     "id": "glm-4-6v-flash",
@@ -96,7 +96,7 @@
     "verified": true,
     "verified_date": "2026-08-05",
     "free": true,
-    "free_note": "智谱开放平台永久免费视觉模型（免信用卡）。"
+    "free_note": "智谱开放平台永久免费视觉模型。"
   },
   {
     "id": "glm-5-1",
@@ -367,7 +367,7 @@
       "unit": "second",
       "price": 0,
       "currency": "USD",
-      "note": "智谱免费视频生成，免信用卡 API key 调用。"
+      "note": "智谱免费视频生成，API key 调用。"
     },
     "release_date": "2026",
     "source_url": "https://docs.bigmodel.cn/cn/guide/models/cogvideox-flash",
@@ -383,7 +383,7 @@
     "name": "Agnes 2.5 Flash",
     "name_cn": "Agnes 2.5 Flash",
     "model_id": "agnes-2.5-flash",
-    "one_liner_cn": "Agnes AI 永久免费全模态模型，1M 上下文，免信用卡。",
+    "one_liner_cn": "Agnes AI 永久免费全模态模型，1M 上下文。",
     "context_window": 1000000,
     "max_output_tokens": 128000,
     "input_price_per_mtok": 0,
@@ -407,7 +407,7 @@
     "verified": true,
     "verified_date": "2026-08-05",
     "free": true,
-    "free_note": "Agnes AI 永久免费 API（免信用卡，OpenAI 兼容，1M 上下文，文本/图像/视频全模态）。"
+    "free_note": "Agnes AI 永久免费 API（OpenAI 兼容，1M 上下文，文本/图像/视频全模态）。"
   },
   {
     "id": "agnes-2-0-flash",
@@ -440,7 +440,7 @@
     "verified": true,
     "verified_date": "2026-08-05",
     "free": true,
-    "free_note": "Agnes AI 免费 API（2.0 兼容版，免信用卡）。"
+    "free_note": "Agnes AI 免费 API（2.0 兼容版）。"
   },
   {
     "id": "agnes-image-2-1-flash",
@@ -481,7 +481,7 @@
     "verified": true,
     "verified_date": "2026-08-05",
     "free": true,
-    "free_note": "Agnes AI 免费图像生成 API（免信用卡）。"
+    "free_note": "Agnes AI 免费图像生成 API。"
   },
   {
     "id": "agnes-video-2-0",
@@ -524,7 +524,7 @@
     "verified": true,
     "verified_date": "2026-08-05",
     "free": true,
-    "free_note": "Agnes AI 免费视频生成 API（免信用卡）。"
+    "free_note": "Agnes AI 免费视频生成 API。"
   },
   {
     "id": "groq-llama-3-3-70b",
@@ -557,7 +557,7 @@
     "verified": true,
     "verified_date": "2026-08-05",
     "free": true,
-    "free_note": "Groq 免费开发者层（免信用卡，约 30 RPM），LPU 极速推理。"
+    "free_note": "Groq 免费开发者层（约 30 RPM），LPU 极速推理。"
   },
   {
     "id": "groq-qwen3-32b",
@@ -590,7 +590,7 @@
     "verified": true,
     "verified_date": "2026-08-05",
     "free": true,
-    "free_note": "Groq 免费开发者层（免信用卡）托管 Qwen3-32B。"
+    "free_note": "Groq 免费开发者层托管 Qwen3-32B。"
   },
   {
     "id": "groq-llama-4-scout",
@@ -623,7 +623,7 @@
     "verified": true,
     "verified_date": "2026-08-05",
     "free": true,
-    "free_note": "Groq 免费开发者层（免信用卡）托管 Llama 4 Scout。"
+    "free_note": "Groq 免费开发者层托管 Llama 4 Scout。"
   },
   {
     "id": "openrouter-llama-3-3-70b-free",
@@ -656,7 +656,7 @@
     "verified": true,
     "verified_date": "2026-08-05",
     "free": true,
-    "free_note": "OpenRouter 免费路由模型（50 请求/日，免信用卡）。"
+    "free_note": "OpenRouter 免费路由模型（50 请求/日）。"
   },
   {
     "id": "openrouter-deepseek-r1-free",
@@ -689,7 +689,7 @@
     "verified": true,
     "verified_date": "2026-08-05",
     "free": true,
-    "free_note": "OpenRouter 免费路由 DeepSeek R1（免信用卡）。"
+    "free_note": "OpenRouter 免费路由 DeepSeek R1。"
   },
   {
     "id": "nvidia-nim-nemotron-70b",
@@ -722,7 +722,7 @@
     "verified": true,
     "verified_date": "2026-08-05",
     "free": true,
-    "free_note": "NVIDIA NIM 免费推理微服务（免信用卡，约 40 RPM）。"
+    "free_note": "NVIDIA NIM 免费推理微服务（约 40 RPM）。"
   },
   {
     "id": "nvidia-nim-llama-3-3-70b",
@@ -755,7 +755,7 @@
     "verified": true,
     "verified_date": "2026-08-05",
     "free": true,
-    "free_note": "NVIDIA NIM 免费推理微服务（免信用卡）托管 Llama 3.3 70B。"
+    "free_note": "NVIDIA NIM 免费推理微服务托管 Llama 3.3 70B。"
   },
   {
     "id": "mistral-small-free",
@@ -789,5 +789,1168 @@
     "verified_date": "2026-08-05",
     "free": true,
     "free_note": "Mistral 免费 Experiment 层（Small 模型，需同意数据训练）。"
+  },
+  {
+    "id": "groq-llama-3-1-8b-instant",
+    "provider_id": "groq",
+    "name": "Llama 3.1 8B (Groq)",
+    "name_cn": "Llama 3.1 8B · Groq",
+    "model_id": "llama-3.1-8b-instant",
+    "one_liner_cn": "Groq 免费层托管 Llama 3.1 8B，高并发低延迟。",
+    "context_window": 131072,
+    "max_output_tokens": 131072,
+    "input_price_per_mtok": 0,
+    "output_price_per_mtok": 0,
+    "currency": "USD",
+    "vision_support": false,
+    "open_weight": true,
+    "speed_tier": "fastest",
+    "model_type": [
+      "Chat",
+      "Coding"
+    ],
+    "capabilities": {
+      "reasoning": {
+        "tier": "medium",
+        "basis": "Llama 3.1 8B · Groq。"
+      },
+      "coding": {
+        "tier": "medium-high",
+        "basis": "Llama 3.1 8B · Groq。"
+      },
+      "agent": {
+        "tier": "medium",
+        "basis": "Llama 3.1 8B · Groq。"
+      },
+      "knowledge": {
+        "tier": "high",
+        "basis": "Llama 3.1 8B · Groq。"
+      },
+      "multilingual": {
+        "tier": "high",
+        "basis": "Llama 3.1 8B · Groq。"
+      }
+    },
+    "best_for": [
+      "low_cost",
+      "coding"
+    ],
+    "avoid_for": [],
+    "release_date": "2026",
+    "source_url": "https://console.groq.com/docs",
+    "verified": true,
+    "verified_date": "2026-08-06",
+    "free": true,
+    "free_note": "Groq 免费开发者层托管 Llama 3.1 8B（14,400 RPD）。",
+    "family_id": "meta-llama"
+  },
+  {
+    "id": "groq-gemma-2-9b",
+    "provider_id": "groq",
+    "name": "Gemma 2 9B (Groq)",
+    "name_cn": "Gemma 2 9B · Groq",
+    "model_id": "gemma2-9b-it",
+    "one_liner_cn": "Groq 免费托管 Google Gemma 2 9B，指令跟随好。",
+    "context_window": 8192,
+    "max_output_tokens": 8192,
+    "input_price_per_mtok": 0,
+    "output_price_per_mtok": 0,
+    "currency": "USD",
+    "vision_support": false,
+    "open_weight": true,
+    "speed_tier": "fastest",
+    "model_type": [
+      "Chat"
+    ],
+    "capabilities": {
+      "reasoning": {
+        "tier": "medium",
+        "basis": "Gemma 2 9B · Groq。"
+      },
+      "coding": {
+        "tier": "medium",
+        "basis": "Gemma 2 9B · Groq。"
+      },
+      "agent": {
+        "tier": "medium",
+        "basis": "Gemma 2 9B · Groq。"
+      },
+      "knowledge": {
+        "tier": "medium-high",
+        "basis": "Gemma 2 9B · Groq。"
+      },
+      "multilingual": {
+        "tier": "medium-high",
+        "basis": "Gemma 2 9B · Groq。"
+      }
+    },
+    "best_for": [
+      "low_cost"
+    ],
+    "avoid_for": [],
+    "release_date": "2026",
+    "source_url": "https://console.groq.com/docs",
+    "verified": true,
+    "verified_date": "2026-08-06",
+    "free": true,
+    "free_note": "Groq 免费开发者层托管 Gemma 2 9B。",
+    "family_id": "google-gemma"
+  },
+  {
+    "id": "groq-mixtral-8x7b",
+    "provider_id": "groq",
+    "name": "Mixtral 8x7B (Groq)",
+    "name_cn": "Mixtral 8x7B · Groq",
+    "model_id": "mixtral-8x7b-32768",
+    "one_liner_cn": "Groq 免费托管 Mixtral 8x7B MoE，技术与编码强。",
+    "context_window": 32768,
+    "max_output_tokens": 32768,
+    "input_price_per_mtok": 0,
+    "output_price_per_mtok": 0,
+    "currency": "USD",
+    "vision_support": false,
+    "open_weight": true,
+    "speed_tier": "fastest",
+    "model_type": [
+      "Chat",
+      "Coding"
+    ],
+    "capabilities": {
+      "reasoning": {
+        "tier": "medium-high",
+        "basis": "Mixtral 8x7B · Groq。"
+      },
+      "coding": {
+        "tier": "high",
+        "basis": "Mixtral 8x7B · Groq。"
+      },
+      "agent": {
+        "tier": "medium",
+        "basis": "Mixtral 8x7B · Groq。"
+      },
+      "knowledge": {
+        "tier": "high",
+        "basis": "Mixtral 8x7B · Groq。"
+      },
+      "multilingual": {
+        "tier": "high",
+        "basis": "Mixtral 8x7B · Groq。"
+      }
+    },
+    "best_for": [
+      "coding"
+    ],
+    "avoid_for": [],
+    "release_date": "2026",
+    "source_url": "https://console.groq.com/docs",
+    "verified": true,
+    "verified_date": "2026-08-06",
+    "free": true,
+    "free_note": "Groq 免费开发者层托管 Mixtral 8x7B。",
+    "family_id": "mistral-mixtral"
+  },
+  {
+    "id": "groq-whisper-large-v3",
+    "provider_id": "groq",
+    "name": "Whisper Large v3 (Groq)",
+    "name_cn": "Whisper Large v3 · Groq",
+    "model_id": "whisper-large-v3",
+    "one_liner_cn": "Groq 免费 Whisper 语音转文字，极速。",
+    "context_window": 131072,
+    "max_output_tokens": 4096,
+    "input_price_per_mtok": 0,
+    "output_price_per_mtok": 0,
+    "currency": "USD",
+    "vision_support": false,
+    "open_weight": true,
+    "speed_tier": "fast",
+    "model_type": [
+      "Transcription"
+    ],
+    "capabilities": {
+      "reasoning": {
+        "tier": "low",
+        "basis": "Whisper Large v3 · Groq。"
+      },
+      "coding": {
+        "tier": "low",
+        "basis": "Whisper Large v3 · Groq。"
+      },
+      "agent": {
+        "tier": "low",
+        "basis": "Whisper Large v3 · Groq。"
+      },
+      "knowledge": {
+        "tier": "low",
+        "basis": "Whisper Large v3 · Groq。"
+      },
+      "multilingual": {
+        "tier": "high",
+        "basis": "Whisper Large v3 · Groq。"
+      }
+    },
+    "best_for": [
+      "audio"
+    ],
+    "avoid_for": [],
+    "release_date": "2026",
+    "source_url": "https://console.groq.com/docs",
+    "verified": true,
+    "verified_date": "2026-08-06",
+    "free": true,
+    "free_note": "Groq 免费开发者层 Whisper 语音转文字（20 RPM）。"
+  },
+  {
+    "id": "groq-deepseek-r1-distill-70b",
+    "provider_id": "groq",
+    "name": "DeepSeek-R1-Distill-Llama-70B (Groq)",
+    "name_cn": "DeepSeek-R1-Distill 70B · Groq",
+    "model_id": "deepseek-r1-distill-llama-70b",
+    "one_liner_cn": "Groq 免费托管 DeepSeek R1 蒸馏版，强推理。",
+    "context_window": 131072,
+    "max_output_tokens": 131072,
+    "input_price_per_mtok": 0,
+    "output_price_per_mtok": 0,
+    "currency": "USD",
+    "vision_support": false,
+    "open_weight": true,
+    "speed_tier": "fastest",
+    "model_type": [
+      "Chat",
+      "Reasoning"
+    ],
+    "capabilities": {
+      "reasoning": {
+        "tier": "high",
+        "basis": "DeepSeek-R1-Distill 70B · Groq。"
+      },
+      "coding": {
+        "tier": "high",
+        "basis": "DeepSeek-R1-Distill 70B · Groq。"
+      },
+      "agent": {
+        "tier": "medium",
+        "basis": "DeepSeek-R1-Distill 70B · Groq。"
+      },
+      "knowledge": {
+        "tier": "high",
+        "basis": "DeepSeek-R1-Distill 70B · Groq。"
+      },
+      "multilingual": {
+        "tier": "high",
+        "basis": "DeepSeek-R1-Distill 70B · Groq。"
+      }
+    },
+    "best_for": [
+      "reasoning"
+    ],
+    "avoid_for": [],
+    "release_date": "2026",
+    "source_url": "https://console.groq.com/docs",
+    "verified": true,
+    "verified_date": "2026-08-06",
+    "free": true,
+    "free_note": "Groq 免费开发者层托管 DeepSeek R1 蒸馏版。",
+    "family_id": "deepseek-deepseek"
+  },
+  {
+    "id": "groq-llama-4-maverick",
+    "provider_id": "groq",
+    "name": "Llama 4 Maverick (Groq)",
+    "name_cn": "Llama 4 Maverick · Groq",
+    "model_id": "meta-llama/llama-4-maverick-17b-128e-instruct",
+    "one_liner_cn": "Groq 免费托管 Llama 4 Maverick 多模态模型。",
+    "context_window": 131072,
+    "max_output_tokens": 32768,
+    "input_price_per_mtok": 0,
+    "output_price_per_mtok": 0,
+    "currency": "USD",
+    "vision_support": true,
+    "open_weight": true,
+    "speed_tier": "fastest",
+    "model_type": [
+      "Chat",
+      "Vision"
+    ],
+    "capabilities": {
+      "reasoning": {
+        "tier": "medium-high",
+        "basis": "Llama 4 Maverick · Groq。"
+      },
+      "coding": {
+        "tier": "high",
+        "basis": "Llama 4 Maverick · Groq。"
+      },
+      "agent": {
+        "tier": "medium",
+        "basis": "Llama 4 Maverick · Groq。"
+      },
+      "knowledge": {
+        "tier": "high",
+        "basis": "Llama 4 Maverick · Groq。"
+      },
+      "multilingual": {
+        "tier": "high",
+        "basis": "Llama 4 Maverick · Groq。"
+      }
+    },
+    "best_for": [
+      "coding",
+      "image"
+    ],
+    "avoid_for": [],
+    "release_date": "2026",
+    "source_url": "https://console.groq.com/docs",
+    "verified": true,
+    "verified_date": "2026-08-06",
+    "free": true,
+    "free_note": "Groq 免费开发者层托管 Llama 4 Maverick。",
+    "family_id": "meta-llama"
+  },
+  {
+    "id": "groq-kimi-k2",
+    "provider_id": "groq",
+    "name": "Kimi K2 (Groq)",
+    "name_cn": "Kimi K2 · Groq",
+    "model_id": "kimi-k2-instruct",
+    "one_liner_cn": "Groq 免费托管 Kimi K2，超长上下文。",
+    "context_window": 262144,
+    "max_output_tokens": 32768,
+    "input_price_per_mtok": 0,
+    "output_price_per_mtok": 0,
+    "currency": "USD",
+    "vision_support": false,
+    "open_weight": true,
+    "speed_tier": "fast",
+    "model_type": [
+      "Chat",
+      "Coding"
+    ],
+    "capabilities": {
+      "reasoning": {
+        "tier": "high",
+        "basis": "Kimi K2 · Groq。"
+      },
+      "coding": {
+        "tier": "high",
+        "basis": "Kimi K2 · Groq。"
+      },
+      "agent": {
+        "tier": "high",
+        "basis": "Kimi K2 · Groq。"
+      },
+      "knowledge": {
+        "tier": "high",
+        "basis": "Kimi K2 · Groq。"
+      },
+      "multilingual": {
+        "tier": "high",
+        "basis": "Kimi K2 · Groq。"
+      }
+    },
+    "best_for": [
+      "long_context"
+    ],
+    "avoid_for": [],
+    "release_date": "2026",
+    "source_url": "https://console.groq.com/docs",
+    "verified": true,
+    "verified_date": "2026-08-06",
+    "free": true,
+    "free_note": "Groq 免费开发者层托管 Kimi K2（262K 上下文）。",
+    "family_id": "moonshot-kimi"
+  },
+  {
+    "id": "openrouter-llama-4-maverick-free",
+    "provider_id": "openrouter",
+    "name": "Llama 4 Maverick (OpenRouter)",
+    "name_cn": "Llama 4 Maverick · OpenRouter",
+    "model_id": "meta-llama/llama-4-maverick:free",
+    "one_liner_cn": "OpenRouter 免费路由 Llama 4 Maverick 多模态。",
+    "context_window": 128000,
+    "max_output_tokens": 32768,
+    "input_price_per_mtok": 0,
+    "output_price_per_mtok": 0,
+    "currency": "USD",
+    "vision_support": true,
+    "open_weight": true,
+    "speed_tier": "fast",
+    "model_type": [
+      "Chat",
+      "Vision"
+    ],
+    "capabilities": {
+      "reasoning": {
+        "tier": "medium-high",
+        "basis": "Llama 4 Maverick · OpenRouter。"
+      },
+      "coding": {
+        "tier": "high",
+        "basis": "Llama 4 Maverick · OpenRouter。"
+      },
+      "agent": {
+        "tier": "medium",
+        "basis": "Llama 4 Maverick · OpenRouter。"
+      },
+      "knowledge": {
+        "tier": "high",
+        "basis": "Llama 4 Maverick · OpenRouter。"
+      },
+      "multilingual": {
+        "tier": "high",
+        "basis": "Llama 4 Maverick · OpenRouter。"
+      }
+    },
+    "best_for": [
+      "coding",
+      "image"
+    ],
+    "avoid_for": [],
+    "release_date": "2026",
+    "source_url": "https://openrouter.ai/docs",
+    "verified": true,
+    "verified_date": "2026-08-06",
+    "free": true,
+    "free_note": "OpenRouter 免费路由模型（约 20 RPM）。",
+    "family_id": "meta-llama"
+  },
+  {
+    "id": "openrouter-llama-4-scout-free",
+    "provider_id": "openrouter",
+    "name": "Llama 4 Scout (OpenRouter)",
+    "name_cn": "Llama 4 Scout · OpenRouter",
+    "model_id": "meta-llama/llama-4-scout:free",
+    "one_liner_cn": "OpenRouter 免费路由 Llama 4 Scout。",
+    "context_window": 128000,
+    "max_output_tokens": 32768,
+    "input_price_per_mtok": 0,
+    "output_price_per_mtok": 0,
+    "currency": "USD",
+    "vision_support": true,
+    "open_weight": true,
+    "speed_tier": "fast",
+    "model_type": [
+      "Chat",
+      "Vision"
+    ],
+    "capabilities": {
+      "reasoning": {
+        "tier": "medium",
+        "basis": "Llama 4 Scout · OpenRouter。"
+      },
+      "coding": {
+        "tier": "medium",
+        "basis": "Llama 4 Scout · OpenRouter。"
+      },
+      "agent": {
+        "tier": "medium",
+        "basis": "Llama 4 Scout · OpenRouter。"
+      },
+      "knowledge": {
+        "tier": "high",
+        "basis": "Llama 4 Scout · OpenRouter。"
+      },
+      "multilingual": {
+        "tier": "high",
+        "basis": "Llama 4 Scout · OpenRouter。"
+      }
+    },
+    "best_for": [
+      "image"
+    ],
+    "avoid_for": [],
+    "release_date": "2026",
+    "source_url": "https://openrouter.ai/docs",
+    "verified": true,
+    "verified_date": "2026-08-06",
+    "free": true,
+    "free_note": "OpenRouter 免费路由模型（约 20 RPM）。",
+    "family_id": "meta-llama"
+  },
+  {
+    "id": "openrouter-gemma-2-9b-free",
+    "provider_id": "openrouter",
+    "name": "Gemma 2 9B (OpenRouter)",
+    "name_cn": "Gemma 2 9B · OpenRouter",
+    "model_id": "google/gemma-2-9b-it:free",
+    "one_liner_cn": "OpenRouter 免费路由 Gemma 2 9B。",
+    "context_window": 8192,
+    "max_output_tokens": 8192,
+    "input_price_per_mtok": 0,
+    "output_price_per_mtok": 0,
+    "currency": "USD",
+    "vision_support": false,
+    "open_weight": true,
+    "speed_tier": "fast",
+    "model_type": [
+      "Chat"
+    ],
+    "capabilities": {
+      "reasoning": {
+        "tier": "medium",
+        "basis": "Gemma 2 9B · OpenRouter。"
+      },
+      "coding": {
+        "tier": "medium",
+        "basis": "Gemma 2 9B · OpenRouter。"
+      },
+      "agent": {
+        "tier": "medium",
+        "basis": "Gemma 2 9B · OpenRouter。"
+      },
+      "knowledge": {
+        "tier": "medium-high",
+        "basis": "Gemma 2 9B · OpenRouter。"
+      },
+      "multilingual": {
+        "tier": "medium-high",
+        "basis": "Gemma 2 9B · OpenRouter。"
+      }
+    },
+    "best_for": [
+      "low_cost"
+    ],
+    "avoid_for": [],
+    "release_date": "2026",
+    "source_url": "https://openrouter.ai/docs",
+    "verified": true,
+    "verified_date": "2026-08-06",
+    "free": true,
+    "free_note": "OpenRouter 免费路由模型（约 30 RPM）。",
+    "family_id": "google-gemma"
+  },
+  {
+    "id": "openrouter-mistral-7b-free",
+    "provider_id": "openrouter",
+    "name": "Mistral 7B (OpenRouter)",
+    "name_cn": "Mistral 7B · OpenRouter",
+    "model_id": "mistralai/mistral-7b-instruct:free",
+    "one_liner_cn": "OpenRouter 免费路由 Mistral 7B，高并发。",
+    "context_window": 32768,
+    "max_output_tokens": 32768,
+    "input_price_per_mtok": 0,
+    "output_price_per_mtok": 0,
+    "currency": "USD",
+    "vision_support": false,
+    "open_weight": true,
+    "speed_tier": "fast",
+    "model_type": [
+      "Chat",
+      "Coding"
+    ],
+    "capabilities": {
+      "reasoning": {
+        "tier": "medium",
+        "basis": "Mistral 7B · OpenRouter。"
+      },
+      "coding": {
+        "tier": "medium-high",
+        "basis": "Mistral 7B · OpenRouter。"
+      },
+      "agent": {
+        "tier": "medium",
+        "basis": "Mistral 7B · OpenRouter。"
+      },
+      "knowledge": {
+        "tier": "high",
+        "basis": "Mistral 7B · OpenRouter。"
+      },
+      "multilingual": {
+        "tier": "high",
+        "basis": "Mistral 7B · OpenRouter。"
+      }
+    },
+    "best_for": [
+      "low_cost"
+    ],
+    "avoid_for": [],
+    "release_date": "2026",
+    "source_url": "https://openrouter.ai/docs",
+    "verified": true,
+    "verified_date": "2026-08-06",
+    "free": true,
+    "free_note": "OpenRouter 免费路由模型（约 60 RPM）。",
+    "family_id": "mistral-mixtral"
+  },
+  {
+    "id": "openrouter-qwen-2-5-72b-free",
+    "provider_id": "openrouter",
+    "name": "Qwen2.5 72B (OpenRouter)",
+    "name_cn": "Qwen2.5 72B · OpenRouter",
+    "model_id": "qwen/qwen-2.5-72b-instruct:free",
+    "one_liner_cn": "OpenRouter 免费路由 Qwen2.5 72B，多语言强。",
+    "context_window": 131072,
+    "max_output_tokens": 32768,
+    "input_price_per_mtok": 0,
+    "output_price_per_mtok": 0,
+    "currency": "USD",
+    "vision_support": false,
+    "open_weight": true,
+    "speed_tier": "fast",
+    "model_type": [
+      "Chat",
+      "Coding"
+    ],
+    "capabilities": {
+      "reasoning": {
+        "tier": "medium-high",
+        "basis": "Qwen2.5 72B · OpenRouter。"
+      },
+      "coding": {
+        "tier": "high",
+        "basis": "Qwen2.5 72B · OpenRouter。"
+      },
+      "agent": {
+        "tier": "medium",
+        "basis": "Qwen2.5 72B · OpenRouter。"
+      },
+      "knowledge": {
+        "tier": "high",
+        "basis": "Qwen2.5 72B · OpenRouter。"
+      },
+      "multilingual": {
+        "tier": "high",
+        "basis": "Qwen2.5 72B · OpenRouter。"
+      }
+    },
+    "best_for": [
+      "coding"
+    ],
+    "avoid_for": [],
+    "release_date": "2026",
+    "source_url": "https://openrouter.ai/docs",
+    "verified": true,
+    "verified_date": "2026-08-06",
+    "free": true,
+    "free_note": "OpenRouter 免费路由模型（约 20 RPM）。",
+    "family_id": "qwen-qwen"
+  },
+  {
+    "id": "openrouter-llama-3-1-8b-free",
+    "provider_id": "openrouter",
+    "name": "Llama 3.1 8B (OpenRouter)",
+    "name_cn": "Llama 3.1 8B · OpenRouter",
+    "model_id": "meta-llama/llama-3.1-8b-instruct:free",
+    "one_liner_cn": "OpenRouter 免费路由 Llama 3.1 8B，轻量高并发。",
+    "context_window": 131072,
+    "max_output_tokens": 131072,
+    "input_price_per_mtok": 0,
+    "output_price_per_mtok": 0,
+    "currency": "USD",
+    "vision_support": false,
+    "open_weight": true,
+    "speed_tier": "fast",
+    "model_type": [
+      "Chat"
+    ],
+    "capabilities": {
+      "reasoning": {
+        "tier": "medium",
+        "basis": "Llama 3.1 8B · OpenRouter。"
+      },
+      "coding": {
+        "tier": "medium-high",
+        "basis": "Llama 3.1 8B · OpenRouter。"
+      },
+      "agent": {
+        "tier": "medium",
+        "basis": "Llama 3.1 8B · OpenRouter。"
+      },
+      "knowledge": {
+        "tier": "high",
+        "basis": "Llama 3.1 8B · OpenRouter。"
+      },
+      "multilingual": {
+        "tier": "high",
+        "basis": "Llama 3.1 8B · OpenRouter。"
+      }
+    },
+    "best_for": [
+      "low_cost"
+    ],
+    "avoid_for": [],
+    "release_date": "2026",
+    "source_url": "https://openrouter.ai/docs",
+    "verified": true,
+    "verified_date": "2026-08-06",
+    "free": true,
+    "free_note": "OpenRouter 免费路由模型（约 20 RPM）。",
+    "family_id": "meta-llama"
+  },
+  {
+    "id": "openrouter-phi-3-5-mini-free",
+    "provider_id": "openrouter",
+    "name": "Phi-3.5 Mini (OpenRouter)",
+    "name_cn": "Phi-3.5 Mini · OpenRouter",
+    "model_id": "microsoft/phi-3.5-mini-128k-instruct:free",
+    "one_liner_cn": "OpenRouter 免费路由 Phi-3.5 Mini，长上下文小模型。",
+    "context_window": 131072,
+    "max_output_tokens": 32768,
+    "input_price_per_mtok": 0,
+    "output_price_per_mtok": 0,
+    "currency": "USD",
+    "vision_support": false,
+    "open_weight": true,
+    "speed_tier": "fast",
+    "model_type": [
+      "Chat"
+    ],
+    "capabilities": {
+      "reasoning": {
+        "tier": "medium-high",
+        "basis": "Phi-3.5 Mini · OpenRouter。"
+      },
+      "coding": {
+        "tier": "medium",
+        "basis": "Phi-3.5 Mini · OpenRouter。"
+      },
+      "agent": {
+        "tier": "medium",
+        "basis": "Phi-3.5 Mini · OpenRouter。"
+      },
+      "knowledge": {
+        "tier": "medium-high",
+        "basis": "Phi-3.5 Mini · OpenRouter。"
+      },
+      "multilingual": {
+        "tier": "medium-high",
+        "basis": "Phi-3.5 Mini · OpenRouter。"
+      }
+    },
+    "best_for": [
+      "low_cost"
+    ],
+    "avoid_for": [],
+    "release_date": "2026",
+    "source_url": "https://openrouter.ai/docs",
+    "verified": true,
+    "verified_date": "2026-08-06",
+    "free": true,
+    "free_note": "OpenRouter 免费路由模型（约 20 RPM）。",
+    "family_id": "microsoft-phi"
+  },
+  {
+    "id": "openrouter-gemini-2-0-flash-free",
+    "provider_id": "openrouter",
+    "name": "Gemini 2.0 Flash (OpenRouter)",
+    "name_cn": "Gemini 2.0 Flash · OpenRouter",
+    "model_id": "google/gemini-2.0-flash-exp:free",
+    "one_liner_cn": "OpenRouter 免费路由 Gemini 2.0 Flash，百万上下文多模态。",
+    "context_window": 1000000,
+    "max_output_tokens": 8192,
+    "input_price_per_mtok": 0,
+    "output_price_per_mtok": 0,
+    "currency": "USD",
+    "vision_support": true,
+    "open_weight": false,
+    "speed_tier": "fast",
+    "model_type": [
+      "Chat",
+      "Vision"
+    ],
+    "capabilities": {
+      "reasoning": {
+        "tier": "medium-high",
+        "basis": "Gemini 2.0 Flash · OpenRouter。"
+      },
+      "coding": {
+        "tier": "medium-high",
+        "basis": "Gemini 2.0 Flash · OpenRouter。"
+      },
+      "agent": {
+        "tier": "medium",
+        "basis": "Gemini 2.0 Flash · OpenRouter。"
+      },
+      "knowledge": {
+        "tier": "high",
+        "basis": "Gemini 2.0 Flash · OpenRouter。"
+      },
+      "multilingual": {
+        "tier": "high",
+        "basis": "Gemini 2.0 Flash · OpenRouter。"
+      }
+    },
+    "best_for": [
+      "long_context",
+      "image"
+    ],
+    "avoid_for": [],
+    "release_date": "2026",
+    "source_url": "https://openrouter.ai/docs",
+    "verified": true,
+    "verified_date": "2026-08-06",
+    "free": true,
+    "free_note": "OpenRouter 免费路由模型（约 15 RPM）。",
+    "family_id": "google-gemini"
+  },
+  {
+    "id": "nvidia-nim-llama-4-maverick",
+    "provider_id": "nvidia-nim",
+    "name": "Llama 4 Maverick (NIM)",
+    "name_cn": "Llama 4 Maverick · NVIDIA NIM",
+    "model_id": "meta/llama-4-maverick",
+    "one_liner_cn": "NVIDIA NIM 免费托管 Llama 4 Maverick 多模态。",
+    "context_window": 128000,
+    "max_output_tokens": 32768,
+    "input_price_per_mtok": 0,
+    "output_price_per_mtok": 0,
+    "currency": "USD",
+    "vision_support": true,
+    "open_weight": true,
+    "speed_tier": "fast",
+    "model_type": [
+      "Chat",
+      "Vision"
+    ],
+    "capabilities": {
+      "reasoning": {
+        "tier": "medium-high",
+        "basis": "Llama 4 Maverick · NVIDIA NIM。"
+      },
+      "coding": {
+        "tier": "high",
+        "basis": "Llama 4 Maverick · NVIDIA NIM。"
+      },
+      "agent": {
+        "tier": "medium",
+        "basis": "Llama 4 Maverick · NVIDIA NIM。"
+      },
+      "knowledge": {
+        "tier": "high",
+        "basis": "Llama 4 Maverick · NVIDIA NIM。"
+      },
+      "multilingual": {
+        "tier": "high",
+        "basis": "Llama 4 Maverick · NVIDIA NIM。"
+      }
+    },
+    "best_for": [
+      "coding",
+      "image"
+    ],
+    "avoid_for": [],
+    "release_date": "2026",
+    "source_url": "https://build.nvidia.com/",
+    "verified": true,
+    "verified_date": "2026-08-06",
+    "free": true,
+    "free_note": "NVIDIA NIM 免费推理微服务托管 Llama 4 Maverick。",
+    "family_id": "meta-llama"
+  },
+  {
+    "id": "nvidia-nim-mistral-small-24b",
+    "provider_id": "nvidia-nim",
+    "name": "Mistral Small 24B (NIM)",
+    "name_cn": "Mistral Small 24B · NVIDIA NIM",
+    "model_id": "mistralai/mistral-small-24b-instruct-2501",
+    "one_liner_cn": "NVIDIA NIM 免费托管 Mistral Small 24B。",
+    "context_window": 32000,
+    "max_output_tokens": 8192,
+    "input_price_per_mtok": 0,
+    "output_price_per_mtok": 0,
+    "currency": "USD",
+    "vision_support": false,
+    "open_weight": true,
+    "speed_tier": "fast",
+    "model_type": [
+      "Chat",
+      "Coding"
+    ],
+    "capabilities": {
+      "reasoning": {
+        "tier": "medium-high",
+        "basis": "Mistral Small 24B · NVIDIA NIM。"
+      },
+      "coding": {
+        "tier": "high",
+        "basis": "Mistral Small 24B · NVIDIA NIM。"
+      },
+      "agent": {
+        "tier": "medium",
+        "basis": "Mistral Small 24B · NVIDIA NIM。"
+      },
+      "knowledge": {
+        "tier": "high",
+        "basis": "Mistral Small 24B · NVIDIA NIM。"
+      },
+      "multilingual": {
+        "tier": "high",
+        "basis": "Mistral Small 24B · NVIDIA NIM。"
+      }
+    },
+    "best_for": [
+      "coding"
+    ],
+    "avoid_for": [],
+    "release_date": "2026",
+    "source_url": "https://build.nvidia.com/",
+    "verified": true,
+    "verified_date": "2026-08-06",
+    "free": true,
+    "free_note": "NVIDIA NIM 免费推理微服务托管 Mistral Small 24B。",
+    "family_id": "mistral-mistral"
+  },
+  {
+    "id": "nvidia-nim-deepseek-r1",
+    "provider_id": "nvidia-nim",
+    "name": "DeepSeek R1 (NIM)",
+    "name_cn": "DeepSeek R1 · NVIDIA NIM",
+    "model_id": "deepseek/deepseek-r1",
+    "one_liner_cn": "NVIDIA NIM 免费托管 DeepSeek R1 推理模型。",
+    "context_window": 128000,
+    "max_output_tokens": 32768,
+    "input_price_per_mtok": 0,
+    "output_price_per_mtok": 0,
+    "currency": "USD",
+    "vision_support": false,
+    "open_weight": true,
+    "speed_tier": "fast",
+    "model_type": [
+      "Chat",
+      "Reasoning"
+    ],
+    "capabilities": {
+      "reasoning": {
+        "tier": "high",
+        "basis": "DeepSeek R1 · NVIDIA NIM。"
+      },
+      "coding": {
+        "tier": "high",
+        "basis": "DeepSeek R1 · NVIDIA NIM。"
+      },
+      "agent": {
+        "tier": "medium",
+        "basis": "DeepSeek R1 · NVIDIA NIM。"
+      },
+      "knowledge": {
+        "tier": "high",
+        "basis": "DeepSeek R1 · NVIDIA NIM。"
+      },
+      "multilingual": {
+        "tier": "high",
+        "basis": "DeepSeek R1 · NVIDIA NIM。"
+      }
+    },
+    "best_for": [
+      "reasoning"
+    ],
+    "avoid_for": [],
+    "release_date": "2026",
+    "source_url": "https://build.nvidia.com/",
+    "verified": true,
+    "verified_date": "2026-08-06",
+    "free": true,
+    "free_note": "NVIDIA NIM 免费推理微服务托管 DeepSeek R1。",
+    "family_id": "deepseek-deepseek"
+  },
+  {
+    "id": "nvidia-nim-qwen3-coder-480b",
+    "provider_id": "nvidia-nim",
+    "name": "Qwen3 Coder 480B (NIM)",
+    "name_cn": "Qwen3 Coder 480B · NVIDIA NIM",
+    "model_id": "qwen/qwen3-coder-480b",
+    "one_liner_cn": "NVIDIA NIM 免费托管 Qwen3 Coder 480B，256K 编码。",
+    "context_window": 256000,
+    "max_output_tokens": 32768,
+    "input_price_per_mtok": 0,
+    "output_price_per_mtok": 0,
+    "currency": "USD",
+    "vision_support": false,
+    "open_weight": true,
+    "speed_tier": "fast",
+    "model_type": [
+      "Chat",
+      "Coding"
+    ],
+    "capabilities": {
+      "reasoning": {
+        "tier": "high",
+        "basis": "Qwen3 Coder 480B · NVIDIA NIM。"
+      },
+      "coding": {
+        "tier": "high",
+        "basis": "Qwen3 Coder 480B · NVIDIA NIM。"
+      },
+      "agent": {
+        "tier": "high",
+        "basis": "Qwen3 Coder 480B · NVIDIA NIM。"
+      },
+      "knowledge": {
+        "tier": "high",
+        "basis": "Qwen3 Coder 480B · NVIDIA NIM。"
+      },
+      "multilingual": {
+        "tier": "high",
+        "basis": "Qwen3 Coder 480B · NVIDIA NIM。"
+      }
+    },
+    "best_for": [
+      "coding"
+    ],
+    "avoid_for": [],
+    "release_date": "2026",
+    "source_url": "https://build.nvidia.com/",
+    "verified": true,
+    "verified_date": "2026-08-06",
+    "free": true,
+    "free_note": "NVIDIA NIM 免费推理微服务托管 Qwen3 Coder 480B。",
+    "family_id": "qwen-qwen"
+  },
+  {
+    "id": "nvidia-nim-nemotron-nano-9b",
+    "provider_id": "nvidia-nim",
+    "name": "Nemotron Nano 9B (NIM)",
+    "name_cn": "Nemotron Nano 9B · NVIDIA NIM",
+    "model_id": "nvidia/nemotron-nano-9b-v2",
+    "one_liner_cn": "NVIDIA NIM 免费托管 Nemotron Nano 9B，推理与智能体。",
+    "context_window": 128000,
+    "max_output_tokens": 4096,
+    "input_price_per_mtok": 0,
+    "output_price_per_mtok": 0,
+    "currency": "USD",
+    "vision_support": false,
+    "open_weight": true,
+    "speed_tier": "fast",
+    "model_type": [
+      "Chat",
+      "Reasoning"
+    ],
+    "capabilities": {
+      "reasoning": {
+        "tier": "medium-high",
+        "basis": "Nemotron Nano 9B · NVIDIA NIM。"
+      },
+      "coding": {
+        "tier": "medium-high",
+        "basis": "Nemotron Nano 9B · NVIDIA NIM。"
+      },
+      "agent": {
+        "tier": "medium",
+        "basis": "Nemotron Nano 9B · NVIDIA NIM。"
+      },
+      "knowledge": {
+        "tier": "high",
+        "basis": "Nemotron Nano 9B · NVIDIA NIM。"
+      },
+      "multilingual": {
+        "tier": "high",
+        "basis": "Nemotron Nano 9B · NVIDIA NIM。"
+      }
+    },
+    "best_for": [
+      "low_cost"
+    ],
+    "avoid_for": [],
+    "release_date": "2026",
+    "source_url": "https://build.nvidia.com/",
+    "verified": true,
+    "verified_date": "2026-08-06",
+    "free": true,
+    "free_note": "NVIDIA NIM 免费推理微服务托管 Nemotron Nano 9B。",
+    "family_id": "nvidia-nim"
+  },
+  {
+    "id": "nvidia-nim-phi-4",
+    "provider_id": "nvidia-nim",
+    "name": "Phi-4 (NIM)",
+    "name_cn": "Phi-4 · NVIDIA NIM",
+    "model_id": "microsoft/phi-4",
+    "one_liner_cn": "NVIDIA NIM 免费托管 Microsoft Phi-4。",
+    "context_window": 16384,
+    "max_output_tokens": 4096,
+    "input_price_per_mtok": 0,
+    "output_price_per_mtok": 0,
+    "currency": "USD",
+    "vision_support": false,
+    "open_weight": true,
+    "speed_tier": "fast",
+    "model_type": [
+      "Chat"
+    ],
+    "capabilities": {
+      "reasoning": {
+        "tier": "medium-high",
+        "basis": "Phi-4 · NVIDIA NIM。"
+      },
+      "coding": {
+        "tier": "medium-high",
+        "basis": "Phi-4 · NVIDIA NIM。"
+      },
+      "agent": {
+        "tier": "medium",
+        "basis": "Phi-4 · NVIDIA NIM。"
+      },
+      "knowledge": {
+        "tier": "medium-high",
+        "basis": "Phi-4 · NVIDIA NIM。"
+      },
+      "multilingual": {
+        "tier": "medium-high",
+        "basis": "Phi-4 · NVIDIA NIM。"
+      }
+    },
+    "best_for": [
+      "low_cost"
+    ],
+    "avoid_for": [],
+    "release_date": "2026",
+    "source_url": "https://build.nvidia.com/",
+    "verified": true,
+    "verified_date": "2026-08-06",
+    "free": true,
+    "free_note": "NVIDIA NIM 免费推理微服务托管 Phi-4。",
+    "family_id": "microsoft-phi"
+  },
+  {
+    "id": "nvidia-nim-gemma-2-9b",
+    "provider_id": "nvidia-nim",
+    "name": "Gemma 2 9B (NIM)",
+    "name_cn": "Gemma 2 9B · NVIDIA NIM",
+    "model_id": "google/gemma-2-9b-it",
+    "one_liner_cn": "NVIDIA NIM 免费托管 Google Gemma 2 9B。",
+    "context_window": 8192,
+    "max_output_tokens": 8192,
+    "input_price_per_mtok": 0,
+    "output_price_per_mtok": 0,
+    "currency": "USD",
+    "vision_support": false,
+    "open_weight": true,
+    "speed_tier": "fast",
+    "model_type": [
+      "Chat"
+    ],
+    "capabilities": {
+      "reasoning": {
+        "tier": "medium",
+        "basis": "Gemma 2 9B · NVIDIA NIM。"
+      },
+      "coding": {
+        "tier": "medium",
+        "basis": "Gemma 2 9B · NVIDIA NIM。"
+      },
+      "agent": {
+        "tier": "medium",
+        "basis": "Gemma 2 9B · NVIDIA NIM。"
+      },
+      "knowledge": {
+        "tier": "medium-high",
+        "basis": "Gemma 2 9B · NVIDIA NIM。"
+      },
+      "multilingual": {
+        "tier": "medium-high",
+        "basis": "Gemma 2 9B · NVIDIA NIM。"
+      }
+    },
+    "best_for": [
+      "low_cost"
+    ],
+    "avoid_for": [],
+    "release_date": "2026",
+    "source_url": "https://build.nvidia.com/",
+    "verified": true,
+    "verified_date": "2026-08-06",
+    "free": true,
+    "free_note": "NVIDIA NIM 免费推理微服务托管 Gemma 2 9B。",
+    "family_id": "google-gemma"
   }
 ]
