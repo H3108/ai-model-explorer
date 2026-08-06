@@ -307,7 +307,7 @@ function viewProviders() {
         ${seg('providerModality', state.providerModality, 'providerModality', [['all', '全部模态'], ['text', '文本'], ['image', '图像'], ['video', '视频']])}
       </div>
     </div>
-    <p class="notice">数据于 2026-08-05 联网核实，价格与能力以厂商官方为准。托管网关（Groq / OpenRouter / NVIDIA NIM）已移至导航「托管网关」专页。</p>
+    <p class="notice">数据于 2026-08-05 联网核实，价格与能力以厂商官方为准。</p>
     <div class="provider-grid" id="provider-grid">${providerGridHTML()}</div>
   </div>`
 }
@@ -464,6 +464,13 @@ function matchModels() {
     const t = TRAITS.find((x) => x.key === k)
     if (t) list = list.filter(t.test)
   })
+  // 能力维度改为硬筛选：必须同时具备所选每一项能力（缺任一即排除）
+  if (state.browseCaps.length) {
+    list = list.filter((v) => {
+      const caps = v.capabilities || {}
+      return state.browseCaps.every((k) => caps[k] && caps[k].tier)
+    })
+  }
   const scored = list.map((v) => {
     const caps = v.capabilities || {}
     let score = 0
@@ -517,12 +524,12 @@ function viewBrowse() {
   const priceBtn = (k, label) =>
     `<button class="${state.browsePrice === k ? 'selected' : ''}" data-value="${k}">${label}</button>`
   return `<div class="wrap page">
-    ${pageHead({ eyebrow: '02 / 能力筛选', title: '按<em>能力</em>找模型', desc: '左边勾选你需要的能力与硬性条件，右边实时匹配并排序，找到最合适的型号。' })}
+    ${pageHead({ eyebrow: '02 / 能力筛选', title: '按<em>能力</em>找模型', desc: '左边勾选你需要的能力与硬性条件，右边即时过滤并排序，找到最合适的型号。' })}
     <div class="browse-layout">
       <aside class="filter-panel">
         <div class="fp-block"><h4>模态</h4><div class="segmented" data-seg="browseModality">${modBtn('all', '全部')}${modBtn('text', '文本')}${modBtn('image', '图像')}${modBtn('video', '视频')}</div></div>
         <div class="fp-block"><h4>价格<small>按付费方式筛选</small></h4><div class="segmented" data-seg="browsePrice">${priceBtn('all', '全部')}${priceBtn('free', '免费')}${priceBtn('low', '低成本')}${priceBtn('standard', '标准价')}</div></div>
-        <div class="fp-block"><h4>能力维度<small>多选，取平均匹配度</small></h4><div class="chip-wrap">${CAP_DIMS.map(capChip).join('')}</div></div>
+        <div class="fp-block"><h4>能力维度<small>多选，逐条过滤</small></h4><div class="chip-wrap">${CAP_DIMS.map(capChip).join('')}</div></div>
         <div class="fp-block"><h4>硬性条件<small>多选，逐条过滤</small></h4><div class="chip-wrap">${TRAITS.map(traitChip).join('')}</div></div>
         <div class="fp-block"><h4>排序</h4><div class="segmented" data-seg="browseSort"><button class="${state.browseSort === 'match' ? 'selected' : ''}" data-value="match">匹配度</button><button class="${state.browseSort === 'price' ? 'selected' : ''}" data-value="price">价格</button><button class="${state.browseSort === 'context' ? 'selected' : ''}" data-value="context">上下文</button></div></div>
         <button class="button ghost small" data-reset-filters>清空筛选</button>
@@ -685,6 +692,48 @@ function specCards(v) {
     statCard('开放权重', v.open_weight ? '是' : '否'),
   ].join('')
 }
+// 参数速读：把 122B / 256K 这类数字翻译成通俗含义（Option B 解读区块）
+function paramInsight(v) {
+  const items = []
+  // 参数规模
+  const pr = (v.params || '').trim()
+  if (pr && pr !== '未公开') {
+    const m = pr.match(/(\d+(?:\.\d+)?)\s*([BT])/i)
+    if (m) {
+      const num = parseFloat(m[1])
+      const unit = m[2].toUpperCase()
+      const billions = unit === 'T' ? num * 1000 : num
+      let band, desc
+      if (billions < 8) { band = '轻量级'; desc = '参数少、体积小，适合端侧部署、高频低延迟调用，但复杂推理能力有限。' }
+      else if (billions < 30) { band = '中小规模'; desc = '在速度与质量间取得平衡，多数日常任务够用，显存占用可控。' }
+      else if (billions < 70) { band = '中大型'; desc = '进入高质量区间，长文理解与复杂推理更稳，需要较好算力。' }
+      else if (billions <= 150) { band = '大型稠密'; desc = '旗舰级稠密模型，推理质量高，但更吃显存与算力、速度偏慢。' }
+      else { band = '超大规模'; desc = '参数规模位于顶端（多为 MoE 混合专家架构），能力最强，但对算力与上下文规划要求最高。' }
+      items.push({ k: '参数规模', v: pr, band, desc })
+    }
+  }
+  // 上下文窗口
+  const cw = v.context_window
+  if (cw) {
+    const k = cw / 1000
+    const km = k >= 1000 ? (k / 1000).toFixed(k % 1000 === 0 ? 0 : 1) + 'M' : (Number.isInteger(k) ? k : Math.round(k)) + 'K'
+    const chars = Math.round(cw * 0.7)
+    let band, desc
+    if (cw < 32000) { band = '标准窗口'; desc = '适合单轮问答与中短文档，长文档需分段处理。' }
+    else if (cw < 128000) { band = '长窗口'; desc = '可一次喂入数万字长文，胜任多数文档摘要与多轮对话。' }
+    else if (cw < 256000) { band = '超长窗口'; desc = '能处理整篇论文或报告，长程依赖保持更好。' }
+    else { band = '极长窗口'; desc = '可整本小说或数百页资料一次放入，适合超长文档问答、代码库级检索。' }
+    items.push({ k: '上下文窗口', v: km + '（' + cw.toLocaleString() + ' token）', band, desc, tip: '约 ' + chars.toLocaleString() + ' 中文字' })
+  }
+  // 计费单位
+  if (!v.free && (v.input_price_per_mtok != null || v.output_price_per_mtok != null)) {
+    items.push({ k: '计费单位', v: '每百万 token', band: '计价基准', desc: '1M token ≈ 约 75 万中文字 ≈ 一本中等长度的书。输入/输出分别计费，输出通常更贵。' })
+  }
+  if (!items.length) return ''
+  return `<section class="detail-sec"><h3>参数速读<small>这些数字到底意味着什么</small></h3><div class="insight-grid">${items
+    .map((it) => `<article class="insight-card"><div class="insight-top"><span class="insight-k">${esc(it.k)}</span><span class="insight-band">${esc(it.band)}</span></div><b class="insight-val">${esc(it.v)}</b><p>${esc(it.desc)}</p>${it.tip ? `<small class="insight-tip">${esc(it.tip)}</small>` : ''}</article>`)
+    .join('')}</div></section>`
+}
 function namingBlock(v) {
   const hay = `${v.name || ''} ${v.name_cn || ''} ${v.model_id || ''}`.toLowerCase()
   const hits = state.naming.filter((n) => hay.includes(n.term.toLowerCase()))
@@ -729,6 +778,8 @@ function viewModel(id) {
       <h3>关键参数</h3>
       <div class="stat-strip four">${specCards(v)}</div>
     </section>
+
+    ${paramInsight(v)}
 
     ${bars ? `<section class="detail-sec"><h3>能力评估<small>三档定性 · 每项标注依据，不编造分数</small></h3><div class="cap-bars">${bars}</div></section>` : ''}
 

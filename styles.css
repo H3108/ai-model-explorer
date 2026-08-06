@@ -729,6 +729,20 @@ select { padding: 8px 12px; border-radius: var(--r-sm); }
 .naming-card p, .glossary-card p { margin: 0; font-size: 12.5px; color: var(--muted); flex: 1; }
 .naming-card small, .glossary-card small { font-size: 11.5px; color: var(--green-600); }
 
+/* 参数速读（解读区块） */
+.insight-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px; }
+.insight-card {
+  background: var(--card); border: 1px solid var(--line);
+  border-left: 3px solid var(--green-600, #173e35); border-radius: var(--r-md);
+  padding: 14px 16px; display: flex; flex-direction: column; gap: 8px;
+}
+.insight-top { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.insight-k { font-size: 12px; font-weight: 700; color: var(--muted); letter-spacing: .02em; }
+.insight-band { font-size: 11px; font-weight: 700; color: var(--deep); background: var(--green); padding: 2px 9px; border-radius: 999px; white-space: nowrap; }
+.insight-val { font-size: 18px; font-weight: 800; color: var(--deep); line-height: 1.2; word-break: break-word; }
+.insight-card p { margin: 0; font-size: 12.5px; color: var(--muted); line-height: 1.6; }
+.insight-tip { font-size: 11.5px; color: var(--green-600); }
+
 .rel-group { margin-bottom: 18px; }
 .rel-group h4 { font-size: 13px; color: var(--muted); margin-bottom: 10px; font-weight: 700; }
 .source-line { margin-top: 34px; font-size: 12px; color: var(--muted); }
