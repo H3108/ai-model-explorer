@@ -767,9 +767,8 @@ function viewGateways() {
         <li>模型版本与官方同步可能有延迟</li>
       </ul></div>
     </div>
-    <p class="notice">下方卡片与「厂商地图」完全一致：点击任意卡片进入该网关的系列与型号列表。</p>
-    <div class="provider-grid">${gw.map(providerCard).join('')}</div>
     <p class="notice">本页仅收录「真·免费 API」的托管网关（可程序化调用）。各厂商自带免费模型见对应厂商页与浏览页「价格 = 免费」。</p>
+    <div class="provider-grid">${gw.map(providerCard).join('')}</div>
   </div>`
 }
 
