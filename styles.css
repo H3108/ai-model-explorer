@@ -310,7 +310,15 @@ select { padding: 8px 12px; border-radius: var(--r-sm); }
 .dot.orange { background: var(--orange); }
 .dot.purple { background: var(--purple); }
 @keyframes orbit-spin { to { transform: translate(-50%, -50%) rotate(360deg); } }
-@media (prefers-reduced-motion: reduce) { .orbit-b { animation: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .orbit-b { animation: none; }
+  *, *::before, *::after {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
 
 .proof {
   display: grid; grid-template-columns: repeat(4, 1fr);
@@ -836,3 +844,23 @@ select { padding: 8px 12px; border-radius: var(--r-sm); }
   .result-row { flex-wrap: wrap; }
   .result-reason { width: 100%; }
 }
+
+/* 首屏骨架屏（loadData 首次渲染前占位，消除白屏） */
+#boot-skeleton { display: flex; flex-direction: column; gap: 22px; }
+.sk-hero { height: 120px; border-radius: 16px; }
+.sk-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.sk-card { height: 160px; border-radius: 14px; }
+.sk-hint { color: var(--muted, #888); font-size: 14px; margin: 4px 0 0; }
+.skip-link {
+  position: absolute; left: 12px; top: -48px; z-index: 50;
+  background: var(--accent, #3b6cff); color: #fff; padding: 8px 14px; border-radius: 8px;
+  font-size: 14px; font-weight: 600; transition: top .15s ease; text-decoration: none;
+}
+.skip-link:focus { top: 10px; }
+.sk-hero, .sk-card {
+  background: linear-gradient(100deg, #eceef2 30%, #f5f6f8 50%, #eceef2 70%);
+  background-size: 200% 100%;
+  animation: sk-shimmer 1.3s ease-in-out infinite;
+}
+@keyframes sk-shimmer { from { background-position: 200% 0; } to { background-position: -200% 0; } }
+@media (max-width: 720px) { .sk-grid { grid-template-columns: 1fr 1fr; } }

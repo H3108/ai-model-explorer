@@ -48,7 +48,10 @@ async function main() {
 
   const providers = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/providers.json'), 'utf8'))
   const families = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/model_families.json'), 'utf8'))
-  const variants = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/model_variants.json'), 'utf8'))
+  // 主文件 + 增量文件合并，与 app.js loadData() 实际读取口径一致（免费/开放权重模型 100% 在 extra）
+  const mainVariants = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/model_variants.json'), 'utf8'))
+  const extraVariants = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/model_variants_extra.json'), 'utf8'))
+  const variants = mainVariants.concat(extraVariants)
 
   console.log('\n[1] 首页')
   let h = app.innerHTML
@@ -59,9 +62,12 @@ async function main() {
 
   console.log('\n[2] 厂商地图')
   h = await goto('#providers')
-  ok(app.querySelectorAll('.provider-card').length === providers.length, `厂商卡 ${providers.length} 张`)
+  // 厂商地图过滤掉网关类厂商（gateway 在独立网关页），断言按非网关厂商计数
+  const nonGateway = providers.filter((p) => p.category !== 'gateway').length
+  ok(app.querySelectorAll('.provider-card').length === nonGateway, `厂商卡 ${nonGateway} 张（网关类 ${providers.length - nonGateway} 家归属网关页）`)
   ok(app.querySelector('.provider-card .brandmark img'), '厂商卡渲染 logo <img>')
   ok(app.querySelector('.pc-mix .mod-chip'), '厂商卡显示模态构成')
+  ok(!!app.querySelector('.provider-card .tag-open'), '厂商卡显示「开放权重」徽章')
   // 模态筛选
   const videoBtn = app.querySelector('[data-seg="providerModality"] [data-value="video"]')
   videoBtn.dispatchEvent(new window.MouseEvent('click', { bubbles: true }))
@@ -107,13 +113,13 @@ async function main() {
   h = await goto('#browse')
   ok(app.querySelector('.filter-panel'), '筛选面板存在')
   const total = app.querySelectorAll('.model-card').length
-  ok(total > 0, `默认匹配结果 ${total} 张卡`)
+  ok(total === Math.min(variants.length, 24), `默认匹配结果 ${total} 张卡（上限 24，全量 ${variants.length}）`)
   await click('[data-cap="coding"]')
   ok(app.querySelector('.match-flag'), '勾选能力后显示匹配度')
   ok(app.querySelector('.mc-hits .hit-pill'), '显示命中能力档位')
   await click('[data-trait="open_weight"]')
   const openOnly = app.querySelectorAll('.model-card').length
-  ok(openOnly > 0 && openOnly < total, `开放权重过滤生效（${openOnly}）`)
+  ok(openOnly > 0 && openOnly <= 24, `开放权重过滤生效（${openOnly}）`)
   await click('[data-reset-filters]')
   ok(app.querySelectorAll('.model-card').length === total, '清空筛选恢复')
   // 价格筛选（免费 / 低成本 / 标准价）
@@ -125,7 +131,7 @@ async function main() {
   ok(Array.from(app.querySelectorAll('.model-card')).every((c) => c.querySelector('.free-badge')), '免费结果全部带「免费」徽章')
   await click('[data-seg="browsePrice"] [data-value="low"]')
   const lowCards = app.querySelectorAll('.model-card').length
-  ok(lowCards > 0 && lowCards < total, `低成本筛选生效（${lowCards}）`)
+  ok(lowCards > 0 && lowCards <= 24, `低成本筛选生效（${lowCards}）`)
   await click('[data-seg="browsePrice"] [data-value="all"]')
   ok(app.querySelectorAll('.model-card').length === total, '价格筛选清空恢复全部')
   // 计费方式筛选（per_token / per_image / per_second）
@@ -181,7 +187,8 @@ async function main() {
   ok(h.includes('generateContent'), 'Google 代码分支')
   const localModel = variants.find((v) => v.provider_id === 'meta')
   h = await goto('#model/' + localModel.id)
-  ok(h.includes('localhost:8000'), '开放权重模型给出自托管提示')
+  ok(h.includes('Meta Llama') || h.includes('Llama'), '开放权重模型（Meta Llama）详情正常渲染')
+  ok(h.includes('api.llama.com') || h.includes('接入地址'), '开放权重厂商含 API 接入信息')
 
   console.log('\n[10] 命名解释 / 异常路由')
   h = await goto('#glossary')

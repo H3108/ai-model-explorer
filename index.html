@@ -16,6 +16,7 @@
 </head>
 
 <body>
+  <a class="skip-link" href="#app">跳到主内容</a>
   <header class="topbar">
     <a class="brand" href="#home">
       <img class="brand-logo" src="assets/brand/logo.svg" alt="AI Model Explorer" width="30" height="30">
@@ -31,7 +32,15 @@
     <span class="version-pill">V4 · AI 模型知识库</span>
   </header>
 
-  <main id="app" class="app-view"></main>
+  <main id="app" class="app-view" tabindex="-1">
+    <div class="wrap page" id="boot-skeleton" aria-busy="true" aria-live="polite">
+      <div class="sk-hero"></div>
+      <div class="sk-grid">
+        <div class="sk-card"></div><div class="sk-card"></div><div class="sk-card"></div><div class="sk-card"></div>
+      </div>
+      <p class="sk-hint">正在加载模型数据…</p>
+    </div>
+  </main>
 
   <footer class="footer wrap">
     <span>© 2026 AI Model Explorer</span>

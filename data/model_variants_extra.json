@@ -512,7 +512,8 @@
     "last_verified_at": "2026-08-05",
     "price_model": "per_token",
     "repo_url": "https://huggingface.co/models?search=GLM-4.5",
-    "benchmarks": []
+    "benchmarks": [],
+    "params": "355B (32B 激活 / MoE)"
   },
   {
     "id": "glm-4-5-air",
@@ -1194,7 +1195,8 @@
     "last_verified_at": "2026-08-05",
     "price_model": "per_token",
     "repo_url": "https://huggingface.co/models?search=Llama%203.3%2070B%20(Groq)",
-    "benchmarks": []
+    "benchmarks": [],
+    "params": "70B"
   },
   {
     "id": "groq-qwen3-32b",
@@ -1269,7 +1271,8 @@
     "last_verified_at": "2026-08-05",
     "price_model": "per_token",
     "repo_url": "https://huggingface.co/models?search=Qwen3-32B%20(Groq)",
-    "benchmarks": []
+    "benchmarks": [],
+    "params": "32B"
   },
   {
     "id": "groq-llama-4-scout",
@@ -1343,7 +1346,8 @@
     "last_verified_at": "2026-08-05",
     "price_model": "per_token",
     "repo_url": "https://huggingface.co/models?search=Llama%204%20Scout%20(Groq)",
-    "benchmarks": []
+    "benchmarks": [],
+    "params": "109B (16 专家, 17B 激活 / MoE)"
   },
   {
     "id": "openrouter-llama-3-3-70b-free",
@@ -1417,7 +1421,8 @@
     "last_verified_at": "2026-08-05",
     "price_model": "per_token",
     "repo_url": "https://huggingface.co/models?search=Llama%203.3%2070B%20(OpenRouter)",
-    "benchmarks": []
+    "benchmarks": [],
+    "params": "70B"
   },
   {
     "id": "openrouter-deepseek-r1-free",
@@ -1491,7 +1496,8 @@
     "last_verified_at": "2026-08-05",
     "price_model": "per_token",
     "repo_url": "https://huggingface.co/models?search=DeepSeek%20R1%20(OpenRouter)",
-    "benchmarks": []
+    "benchmarks": [],
+    "params": "671B (37B 激活 / MoE)"
   },
   {
     "id": "nvidia-nim-nemotron-70b",
@@ -1565,7 +1571,8 @@
     "last_verified_at": "2026-08-05",
     "price_model": "per_token",
     "repo_url": "https://huggingface.co/models?search=Nemotron-70B%20(NIM)",
-    "benchmarks": []
+    "benchmarks": [],
+    "params": "70B"
   },
   {
     "id": "nvidia-nim-llama-3-3-70b",
@@ -1639,7 +1646,8 @@
     "last_verified_at": "2026-08-05",
     "price_model": "per_token",
     "repo_url": "https://huggingface.co/models?search=Llama%203.3%2070B%20(NIM)",
-    "benchmarks": []
+    "benchmarks": [],
+    "params": "70B"
   },
   {
     "id": "mistral-small-free",
@@ -1783,7 +1791,8 @@
     "last_verified_at": "2026-08-06",
     "price_model": "per_token",
     "repo_url": "https://huggingface.co/models?search=Llama%203.1%208B%20(Groq)",
-    "benchmarks": []
+    "benchmarks": [],
+    "params": "8B"
   },
   {
     "id": "groq-gemma-2-9b",
@@ -1855,7 +1864,8 @@
     "last_verified_at": "2026-08-06",
     "price_model": "per_token",
     "repo_url": "https://huggingface.co/models?search=Gemma%202%209B%20(Groq)",
-    "benchmarks": []
+    "benchmarks": [],
+    "params": "9B"
   },
   {
     "id": "groq-mixtral-8x7b",
@@ -1928,7 +1938,8 @@
     "last_verified_at": "2026-08-06",
     "price_model": "per_token",
     "repo_url": "https://huggingface.co/models?search=Mixtral%208x7B%20(Groq)",
-    "benchmarks": []
+    "benchmarks": [],
+    "params": "47B (8x7B / MoE)"
   },
   {
     "id": "groq-whisper-large-v3",
@@ -1999,7 +2010,8 @@
     "last_verified_at": "2026-08-06",
     "price_model": "per_token",
     "repo_url": "https://huggingface.co/models?search=Whisper%20Large%20v3%20(Groq)",
-    "benchmarks": []
+    "benchmarks": [],
+    "params": "1.5B"
   },
   {
     "id": "groq-deepseek-r1-distill-70b",
@@ -2072,7 +2084,8 @@
     "last_verified_at": "2026-08-06",
     "price_model": "per_token",
     "repo_url": "https://huggingface.co/models?search=DeepSeek-R1-Distill-Llama-70B%20(Groq)",
-    "benchmarks": []
+    "benchmarks": [],
+    "params": "70B (蒸馏)"
   },
   {
     "id": "groq-llama-4-maverick",
@@ -2146,7 +2159,8 @@
     "last_verified_at": "2026-08-06",
     "price_model": "per_token",
     "repo_url": "https://huggingface.co/models?search=Llama%204%20Maverick%20(Groq)",
-    "benchmarks": []
+    "benchmarks": [],
+    "params": "400B (128 专家, 17B 激活 / MoE)"
   },
   {
     "id": "groq-kimi-k2",
@@ -2219,7 +2233,8 @@
     "last_verified_at": "2026-08-06",
     "price_model": "per_token",
     "repo_url": "https://huggingface.co/models?search=Kimi%20K2%20(Groq)",
-    "benchmarks": []
+    "benchmarks": [],
+    "params": "1T (32B 激活 / MoE)"
   },
   {
     "id": "openrouter-llama-4-maverick-free",
@@ -2293,7 +2308,8 @@
     "last_verified_at": "2026-08-06",
     "price_model": "per_token",
     "repo_url": "https://huggingface.co/models?search=Llama%204%20Maverick%20(OpenRouter)",
-    "benchmarks": []
+    "benchmarks": [],
+    "params": "400B (128 专家, 17B 激活 / MoE)"
   },
   {
     "id": "openrouter-llama-4-scout-free",
@@ -2366,7 +2382,8 @@
     "last_verified_at": "2026-08-06",
     "price_model": "per_token",
     "repo_url": "https://huggingface.co/models?search=Llama%204%20Scout%20(OpenRouter)",
-    "benchmarks": []
+    "benchmarks": [],
+    "params": "109B (16 专家, 17B 激活 / MoE)"
   },
   {
     "id": "openrouter-gemma-2-9b-free",
@@ -2438,7 +2455,8 @@
     "last_verified_at": "2026-08-06",
     "price_model": "per_token",
     "repo_url": "https://huggingface.co/models?search=Gemma%202%209B%20(OpenRouter)",
-    "benchmarks": []
+    "benchmarks": [],
+    "params": "9B"
   },
   {
     "id": "openrouter-mistral-7b-free",
@@ -2511,7 +2529,8 @@
     "last_verified_at": "2026-08-06",
     "price_model": "per_token",
     "repo_url": "https://huggingface.co/models?search=Mistral%207B%20(OpenRouter)",
-    "benchmarks": []
+    "benchmarks": [],
+    "params": "7B"
   },
   {
     "id": "openrouter-qwen-2-5-72b-free",
@@ -2584,7 +2603,8 @@
     "last_verified_at": "2026-08-06",
     "price_model": "per_token",
     "repo_url": "https://huggingface.co/models?search=Qwen2.5%2072B%20(OpenRouter)",
-    "benchmarks": []
+    "benchmarks": [],
+    "params": "72B"
   },
   {
     "id": "openrouter-llama-3-1-8b-free",
@@ -2656,7 +2676,8 @@
     "last_verified_at": "2026-08-06",
     "price_model": "per_token",
     "repo_url": "https://huggingface.co/models?search=Llama%203.1%208B%20(OpenRouter)",
-    "benchmarks": []
+    "benchmarks": [],
+    "params": "8B"
   },
   {
     "id": "openrouter-phi-3-5-mini-free",
@@ -2728,7 +2749,8 @@
     "last_verified_at": "2026-08-06",
     "price_model": "per_token",
     "repo_url": "https://huggingface.co/models?search=Phi-3.5%20Mini%20(OpenRouter)",
-    "benchmarks": []
+    "benchmarks": [],
+    "params": "3.8B"
   },
   {
     "id": "openrouter-gemini-2-0-flash-free",
@@ -2873,7 +2895,8 @@
     "last_verified_at": "2026-08-06",
     "price_model": "per_token",
     "repo_url": "https://huggingface.co/models?search=Llama%204%20Maverick%20(NIM)",
-    "benchmarks": []
+    "benchmarks": [],
+    "params": "400B (128 专家, 17B 激活 / MoE)"
   },
   {
     "id": "nvidia-nim-mistral-small-24b",
@@ -2946,7 +2969,8 @@
     "last_verified_at": "2026-08-06",
     "price_model": "per_token",
     "repo_url": "https://huggingface.co/models?search=Mistral%20Small%2024B%20(NIM)",
-    "benchmarks": []
+    "benchmarks": [],
+    "params": "24B"
   },
   {
     "id": "nvidia-nim-deepseek-r1",
@@ -3019,7 +3043,8 @@
     "last_verified_at": "2026-08-06",
     "price_model": "per_token",
     "repo_url": "https://huggingface.co/models?search=DeepSeek%20R1%20(NIM)",
-    "benchmarks": []
+    "benchmarks": [],
+    "params": "671B (37B 激活 / MoE)"
   },
   {
     "id": "nvidia-nim-qwen3-coder-480b",
@@ -3092,7 +3117,8 @@
     "last_verified_at": "2026-08-06",
     "price_model": "per_token",
     "repo_url": "https://huggingface.co/models?search=Qwen3%20Coder%20480B%20(NIM)",
-    "benchmarks": []
+    "benchmarks": [],
+    "params": "480B (MoE)"
   },
   {
     "id": "nvidia-nim-nemotron-nano-9b",
@@ -3165,7 +3191,8 @@
     "last_verified_at": "2026-08-06",
     "price_model": "per_token",
     "repo_url": "https://huggingface.co/models?search=Nemotron%20Nano%209B%20(NIM)",
-    "benchmarks": []
+    "benchmarks": [],
+    "params": "9B"
   },
   {
     "id": "nvidia-nim-phi-4",
@@ -3237,7 +3264,8 @@
     "last_verified_at": "2026-08-06",
     "price_model": "per_token",
     "repo_url": "https://huggingface.co/models?search=Phi-4%20(NIM)",
-    "benchmarks": []
+    "benchmarks": [],
+    "params": "14B"
   },
   {
     "id": "nvidia-nim-gemma-2-9b",
@@ -3309,7 +3337,8 @@
     "last_verified_at": "2026-08-06",
     "price_model": "per_token",
     "repo_url": "https://huggingface.co/models?search=Gemma%202%209B%20(NIM)",
-    "benchmarks": []
+    "benchmarks": [],
+    "params": "9B"
   },
   {
     "id": "anyapi-auto",
@@ -3541,7 +3570,8 @@
     "last_verified_at": "2026-08-06",
     "price_model": "per_token",
     "repo_url": "https://huggingface.co/models?search=Zen%20Llama%203.3%2070B",
-    "benchmarks": []
+    "benchmarks": [],
+    "params": "70B"
   },
   {
     "id": "opencode-zen-qwen25",
@@ -3606,7 +3636,8 @@
     "last_verified_at": "2026-08-06",
     "price_model": "per_token",
     "repo_url": "https://huggingface.co/models?search=Zen%20Qwen2.5%2072B",
-    "benchmarks": []
+    "benchmarks": [],
+    "params": "72B"
   },
   {
     "id": "ovh-llama33",
@@ -3666,7 +3697,8 @@
     "last_verified_at": "2026-08-06",
     "price_model": "per_token",
     "repo_url": "https://huggingface.co/models?search=OVH%20Llama%203.3%2070B",
-    "benchmarks": []
+    "benchmarks": [],
+    "params": "70B"
   },
   {
     "id": "ovh-deepseek-r1",
@@ -3728,7 +3760,8 @@
     "last_verified_at": "2026-08-06",
     "price_model": "per_token",
     "repo_url": "https://huggingface.co/models?search=OVH%20DeepSeek%20R1%20Distill",
-    "benchmarks": []
+    "benchmarks": [],
+    "params": "671B (37B 激活 / MoE)"
   },
   {
     "id": "freeai-auto",
@@ -4135,6 +4168,7 @@
     "last_verified_at": "2026-08-06",
     "price_model": "per_image",
     "repo_url": "https://huggingface.co/Kwai-Kolors",
-    "benchmarks": []
+    "benchmarks": [],
+    "params": "未公开"
   }
 ]

@@ -52,9 +52,9 @@ def main():
             anomalies.append(f"{mid}: 缺少来源链接")
         if not v.get("capabilities"):
             anomalies.append(f"{mid}: 缺少能力标签")
-        # API 变化
+        # API 变化（no_endpoint 厂商如 Midjourney 无公开 REST API，属合理缺失，不报）
         p = providers.get(v.get("provider_id"))
-        if p and not p.get("api_base_url"):
+        if p and not p.get("api_base_url") and not p.get("no_endpoint"):
             issues.append(f"{mid}: 厂商 {p.get('name')} 无 api_base_url")
         # 价格变化（仅按 token 计费的「非免费」型号缺价才算缺失；媒体模型按 price_model 区分）
         pm = v.get("price_model", "per_token")

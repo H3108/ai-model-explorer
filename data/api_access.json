@@ -841,7 +841,8 @@
       {
         "vendor": "midjourney",
         "access_type": "official_api",
-        "base_url": "https://www.midjourney.com",
+        "base_url": null,
+        "no_endpoint": true,
         "protocol": "provider_specific",
         "auth_type": "api_key",
         "model_id": "midjourney-v7",

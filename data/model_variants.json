@@ -1329,7 +1329,8 @@
     "last_verified_at": "2026-08-05",
     "price_model": "per_token",
     "repo_url": "https://huggingface.co/deepseek-ai",
-    "benchmarks": []
+    "benchmarks": [],
+    "params": "236B (21B 激活 / MoE)"
   },
   {
     "id": "qwen-plus",
@@ -1777,7 +1778,8 @@
     "last_verified_at": "2026-08-05",
     "price_model": "per_token",
     "repo_url": "https://huggingface.co/models?search=GLM-5",
-    "benchmarks": []
+    "benchmarks": [],
+    "params": "未公开"
   },
   {
     "id": "glm-5-turbo",
@@ -2224,7 +2226,8 @@
     "last_verified_at": "2026-08-05",
     "price_model": "per_token",
     "repo_url": "https://huggingface.co/models?search=ERNIE%204.5%20Turbo",
-    "benchmarks": []
+    "benchmarks": [],
+    "params": "未公开"
   },
   {
     "id": "minimax-m2-5",
@@ -2518,7 +2521,8 @@
     "last_verified_at": "2026-08-05",
     "price_model": "per_token",
     "repo_url": "https://huggingface.co/mistralai",
-    "benchmarks": []
+    "benchmarks": [],
+    "params": "未公开"
   },
   {
     "id": "mistral-small-4",
@@ -2591,7 +2595,8 @@
     "last_verified_at": "2026-08-05",
     "price_model": "per_token",
     "repo_url": "https://huggingface.co/mistralai",
-    "benchmarks": []
+    "benchmarks": [],
+    "params": "24B"
   },
   {
     "id": "mistral-codestral",
@@ -2663,7 +2668,8 @@
     "last_verified_at": "2026-08-05",
     "price_model": "per_token",
     "repo_url": "https://huggingface.co/mistralai",
-    "benchmarks": []
+    "benchmarks": [],
+    "params": "22B"
   },
   {
     "id": "mistral-magistral-medium",
@@ -3409,7 +3415,8 @@
     "price_model": "per_image",
     "price_note": "按张计费（图像生成，Flux 2 Pro）；经 Black Forest Labs / 合作云调用。来源：官方。",
     "repo_url": "https://huggingface.co/black-forest-labs",
-    "benchmarks": []
+    "benchmarks": [],
+    "params": "未公开"
   },
   {
     "id": "stability-sd-4",
@@ -3488,7 +3495,8 @@
     "price_model": "per_image",
     "price_note": "按张计费（图像生成）；Stability 平台按生成计价，亦提供开放权重自部署。来源：Stability AI 官方。",
     "repo_url": "https://huggingface.co/stabilityai",
-    "benchmarks": []
+    "benchmarks": [],
+    "params": "未公开"
   },
   {
     "id": "adobe-firefly-4",
@@ -3719,7 +3727,8 @@
     "price_model": "per_image",
     "price_note": "按张计费（图像生成）；经阿里云百炼调用，按生成图像数计价。来源：阿里云官方。",
     "repo_url": "https://huggingface.co/Qwen",
-    "benchmarks": []
+    "benchmarks": [],
+    "params": "20B"
   },
   {
     "id": "openai-sora-2",
@@ -4422,6 +4431,7 @@
     "price_model": "per_second",
     "price_note": "开放权重视频模型，自部署免费（需自备 GPU，约 24GB+ VRAM）；无官方按量 API 价。来源：开源仓库。",
     "repo_url": "https://huggingface.co/Qwen",
-    "benchmarks": []
+    "benchmarks": [],
+    "params": "14B"
   }
 ]

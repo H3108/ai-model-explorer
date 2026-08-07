@@ -92,7 +92,7 @@ async function loadData() {
 // ---------- 查询 ----------
 const byId = (arr, key, value) => arr.find((i) => i[key] === value) || null
 const providerById = (id) => byId(state.providers, 'id', id) || {}
-const familyById = (id) => byId(state.families, 'id', id) || {}
+const familyById = (id) => byId(state.families, 'id', id) || null
 const variantById = (id) => byId(state.variants, 'id', id)
 const variantsOfProvider = (pid) => state.variants.filter((v) => v.provider_id === pid)
 const familiesOfProvider = (pid) => state.families.filter((f) => f.provider_id === pid)
@@ -104,7 +104,7 @@ const modalityOf = (v) => (v.media_type === 'video' ? 'video' : v.media_type ===
 
 // ---------- 格式化 ----------
 function esc(s) {
-  return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')
+  return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;')
 }
 function cur(c) {
   return c === 'CNY' ? '¥' : '$'
@@ -240,7 +240,7 @@ function emptyBox(text) {
 
 // ---------- V4 首页模块：场景推荐 / 成本入口 ----------
 function sceneModuleHTML() {
-  const chips = state.scenarios.map((s) => `<a class="scene-chip" href="#matcher" data-task="${esc(s.task_ids[0] || s.id)}"><span class="sc-ico">${s.icon || '✦'}</span>${esc(s.name_cn)}</a>`).join('')
+  const chips = state.scenarios.map((s) => `<a class="scene-chip" href="#matcher" data-scene-task="${esc(s.task_ids[0] || s.id)}"><span class="sc-ico">${s.icon || '✦'}</span>${esc(s.name_cn)}</a>`).join('')
   return `<section class="section wrap v4-scene">
     <div class="heading"><div><span class="eyebrow">场景推荐</span><h2>你想用 AI 做什么？</h2></div><p>点一个场景，直接给出适合该任务的推荐模型。</p></div>
     <div class="scene-grid">${chips}</div>
@@ -465,7 +465,7 @@ function familyTableHTML(f) {
     return `<tr data-goto="#model/${encodeURIComponent(v.id)}">${cells.map((c) => `<td>${c}</td>`).join('')}<td class="td-go">→</td></tr>`
   }
   return `<div class="table-wrap"><table class="cmp-table">
-    <thead><tr>${head.map((h) => `<th>${h}</th>`).join('')}</tr></thead>
+    <thead><tr>${head.map((h) => `<th scope="col">${h}</th>`).join('')}</tr></thead>
     <tbody>${list.map(row).join('')}</tbody>
   </table></div>`
 }
@@ -580,15 +580,15 @@ function browseResultsHTML() {
 }
 function viewBrowse() {
   const capChip = (d) =>
-    `<button class="chip ${state.browseCaps.includes(d.key) ? 'on' : ''}" data-cap="${d.key}">${d.cn}<span>${d.en}</span></button>`
+    `<button class="chip ${state.browseCaps.includes(d.key) ? 'on' : ''}" aria-pressed="${state.browseCaps.includes(d.key) ? 'true' : 'false'}" data-cap="${d.key}">${d.cn}<span>${d.en}</span></button>`
   const traitChip = (t) =>
-    `<button class="chip ${state.browseTraits.includes(t.key) ? 'on' : ''}" data-trait="${t.key}">${t.cn}<span>${t.hint}</span></button>`
+    `<button class="chip ${state.browseTraits.includes(t.key) ? 'on' : ''}" aria-pressed="${state.browseTraits.includes(t.key) ? 'true' : 'false'}" data-trait="${t.key}">${t.cn}<span>${t.hint}</span></button>`
   const modBtn = (k, label) =>
-    `<button class="${state.browseModality === k ? 'selected' : ''}" data-value="${k}">${label}</button>`
+    `<button class="${state.browseModality === k ? 'selected' : ''}" aria-pressed="${state.browseModality === k ? 'true' : 'false'}" data-value="${k}">${label}</button>`
   const priceBtn = (k, label) =>
-    `<button class="${state.browsePrice === k ? 'selected' : ''}" data-value="${k}">${label}</button>`
+    `<button class="${state.browsePrice === k ? 'selected' : ''}" aria-pressed="${state.browsePrice === k ? 'true' : 'false'}" data-value="${k}">${label}</button>`
   const billBtn = (k, label) =>
-    `<button class="${state.browseBill === k ? 'selected' : ''}" data-value="${k}">${label}</button>`
+    `<button class="${state.browseBill === k ? 'selected' : ''}" aria-pressed="${state.browseBill === k ? 'true' : 'false'}" data-value="${k}">${label}</button>`
   return `<div class="wrap page">
     ${pageHead({ eyebrow: '02 / 能力筛选', title: '按<em>能力</em>找模型', desc: '左边勾选你需要的能力与硬性条件，右边即时过滤并排序，找到最合适的型号。' })}
     <div class="browse-layout">
@@ -647,9 +647,9 @@ function recommendationHTML(taskId = state.selectedTask) {
 }
 function viewMatcher() {
   const taskBtn = (t) =>
-    `<button class="task-option ${state.selectedTask === t.id ? 'selected' : ''}" data-task="${t.id}"><span class="to-ico">${t.icon || '◎'}</span><span class="to-text"><b>${esc(t.name_cn)}</b><small>${esc(t.description_cn)}</small></span></button>`
+    `<button class="task-option ${state.selectedTask === t.id ? 'selected' : ''}" aria-pressed="${state.selectedTask === t.id ? 'true' : 'false'}" data-task="${t.id}"><span class="to-ico">${t.icon || '◎'}</span><span class="to-text"><b>${esc(t.name_cn)}</b><small>${esc(t.description_cn)}</small></span></button>`
   const segBtn = (group, cur, val, label) =>
-    `<button class="${cur === val ? 'selected' : ''}" data-value="${val}">${label}</button>`
+    `<button class="${cur === val ? 'selected' : ''}" aria-pressed="${cur === val ? 'true' : 'false'}" data-value="${val}">${label}</button>`
   return `<div class="matcher-page">
     <div class="wrap page">
       ${pageHead({ eyebrow: '03 / 任务匹配', title: '告诉我，<em>你想做什么？</em>', desc: '选择任务、预算和偏好，得到带理由的推荐列表。' })}
@@ -692,7 +692,8 @@ function codeExamples(v) {
   }
   if (v.media_type) {
     const docs = p.api_docs ? `<a class="text-link" href="${esc(p.api_docs)}" target="_blank" rel="noopener">官方文档 ↗</a>` : '无公开文档'
-    return { note: `该模型通过官方平台 / API 调用，无统一 SDK 示例。请参考：${docs}${p.api_base_url ? ' · Base URL：<code>' + esc(p.api_base_url) + '</code>' : ''}。` }
+    const baseUrlPart = (p.api_base_url && !p.no_endpoint) ? ' · Base URL：<code>' + esc(p.api_base_url) + '</code>' : ''
+    return { note: `该模型通过官方平台 / API 调用，无统一 SDK 示例。请参考：${docs}${baseUrlPart}。` }
   }
   if (style === 'anthropic') {
     return {
@@ -721,7 +722,7 @@ function priceBlock(v) {
   let detail = ''
   if (v.price_model === 'per_token') {
     if (v.free) detail = '免费模型（无 token 价）'
-    else if (v.input_price_per_mtok != null) detail = `输入 ¥${v.input_price_per_mtok}/百万 tokens · 输出 ¥${v.output_price_per_mtok}/百万 tokens`
+    else if (v.input_price_per_mtok != null) detail = `输入 ${cur(v.currency)}${v.input_price_per_mtok}/百万 tokens · 输出 ${cur(v.currency)}${v.output_price_per_mtok}/百万 tokens`
     else detail = '价格未公开'
   } else {
     detail = v.price_note || ''
@@ -734,11 +735,15 @@ function apiBlockHTML(v) {
   const ex = codeExamples(v)
   const aa = apiAccessOf(v)
   const acc = aa ? aa.accesses[0] : null
+  const noEndpoint = !!((acc && acc.no_endpoint) || p.no_endpoint)
+  const accessFact = noEndpoint
+    ? `<div class="api-fact"><b>官方访问</b><span>${p.website ? `<a class="text-link" href="${esc(p.website)}" target="_blank" rel="noopener">${esc(p.website)}</a>` : '暂无公开 API 端点'}</span></div>`
+    : `<div class="api-fact"><b>接入地址</b><code>${esc(acc ? acc.base_url : (p.api_base_url || '（自托管）'))}</code></div>`
   const feats = (acc && acc.features) || []
   const hasTool = feats.includes('tool_calling') || !!(v.capabilities && v.capabilities.agent && v.capabilities.agent.tier)
   const hasStream = feats.includes('streaming')
   const facts = `<div class="api-facts">
-    <div class="api-fact"><b>接入地址</b><code>${esc(acc ? acc.base_url : (p.api_base_url || '（自托管）'))}</code></div>
+    ${accessFact}
     <div class="api-fact"><b>模型 ID</b><code>${esc(v.model_id || v.id)}</code></div>
     <div class="api-fact"><b>接口协议</b><code>${esc(API_STYLE_CN[acc ? acc.protocol : p.api_style] || (acc ? acc.protocol : p.api_style) || '—')}</code></div>
     <div class="api-fact"><b>认证方式</b><code>${esc((acc && acc.auth_type) || 'api_key')}</code></div>
@@ -831,9 +836,9 @@ function ecoBlock(v) {
     { n: 'LMArena', u: 'https://lmarena.ai/leaderboard' },
   ]
   const repo = v.repo_url
-  const bench = (v.benchmarks && v.benchmarks.length)
-    ? `<ul class="bench-list">${v.benchmarks.map((b) => `<li><b>${esc(b.name)}</b><span>${esc(b.score)}${b.source ? ` · <a href="${esc(b.source)}" target="_blank" rel="noopener">来源↗</a>` : ''}</span></li>`).join('')}</ul>`
-    : '<p class="muted">本站不写死基准分数（避免过时/编造）；请用下方实时看板核对最新表现。</p>'
+  const benchRow = (v.benchmarks && v.benchmarks.length)
+    ? `<div class="eco-row"><b>本站基准记录</b><span><ul class="bench-list">${v.benchmarks.map((b) => `<li><b>${esc(b.name)}</b><span>${esc(b.score)}${b.source ? ` · <a href="${esc(b.source)}" target="_blank" rel="noopener">来源↗</a>` : ''}</span></li>`).join('')}</ul></span></div>`
+    : ''
   const links = benchLinks.map((l) => `<a class="eco-link" href="${esc(l.u)}" target="_blank" rel="noopener">${esc(l.n)} ↗</a>`).join('')
   const repoEl = repo ? `<a class="eco-link" href="${esc(repo)}" target="_blank" rel="noopener">官方仓库 / 模型页 ↗</a>` : '<span class="muted">闭源模型，无公开仓库</span>'
   const qNote = ['C', 'D'].includes(g) ? ' · <span class="muted">完整度偏低，建议以官方文档为准</span>' : ''
@@ -841,8 +846,8 @@ function ecoBlock(v) {
     <div class="eco-box">
       <div class="eco-row"><b>数据质量</b><span>${gradeBadge(v)} ${v.data_quality_score || 0} 分${qNote}</span></div>
       <div class="eco-row"><b>官方仓库</b><span>${repoEl}</span></div>
-      <div class="eco-row"><b>实时基准</b><span class="eco-links">${links}</span></div>
-      <div class="eco-row"><b>本站基准记录</b><span>${bench}</span></div>
+      <div class="eco-row"><b>实时基准</b><span class="eco-links">${links}<p class="muted" style="margin:.4em 0 0">本站不写死基准分数（避免过时/编造），请用上方看板核对实时表现。</p></span></div>
+      ${benchRow}
     </div></section>`
 }
 function namingBlock(v) {
@@ -981,7 +986,12 @@ function render() {
   app.dataset.route = r.name
   currentKey = r.key
   // 导航高亮
-  $$('#main-nav a').forEach((a) => a.classList.toggle('on', a.dataset.nav === r.name || (r.name === 'provider' && a.dataset.nav === 'providers') || (r.name === 'family' && a.dataset.nav === 'providers')))
+  $$('#main-nav a').forEach((a) => {
+    const active = a.dataset.nav === r.name || (r.name === 'provider' && a.dataset.nav === 'providers') || (r.name === 'family' && a.dataset.nav === 'providers')
+    a.classList.toggle('on', active)
+    if (active) a.setAttribute('aria-current', 'page')
+    else a.removeAttribute('aria-current')
+  })
   // 滚动：恢复该路由上次位置，没有则回到顶部（瞬时，不做平滑动画）
   const y = scrollMem.get(r.key) || 0
   window.scrollTo(0, y)
@@ -1048,8 +1058,8 @@ function bindGlobalEvents() {
       freeInfo.classList.toggle('active')
       return
     }
-    // V4 首页场景芯片 → 预选任务进入任务选择器
-    const sceneChip = e.target.closest('[data-task]')
+    // V4 首页场景芯片 → 预选任务进入任务选择器（与 matcher 的 data-task 区分，避免冲突死分支）
+    const sceneChip = e.target.closest('[data-scene-task]')
     if (sceneChip) {
       state.selectedTask = sceneChip.dataset.task
       if (parseHash().name === 'matcher') render()
