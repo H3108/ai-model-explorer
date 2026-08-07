@@ -218,7 +218,7 @@ ${Object.entries(statusCount).map(([k, n]) => `- ${k}: ${n}`).join('\n')}
 - 价格(token 模型)：按 token 计费的型号中，仅免费/未填者计为缺失。
 - Benchmark：当前库未收录（生态信息 15 分中 Benchmark 5 分暂为 0，已在评分中体现）。
 `
-fs.writeFileSync(path.join(__dirname, '..', 'DATA_AUDIT_REPORT.md'), audit, 'utf8')
+fs.writeFileSync(path.join(__dirname, '..', 'docs', 'DATA_AUDIT_REPORT.md'), audit, 'utf8')
 
 // ---------- §13 治理报告 ----------
 const govreport = `# 数据治理报告 (DATA_GOVERNANCE_REPORT)
@@ -288,6 +288,6 @@ const govreport = `# 数据治理报告 (DATA_GOVERNANCE_REPORT)
 - 对 C/D 级型号降权或归档，提升首页推荐质量。
 - 建立模型推荐算法与智能路由评分（依赖本治理产出的 score / cost_tier / access_types）。
 `
-fs.writeFileSync(path.join(__dirname, '..', 'DATA_GOVERNANCE_REPORT.md'), govreport, 'utf8')
+fs.writeFileSync(path.join(__dirname, '..', 'docs', 'DATA_GOVERNANCE_REPORT.md'), govreport, 'utf8')
 
 console.log('报告已生成：DATA_AUDIT_REPORT.md / DATA_GOVERNANCE_REPORT.md')

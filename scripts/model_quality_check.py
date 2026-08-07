@@ -22,7 +22,7 @@ from datetime import date
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA = os.path.join(ROOT, "data")
 SNAP = os.path.join(ROOT, ".last_snapshot.json")
-REPORT = os.path.join(ROOT, "daily_model_update_report.md")
+REPORT = os.path.join(ROOT, "docs", "daily_model_update_report.md")
 
 
 def load(name):

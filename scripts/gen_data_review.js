@@ -1,5 +1,5 @@
 // 生成《数据评审稿》——供用户拿去其它 AI 评审「模型覆盖度」与「设计合理性」
-// 用法: node scripts/gen_data_review.js  -> 输出 DATA_REVIEW.md（项目根）
+// 用法: node scripts/gen_data_review.js  -> 输出 docs/DATA_REVIEW.md
 const fs = require('fs')
 const path = require('path')
 const ROOT = path.resolve(__dirname, '..')
@@ -201,5 +201,5 @@ ${openQuestions.map((q)=>`${q}`).join('\n')}
 *本文件由 scripts/gen_data_review.js 自动生成，可随时重新生成以跟随数据更新。*
 `
 
-fs.writeFileSync(path.join(ROOT, 'DATA_REVIEW.md'), md, 'utf8')
+fs.writeFileSync(path.join(ROOT, 'docs', 'DATA_REVIEW.md'), md, 'utf8')
 console.log('已生成 DATA_REVIEW.md，字数≈', md.length, '；型号行数', all.length)

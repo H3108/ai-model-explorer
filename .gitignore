@@ -20,3 +20,6 @@ daily_model_update_report.md
 *.key
 credentials.json
 secrets.json
+
+# 文档目录（内部报告/审计/走查/设计稿，不推送 GitHub）
+docs/
