@@ -806,7 +806,7 @@ select { padding: 8px 12px; border-radius: var(--r-sm); }
 
 /* ---------------- 推荐结果行 ---------------- */
 .tr-head { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 16px; gap: 16px; }
-.tr-head h3 { font-size: 19px; }
+.tr-head h3 { font-size: 19px; margin: 0; line-height: 1.25; }
 .match-badge {
   font-size: 11px; font-weight: 700; padding: 5px 12px; border-radius: 999px;
   background: var(--soft); color: var(--deep); white-space: nowrap;
@@ -834,9 +834,9 @@ select { padding: 8px 12px; border-radius: var(--r-sm); }
 .matcher-page { background: var(--background); }
 .matcher-layout { display: grid; grid-template-columns: 380px 1fr; gap: 26px; align-items: start; }
 .matcher-form {
-  background: var(--card); border: 1px solid var(--line); border-radius: var(--r-lg); padding: 22px;
+  background: var(--card); border: 1px solid var(--line); border-radius: var(--r-lg); padding: 24px;
 }
-.matcher-form label { display: block; font-size: 12px; color: var(--muted); font-weight: 700; margin: 18px 0 10px; }
+.matcher-form label { display: block; font-size: 12px; color: var(--muted); font-weight: 700; margin: 12px 0 10px; }
 .matcher-form label:first-child { margin-top: 0; }
 .task-options { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
 .task-option {

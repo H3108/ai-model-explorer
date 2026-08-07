@@ -435,6 +435,7 @@ export function viewMatcher() {
       ${pageHead({ eyebrow: '03 / 任务选择器', title: '告诉我，<em>你想做什么？</em>', desc: '选择任务、预算和偏好，得到带理由的推荐列表。' })}
       <div class="matcher-layout">
         <div class="matcher-form">
+          <div class="tr-head"><div><span class="eyebrow">筛选</span><h4>你的偏好</h4></div></div>
           <label>我想要</label>
           <div class="task-options">${state.tasks.map(taskBtn).join('')}</div>
           <label>预算倾向</label>
@@ -525,7 +526,10 @@ export function recentModuleHTML() {
 // ---------- 视图：对比集 ----------
 export function viewCompare() {
   const ids = getCompare()
-  if (!ids.length) return `<div class="wrap page"><button class="back-link" data-back="#home">← 返回首页</button><div class="empty-box big"><span>✦</span><h2>对比集还是空的</h2><p>去模型详情页点「加入对比」，这里会列出你选的型号。</p></div></div>`
+  if (!ids.length) return `<div class="wrap page">
+    ${pageHead({ eyebrow: '06 / 模型对比', title: '模型<em>对比</em>', desc: '把想比较的型号加入对比集，这里并排列出参数、能力、价格与定位。去模型详情页点「加入对比」即可开始。' })}
+    <div class="empty-box big"><span>✦</span><h2>对比集还是空的</h2><p>去模型详情页点「加入对比」，这里会列出你选的型号。</p></div>
+  </div>`
   const list = ids.map(variantById).filter(Boolean)
   const isMedia = list.every((v) => v.media_type)
   const head = isMedia
@@ -553,8 +557,7 @@ export function viewCompare() {
     return `<tr data-goto="#model/${encodeURIComponent(v.id)}">${cells.map((c) => `<td>${c}</td>`).join('')}<td class="td-go"><button class="cmp-remove" data-cmp-remove="${v.id}" aria-label="移除对比">✕</button></td></tr>`
   }
   return `<div class="wrap page">
-    <button class="back-link" data-back="#home">← 返回首页</button>
-    <header class="entity-head"><div class="eh-main"><span class="eyebrow">06 / 模型对比</span><h1>模型对比（${list.length}）</h1><p>本地保存，刷新不丢。点行看详情，✕ 移除。</p></div></header>
+    ${pageHead({ eyebrow: '06 / 模型对比', title: `模型<em>对比</em>（${list.length}）`, desc: '把想比较的型号放一起，并排看清参数、能力、价格与定位。本地保存、刷新不丢；点任意行看详情，右上角 ✕ 移除。' })}
     <div class="table-wrap"><table class="cmp-table">
       <thead><tr>${head.map((h) => `<th scope="col">${h}</th>`).join('')}</tr></thead>
       <tbody>${list.map(row).join('')}</tbody>
