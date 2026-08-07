@@ -151,12 +151,9 @@ async function main() {
   ok(lowCards > 0 && lowCards <= 24, `低成本筛选生效（${lowCards}）`)
   await click('[data-seg="browsePrice"] [data-value="all"]')
   ok(app.querySelectorAll('.model-card').length === total, '价格筛选清空恢复全部')
-  // 计费方式筛选（per_token / per_image / per_second）
-  await click('[data-seg="browseBill"] [data-value="per_second"]')
-  const secCards = app.querySelectorAll('.model-card').length
-  ok(secCards > 0 && secCards < total, `按秒计费筛选生效（${secCards}）`)
-  await click('[data-seg="browseBill"] [data-value="all"]')
-  ok(app.querySelectorAll('.model-card').length === total, '计费方式清空恢复全部')
+  // 注：「计费方式」筛选（browseBill: per_token/per_image/per_second）已于 2026-08-07 按需求移除。
+  // 此断言确保不会残留「看得见控件却无筛选逻辑」或反之的半移除状态；若后续恢复该功能，需一并恢复原用例。
+  ok(!app.querySelector('[data-seg="browseBill"]'), '「计费方式」筛选块已移除')
   // 搜索框（Phase 1 工具栏）
   const bs = app.querySelector('#browse-search')
   bs.value = 'gpt'
