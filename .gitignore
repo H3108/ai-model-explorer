@@ -8,3 +8,15 @@ backup/
 # 治理脚本本地产物（每日质量检查基线 / 日报告）
 .last_snapshot.json
 daily_model_update_report.md
+
+# 内部走查 / 过程文档（不发布到 GitHub）
+设计走查报告.md
+
+# 密钥安全网（防御：日后若误加 env / 密钥文件）
+.env
+.env.*
+*.local
+*.pem
+*.key
+credentials.json
+secrets.json

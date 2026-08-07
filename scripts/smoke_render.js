@@ -1,6 +1,6 @@
 /**
  * 渲染冒烟测试（jsdom 真实 DOM）
- * 运行：NODE_PATH=/Users/hush/.workbuddy/binaries/node/workspace/node_modules node scripts/smoke_render.js
+ * 运行：NODE_PATH=~/.workbuddy/binaries/node/workspace/node_modules node scripts/smoke_render.js
  * 覆盖：全部路由渲染、logo 引用、模态徽章、能力匹配、系列页、详情页 API 分支、交互控件
  */
 const fs = require('fs')

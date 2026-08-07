@@ -66,7 +66,8 @@ AI Model Explorer 已从“模型展示库”升级为“AI 模型选择导航�
 项目是零依赖纯静态前端。由于页面通过 `fetch` 加载 JSON，建议使用本地静态服务器：
 
 ```bash
-cd /Users/hush/Ai/codex_workspace/Project_001_AI_Model_Explorer
+# 在仓库根目录下执行：
+cd <REPO_ROOT>
 python3 -m http.server 8000
 ```
 
