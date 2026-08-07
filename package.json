@@ -1,0 +1,18 @@
+{
+  "name": "ai-model-explorer",
+  "version": "4.0.0",
+  "private": true,
+  "type": "module",
+  "description": "AI Model Explorer — 不需要懂模型，也能找到适合任务的 AI 模型。纯静态、零依赖、零构建。",
+  "scripts": {
+    "dev": "python3 -m http.server 8848",
+    "server": "python3 -m http.server 8848",
+    "check": "node scripts/validate_normalized.cjs",
+    "test": "node scripts/smoke_render.cjs",
+    "quality": "python3 scripts/model_quality_check.py",
+    "review": "node scripts/gen_data_review.cjs"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

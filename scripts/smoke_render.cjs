@@ -6,6 +6,7 @@
 const fs = require('fs')
 const path = require('path')
 const { JSDOM } = require('jsdom')
+const { pathToFileURL } = require('url')
 
 const ROOT = path.resolve(__dirname, '..')
 const failures = []
@@ -28,9 +29,22 @@ async function main() {
   window.scrollTo = () => {}
   Object.defineProperty(window, 'scrollY', { value: 0, writable: true })
 
-  const code = fs.readFileSync(path.join(ROOT, 'app.js'), 'utf8')
-  window.eval(code)
-  await new Promise((r) => setTimeout(r, 250))
+  // 注入浏览器全局，供 ESM 应用模块（app.js 及其 src/* 依赖）使用
+  for (const k of [
+    'window', 'document', 'navigator', 'location', 'history', 'localStorage',
+    'fetch', 'HTMLElement', 'customElements', 'getComputedStyle', 'MutationObserver',
+    'Node', 'Event', 'CustomEvent', 'DOMParser', 'console',
+  ]) {
+    if (window[k] !== undefined) global[k] = window[k]
+  }
+  global.scrollTo = () => {}
+  global.requestAnimationFrame = (cb) => setTimeout(cb, 0)
+  global.matchMedia = global.matchMedia || (() => ({ matches: false, addEventListener() {}, removeEventListener() {}, addListener() {}, removeListener() {} }))
+
+  // 以 ESM 方式动态加载应用（app.js 使用 import 语法，window.eval 无法解析）
+  const appUrl = pathToFileURL(path.join(ROOT, 'app.js')).href
+  await import(appUrl)
+  await new Promise((r) => setTimeout(r, 300))
 
   const app = window.document.querySelector('#app')
   const goto = async (hash) => {
@@ -56,8 +70,8 @@ async function main() {
   console.log('\n[1] 首页（Phase 1 决策入口）')
   let h = app.innerHTML
   ok(h.includes('找到适合你的'), '首页 hero 渲染')
-  // Phase 1：精选推荐 6 张卡（recommendedModels(6)），不再有旧版 8 张热门卡
-  ok(app.querySelectorAll('.model-card').length === 6, '精选推荐 6 张卡')
+  // Phase 1：精选推荐 8 张卡（recommendedModels(8)），不再有旧版 8 张热门卡
+  ok(app.querySelectorAll('.model-card').length === 8, '精选推荐 8 张卡')
   ok(app.querySelector('#task-input') && app.querySelector('[data-start-match]'), 'Hero 任务输入框 + 开始匹配按钮存在')
   ok(app.querySelector('.popular-row [data-pop-task]'), '「大家常搜」快捷标签存在')
   ok(app.querySelector('.trust-section'), '信任层区块存在（DESIGN Layer 3）')
@@ -129,6 +143,14 @@ async function main() {
   console.log('\n[5] 能力筛选浏览')
   h = await goto('#browse')
   ok(app.querySelector('.filter-panel'), '筛选面板存在')
+  // 防回归：能力维度与硬性条件已合并为单个「筛选条件」块（2026-08-07 决策），不得拆回两块
+  ok(app.querySelectorAll('.filter-panel .chip-wrap').length === 1, '筛选条件为单块（能力维度+硬性条件已合并）')
+  ok(app.querySelectorAll('[data-trait]').length === 5 && app.querySelectorAll('[data-cap]').length === 5, '合并块内 10 个 chip 齐全')
+  // 防回归：侧栏精简为 4 块 + 顶部头（2026-08-07），收藏并入条件块、清空按钮常驻顶部
+  ok(app.querySelectorAll('.filter-panel .fp-block').length === 4, '侧栏筛选块精简为 4 块')
+  ok(app.querySelector('.fp-head [data-reset-filters]'), '清空按钮常驻面板顶部')
+  ok(app.querySelector('.chip-wrap [data-fav-only]'), '只看收藏已并入条件块')
+  ok(!app.querySelector('.chip span'), 'chip 为单行（副标题收进 title，勿改回双行）')
   const total = app.querySelectorAll('.model-card').length
   ok(total === Math.min(variants.length, 24), `默认匹配结果 ${total} 张卡（上限 24，全量 ${variants.length}）`)
   await click('[data-cap="coding"]')

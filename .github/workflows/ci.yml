@@ -4,6 +4,9 @@ on:
   push:
     branches: [master, main]
   pull_request:
+  # 数据更新自动化：每周一 09:17 跑一次数据质量复核（仅提示，不阻断 push）
+  schedule:
+    - cron: '17 9 * * 1'
 
 jobs:
   check:
@@ -16,15 +19,25 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Syntax check app.js (and src modules)
+      - name: Syntax check app.js + src modules
         run: |
           node --check app.js
-          # 若已拆分为 ESM 模块，一并做语法校验
-          if [ -d src ]; then
-            for f in src/*.js; do
-              node --check "$f"
-            done
-          fi
+          for f in src/*.js; do
+            node --check "$f"
+          done
 
-      - name: Validate normalized data
-        run: node scripts/validate_normalized.js
+      - name: Validate normalized data (zero-dependency)
+        run: node scripts/validate_normalized.cjs
+
+  data-quality:
+    # 仅定时任务运行；push/PR 不触发，避免阻塞合入
+    if: github.event_name == 'schedule'
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: 数据质量复核（检测过期/缺失字段）
+        run: python3 scripts/model_quality_check.py
