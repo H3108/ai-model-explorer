@@ -131,6 +131,33 @@ function priceValue(v) {
   if (v.input_price_per_mtok == null) return Number.MAX_SAFE_INTEGER
   return (v.input_price_per_mtok + (v.output_price_per_mtok ?? v.input_price_per_mtok)) / 2
 }
+// ---------- 本地存储：最近浏览 / 对比集（跨会话持久化） ----------
+const LS_RECENT = 'ame_recent_views'
+const LS_COMPARE = 'ame_compare_set'
+function lsGet(key, fallback) { try { const v = localStorage.getItem(key); return v ? JSON.parse(v) : fallback } catch { return fallback } }
+function lsSet(key, val) { try { localStorage.setItem(key, JSON.stringify(val)) } catch {} }
+function getRecent() { return lsGet(LS_RECENT, []).filter((id) => variantById(id)) }
+function pushRecent(id) {
+  const r = getRecent().filter((x) => x !== id)
+  r.unshift(id)
+  lsSet(LS_RECENT, r.slice(0, 8))
+}
+function getCompare() { return lsGet(LS_COMPARE, []).filter((id) => variantById(id)) }
+function toggleCompare(id) {
+  const c = getCompare()
+  const i = c.indexOf(id)
+  if (i >= 0) c.splice(i, 1); else c.push(id)
+  lsSet(LS_COMPARE, c.slice(0, 6))
+  return c
+}
+function inCompare(id) { return getCompare().includes(id) }
+function updateCmpBadge() {
+  const el = document.getElementById('cmp-count')
+  if (!el) return
+  const n = getCompare().length
+  el.textContent = n
+  el.hidden = n === 0
+}
 function ctxShort(n) {
   if (n == null) return '—'
   if (n >= 1e6) return `${+(n / 1e6).toFixed(1)}M`
@@ -323,7 +350,9 @@ function viewHome() {
   <section class="section wrap">
     <div class="heading"><div><span class="eyebrow">当前主流模型</span><h2>大家都在看的模型</h2></div><p>按各场景推荐评分聚合，挑出当前最受关注的型号。</p></div>
     <div class="card-grid">${hot.map((v) => modelCard(v, `<span class="hot-flag">热度 ${scoreOf[v.id]}</span>`)).join('')}</div>
-  </section>`
+  </section>
+  ${recentModuleHTML()}
+  `
 }
 
 // ---------- 视图：厂商地图 ----------
@@ -870,6 +899,7 @@ function relatedBlock(v) {
 function viewModel(id) {
   const v = variantById(id)
   if (!v) return notFound('型号', id, '#providers')
+  pushRecent(id)
   const p = providerOf(v)
   const f = familyOf(v)
   const caps = v.capabilities || {}
@@ -890,6 +920,10 @@ function viewModel(id) {
         ${tags.length ? `<div class="cap-tags">${tags.map((t) => `<span class="cap-tag">${esc(t)}</span>`).join('')}</div>` : ''}
       </div>
     </header>
+
+    <div class="detail-actions">
+      <button class="cmp-toggle" data-cmp="${v.id}">${inCompare(v.id) ? '✓ 已加入对比' : '＋ 加入对比'}</button>
+    </div>
 
     <section class="detail-sec">
       <h3>关键参数</h3>
@@ -916,6 +950,57 @@ function viewModel(id) {
       ${v.source_url ? `<a class="text-link" href="${esc(v.source_url)}" target="_blank" rel="noopener">官方来源 ↗</a> · ` : ''}
       核验日期：${esc(v.verified_date || '未知')}${v.price_note ? ' · ' + esc(v.price_note) : ''}
     </p>
+  </div>`
+}
+
+// ---------- 视图：最近浏览（首页区块） ----------
+function recentModuleHTML() {
+  const ids = getRecent()
+  if (!ids.length) return ''
+  const cards = ids.map(variantById).filter(Boolean).map((v) => modelCard(v, '')).join('')
+  return `<section class="section wrap">
+    <div class="heading"><div><span class="eyebrow">最近浏览</span><h2>你刚才看过的</h2></div><p>本地记录，刷新不丢。</p></div>
+    <div class="card-grid">${cards}</div>
+  </section>`
+}
+
+// ---------- 视图：对比集 ----------
+function viewCompare() {
+  const ids = getCompare()
+  if (!ids.length) return `<div class="wrap page"><button class="back-link" data-back="#home">← 返回首页</button><div class="empty-box big"><span>✦</span><h2>对比集还是空的</h2><p>去模型详情页点「加入对比」，这里会列出你选的型号。</p></div></div>`
+  const list = ids.map(variantById).filter(Boolean)
+  const isMedia = list.every((v) => v.media_type)
+  const head = isMedia
+    ? ['型号', '模态', '分辨率 / 时长', '价格', '速度', '定位', '']
+    : ['型号', '模态', '上下文', '输入 / 输出 (每 M tokens)', '速度', '推理', '编码', '']
+  const row = (v) => {
+    const cells = isMedia
+      ? [
+          `<b>${esc(v.name_cn || v.name)}</b><small>${esc(v.model_id || v.id)}</small>`,
+          modBadge(v),
+          esc([v.max_resolution, v.max_duration_sec ? v.max_duration_sec + 's' : null].filter(Boolean).join(' · ') || '—'),
+          priceCell(v),
+          esc(SPEED_CN[v.speed_tier] || v.speed_tier || '—'),
+          `<span class="cell-desc">${esc(v.one_liner_cn || '')}</span>`,
+        ]
+      : [
+          `<b>${esc(v.name_cn || v.name)}</b><small>${esc(v.model_id || v.id)}</small>`,
+          modBadge(v),
+          ctxShort(v.context_window),
+          priceCell(v),
+          esc(SPEED_CN[v.speed_tier] || v.speed_tier || '—'),
+          tierPill(v, 'reasoning'),
+          tierPill(v, 'coding'),
+        ]
+    return `<tr data-goto="#model/${encodeURIComponent(v.id)}">${cells.map((c) => `<td>${c}</td>`).join('')}<td class="td-go"><button class="cmp-remove" data-cmp-remove="${v.id}" aria-label="移除对比">✕</button></td></tr>`
+  }
+  return `<div class="wrap page">
+    <button class="back-link" data-back="#home">← 返回首页</button>
+    <header class="entity-head"><div class="eh-main"><span class="eyebrow">对比集</span><h1>模型对比（${list.length}）</h1><p>本地保存，刷新不丢。点行看详情，✕ 移除。</p></div></header>
+    <div class="table-wrap"><table class="cmp-table">
+      <thead><tr>${head.map((h) => `<th scope="col">${h}</th>`).join('')}</tr></thead>
+      <tbody>${list.map(row).join('')}</tbody>
+    </table></div>
   </div>`
 }
 
@@ -979,6 +1064,7 @@ function render() {
   else if (r.name === 'matcher') html = viewMatcher()
   else if (r.name === 'gateways') html = viewGateways()
   else if (r.name === 'model') html = viewModel(r.param)
+  else if (r.name === 'compare') html = viewCompare()
   else if (r.name === 'glossary') html = viewGlossary()
   else if (r.name === 'home') html = viewHome()
   else html = notFound('页面', r.name, '#home')
@@ -987,6 +1073,7 @@ function render() {
   app.innerHTML = html
   app.dataset.route = r.name
   currentKey = r.key
+  updateCmpBadge()
   // 导航高亮
   $$('#main-nav a').forEach((a) => {
     const active = a.dataset.nav === r.name || (r.name === 'provider' && a.dataset.nav === 'providers') || (r.name === 'family' && a.dataset.nav === 'providers')
@@ -1058,6 +1145,24 @@ function bindGlobalEvents() {
     if (freeInfo) {
       e.preventDefault()
       freeInfo.classList.toggle('active')
+      return
+    }
+    // 加入 / 移出对比集（须位于 [data-goto] 行跳转之前，避免对比表内移除按钮触发整行跳转）
+    const cmpBtn = e.target.closest('[data-cmp]')
+    if (cmpBtn) {
+      const id = cmpBtn.dataset.cmp
+      const on = toggleCompare(id).includes(id)
+      cmpBtn.classList.toggle('on', on)
+      cmpBtn.textContent = on ? '✓ 已加入对比' : '＋ 加入对比'
+      updateCmpBadge()
+      return
+    }
+    const cmpRemove = e.target.closest('[data-cmp-remove]')
+    if (cmpRemove) {
+      e.preventDefault()
+      toggleCompare(cmpRemove.dataset.cmpRemove)
+      render()
+      updateCmpBadge()
       return
     }
     // V4 首页场景芯片 → 预选任务进入任务选择器（与 matcher 的 data-task 区分，避免冲突死分支）

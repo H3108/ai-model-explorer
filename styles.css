@@ -855,6 +855,27 @@ select { padding: 8px 12px; border-radius: var(--r-sm); }
   .result-reason { width: 100%; }
 }
 
+/* ---------- 对比集 / 最近浏览 ---------- */
+.detail-actions { margin: 4px 0 18px; }
+.cmp-toggle {
+  border: 1px solid #2f9e6e; color: #1c7a52; background: #fff;
+  border-radius: 999px; padding: 9px 18px; font-size: 14px; font-weight: 600;
+  cursor: pointer; transition: background .15s, color .15s;
+}
+.cmp-toggle:hover { background: #f1faf5; }
+.cmp-toggle.on { background: #2f9e6e; color: #fff; }
+.cmp-remove {
+  border: 1px solid var(--line, #e3e8e3); background: #fff; color: var(--muted, #888);
+  border-radius: 8px; width: 28px; height: 28px; cursor: pointer; line-height: 1; font-size: 14px;
+}
+.cmp-remove:hover { border-color: #e2706a; color: #e2706a; }
+.nav-badge {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-width: 18px; height: 18px; padding: 0 5px; margin-left: 6px;
+  border-radius: 999px; background: #2f9e6e; color: #fff; font-size: 11px; font-weight: 700;
+}
+.nav-badge[hidden] { display: none; }
+
 /* 首屏骨架屏（loadData 首次渲染前占位，消除白屏） */
 #boot-skeleton { display: flex; flex-direction: column; gap: 22px; }
 .sk-hero { height: 120px; border-radius: 16px; }
