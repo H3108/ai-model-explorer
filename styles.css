@@ -406,7 +406,7 @@ select { padding: 8px 12px; border-radius: var(--r-sm); }
 .dt-name { white-space: nowrap; max-width: 220px; }
 .dt-name a { display: inline-flex; align-items: center; gap: 9px; text-decoration: none; color: var(--foreground); }
 .dt-name-txt { display: inline-flex; flex-direction: column; line-height: 1.25; min-width: 0; }
-.dt-name-txt b { overflow: hidden; text-overflow: ellipsis; }
+.dt-name-txt b { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .dt-name-txt small { color: var(--muted); font-size: 11px; }
 .dt-caps { min-width: 130px; max-width: 220px; }
 
@@ -607,8 +607,8 @@ select { padding: 8px 12px; border-radius: var(--r-sm); }
   transition: transform .15s, box-shadow .15s, border-color .15s;
 }
 .model-card:hover { transform: translateY(-3px); box-shadow: var(--sh-3); border-color: var(--border-hover); }
-.mc-top { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-.mc-tags { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; margin-left: auto; }
+.mc-top { display: flex; align-items: center; gap: 10px; flex-wrap: nowrap; }
+.mc-tags { display: flex; align-items: center; gap: 5px; flex-wrap: nowrap; margin-left: auto; overflow: hidden; }
 .mc-name { font-size: 16px; font-weight: 700; margin-top: 4px; }
 .mc-from { font-size: 12px; color: var(--muted); }
 .mc-desc { margin: 2px 0 0; font-size: 13px; color: var(--ink-2); flex: 1;
@@ -620,19 +620,21 @@ select { padding: 8px 12px; border-radius: var(--r-sm); }
 .mc-hits { display: flex; gap: 5px; flex-wrap: wrap; margin-top: 8px; }
 .hit-pill { font-size: 10.5px; font-weight: 700; padding: 2px 8px; border-radius: 999px; }
 .hot-flag, .match-flag {
-  margin-left: auto; font-size: 11px; font-weight: 700;
+  display: inline-flex; align-items: center;
+  margin-left: auto; font-size: 11px; font-weight: 700; white-space: nowrap; line-height: 1;
   background: var(--deep); color: var(--green); padding: 3px 9px; border-radius: 999px;
 }
 /* Phase 2 浏览卡片/表格综合评分标 */
 .score-flag {
-  margin-left: auto; font-size: 11px; font-weight: 700;
+  display: inline-flex; align-items: center;
+  margin-left: auto; font-size: 11px; font-weight: 700; white-space: nowrap; line-height: 1;
   background: var(--brand-soft); color: var(--brand); padding: 3px 9px; border-radius: 999px;
   border: 1px solid color-mix(in srgb, var(--brand-accent) 24%, transparent);
 }
 .score-td { color: var(--brand); font-weight: 700; font-variant-numeric: tabular-nums; }
 .free-badge {
   display: inline-flex; align-items: center;
-  font-size: 11px; font-weight: 700; letter-spacing: .02em; line-height: 1.4;
+  font-size: 11px; font-weight: 700; letter-spacing: .02em; line-height: 1; white-space: nowrap;
   color: var(--green); background: var(--deep);
   padding: 2px 8px; border-radius: 999px; cursor: default;
 }

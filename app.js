@@ -47,7 +47,7 @@ const state = {
   // 系列页
   familySort: 'default',
   // 浏览页
-  browseModality: 'all', browseCaps: [], browseTraits: [], browseSort: 'match', browsePrice: 'all', browseBill: 'all',
+  browseModality: 'all', browseCaps: [], browseTraits: [], browseSort: 'match', browsePrice: 'all',
   browseView: 'card', browseSearch: '', browseSearchClean: '', minContext: 0, favOnly: false,
   // 匹配器
   selectedTask: null, budget: 'balanced', speed: 'balanced',
@@ -192,7 +192,7 @@ const LS_BROWSE_FILTERS = 'ame_browse_filters'
 function saveBrowseFilters() {
   lsSet(LS_BROWSE_FILTERS, {
     browseModality: state.browseModality, browseCaps: state.browseCaps, browseTraits: state.browseTraits,
-    browseSort: state.browseSort, browsePrice: state.browsePrice, browseBill: state.browseBill,
+    browseSort: state.browseSort, browsePrice: state.browsePrice,
     browseSearch: state.browseSearch, browseSearchClean: state.browseSearchClean, minContext: state.minContext, favOnly: state.favOnly,
   })
 }
@@ -204,7 +204,6 @@ function restoreBrowseFilters() {
   if (Array.isArray(s.browseTraits)) state.browseTraits = s.browseTraits
   if (s.browseSort) state.browseSort = s.browseSort
   if (s.browsePrice) state.browsePrice = s.browsePrice
-  if (s.browseBill) state.browseBill = s.browseBill
   if (typeof s.browseSearch === 'string') state.browseSearch = s.browseSearch
   if (typeof s.browseSearchClean === 'string') state.browseSearchClean = s.browseSearchClean
   if (typeof s.minContext === 'number') state.minContext = s.minContext
@@ -776,7 +775,6 @@ function matchModels() {
   if (state.browsePrice === 'free') list = list.filter((v) => v.free)
   else if (state.browsePrice === 'low') list = list.filter((v) => v.free !== true && v.input_price_per_mtok != null && v.input_price_per_mtok <= 1)
   else if (state.browsePrice === 'standard') list = list.filter((v) => v.free !== true && v.input_price_per_mtok != null && v.input_price_per_mtok > 1)
-  if (state.browseBill !== 'all') list = list.filter((v) => v.price_model === state.browseBill)
   state.browseTraits.forEach((k) => {
     const t = TRAITS.find((x) => x.key === k)
     if (t) list = list.filter(t.test)
@@ -869,8 +867,6 @@ function viewBrowse() {
     `<button class="${state.browseModality === k ? 'selected' : ''}" aria-pressed="${state.browseModality === k ? 'true' : 'false'}" data-value="${k}">${label}</button>`
   const priceBtn = (k, label) =>
     `<button class="${state.browsePrice === k ? 'selected' : ''}" aria-pressed="${state.browsePrice === k ? 'true' : 'false'}" data-value="${k}">${label}</button>`
-  const billBtn = (k, label) =>
-    `<button class="${state.browseBill === k ? 'selected' : ''}" aria-pressed="${state.browseBill === k ? 'true' : 'false'}" data-value="${k}">${label}</button>`
   return `<div class="wrap page">
     ${pageHead({ eyebrow: '02 / 能力筛选', title: '按<em>能力</em>找模型', desc: '左边勾选你需要的能力与硬性条件，右边即时过滤并排序，找到最合适的型号。' })}
     <div class="browse-toolbar">
@@ -884,7 +880,6 @@ function viewBrowse() {
       <aside class="filter-panel">
         <div class="fp-block"><h4>模态</h4><div class="segmented" data-seg="browseModality">${modBtn('all', '全部')}${modBtn('text', '文本')}${modBtn('image', '图像')}${modBtn('video', '视频')}</div></div>
         <div class="fp-block"><h4>价格<small>按付费方式筛选</small></h4><div class="segmented" data-seg="browsePrice">${priceBtn('all', '全部')}${priceBtn('free', '免费')}${priceBtn('low', '低成本')}${priceBtn('standard', '标准价')}</div></div>
-        <div class="fp-block"><h4>计费方式<small>按计价单位筛选</small></h4><div class="segmented" data-seg="browseBill">${billBtn('all', '全部')}${billBtn('per_token', '按 Token')}${billBtn('per_image', '按张')}${billBtn('per_second', '按秒')}</div></div>
         <div class="fp-block"><h4>能力维度<small>多选，逐条过滤</small></h4><div class="chip-wrap">${CAP_DIMS.map(capChip).join('')}</div></div>
         <div class="fp-block"><h4>硬性条件<small>多选，逐条过滤</small></h4><div class="chip-wrap">${TRAITS.map(traitChip).join('')}</div></div>
         <div class="fp-block"><h4>排序</h4><div class="segmented" data-seg="browseSort"><button class="${state.browseSort === 'match' ? 'selected' : ''}" data-value="match">匹配度</button><button class="${state.browseSort === 'price' ? 'selected' : ''}" data-value="price">价格</button><button class="${state.browseSort === 'context' ? 'selected' : ''}" data-value="context">上下文</button></div></div>
@@ -1443,7 +1438,6 @@ function bindGlobalEvents() {
       // 同步筛选面板分段按钮高亮（结构化搜索改了 state，但筛选面板未整体重渲染）
       syncSeg('browseModality', state.browseModality)
       syncSeg('browsePrice', state.browsePrice)
-      syncSeg('browseBill', state.browseBill)
       refreshBrowse()
     }
   })
@@ -1592,7 +1586,6 @@ function bindGlobalEvents() {
       state.browseModality = 'all'
       state.browseSort = 'match'
       state.browsePrice = 'all'
-      state.browseBill = 'all'
       state.minContext = 0
       state.browseSearch = ''
       state.browseSearchClean = ''
