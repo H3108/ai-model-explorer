@@ -402,12 +402,13 @@ select { padding: 8px 12px; border-radius: var(--r-sm); }
 .view-switch { display: inline-flex; border: 1px solid var(--border); border-radius: var(--radius-md); overflow: hidden; background: var(--surface); }
 .view-switch button { border: 0; background: transparent; padding: 0 16px; height: 44px; cursor: pointer; font-size: 13.5px; font-weight: 600; color: var(--muted); }
 .view-switch button.selected { background: var(--brand); color: var(--on-brand); }
-.cap-mini { display: inline-block; background: var(--category-text-bg); color: var(--category-text-fg); border-radius: var(--radius-pill); padding: 2px 8px; font-size: 11.5px; margin: 1px 3px 1px 0; font-weight: 600; }
-.dt-name { white-space: nowrap; }
+.cap-mini { display: inline-block; background: var(--category-text-bg); color: var(--category-text-fg); border-radius: var(--radius-pill); padding: 2px 8px; font-size: 11.5px; margin: 1px 3px 1px 0; font-weight: 600; white-space: nowrap; }
+.dt-name { white-space: nowrap; max-width: 220px; }
 .dt-name a { display: inline-flex; align-items: center; gap: 9px; text-decoration: none; color: var(--foreground); }
-.dt-name-txt { display: inline-flex; flex-direction: column; line-height: 1.25; }
+.dt-name-txt { display: inline-flex; flex-direction: column; line-height: 1.25; min-width: 0; }
+.dt-name-txt b { overflow: hidden; text-overflow: ellipsis; }
 .dt-name-txt small { color: var(--muted); font-size: 11px; }
-.dt-caps { max-width: 220px; }
+.dt-caps { min-width: 130px; max-width: 220px; }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
@@ -584,7 +585,16 @@ select { padding: 8px 12px; border-radius: var(--r-sm); }
 .cmp-table tbody tr:hover { background: var(--brand-soft); }
 
 /* 变体：浏览表（紧凑） */
-.data-table--browse { font-size: 13px; min-width: 720px; }
+.data-table--browse { font-size: 13px; min-width: 720px; table-layout: fixed; }
+.data-table--browse col:nth-child(1) { width: 22%; }
+.data-table--browse col:nth-child(2) { width: 12%; }
+.data-table--browse col:nth-child(3) { width: 8%; }
+.data-table--browse col:nth-child(4) { width: 9%; }
+.data-table--browse col:nth-child(5) { width: 9%; }
+.data-table--browse col:nth-child(6) { width: 16%; }
+.data-table--browse col:nth-child(7) { width: 7%; }
+.data-table--browse col:nth-child(8) { width: 7%; }
+.data-table--browse col:nth-child(9) { width: 10%; }
 /* 变体：对比表（常规字号，强调行 hover） */
 .data-table--compare { font-size: 14px; }
 

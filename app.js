@@ -305,11 +305,10 @@ function capBar(dim, cap) {
 }
 // 模型卡（列表/网格通用）
 // 数据质量评级（阈值与 scripts/governance_v1.js 的 grade() 一致：A≥90 / B≥70 / C≥50 / D<50）
-const GRADE_CN = { A: '优', B: '良', C: '中', D: '待补' }
 const gradeOf = (v) => { const s = v.data_quality_score || 0; return s >= 90 ? 'A' : s >= 70 ? 'B' : s >= 50 ? 'C' : 'D' }
 const gradeBadge = (v) => {
   const g = gradeOf(v)
-  return `<span class="grade-badge g-${g}" title="数据质量 ${v.data_quality_score || 0} 分 · 等级 ${g}（${GRADE_CN[g]}）">${GRADE_CN[g]}</span>`
+  return `<span class="grade-badge g-${g}" title="数据质量 ${v.data_quality_score || 0} 分">${g}</span>`
 }
 function modelCard(v, extra = '') {
   const p = providerOf(v)
@@ -856,6 +855,7 @@ function browseTableViewHTML() {
   }).join('')
   return `<p class="result-count">匹配到 <b>${scored.length}</b> 个模型${scored.length > 60 ? '，表格展示前 60 个' : ''}</p>
   <div class="table-wrap"><table class="data-table data-table--browse">
+    <colgroup><col><col><col><col><col><col><col><col><col></colgroup>
     <thead><tr><th>模型</th><th>厂商</th><th>上下文</th><th>输入 $/M</th><th>输出 $/M</th><th>能力</th><th>速度</th><th>评分</th><th>对比</th></tr></thead>
     <tbody>${rows}</tbody>
   </table></div>`
