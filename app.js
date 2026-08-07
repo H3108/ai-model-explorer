@@ -126,6 +126,7 @@ function priceCell(v) {
   return `<span class="price-cell">${esc(label)}${dot}</span>`
 }
 function priceValue(v) {
+  // 媒体计费（图像/视频）以美元计，×40 为 USD→CNY 近似换算，仅用于排序/量级比较
   if (v.media_pricing && v.media_pricing.price != null) return v.media_pricing.price * 40
   if (v.input_price_per_mtok == null) return Number.MAX_SAFE_INTEGER
   return (v.input_price_per_mtok + (v.output_price_per_mtok ?? v.input_price_per_mtok)) / 2
@@ -979,7 +980,8 @@ function render() {
   else if (r.name === 'gateways') html = viewGateways()
   else if (r.name === 'model') html = viewModel(r.param)
   else if (r.name === 'glossary') html = viewGlossary()
-  else html = viewHome()
+  else if (r.name === 'home') html = viewHome()
+  else html = notFound('页面', r.name, '#home')
 
   const app = $('#app')
   app.innerHTML = html

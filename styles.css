@@ -476,6 +476,9 @@ select { padding: 8px 12px; border-radius: var(--r-sm); }
 .cmp-table tbody tr:last-child td { border-bottom: 0; }
 .cmp-table td b { display: block; font-size: 14px; }
 .cmp-table td small { color: var(--muted); font-size: 11.5px; font-family: 'SF Mono', ui-monospace, monospace; }
+/* 对比表首列 sticky：窄屏横滚时模型名列固定，便于对照 */
+.cmp-table th:first-child, .cmp-table td:first-child { position: sticky; left: 0; z-index: 2; background: var(--card); }
+.cmp-table thead th:first-child { background: #fafcf8; z-index: 3; }
 .cell-desc { color: var(--muted); font-size: 12.5px; display: block; max-width: 260px; }
 .td-go { color: var(--green-600); font-weight: 700; text-align: right; }
 
@@ -829,7 +832,14 @@ select { padding: 8px 12px; border-radius: var(--r-sm); }
 }
 @media (max-width: 720px) {
   .topbar { gap: 18px; height: auto; padding: 12px 18px; flex-wrap: wrap; }
-  #main-nav { gap: 16px; order: 3; width: 100%; overflow-x: auto; }
+  #main-nav {
+    gap: 16px; order: 3; width: 100%; overflow-x: auto;
+    /* 边缘渐隐提示：窄屏导航可横向滑动 */
+    -webkit-mask-image: linear-gradient(to right, transparent 0, #000 14px, #000 calc(100% - 14px), transparent 100%);
+    mask-image: linear-gradient(to right, transparent 0, #000 14px, #000 calc(100% - 14px), transparent 100%);
+    scrollbar-width: none;
+  }
+  #main-nav::-webkit-scrollbar { display: none; }
   .version-pill { display: none; }
   .page { padding: 26px 18px 60px; }
   .wrap { padding: 0 18px; }
