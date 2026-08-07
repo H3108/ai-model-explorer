@@ -581,7 +581,7 @@ select { padding: 8px 12px; border-radius: var(--r-sm); }
 .cmp-table tbody tr:hover { background: var(--brand-soft); }
 
 /* 变体：浏览表（紧凑） */
-.data-table--browse { font-size: 13px; }
+.data-table--browse { font-size: 13px; min-width: 720px; }
 /* 变体：对比表（常规字号，强调行 hover） */
 .data-table--compare { font-size: 14px; }
 
@@ -866,6 +866,12 @@ select { padding: 8px 12px; border-radius: var(--r-sm); }
 .bench-list li { display: flex; gap: 8px; flex-wrap: wrap; }
 .bench-list b { font-size: 13px; color: var(--deep); }
 .bench-list span { font-size: 12px; color: var(--muted); }
+/* 版本信息区块（model_versions.json） */
+.ver-box { display: flex; flex-direction: column; gap: 2px; border: 1px solid var(--line); border-radius: var(--r-lg); overflow: hidden; }
+.ver-row { display: grid; grid-template-columns: 1fr auto auto; gap: 10px; align-items: center; padding: 10px 15px; border-bottom: 1px solid var(--line); }
+.ver-row:last-child { border-bottom: none; }
+.ver-row > b { font-size: 13.5px; color: var(--deep); }
+.ver-row > .muted { font-size: 12px; }
 .feat {
   font-style: normal; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 999px;
   background: var(--paper); color: var(--muted); border: 1px solid var(--line);
@@ -937,7 +943,6 @@ select { padding: 8px 12px; border-radius: var(--r-sm); }
   .hero-visual { display: none; }
   .browse-layout, .matcher-layout { grid-template-columns: 1fr; }
   .filter-panel { position: static; }
-  .entry-grid { grid-template-columns: 1fr; }
   .stat-strip.four { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 720px) {
@@ -956,8 +961,6 @@ select { padding: 8px 12px; border-radius: var(--r-sm); }
   .page-head h1, .hero h1 { font-size: 32px; }
   .eh-main h1 { font-size: 25px; }
   .entity-head { flex-direction: column; gap: 14px; padding: 20px; }
-  .proof { grid-template-columns: 1fr 1fr; }
-  .proof div:nth-child(2) { border-right: 0; }
   .detail-sec.split { grid-template-columns: 1fr; }
   .stat-strip.four { grid-template-columns: 1fr 1fr; }
   .task-options { grid-template-columns: 1fr; }

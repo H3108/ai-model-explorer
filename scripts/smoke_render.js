@@ -193,6 +193,16 @@ async function main() {
   await new Promise((r) => setTimeout(r, 30))
   ok(app.querySelectorAll('.model-card').length === total, '清空结构化搜索恢复全部')
   ok(app.querySelector('.score-flag'), '浏览卡片显示综合评分标（fitScore）')
+  // Issue-5 别名表召回：搜索「ChatGPT」应命中 openai 模型（model_aliases.json）
+  bs2.value = 'ChatGPT'
+  bs2.dispatchEvent(new window.Event('input', { bubbles: true }))
+  await new Promise((r) => setTimeout(r, 30))
+  const aliasCards = app.querySelectorAll('.model-card').length
+  ok(aliasCards > 0 && aliasCards < total, `别名搜索「ChatGPT」命中（${aliasCards} < ${total}）`)
+  bs2.value = ''
+  bs2.dispatchEvent(new window.Event('input', { bubbles: true }))
+  await new Promise((r) => setTimeout(r, 30))
+  ok(app.querySelectorAll('.model-card').length === total, '清空别名搜索恢复全部')
   // #browse 只做能力筛选，场景入口统一在首页场景模块 + #matcher（见 398b801 去重决策）
   ok(!app.querySelector('[data-tab="scene"]'), '#browse 无场景 tab（不与 #matcher 重复）')
 
@@ -218,6 +228,8 @@ async function main() {
   ok(app.querySelector('.fit-list li.ok'), '适合列表')
   ok(app.querySelector('.naming-card') || true, '命名解读区块（可选）')
   ok(app.querySelectorAll('.rel-group').length >= 1, '相关模型区块')
+  // Issue-2 版本信息区块（model_versions.json 接入详情页）
+  ok(app.querySelector('.ver-box'), '详情显示版本信息区块（model_versions.json）')
   // Phase 2 综合评分分解
   ok(app.querySelector('.score-break'), '详情显示综合评分分解')
   ok(/\/100/.test(app.querySelector('.sb-head b').textContent), '综合评分以 /100 呈现')

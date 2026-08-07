@@ -74,14 +74,18 @@ async function loadData() {
   }
   // V4 数据层（独立实体）
   try {
-    const [gw, sc, api] = await Promise.all([
+    const [gw, sc, api, al, ver] = await Promise.all([
       fetch('./data/gateways.json').then((r) => (r.ok ? r.json() : [])),
       fetch('./data/scenarios.json').then((r) => (r.ok ? r.json() : [])),
       fetch('./data/api_access.json').then((r) => (r.ok ? r.json() : [])),
+      fetch('./data/model_aliases.json').then((r) => (r.ok ? r.json() : [])),
+      fetch('./data/model_versions.json').then((r) => (r.ok ? r.json() : [])),
     ])
     state.gateways = Array.isArray(gw) ? gw : []
     state.scenarios = Array.isArray(sc) ? sc : []
     state.apiAccess = Array.isArray(api) ? api : []
+    state.aliases = Array.isArray(al) ? al : []
+    state.versions = Array.isArray(ver) ? ver : []
   } catch (e) {
     console.warn('V4 数据加载失败：', e)
   }
@@ -224,10 +228,27 @@ function catBadge(p, extraCls = '') {
 }
 const apiAccessOf = (v) => state.apiAccess.find((a) => a.id === v.id) || null
 const capCn = (k) => (CAP_DIMS.find((c) => c.key === k) || {}).cn || k
+// 合并变体自带 aliases 字段与 model_aliases.json 别名表
+function aliasesOf(v) {
+  const own = (v.aliases || []).map((a) => (typeof a === 'string' ? a : a.alias || '')).filter(Boolean)
+  const fromFile = (state.aliases || [])
+    .filter((a) => a.model_id && (a.model_id === v.id || a.model_id === v.model_id))
+    .map((a) => a.alias)
+    .filter(Boolean)
+  const p = providerOf(v)
+  const prov = p ? [p.name, p.name_cn] : []
+  return Array.from(new Set([...own, ...fromFile, ...prov])).join(' ').toLowerCase()
+}
+// 该型号在 model_versions.json 中的版本记录（按发布时间倒序）
+function versionsOf(v) {
+  return (state.versions || [])
+    .filter((x) => x.model_id && (x.model_id === v.id || x.model_id === v.model_id))
+    .sort((a, b) => (b.release_date || '').localeCompare(a.release_date || ''))
+}
 // V4 全文搜索匹配：模型名/中文名/别名/厂商/能力/使用场景
 function variantMatches(v, q) {
   if (!q) return true
-  const hay = [v.name, v.name_cn, v.model_id, v.one_liner_cn, (v.aliases || []).join(' '), capCn(v.role)]
+  const hay = [v.name, v.name_cn, v.model_id, v.one_liner_cn, aliasesOf(v), capCn(v.role)]
     .filter(Boolean).join(' ').toLowerCase()
   if (hay.includes(q)) return true
   if ((v.capabilities || {}) && Object.keys(v.capabilities).some((k) => capCn(k).includes(q))) return true
@@ -833,10 +854,10 @@ function browseTableViewHTML() {
     </tr>`
   }).join('')
   return `<p class="result-count">匹配到 <b>${scored.length}</b> 个模型${scored.length > 60 ? '，表格展示前 60 个' : ''}</p>
-  <table class="data-table data-table--browse">
+  <div class="table-wrap"><table class="data-table data-table--browse">
     <thead><tr><th>模型</th><th>厂商</th><th>上下文</th><th>输入 $/M</th><th>输出 $/M</th><th>能力</th><th>速度</th><th>评分</th><th>对比</th></tr></thead>
     <tbody>${rows}</tbody>
-  </table>`
+  </table></div>`
 }
 function viewBrowse() {
   const capChip = (d) =>
@@ -1128,6 +1149,18 @@ function ecoBlock(v) {
       ${benchRow}
     </div></section>`
 }
+// 版本信息（来自 model_versions.json）：展示该型号的各版本与发布时间
+function versionBlockHTML(v) {
+  const vs = versionsOf(v)
+  if (!vs.length) return ''
+  const rows = vs.map((x) => {
+    const st = x.status === 'active' ? '<span class="tag tag-open">在售</span>' : (x.status ? `<span class="tag">${esc(x.status)}</span>` : '')
+    const ctx = x.context_length ? `<span class="muted">· 上下文 ${ctxShort(x.context_length)}</span>` : ''
+    return `<div class="ver-row"><b>${esc(x.version)}</b><span class="muted">${esc(x.release_date || '—')} ${ctx}</span>${st}</div>`
+  }).join('')
+  return `<section class="detail-sec"><h3>版本<small>来自 model_versions.json</small></h3>
+    <div class="ver-box">${rows}</div></section>`
+}
 function namingBlock(v) {
   const hay = `${v.name || ''} ${v.name_cn || ''} ${v.model_id || ''}`.toLowerCase()
   const hits = state.naming.filter((n) => hay.includes(n.term.toLowerCase()))
@@ -1216,6 +1249,7 @@ function viewModel(id) {
     </section>
 
     <section class="detail-sec"><h3>API 调用</h3>${apiBlockHTML(v)}</section>
+    ${versionBlockHTML(v)}
     ${v.playground_url ? `<section class="detail-sec"><h3>在线试用</h3><div class="try-box"><a class="button primary" href="${esc(v.playground_url)}" target="_blank" rel="noopener">在官方 Playground 试用 ↗</a><p class="muted-note">仅当厂商提供公开试用入口时才显示。</p></div></section>` : ''}
 
     ${ecoBlock(v)}

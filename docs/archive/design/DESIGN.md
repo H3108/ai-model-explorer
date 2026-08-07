@@ -238,8 +238,11 @@ Search
 
 Remove:
 
-- Version badge
 - Decorative labels
+
+Retain:
+
+- Version badge (`<span class="version-pill">` in `index.html`) — 作为产品版本标识有意保留，非装饰噪音。后续审计不再将其列为待移除项。
 
 
 ---
