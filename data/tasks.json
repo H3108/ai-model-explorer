@@ -3,7 +3,7 @@
   {"id":"coding","name_cn":"写代码","description_cn":"生成、解释、审查和重构代码。","icon":"⌘","model_types":["Coding","Reasoning"],"prefer":{"capabilities":{"coding":"high"}}},
   {"id":"agent","name_cn":"Agent 开发","description_cn":"规划、工具调用和多步骤任务执行。","icon":"⚙","model_types":["Agent","Reasoning"],"prefer":{"capabilities":{"agent":"high"}}},
   {"id":"image","name_cn":"图片生成","description_cn":"文生图、图生图与图像编辑。","icon":"◉","model_types":["Image"],"prefer":{}},
-  {"id":"image_understanding","name_cn":"图片理解","description_cn":"看图问答、文档/图表理解与视觉分析。","icon":"◉","model_types":["Vision"],"prefer":{"vision_support":true}},
+  {"id":"image_understanding","name_cn":"图片理解","description_cn":"看图问答、文档/图表理解与视觉分析。","icon":"⊙","model_types":["Vision"],"prefer":{"vision_support":true}},
   {"id":"video","name_cn":"视频生成","description_cn":"文本/图像到视频生成。","icon":"↗","model_types":["Video"],"prefer":{}},
   {"id":"local","name_cn":"本地部署","description_cn":"开放权重模型和私有化部署。","icon":"⌂","model_types":["Chat","Coding","Vision"],"prefer":{"open_weight":true}},
   {"id":"low_cost","name_cn":"低成本 API","description_cn":"按输入输出成本筛选高性价比模型。","icon":"♧","model_types":["Chat","Coding"],"prefer":{"cost":"low"}},

@@ -18,7 +18,7 @@ const SPEED_RANK = { slow: 1, slower: 2, moderate: 3, medium: 3, fast: 4, faster
 const SPEED_CN = { slow: '较慢', slower: '偏慢', moderate: '中速', medium: '中速', fast: '快', faster: '很快', fastest: '极快' }
 const API_STYLE_CN = { openai: 'OpenAI 兼容', media: '媒体接口', anthropic: 'Anthropic', google: 'Google Gemini' }
 const MODALITY = {
-  text: { label: '文本', short: '文本', icon: '⌘' },
+  text: { label: '文本', short: '文本', icon: '¶' },
   image: { label: '图像生成', short: '图像', icon: '◈' },
   video: { label: '视频生成', short: '视频', icon: '▶' },
 }
@@ -309,7 +309,7 @@ const GRADE_CN = { A: '优', B: '良', C: '中', D: '待补' }
 const gradeOf = (v) => { const s = v.data_quality_score || 0; return s >= 90 ? 'A' : s >= 70 ? 'B' : s >= 50 ? 'C' : 'D' }
 const gradeBadge = (v) => {
   const g = gradeOf(v)
-  return `<span class="grade-badge g-${g}" title="数据质量 ${v.data_quality_score || 0} 分（${GRADE_CN[g]}）">${g}</span>`
+  return `<span class="grade-badge g-${g}" title="数据质量 ${v.data_quality_score || 0} 分 · 等级 ${g}（${GRADE_CN[g]}）">${GRADE_CN[g]}</span>`
 }
 function modelCard(v, extra = '') {
   const p = providerOf(v)
@@ -323,8 +323,9 @@ function modelCard(v, extra = '') {
     modalityOf(v) === 'text'
       ? `<span>${ctxShort(v.context_window)} 上下文</span><span>${priceTxt}</span>`
       : `<span>${esc(v.max_resolution || v.max_duration_sec ? (v.max_resolution || v.max_duration_sec + 's') : '—')}</span><span>${priceTxt}</span>`
+  const tags = [modBadge(v), gradeBadge(v), free, extra].filter(Boolean).join('')
   return `<a class="model-card" href="#model/${encodeURIComponent(v.id)}">
-    <div class="mc-top">${logoHTML(p, 'sm')}${modBadge(v)}${free}${gradeBadge(v)}${extra}</div>
+    <div class="mc-top">${logoHTML(p, 'sm')}${tags ? `<div class="mc-tags">${tags}</div>` : ''}</div>
     <b class="mc-name">${esc(v.name_cn || v.name)}</b>
     <small class="mc-from">${esc(p.name_cn || p.name)}${famName(v) ? ' · ' + esc(famName(v)) : ''}</small>
     <p class="mc-desc">${esc(v.one_liner_cn || '')}</p>
@@ -370,7 +371,7 @@ function viewHome() {
     <div class="hero-copy hero-center">
       <span class="eyebrow">AI 模型选型系统</span>
       <h1>找到适合你的<br><em>AI 模型。</em></h1>
-      <p class="hero-lead">不需要研究几十个模型名称。描述你的任务，系统自动推荐，并解释为什么。</p>
+      <p class="hero-lead">不需要研究众多模型名称。描述你的任务，自动推荐，并解释为什么。</p>
       <form class="task-form" id="task-form" autocomplete="off">
         <div class="task-input-row">
           <input id="task-input" type="text" placeholder="描述你的需求，如「便宜的中文编码模型、长上下文、视觉…」" aria-label="描述你的需求">
@@ -388,7 +389,7 @@ function viewHome() {
   </section>
 
   <section class="section wrap">
-    <div class="heading"><div><span class="eyebrow">精选推荐</span><h2>大家都在看的模型</h2></div><p>按各场景推荐评分聚合，挑出当前最受关注、数据质量最高的型号。</p></div>
+    <div class="heading"><div><span class="eyebrow">精选推荐</span><h2>大家都在看的模型</h2></div><p>按各场景推荐评分聚合评选的型号。</p></div>
     <div class="card-grid">${recs.map((v) => modelCard(v)).join('')}</div>
     <div class="section-foot"><a class="button ghost" href="#browse">查看全部 ${state.variants.length} 个型号 →</a></div>
   </section>
@@ -951,7 +952,7 @@ function viewMatcher() {
     `<button class="${cur === val ? 'selected' : ''}" aria-pressed="${cur === val ? 'true' : 'false'}" data-value="${val}">${label}</button>`
   return `<div class="matcher-page">
     <div class="wrap page">
-      ${pageHead({ eyebrow: '03 / 任务匹配', title: '告诉我，<em>你想做什么？</em>', desc: '选择任务、预算和偏好，得到带理由的推荐列表。' })}
+      ${pageHead({ eyebrow: '03 / 任务选择器', title: '告诉我，<em>你想做什么？</em>', desc: '选择任务、预算和偏好，得到带理由的推荐列表。' })}
       <div class="matcher-layout">
         <div class="matcher-form">
           <label>我想要</label>
@@ -1307,7 +1308,7 @@ function viewCompare() {
   }
   return `<div class="wrap page">
     <button class="back-link" data-back="#home">← 返回首页</button>
-    <header class="entity-head"><div class="eh-main"><span class="eyebrow">对比集</span><h1>模型对比（${list.length}）</h1><p>本地保存，刷新不丢。点行看详情，✕ 移除。</p></div></header>
+    <header class="entity-head"><div class="eh-main"><span class="eyebrow">06 / 模型对比</span><h1>模型对比（${list.length}）</h1><p>本地保存，刷新不丢。点行看详情，✕ 移除。</p></div></header>
     <div class="table-wrap"><table class="cmp-table">
       <thead><tr>${head.map((h) => `<th scope="col">${h}</th>`).join('')}</tr></thead>
       <tbody>${list.map(row).join('')}</tbody>
@@ -1340,7 +1341,7 @@ function viewGateways() {
 
 function viewGlossary() {
   return `<div class="wrap page">
-    ${pageHead({ eyebrow: '05 / 命名词典', title: '模型名称，<em>其实有规律。</em>', desc: '不再被 Mini、Pro、Flash 搞混。快速理解型号后缀代表什么。' })}
+    ${pageHead({ eyebrow: '05 / 名称解释', title: '模型名称，<em>其实有规律。</em>', desc: '不再被 Mini、Pro、Flash 搞混。快速理解型号后缀代表什么。' })}
     <div class="glossary-grid">${state.naming
       .map((i) => `<article class="glossary-card"><span class="naming-term">${esc(i.term)}</span><b>${esc(i.name_cn)}</b><p>${esc(i.description_cn)}</p><small>例：${esc(i.example)}</small></article>`)
       .join('')}</div>
