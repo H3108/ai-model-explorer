@@ -1,0 +1,30 @@
+name: CI
+
+on:
+  push:
+    branches: [master, main]
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Syntax check app.js (and src modules)
+        run: |
+          node --check app.js
+          # 若已拆分为 ESM 模块，一并做语法校验
+          if [ -d src ]; then
+            for f in src/*.js; do
+              node --check "$f"
+            done
+          fi
+
+      - name: Validate normalized data
+        run: node scripts/validate_normalized.js

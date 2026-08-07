@@ -152,8 +152,16 @@ function getCompare() { return lsGet(LS_COMPARE, []).filter((id) => variantById(
 function toggleCompare(id) {
   const c = getCompare()
   const i = c.indexOf(id)
-  if (i >= 0) c.splice(i, 1); else c.push(id)
-  lsSet(LS_COMPARE, c.slice(0, 6))
+  if (i >= 0) { c.splice(i, 1) }
+  else {
+    if (c.length >= COMPARE_LIMIT) {
+      const dropped = c[0]
+      c.shift()
+      toast(`对比集最多 ${COMPARE_LIMIT} 个，已移除最早的「${variantById(dropped)?.name_cn || dropped}」以加入新项`)
+    }
+    c.push(id)
+  }
+  lsSet(LS_COMPARE, c.slice(0, COMPARE_LIMIT))
   return c
 }
 function inCompare(id) { return getCompare().includes(id) }
@@ -164,6 +172,21 @@ function updateCmpBadge() {
   el.textContent = n
   el.hidden = n === 0
 }
+// 轻提示（对比集上限等场景）。创建一次 toast 容器，复用之。
+function toast(msg) {
+  let t = document.getElementById('toast')
+  if (!t) {
+    t = document.createElement('div')
+    t.id = 'toast'
+    t.className = 'toast'
+    document.body.appendChild(t)
+  }
+  t.textContent = msg
+  t.classList.add('show')
+  clearTimeout(toast._t)
+  toast._t = setTimeout(() => t.classList.remove('show'), 2400)
+}
+const COMPARE_LIMIT = 6
 // ---------- Phase 2 用户偏好持久化 ----------
 // 收藏集
 const LS_FAV = 'ame_fav_set'
@@ -859,16 +882,18 @@ function browseTableViewHTML() {
   </table></div>`
 }
 function viewBrowse() {
+  // 能力维度为主观评级，用 chip--cap（虚线框）与客观硬性条件区分
+  // 副标题（英文名 / 判定口径）收进 title，避免双行 chip 撑高侧栏
   const capChip = (d) =>
-    `<button class="chip ${state.browseCaps.includes(d.key) ? 'on' : ''}" aria-pressed="${state.browseCaps.includes(d.key) ? 'true' : 'false'}" data-cap="${d.key}">${d.cn}<span>${d.en}</span></button>`
+    `<button class="chip chip--cap ${state.browseCaps.includes(d.key) ? 'on' : ''}" aria-pressed="${state.browseCaps.includes(d.key) ? 'true' : 'false'}" title="${d.cn} · ${d.en}（能力评级）" data-cap="${d.key}">${d.cn}</button>`
   const traitChip = (t) =>
-    `<button class="chip ${state.browseTraits.includes(t.key) ? 'on' : ''}" aria-pressed="${state.browseTraits.includes(t.key) ? 'true' : 'false'}" data-trait="${t.key}">${t.cn}<span>${t.hint}</span></button>`
+    `<button class="chip ${state.browseTraits.includes(t.key) ? 'on' : ''}" aria-pressed="${state.browseTraits.includes(t.key) ? 'true' : 'false'}" title="${t.cn} · ${t.hint}" data-trait="${t.key}">${t.cn}</button>`
   const modBtn = (k, label) =>
     `<button class="${state.browseModality === k ? 'selected' : ''}" aria-pressed="${state.browseModality === k ? 'true' : 'false'}" data-value="${k}">${label}</button>`
   const priceBtn = (k, label) =>
     `<button class="${state.browsePrice === k ? 'selected' : ''}" aria-pressed="${state.browsePrice === k ? 'true' : 'false'}" data-value="${k}">${label}</button>`
   return `<div class="wrap page">
-    ${pageHead({ eyebrow: '02 / 能力筛选', title: '按<em>能力</em>找模型', desc: '左边勾选你需要的能力与硬性条件，右边即时过滤并排序，找到最合适的型号。' })}
+    ${pageHead({ eyebrow: '02 / 能力筛选', title: '按<em>能力</em>找模型', desc: '左边勾选你需要的条件，右边即时过滤并排序，找到最合适的型号。' })}
     <div class="browse-toolbar">
       <div class="bt-search"><span class="bt-ico">⌕</span><input id="browse-search" type="search" placeholder="搜索模型或厂商…" value="${esc(state.browseSearch)}" aria-label="搜索模型或厂商"></div>
       <div class="view-switch" role="group" aria-label="视图切换">
@@ -878,13 +903,11 @@ function viewBrowse() {
     </div>
     <div class="browse-layout">
       <aside class="filter-panel">
+        <div class="fp-head"><h3>筛选</h3><button class="fp-reset" data-reset-filters>清空</button></div>
         <div class="fp-block"><h4>模态</h4><div class="segmented" data-seg="browseModality">${modBtn('all', '全部')}${modBtn('text', '文本')}${modBtn('image', '图像')}${modBtn('video', '视频')}</div></div>
-        <div class="fp-block"><h4>价格<small>按付费方式筛选</small></h4><div class="segmented" data-seg="browsePrice">${priceBtn('all', '全部')}${priceBtn('free', '免费')}${priceBtn('low', '低成本')}${priceBtn('standard', '标准价')}</div></div>
-        <div class="fp-block"><h4>能力维度<small>多选，逐条过滤</small></h4><div class="chip-wrap">${CAP_DIMS.map(capChip).join('')}</div></div>
-        <div class="fp-block"><h4>硬性条件<small>多选，逐条过滤</small></h4><div class="chip-wrap">${TRAITS.map(traitChip).join('')}</div></div>
+        <div class="fp-block"><h4>价格</h4><div class="segmented" data-seg="browsePrice">${priceBtn('all', '全部')}${priceBtn('free', '免费')}${priceBtn('low', '低成本')}${priceBtn('standard', '标准价')}</div></div>
+        <div class="fp-block"><h4>条件<small>同时满足</small></h4><div class="chip-wrap">${TRAITS.map(traitChip).join('')}${CAP_DIMS.map(capChip).join('')}<button class="chip chip--fav ${state.favOnly ? 'on' : ''}" aria-pressed="${state.favOnly}" title="只显示已收藏的模型（本地保存）" data-fav-only>★ 收藏${getFav().length ? ' ' + getFav().length : ''}</button></div></div>
         <div class="fp-block"><h4>排序</h4><div class="segmented" data-seg="browseSort"><button class="${state.browseSort === 'match' ? 'selected' : ''}" data-value="match">匹配度</button><button class="${state.browseSort === 'price' ? 'selected' : ''}" data-value="price">价格</button><button class="${state.browseSort === 'context' ? 'selected' : ''}" data-value="context">上下文</button></div></div>
-        <div class="fp-block"><h4>我的收藏<small>本地保存</small></h4><button class="chip ${state.favOnly ? 'on' : ''}" aria-pressed="${state.favOnly}" data-fav-only>只看收藏 ${getFav().length ? '(' + getFav().length + ')' : ''}</button></div>
-        <button class="button ghost small" data-reset-filters>清空筛选</button>
       </aside>
       <div class="browse-results" id="browse-results">${state.browseView === 'table' ? browseTableViewHTML() : browseResultsHTML()}</div>
     </div>
