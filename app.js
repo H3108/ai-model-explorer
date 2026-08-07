@@ -48,6 +48,7 @@ const state = {
   familySort: 'default',
   // 浏览页
   browseModality: 'all', browseCaps: [], browseTraits: [], browseSort: 'match', browsePrice: 'all', browseBill: 'all',
+  browseView: 'card', browseSearch: '',
   // 匹配器
   selectedTask: null, budget: 'balanced', speed: 'balanced',
 }
@@ -266,93 +267,151 @@ function emptyBox(text) {
   return `<div class="empty-box"><span>✦</span><p>${esc(text)}</p></div>`
 }
 
-// ---------- V4 首页模块：场景推荐 / 成本入口 ----------
-function sceneModuleHTML() {
-  const chips = state.scenarios.map((s) => `<a class="scene-chip" href="#matcher" data-scene-task="${esc(s.task_ids[0] || s.id)}"><span class="sc-ico">${s.icon || '✦'}</span>${esc(s.name_cn)}</a>`).join('')
-  return `<section class="section wrap v4-scene">
-    <div class="heading"><div><span class="eyebrow">场景推荐</span><h2>你想用 AI 做什么？</h2></div><p>点一个场景，直接给出适合该任务的推荐模型。</p></div>
-    <div class="scene-grid">${chips}</div>
-  </section>`
-}
-function costModuleHTML() {
-  const items = [
-    { k: 'free', label: '免费模型', desc: '免信用卡·可 API 调用', cls: 'c-free' },
-    { k: 'low', label: '低成本模型', desc: '高性价比·个人项目', cls: 'c-low' },
-    { k: 'standard', label: '商业模型', desc: '生产级·企业应用', cls: 'c-std' },
-  ]
-  const cards = items.map((i) => `<a class="cost-card ${i.cls}" href="#browse" data-cost="${i.k}"><b>${esc(i.label)}</b><small>${esc(i.desc)}</small></a>`).join('')
-  return `<section class="section wrap v4-cost">
-    <div class="heading"><div><span class="eyebrow">按成本选</span><h2>你的预算是？</h2></div><p>免费体验、低成本开发，还是标准商业模型。</p></div>
-    <div class="cost-grid">${cards}</div>
-  </section>`
-}
+// ---------- 首页模块：任务输入 / 精选推荐 / 信任层 ----------
+// 常搜示例（点击填入输入框并触发结构化提取，作为 Task Templates 输入助手）
+const HOME_POPULAR = [
+  { label: '编码', sample: '我想写代码，要编码能力强的模型' },
+  { label: '推理', sample: '复杂数学和逻辑推理任务' },
+  { label: '长文档', sample: '处理超长文档和代码库' },
+  { label: '视觉', sample: '能看懂图片做视觉分析' },
+  { label: '智能体', sample: '做 Agent 规划和工具调用' },
+  { label: '免费', sample: '免费的中文模型' },
+  { label: '中文长上下文', sample: '中文长上下文且免费' },
+]
 
-// ---------- 视图：首页 ----------
-function viewHome() {
+// 首页精选推荐：质量优先、热度破平（与治理 §11 一致），取前 n
+function recommendedModels(n = 6) {
   const scoreOf = {}
   state.recommendations.forEach((r) => r.model_ids.forEach((m) => (scoreOf[m.id] = (scoreOf[m.id] || 0) + m.score)))
-  // V4 治理 §11：推荐排序以数据质量分为主键、推荐热度为辅（质量优先，热度破平）
-  const hot = Object.entries(scoreOf)
+  return Object.entries(scoreOf)
     .map(([id, heat]) => ({ v: variantById(id), heat }))
-    .filter((x) => x.v && gradeOf(x.v) !== 'D') // 治理 v2.0：D 级彻底降权，不进首页热门
+    .filter((x) => x.v && gradeOf(x.v) !== 'D') // D 级彻底降权，不进首页
     .sort((a, b) => {
-      const qa = a.v.data_quality_score || 0
-      const qb = b.v.data_quality_score || 0
+      const qa = a.v.data_quality_score || 0, qb = b.v.data_quality_score || 0
       if (qb !== qa) return qb - qa
       return b.heat - a.heat
     })
-    .slice(0, 8)
+    .slice(0, n)
     .map((x) => x.v)
-  const mix = modalityMix(state.variants)
+}
+
+function viewHome() {
+  const recs = recommendedModels(6)
   return `
-  <section class="hero wrap">
-    <div class="hero-copy">
+  <section class="hero wrap hero-single">
+    <div class="hero-copy hero-center">
       <span class="eyebrow">AI 模型选型系统</span>
       <h1>找到适合你的<br><em>AI 模型。</em></h1>
-      <p>不需要研究几十个模型名称。告诉我你的任务，系统自动推荐，并解释为什么。</p>
-      <div class="hero-actions">
-        <a class="button primary" href="#matcher">我要选择模型 <span>↘</span></a>
-        <a class="button ghost" href="#browse">按能力浏览 →</a>
+      <p class="hero-lead">不需要研究几十个模型名称。描述你的任务，系统自动推荐，并解释为什么。</p>
+      <form class="task-form" id="task-form" autocomplete="off">
+        <div class="task-input-row">
+          <input id="task-input" type="text" placeholder="描述你的需求，如「便宜的中文编码模型、长上下文、视觉…」" aria-label="描述你的需求">
+          <button type="submit" class="button primary" data-start-match>开始匹配 <span>↘</span></button>
+        </div>
+        <div class="home-chips" id="home-chips"></div>
+      </form>
+      <div class="popular-row">
+        <span class="popular-label">大家常搜：</span>
+        ${HOME_POPULAR.map((p) => `<button type="button" class="pop-chip" data-pop-task="${esc(p.sample)}">${esc(p.label)}</button>`).join('')}
       </div>
-      <div class="home-search"><input id="home-search" type="search" placeholder="搜索模型或厂商，如 GPT-5、DeepSeek、视频生成…" autocomplete="off" value="${esc(state.providerSearch)}"></div>
-      <div class="mod-legend">${mix}</div>
+      <a class="text-link hero-browse" href="#browse">或按能力浏览全部型号 →</a>
     </div>
-    <div class="hero-visual">
-      <div class="orbit orbit-a"></div>
-      <div class="orbit orbit-c"></div>
-      <div class="orbit orbit-b"><span class="orbit-dot d1"></span><span class="orbit-dot d2"></span><span class="orbit-dot d3"></span></div>
-      <div class="visual-core"><b>30<span class="vc-s">s</span></b><small>秒级选型</small></div>
-      <div class="float-card f-one"><i class="dot green"></i><b>14 类任务</b><small>说需求即推荐</small></div>
-      <div class="float-card f-two"><i class="dot orange"></i><b>推荐前 7</b><small>带理由·可排序</small></div>
-      <div class="float-card f-three"><i class="dot purple"></i><b>模型族</b><small>系列 → 型号</small></div>
-    </div>
-  </section>
-
-  <section class="proof wrap">
-    <div><strong>${state.providers.length}</strong><span>主要厂商</span></div>
-    <div><strong>${state.families.length}</strong><span>模型系列</span></div>
-    <div><strong>${state.variants.length}</strong><span>具体型号</span></div>
-    <div><strong>30s</strong><span>找到答案</span></div>
   </section>
 
   <section class="section wrap">
-    <div class="heading"><div><span class="eyebrow">三条路径</span><h2>你想怎么开始？</h2></div><p>三种入口对应三种心态：认厂商、挑能力、说需求。</p></div>
-    <div class="entry-grid">
-      <a class="entry-card" href="#providers"><span class="entry-ico">◎</span><b>按厂商浏览</b><p>厂商 → 系列 → 型号，理解每家在做什么。</p><i>${state.providers.length} 家厂商 →</i></a>
-      <a class="entry-card" href="#browse"><span class="entry-ico">◈</span><b>按能力筛选</b><p>勾选你要的能力与硬性条件（推理、编码、长上下文…），实时匹配并排序。</p><i>${CAP_DIMS.length + TRAITS.length} 个维度 →</i></a>
-      <a class="entry-card" href="#matcher"><span class="entry-ico">✦</span><b>任务选择器</b><p>说出任务 + 预算 + 速度偏好，直接给出推荐。</p><i>${state.tasks.length} 类任务 →</i></a>
-    </div>
+    <div class="heading"><div><span class="eyebrow">精选推荐</span><h2>大家都在看的模型</h2></div><p>按各场景推荐评分聚合，挑出当前最受关注、数据质量最高的型号。</p></div>
+    <div class="card-grid">${recs.map((v) => modelCard(v)).join('')}</div>
+    <div class="section-foot"><a class="button ghost" href="#browse">查看全部 ${state.variants.length} 个型号 →</a></div>
   </section>
 
-  ${sceneModuleHTML()}
-  ${costModuleHTML()}
-
-  <section class="section wrap">
-    <div class="heading"><div><span class="eyebrow">当前主流模型</span><h2>大家都在看的模型</h2></div><p>按各场景推荐评分聚合，挑出当前最受关注的型号。</p></div>
-    <div class="card-grid">${hot.map((v) => modelCard(v, `<span class="hot-flag">热度 ${scoreOf[v.id]}</span>`)).join('')}</div>
-  </section>
   ${recentModuleHTML()}
+  ${trustSectionHTML()}
   `
+}
+
+// ---------- 信任层（DESIGN Layer 3）：数据透明、可核验 ----------
+function trustSectionHTML() {
+  const dates = state.variants.map((v) => v.verified_date).filter(Boolean).sort()
+  const latest = dates.length ? dates[dates.length - 1] : '—'
+  return `<section class="section wrap trust-section">
+    <div class="heading"><div><span class="eyebrow">信任与数据</span><h2>数据怎么来的？</h2></div><p>透明、可核验，是我们做选型建议的底气。</p></div>
+    <div class="trust-grid">
+      <div class="trust-card"><h4>模型覆盖</h4><p><b>${state.variants.length}</b> 个型号 · <b>${state.providers.length}</b> 家厂商 · <b>${state.families.length}</b> 个系列</p></div>
+      <div class="trust-card"><h4>价格口径</h4><p>输入 / 输出分别计价，单位美元 / 百万 Token，取自各厂商官方 API 定价页。</p></div>
+      <div class="trust-card"><h4>最近核验</h4><p>自 <b>${esc(latest)}</b> 起持续更新，每个型号标注核验日期。</p></div>
+      <div class="trust-card"><h4>推荐方法</h4><p>基于 任务匹配 + 能力质量 + 成本效率 + 速度 四要素；当前展示「推荐理由」而非综合分数，评分体系后续引入。</p></div>
+      <div class="trust-card"><h4>数据纠错</h4><p>规格与价格来自公开官方文档。发现错误？欢迎在仓库提交 issue 反馈。</p></div>
+    </div>
+  </section>`
+}
+
+// ---------- 首页任务输入：结构化提取（Phase 1 V1，不做 AI 推理，仅关键词映射） ----------
+let homeConditions = []
+// 将自然语言需求解析为可编辑的结构化条件
+function extractConditions(text) {
+  const t = (text || '').toLowerCase()
+  const out = []
+  const push = (key, value, label) => {
+    if (!out.some((c) => c.key === key && c.value === value)) out.push({ key, value, label })
+  }
+  // 任务：取第一个命中的映射
+  const taskMap = [
+    [/编码|写代码|代码|coding|program/, 'coding'],
+    [/推理|reasoning|数学|逻辑/, 'reasoning'],
+    [/agent|智能体|工具调用|规划/, 'agent'],
+    [/文档|写作|文章|长文|总结|writing/, 'writing'],
+    [/长上下文|长文档|代码库|超长/, 'long_context'],
+    [/视觉|看图|图像理解|vision|ocr/, 'image_understanding'],
+    [/图片生成|文生图|画图/, 'image'],
+    [/视频|video/, 'video'],
+    [/本地|私有化|开放权重|开源/, 'local'],
+    [/知识库|rag|企业/, 'knowledge'],
+    [/学习|入门|答疑/, 'learning'],
+    [/企业应用/, 'enterprise'],
+    [/聊天|对话|问答|翻译/, 'chat'],
+  ]
+  for (const [re, id] of taskMap) {
+    if (re.test(t)) {
+      const tk = byId(state.tasks, 'id', id)
+      if (tk) { push('task', id, '任务：' + tk.name_cn); break }
+    }
+  }
+  // 预算
+  if (/免费|free|0 ?元|不花钱/.test(t)) push('budget', 'low', '预算：免费')
+  else if (/便宜|廉价|低成本|高性价比|省钱|cheap|low ?cost|省/.test(t)) push('budget', 'low', '预算：尽量省钱')
+  else if (/旗舰|最好|顶级|高质量|质量优先|premium|best|quality|最强/.test(t)) push('budget', 'high', '预算：质量优先')
+  // 偏好（速度 / 质量）
+  if (/快|速度|实时|rapid|fast/.test(t)) push('speed', 'fast', '偏好：速度')
+  else if (/质量优先|最好|最强/.test(t)) push('speed', 'quality', '偏好：质量')
+  // 语言
+  if (/中文|国语|汉语|chinese|中文优化/.test(t)) push('language', 'zh', '语言：中文')
+  // 硬性条件（映射为 browseTraits）
+  if (/长上下文|长文档|超长|代码库/.test(t)) push('trait', 'long_context', '条件：长上下文')
+  if (/视觉|看图|图像理解|vision/.test(t)) push('trait', 'vision', '条件：视觉输入')
+  if (/本地|私有化|开放权重|开源/.test(t)) push('trait', 'open_weight', '条件：开放权重')
+  return out
+}
+// 渲染可编辑条件 chip
+function renderHomeChips() {
+  const box = document.getElementById('home-chips')
+  if (!box) return
+  box.innerHTML = homeConditions
+    .map((c, i) => `<button type="button" class="chip-n" data-rm-chip="${i}" title="点击移除该条件">${esc(c.label)}<span class="x">×</span></button>`)
+    .join('')
+}
+// 开始匹配：把解析出的条件写入 matcher 状态并跳转
+function startMatchFromHome() {
+  const input = document.getElementById('task-input')
+  homeConditions = extractConditions(input ? input.value : '')
+  const task = homeConditions.find((c) => c.key === 'task')
+  if (task) state.selectedTask = task.value
+  const budget = homeConditions.find((c) => c.key === 'budget')
+  if (budget) state.budget = budget.value
+  const speed = homeConditions.find((c) => c.key === 'speed')
+  if (speed) state.speed = speed.value
+  const traits = homeConditions.filter((c) => c.key === 'trait').map((c) => c.value)
+  if (traits.length) state.browseTraits = Array.from(new Set([...state.browseTraits, ...traits]))
+  location.hash = 'matcher'
 }
 
 // ---------- 视图：厂商地图 ----------
@@ -550,6 +609,7 @@ function viewFamily(id) {
 // ---------- 视图：能力 / 场景浏览 ----------
 function matchModels() {
   let list = state.variants.filter((v) => state.browseModality === 'all' || modalityOf(v) === state.browseModality)
+  if (state.browseSearch) list = list.filter((v) => variantMatches(v, state.browseSearch.toLowerCase()))
   if (state.browsePrice === 'free') list = list.filter((v) => v.free)
   else if (state.browsePrice === 'low') list = list.filter((v) => v.free !== true && v.input_price_per_mtok != null && v.input_price_per_mtok <= 1)
   else if (state.browsePrice === 'standard') list = list.filter((v) => v.free !== true && v.input_price_per_mtok != null && v.input_price_per_mtok > 1)
@@ -608,6 +668,33 @@ function browseResultsHTML() {
     })
     .join('')}</div>`
 }
+// 浏览页表格视图（复用 data-table--browse Token；与对比表仅共享排版/间距/边框，不共享业务组件）
+function browseTableViewHTML() {
+  const scored = matchModels()
+  if (!scored.length) return emptyBox('没有同时满足这些条件的模型，试着减少几个筛选项。')
+  const rows = scored.slice(0, 60).map(({ v }) => {
+    const p = providerOf(v)
+    const caps = capTags(v).map((c) => `<span class="cap-mini">${esc(c)}</span>`).join('')
+    const inp = v.free ? '免费' : (v.input_price_per_mtok != null ? `<span class="mono">$${v.input_price_per_mtok}</span>` : '—')
+    const out = v.free ? '免费' : (v.output_price_per_mtok != null ? `<span class="mono">$${v.output_price_per_mtok}</span>` : '—')
+    const sp = SPEED_CN[v.speed_tier] || '—'
+    return `<tr>
+      <td class="dt-name"><a href="#model/${encodeURIComponent(v.id)}">${logoHTML(p, 'sm')}<span class="dt-name-txt"><b>${esc(v.name_cn || v.name)}</b><small>${esc(p.name_cn || p.name)}</small></span></a></td>
+      <td>${esc(p.name_cn || p.name)}</td>
+      <td class="mono">${ctxShort(v.context_window)}</td>
+      <td class="mono">${inp}</td>
+      <td class="mono">${out}</td>
+      <td class="dt-caps">${caps}</td>
+      <td>${esc(sp)}</td>
+      <td><button class="cmp-toggle sm" data-cmp="${v.id}">${inCompare(v.id) ? '✓' : '＋'}</button></td>
+    </tr>`
+  }).join('')
+  return `<p class="result-count">匹配到 <b>${scored.length}</b> 个模型${scored.length > 60 ? '，表格展示前 60 个' : ''}</p>
+  <table class="data-table data-table--browse">
+    <thead><tr><th>模型</th><th>厂商</th><th>上下文</th><th>输入 $/M</th><th>输出 $/M</th><th>能力</th><th>速度</th><th>对比</th></tr></thead>
+    <tbody>${rows}</tbody>
+  </table>`
+}
 function viewBrowse() {
   const capChip = (d) =>
     `<button class="chip ${state.browseCaps.includes(d.key) ? 'on' : ''}" aria-pressed="${state.browseCaps.includes(d.key) ? 'true' : 'false'}" data-cap="${d.key}">${d.cn}<span>${d.en}</span></button>`
@@ -621,6 +708,13 @@ function viewBrowse() {
     `<button class="${state.browseBill === k ? 'selected' : ''}" aria-pressed="${state.browseBill === k ? 'true' : 'false'}" data-value="${k}">${label}</button>`
   return `<div class="wrap page">
     ${pageHead({ eyebrow: '02 / 能力筛选', title: '按<em>能力</em>找模型', desc: '左边勾选你需要的能力与硬性条件，右边即时过滤并排序，找到最合适的型号。' })}
+    <div class="browse-toolbar">
+      <div class="bt-search"><span class="bt-ico">⌕</span><input id="browse-search" type="search" placeholder="搜索模型或厂商…" value="${esc(state.browseSearch)}" aria-label="搜索模型或厂商"></div>
+      <div class="view-switch" role="group" aria-label="视图切换">
+        <button class="${state.browseView === 'card' ? 'selected' : ''}" data-view="card" aria-pressed="${state.browseView === 'card'}">卡片</button>
+        <button class="${state.browseView === 'table' ? 'selected' : ''}" data-view="table" aria-pressed="${state.browseView === 'table'}">表格</button>
+      </div>
+    </div>
     <div class="browse-layout">
       <aside class="filter-panel">
         <div class="fp-block"><h4>模态</h4><div class="segmented" data-seg="browseModality">${modBtn('all', '全部')}${modBtn('text', '文本')}${modBtn('image', '图像')}${modBtn('video', '视频')}</div></div>
@@ -631,7 +725,7 @@ function viewBrowse() {
         <div class="fp-block"><h4>排序</h4><div class="segmented" data-seg="browseSort"><button class="${state.browseSort === 'match' ? 'selected' : ''}" data-value="match">匹配度</button><button class="${state.browseSort === 'price' ? 'selected' : ''}" data-value="price">价格</button><button class="${state.browseSort === 'context' ? 'selected' : ''}" data-value="context">上下文</button></div></div>
         <button class="button ghost small" data-reset-filters>清空筛选</button>
       </aside>
-      <div class="browse-results" id="browse-results">${browseResultsHTML()}</div>
+      <div class="browse-results" id="browse-results">${state.browseView === 'table' ? browseTableViewHTML() : browseResultsHTML()}</div>
     </div>
   </div>`
 }
@@ -896,6 +990,30 @@ function relatedBlock(v) {
     list.length ? `<div class="rel-group"><h4>${title}</h4><div class="card-grid compact">${list.map((x) => modelCard(x)).join('')}</div></div>` : ''
   return `<section class="detail-sec"><h3>相关模型</h3>${grp('同系列其他型号', sib)}${grp('同厂商其他系列', other)}</section>`
 }
+// 型号详情：推荐理由（基于公开规格派生，不编造综合分数）
+function whyRecommendedHTML(v) {
+  const caps = v.capabilities || {}
+  const tierOf = (k) => (caps[k] && caps[k].tier) ? TIER[caps[k].tier] : null
+  const strong = (t) => t && ['high', 'highest'].includes(t.lv)
+  const reasons = []
+  const coding = tierOf('coding'); if (strong(coding)) reasons.push(`编码能力强（${coding.label}）`)
+  const reasoning = tierOf('reasoning'); if (strong(reasoning)) reasons.push(`推理能力强（${reasoning.label}）`)
+  const agent = tierOf('agent'); if (strong(agent)) reasons.push('擅长智能体 / 工具调用')
+  const knowledge = tierOf('knowledge'); if (strong(knowledge)) reasons.push('知识面广，适合问答与检索')
+  const multilingual = tierOf('multilingual'); if (strong(multilingual)) reasons.push('多语言（含中文）支持好')
+  if (v.vision_support) reasons.push('支持视觉输入')
+  if ((v.context_window || 0) >= 128000) reasons.push(`长上下文（${ctxShort(v.context_window)}）`)
+  if (v.free) reasons.push('免费可用，免信用卡')
+  else if (v.input_price_per_mtok != null && v.input_price_per_mtok <= 1) reasons.push(`成本低（约 $${v.input_price_per_mtok} / M 输入）`)
+  const sp = SPEED_RANK[v.speed_tier] || 2
+  if (sp >= 4) reasons.push(`响应快（${SPEED_CN[v.speed_tier] || '快'}）`)
+  if (v.open_weight) reasons.push('开放权重，可本地部署')
+  if (!reasons.length) reasons.push('综合指标均衡，适合通用场景')
+  return `<section class="detail-sec why-box"><h3>推荐理由<small>基于公开规格与能力档位，不编造综合分数</small></h3>
+    <ul class="why-list">${reasons.map((r) => `<li><span class="ck">✓</span>${esc(r)}</li>`).join('')}</ul>
+  </section>`
+}
+
 function viewModel(id) {
   const v = variantById(id)
   if (!v) return notFound('型号', id, '#providers')
@@ -925,6 +1043,8 @@ function viewModel(id) {
       <button class="cmp-toggle" data-cmp="${v.id}">${inCompare(v.id) ? '✓ 已加入对比' : '＋ 加入对比'}</button>
     </div>
 
+    ${whyRecommendedHTML(v)}
+
     <section class="detail-sec">
       <h3>关键参数</h3>
       <div class="stat-strip four">${specCards(v)}</div>
@@ -940,6 +1060,7 @@ function viewModel(id) {
     </section>
 
     <section class="detail-sec"><h3>API 调用</h3>${apiBlockHTML(v)}</section>
+    ${v.playground_url ? `<section class="detail-sec"><h3>在线试用</h3><div class="try-box"><a class="button primary" href="${esc(v.playground_url)}" target="_blank" rel="noopener">在官方 Playground 试用 ↗</a><p class="muted-note">仅当厂商提供公开试用入口时才显示。</p></div></section>` : ''}
 
     ${ecoBlock(v)}
 
@@ -1113,23 +1234,20 @@ function refreshProviderGrid() {
   refresh('#provider-grid', providerGridHTML())
 }
 function refreshBrowse() {
-  refresh('#browse-results', browseResultsHTML())
+  const el = document.getElementById('browse-results')
+  if (el) el.innerHTML = state.browseView === 'table' ? browseTableViewHTML() : browseResultsHTML()
 }
 
 // ---------- 事件 ----------
 function bindGlobalEvents() {
   document.addEventListener('input', (e) => {
     const t = e.target
-    if (t.id === 'provider-search' || t.id === 'home-search') {
-      state.providerSearch = t.value
-      if (t.id === 'home-search') return
-      refreshProviderGrid()
-    }
+    if (t.id === 'provider-search') { state.providerSearch = t.value; refreshProviderGrid() }
+    else if (t.id === 'task-input') { homeConditions = extractConditions(t.value); renderHomeChips() }
+    else if (t.id === 'browse-search') { state.browseSearch = t.value; refreshBrowse() }
   })
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter' && e.target.id === 'home-search') {
-      location.hash = 'providers'
-    }
+  document.addEventListener('submit', (e) => {
+    if (e.target.id === 'task-form') { e.preventDefault(); startMatchFromHome() }
   })
   document.addEventListener('change', (e) => {
     const sortSel = e.target.closest('[data-sort]')
@@ -1163,6 +1281,20 @@ function bindGlobalEvents() {
       toggleCompare(cmpRemove.dataset.cmpRemove)
       render()
       updateCmpBadge()
+      return
+    }
+    // 首页任务输入：常搜 chip 填充 + 条件 chip 移除
+    const popTask = e.target.closest('[data-pop-task]')
+    if (popTask) {
+      const input = document.getElementById('task-input')
+      if (input) { input.value = popTask.dataset.popTask; homeConditions = extractConditions(input.value); renderHomeChips(); input.focus() }
+      return
+    }
+    const rmChip = e.target.closest('[data-rm-chip]')
+    if (rmChip) {
+      const i = Number(rmChip.dataset.rmChip)
+      homeConditions = homeConditions.filter((_, idx) => idx !== i)
+      renderHomeChips()
       return
     }
     // V4 首页场景芯片 → 预选任务进入任务选择器（与 matcher 的 data-task 区分，避免冲突死分支）
@@ -1233,6 +1365,14 @@ function bindGlobalEvents() {
       state.browsePrice = 'all'
       state.browseBill = 'all'
       render()
+      return
+    }
+    // 浏览页视图切换（卡片 / 表格）
+    const viewBtn = e.target.closest('[data-view]')
+    if (viewBtn) {
+      state.browseView = viewBtn.dataset.view
+      viewBtn.parentElement.querySelectorAll('button').forEach((b) => b.classList.toggle('selected', b.dataset.view === state.browseView))
+      refreshBrowse()
       return
     }
     // 匹配器任务

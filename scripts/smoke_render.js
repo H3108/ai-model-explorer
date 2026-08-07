@@ -53,12 +53,21 @@ async function main() {
   const extraVariants = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/model_variants_extra.json'), 'utf8'))
   const variants = mainVariants.concat(extraVariants)
 
-  console.log('\n[1] 首页')
+  console.log('\n[1] 首页（Phase 1 决策入口）')
   let h = app.innerHTML
   ok(h.includes('找到适合你的'), '首页 hero 渲染')
-  ok(app.querySelectorAll('.model-card').length === 8, '热门模型 8 张卡')
-  ok(app.querySelectorAll('.entry-card').length === 3, '三个入口卡')
+  // Phase 1：精选推荐 6 张卡（recommendedModels(6)），不再有旧版 8 张热门卡
+  ok(app.querySelectorAll('.model-card').length === 6, '精选推荐 6 张卡')
+  ok(app.querySelector('#task-input') && app.querySelector('[data-start-match]'), 'Hero 任务输入框 + 开始匹配按钮存在')
+  ok(app.querySelector('.popular-row [data-pop-task]'), '「大家常搜」快捷标签存在')
+  ok(app.querySelector('.trust-section'), '信任层区块存在（DESIGN Layer 3）')
   ok(h.includes('assets/logos/'), '首页使用品牌 logo 图片')
+  // 任务输入结构化提取：输入自然语言 → 解析出可编辑条件 chip
+  const ti = app.querySelector('#task-input')
+  ti.value = '便宜的中文编码模型'
+  ti.dispatchEvent(new window.Event('input', { bubbles: true }))
+  await new Promise((r) => setTimeout(r, 30))
+  ok(app.querySelectorAll('#home-chips .chip-n').length >= 1, '任务输入解析出结构化条件 chip')
 
   console.log('\n[2] 厂商地图')
   h = await goto('#providers')
@@ -140,6 +149,23 @@ async function main() {
   ok(secCards > 0 && secCards < total, `按秒计费筛选生效（${secCards}）`)
   await click('[data-seg="browseBill"] [data-value="all"]')
   ok(app.querySelectorAll('.model-card').length === total, '计费方式清空恢复全部')
+  // 搜索框（Phase 1 工具栏）
+  const bs = app.querySelector('#browse-search')
+  bs.value = 'gpt'
+  bs.dispatchEvent(new window.Event('input', { bubbles: true }))
+  await new Promise((r) => setTimeout(r, 30))
+  const searched = app.querySelectorAll('.model-card').length
+  ok(searched > 0 && searched < total, `浏览搜索过滤生效（${searched} < ${total}）`)
+  bs.value = ''
+  bs.dispatchEvent(new window.Event('input', { bubbles: true }))
+  await new Promise((r) => setTimeout(r, 30))
+  ok(app.querySelectorAll('.model-card').length === total, '清空搜索恢复全部')
+  // 视图切换 卡片 / 表格（Phase 1 data-table 表格视图）
+  await click('[data-view="table"]')
+  ok(app.querySelector('.data-table--browse'), '表格视图渲染 data-table--browse')
+  ok(app.querySelector('[data-view="table"].selected'), '表格视图按钮高亮')
+  await click('[data-view="card"]')
+  ok(app.querySelectorAll('.model-card').length === total, '切回卡片视图恢复默认数量')
   // #browse 只做能力筛选，场景入口统一在首页场景模块 + #matcher（见 398b801 去重决策）
   ok(!app.querySelector('[data-tab="scene"]'), '#browse 无场景 tab（不与 #matcher 重复）')
 
