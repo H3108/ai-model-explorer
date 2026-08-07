@@ -7,7 +7,7 @@ import {
 } from './store.js'
 import {
   esc, ctxShort, priceValue, priceCell, logoHTML, catBadge, modBadge, modalityMix, capTags,
-  pageHead, statCard, capBar, gradeBadge, modelCard, emptyBox, recommendedModels,
+  pageHead, statCard, capBar, gradeBadge, modelCard, emptyBox, recommendedModels, freeModels, freePicks,
   versionBlockHTML, namingBlock, relatedBlock, ecoBlock, apiBlockHTML, specCards, paramInsight,
 } from './ui.js'
 import { extractConditions, capSum, fitScore, whyRecommendedHTML, matchModels, recommendationHTML } from './search.js'
@@ -54,9 +54,49 @@ export function viewHome() {
     <div class="section-foot"><a class="button ghost" href="#browse">查看全部 ${state.variants.length} 个型号 →</a></div>
   </section>
 
+  ${freeSectionHTML()}
   ${recentModuleHTML()}
   ${trustSectionHTML()}
   `
+}
+
+// ---------- 首页零成本入口：免费模型 ----------
+// 「免费」= 免信用卡、可程序化调用的官方稳定免费层；网页免费 / 注册赠金不计入（见 viewGateways 说明）
+export function freeSectionHTML() {
+  const free = freeModels()
+  if (!free.length) return ''
+  const MODN = { text: '文本', image: '图像', video: '视频', audio: '语音' }
+  const provs = new Set(free.map((v) => v.provider_id))
+  const mods = Array.from(new Set(free.map((v) => v.media_type || 'text')))
+  const picks = freePicks(4)
+    .map((v) => {
+      const p = providerOf(v)
+      return `<a class="fb-pick" href="#model/${encodeURIComponent(v.id)}">
+        ${logoHTML(p, 'sm')}
+        <span class="fb-pick-main"><b>${esc(v.name_cn || v.name)}</b><small>${esc(v.free_note || '官方免费层')}</small></span>
+        <span class="fb-pick-go">→</span>
+      </a>`
+    })
+    .join('')
+  return `<section class="section wrap free-section">
+    <div class="heading"><div><span class="eyebrow">零成本起步</span><h2>先用<em>免费模型</em>跑通</h2></div>
+      <p>免绑卡、拿到 API key 就能调用的官方免费层。</p></div>
+    <div class="free-band">
+      <div class="fb-side">
+        <div class="fb-stats">
+          <div class="fb-stat"><b>${free.length}</b><small>免费型号</small></div>
+          <div class="fb-stat"><b>${provs.size}</b><small>提供方</small></div>
+          <div class="fb-stat"><b>${mods.length}</b><small>${mods.map((m) => MODN[m] || m).join(' / ')}</small></div>
+        </div>
+        <p class="fb-note">口径：官方稳定免费层，免信用卡、可程序化调用。仅网页端免费或注册赠金不计入。</p>
+        <div class="fb-cta">
+          <button type="button" class="button primary" data-cost="free">浏览全部 ${free.length} 个免费模型 →</button>
+          <a class="button ghost" href="#gateways">免费 API 网关</a>
+        </div>
+      </div>
+      <div class="fb-picks">${picks}</div>
+    </div>
+  </section>`
 }
 
 // ---------- 信任层（DESIGN Layer 3）：数据透明、可核验 ----------

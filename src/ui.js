@@ -146,7 +146,77 @@ export function recommendedModels(n = 6) {
     .map((x) => x.v)
 }
 
+// ---------- 免费模型（首页零成本入口用） ----------
+// 「免费」口径：免信用卡、可程序化调用的官方稳定免费层（数据里的 free:true + free_note）
+export function freeModels() {
+  return state.variants.filter((v) => v.free)
+}
+// 精选免费型号：先保证模态覆盖（文本 / 图像 / 视频各一），再按数据质量补齐
+export function freePicks(n = 4) {
+  const free = freeModels().slice().sort((a, b) => (b.data_quality_score || 0) - (a.data_quality_score || 0))
+  const out = []
+  const seen = new Set()
+  free.forEach((v) => {
+    const m = v.media_type || 'text'
+    if (!seen.has(m) && out.length < n) { seen.add(m); out.push(v) }
+  })
+  free.forEach((v) => { if (out.length < n && !out.includes(v)) out.push(v) })
+  return out.slice(0, n)
+}
+
 // ---------- 型号详情区块 ----------
+// Go / Java 示例一律用标准库（Go: net/http + encoding/json；Java: java.net.http，JDK 17+ 文本块），
+// 不引第三方 SDK：各家 SDK 版本差异大，标准库版本长期可用、复制即跑。
+// 响应统一打印原始 JSON，并在注释里给出结果字段路径，避免示例里堆一坨类型断言。
+function goSnippet({ url, headers, body, path }) {
+  const hs = headers.map(([k, val]) => `\treq.Header.Set("${k}", "${val}")`).join('\n')
+  return `package main
+
+import (
+\t"bytes"
+\t"encoding/json"
+\t"fmt"
+\t"io"
+\t"net/http"
+)
+
+func main() {
+\tbody, _ := json.Marshal(${body})
+\treq, _ := http.NewRequest("POST", "${url}", bytes.NewReader(body))
+${hs}
+
+\tresp, err := http.DefaultClient.Do(req)
+\tif err != nil {
+\t\tpanic(err)
+\t}
+\tdefer resp.Body.Close()
+
+\tout, _ := io.ReadAll(resp.Body)
+\tfmt.Println(string(out)) // 结果字段：${path}
+}`
+}
+function javaSnippet({ url, headers, json, path }) {
+  const hs = headers.map(([k, val]) => `                .header("${k}", "${val}")`).join('\n')
+  return `import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+
+public class Demo {
+    public static void main(String[] args) throws Exception {
+        String body = """
+                ${json}
+                """;
+        HttpRequest req = HttpRequest.newBuilder(URI.create("${url}"))
+${hs}
+                .POST(HttpRequest.BodyPublishers.ofString(body))
+                .build();
+        HttpResponse<String> res = HttpClient.newHttpClient()
+                .send(req, HttpResponse.BodyHandlers.ofString());
+        System.out.println(res.body()); // 结果字段：${path}
+    }
+}`
+}
 export function codeExamples(v) {
   const p = providerOf(v)
   const base = p.api_base_url || 'http://localhost:8000/v1'
@@ -159,6 +229,18 @@ export function codeExamples(v) {
       py: `from openai import OpenAI\n\nclient = OpenAI(api_key="YOUR_API_KEY")\n\nimage = client.images.generate(\n    model="${model}",\n    prompt="一只赛博朋克风格的猫",\n    size="1024x1024",\n    n=1,\n)\nprint(image.data[0].url or image.data[0].b64_json)`,
       js: `const res = await fetch("${base}/images/generations", {\n  method: "POST",\n  headers: { "Content-Type": "application/json", Authorization: "Bearer YOUR_API_KEY" },\n  body: JSON.stringify({ model: "${model}", prompt: "一只赛博朋克风格的猫", size: "1024x1024", n: 1 }),\n});\nconst data = await res.json();\nconsole.log(data.data[0].url || data.data[0].b64_json);`,
       curl: `curl ${base}/images/generations \\\n  -H "Content-Type: application/json" \\\n  -H "Authorization: Bearer YOUR_API_KEY" \\\n  -d '{ "model": "${model}", "prompt": "一只赛博朋克风格的猫", "size": "1024x1024", "n": 1 }'`,
+      go: goSnippet({
+        url: `${base}/images/generations`,
+        headers: [['Content-Type', 'application/json'], ['Authorization', 'Bearer YOUR_API_KEY']],
+        body: `map[string]any{\n\t\t"model":  "${model}",\n\t\t"prompt": "一只赛博朋克风格的猫",\n\t\t"size":   "1024x1024",\n\t\t"n":      1,\n\t}`,
+        path: 'data[0].url 或 data[0].b64_json',
+      }),
+      java: javaSnippet({
+        url: `${base}/images/generations`,
+        headers: [['Content-Type', 'application/json'], ['Authorization', 'Bearer YOUR_API_KEY']],
+        json: `{"model": "${model}", "prompt": "一只赛博朋克风格的猫", "size": "1024x1024", "n": 1}`,
+        path: 'data[0].url 或 data[0].b64_json',
+      }),
     }
   }
   if (v.media_type === 'video' && style === 'google') {
@@ -166,6 +248,18 @@ export function codeExamples(v) {
       py: `import google.generativeai as genai\n\ngenai.configure(api_key="YOUR_API_KEY")\nmodel = genai.GenerativeModel("${model}")\noperation = model.generate_content("一只猫在月球上奔跑")  # Veo\nvideo = operation.result()  # 轮询获取视频结果`,
       js: `const res = await fetch("${base}/models/${model}:generateContent?key=YOUR_API_KEY", {\n  method: "POST",\n  headers: { "Content-Type": "application/json" },\n  body: JSON.stringify({ contents: [{ role: "user", parts: [{ text: "一只猫在月球上奔跑" }] }] }),\n});\nconst data = await res.json();\nconsole.log(data.candidates?.[0]?.content?.parts?.[0]);`,
       curl: `curl "${base}/models/${model}:generateContent?key=YOUR_API_KEY" \\\n  -H "Content-Type: application/json" \\\n  -d '{ "contents": [{"role":"user","parts":[{"text":"一只猫在月球上奔跑"}]}] }'`,
+      go: goSnippet({
+        url: `${base}/models/${model}:generateContent?key=YOUR_API_KEY`,
+        headers: [['Content-Type', 'application/json']],
+        body: `map[string]any{\n\t\t"contents": []map[string]any{\n\t\t\t{"role": "user", "parts": []map[string]string{{"text": "一只猫在月球上奔跑"}}},\n\t\t},\n\t}`,
+        path: '视频为异步任务，需按官方文档轮询 operation 结果',
+      }),
+      java: javaSnippet({
+        url: `${base}/models/${model}:generateContent?key=YOUR_API_KEY`,
+        headers: [['Content-Type', 'application/json']],
+        json: '{"contents": [{"role": "user", "parts": [{"text": "一只猫在月球上奔跑"}]}]}',
+        path: '视频为异步任务，需按官方文档轮询 operation 结果',
+      }),
     }
   }
   if (v.media_type) {
@@ -178,6 +272,18 @@ export function codeExamples(v) {
       py: `import anthropic\n\nclient = anthropic.Anthropic(api_key="YOUR_API_KEY")\nmessage = client.messages.create(\n    model="${model}",\n    max_tokens=1024,\n    messages=[{"role": "user", "content": "${prompt}"}],\n)\nprint(message.content[0].text)`,
       js: `const res = await fetch("${base}/v1/messages", {\n  method: "POST",\n  headers: { "Content-Type": "application/json", "x-api-key": "YOUR_API_KEY", "anthropic-version": "2023-06-01" },\n  body: JSON.stringify({ model: "${model}", max_tokens: 1024, messages: [{ role: "user", content: "${prompt}" }] }),\n});\nconst data = await res.json();\nconsole.log(data.content[0].text);`,
       curl: `curl ${base}/v1/messages \\\n  -H "Content-Type: application/json" \\\n  -H "x-api-key: YOUR_API_KEY" \\\n  -H "anthropic-version: 2023-06-01" \\\n  -d '{ "model": "${model}", "max_tokens": 1024, "messages": [{"role":"user","content":"${prompt}"}] }'`,
+      go: goSnippet({
+        url: `${base}/v1/messages`,
+        headers: [['Content-Type', 'application/json'], ['x-api-key', 'YOUR_API_KEY'], ['anthropic-version', '2023-06-01']],
+        body: `map[string]any{\n\t\t"model":      "${model}",\n\t\t"max_tokens": 1024,\n\t\t"messages": []map[string]string{\n\t\t\t{"role": "user", "content": "${prompt}"},\n\t\t},\n\t}`,
+        path: 'content[0].text',
+      }),
+      java: javaSnippet({
+        url: `${base}/v1/messages`,
+        headers: [['Content-Type', 'application/json'], ['x-api-key', 'YOUR_API_KEY'], ['anthropic-version', '2023-06-01']],
+        json: `{"model": "${model}", "max_tokens": 1024, "messages": [{"role": "user", "content": "${prompt}"}]}`,
+        path: 'content[0].text',
+      }),
     }
   }
   if (style === 'google') {
@@ -185,12 +291,36 @@ export function codeExamples(v) {
       py: `import google.generativeai as genai\n\ngenai.configure(api_key="YOUR_API_KEY")\nmodel = genai.GenerativeModel("${model}")\nresponse = model.generate_content("${prompt}")\nprint(response.text)`,
       js: `const res = await fetch("${base}/models/${model}:generateContent?key=YOUR_API_KEY", {\n  method: "POST",\n  headers: { "Content-Type": "application/json" },\n  body: JSON.stringify({ contents: [{ role: "user", parts: [{ text: "${prompt}" }] }] }),\n});\nconst data = await res.json();\nconsole.log(data.candidates[0].content.parts[0].text);`,
       curl: `curl "${base}/models/${model}:generateContent?key=YOUR_API_KEY" \\\n  -H "Content-Type: application/json" \\\n  -d '{ "contents": [{"role":"user","parts":[{"text":"${prompt}"}]}] }'`,
+      go: goSnippet({
+        url: `${base}/models/${model}:generateContent?key=YOUR_API_KEY`,
+        headers: [['Content-Type', 'application/json']],
+        body: `map[string]any{\n\t\t"contents": []map[string]any{\n\t\t\t{"role": "user", "parts": []map[string]string{{"text": "${prompt}"}}},\n\t\t},\n\t}`,
+        path: 'candidates[0].content.parts[0].text',
+      }),
+      java: javaSnippet({
+        url: `${base}/models/${model}:generateContent?key=YOUR_API_KEY`,
+        headers: [['Content-Type', 'application/json']],
+        json: `{"contents": [{"role": "user", "parts": [{"text": "${prompt}"}]}]}`,
+        path: 'candidates[0].content.parts[0].text',
+      }),
     }
   }
   return {
     py: `from openai import OpenAI\n\nclient = OpenAI(\n    base_url="${base}",\n    api_key="YOUR_API_KEY",\n)\n\nresponse = client.chat.completions.create(\n    model="${model}",\n    messages=[{"role": "user", "content": "${prompt}"}],\n)\nprint(response.choices[0].message.content)`,
     js: `const res = await fetch("${base}/chat/completions", {\n  method: "POST",\n  headers: { "Content-Type": "application/json", Authorization: "Bearer YOUR_API_KEY" },\n  body: JSON.stringify({ model: "${model}", messages: [{ role: "user", content: "${prompt}" }] }),\n});\nconst data = await res.json();\nconsole.log(data.choices[0].message.content);`,
     curl: `curl ${base}/chat/completions \\\n  -H "Content-Type: application/json" \\\n  -H "Authorization: Bearer YOUR_API_KEY" \\\n  -d '{ "model": "${model}", "messages": [{"role":"user","content":"${prompt}"}] }'`,
+    go: goSnippet({
+      url: `${base}/chat/completions`,
+      headers: [['Content-Type', 'application/json'], ['Authorization', 'Bearer YOUR_API_KEY']],
+      body: `map[string]any{\n\t\t"model": "${model}",\n\t\t"messages": []map[string]string{\n\t\t\t{"role": "user", "content": "${prompt}"},\n\t\t},\n\t}`,
+      path: 'choices[0].message.content',
+    }),
+    java: javaSnippet({
+      url: `${base}/chat/completions`,
+      headers: [['Content-Type', 'application/json'], ['Authorization', 'Bearer YOUR_API_KEY']],
+      json: `{"model": "${model}", "messages": [{"role": "user", "content": "${prompt}"}]}`,
+      path: 'choices[0].message.content',
+    }),
     isLocal,
   }
 }
@@ -233,11 +363,14 @@ export function apiBlockHTML(v) {
   const note = ex.isLocal
     ? '<p class="muted">开放权重模型：将 Base URL 换成你自托管的推理服务（vLLM / Ollama 默认监听 <code>http://localhost:8000/v1</code>）。</p>'
     : ''
-  const tab = (label, key) => `<button class="code-tab${key === 'py' ? ' selected' : ''}" data-code-tab="${key}">${label}</button>`
-  const pre = (key, code) => `<pre class="code-block${key === 'py' ? '' : ' hidden'}" data-code="${key}"><code>${esc(code)}</code></pre>`
+  // 语言 tab 按 ex 里实际存在的键生成，第一项默认选中（新增语言只需在 codeExamples 里补键）
+  const LANGS = [['py', 'Python'], ['js', 'JavaScript'], ['curl', 'curl'], ['go', 'Go'], ['java', 'Java']]
+  const langs = LANGS.filter(([key]) => ex[key])
+  const tabs = langs.map(([key, label], i) => `<button class="code-tab${i === 0 ? ' selected' : ''}" data-code-tab="${key}">${label}</button>`).join('')
+  const pres = langs.map(([key], i) => `<pre class="code-block${i === 0 ? '' : ' hidden'}" data-code="${key}"><code>${esc(ex[key])}</code></pre>`).join('')
   return `<div class="api-block">${facts}${price}${apiNote}${note}
-    <div class="code-tabs">${tab('Python', 'py')}${tab('JavaScript', 'js')}${tab('curl', 'curl')}<button class="copy-btn" data-copy>复制</button></div>
-    ${pre('py', ex.py)}${pre('js', ex.js)}${pre('curl', ex.curl)}</div>`
+    <div class="code-tabs">${tabs}<button class="copy-btn" data-copy>复制</button></div>
+    ${pres}</div>`
 }
 export function specCards(v) {
   if (v.media_type) {

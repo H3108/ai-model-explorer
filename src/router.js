@@ -162,11 +162,22 @@ export function bindGlobalEvents() {
       else location.hash = 'matcher'
       return
     }
-    // V4 首页成本入口 → 预置价格筛选进入浏览页
+    // 首页成本入口（如「免费模型」）→ 清掉历史筛选、只留价格条件进入浏览页
+    // 全量清空是刻意的：入口在首页，用户带着「看免费的」单一诉求点进来，
+    // 若沿用上次残留的能力 / 模态筛选会得到看不懂的空结果。
     const costChip = e.target.closest('[data-cost]')
     if (costChip) {
+      state.browseCaps = []
+      state.browseTraits = []
+      state.browseModality = 'all'
+      state.browseSort = 'match'
+      state.minContext = 0
+      state.browseSearch = ''
+      state.browseSearchClean = ''
+      state.favOnly = false
       state.browsePrice = costChip.dataset.cost
-      if (parseHash().name === 'browse') { refreshBrowse(); document.querySelectorAll('[data-seg="browsePrice"] button').forEach((b) => b.classList.toggle('selected', b.dataset.value === costChip.dataset.cost)) }
+      saveBrowseFilters()
+      if (parseHash().name === 'browse') render()
       else location.hash = 'browse'
       return
     }

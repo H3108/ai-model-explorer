@@ -359,6 +359,42 @@ select { padding: 8px 12px; border-radius: var(--r-sm); }
 .hero-browse { display: inline-block; margin-top: 18px; font-size: 14px; }
 .section-foot { display: flex; justify-content: center; margin-top: 26px; }
 
+/* 首页零成本入口：免费模型 */
+.free-band {
+  display: grid; grid-template-columns: minmax(280px, 380px) 1fr; gap: 22px;
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg);
+  padding: 24px;
+}
+.fb-side { display: flex; flex-direction: column; gap: 16px; }
+.fb-stats { display: flex; gap: 10px; }
+.fb-stat {
+  flex: 1; background: var(--success-soft); border-radius: var(--radius-md);
+  padding: 12px 10px; text-align: center;
+}
+.fb-stat b { display: block; font-size: 26px; line-height: 1.1; color: var(--success-fg); font-family: var(--font-mono); }
+.fb-stat small { display: block; margin-top: 4px; font-size: 11.5px; color: var(--muted); }
+.fb-note { margin: 0; font-size: 12.5px; line-height: 1.6; color: var(--muted); }
+.fb-cta { display: flex; flex-wrap: wrap; gap: 10px; margin-top: auto; }
+.fb-picks { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; align-content: start; }
+.fb-pick {
+  display: flex; align-items: center; gap: 10px; text-decoration: none;
+  border: 1px solid var(--border); border-radius: var(--radius-md); padding: 12px 14px;
+  background: var(--background); transition: border-color .15s, background .15s, transform .15s;
+}
+.fb-pick:hover { border-color: var(--brand-accent); background: var(--brand-soft); transform: translateY(-1px); }
+.fb-pick-main { min-width: 0; flex: 1; }
+.fb-pick-main b { display: block; font-size: 13.5px; color: var(--foreground); }
+.fb-pick-main small {
+  margin-top: 2px; font-size: 11.5px; line-height: 1.45; color: var(--muted);
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+}
+.fb-pick-go { color: var(--muted); font-size: 14px; }
+.fb-pick:hover .fb-pick-go { color: var(--brand); }
+@media (max-width: 860px) {
+  .free-band { grid-template-columns: 1fr; }
+  .fb-picks { grid-template-columns: 1fr; }
+}
+
 /* 信任层（Layer 3） */
 .trust-section { margin-top: 8px; }
 .trust-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
@@ -608,8 +644,8 @@ select { padding: 8px 12px; border-radius: var(--r-sm); }
   transition: transform .15s, box-shadow .15s, border-color .15s;
 }
 .model-card:hover { transform: translateY(-3px); box-shadow: var(--sh-3); border-color: var(--border-hover); }
-.mc-top { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-.mc-tags { display: flex; align-items: center; gap: 5px; flex-wrap: wrap; margin-left: auto; }
+.mc-top { display: flex; align-items: center; gap: 10px; flex-wrap: nowrap; overflow: hidden; min-width: 0; }
+.mc-tags { display: flex; align-items: center; gap: 5px; flex-wrap: nowrap; margin-left: auto; overflow: hidden; min-width: 0; }
 .mc-name { min-width: 0; overflow-wrap: anywhere; }
 .mc-name { font-size: 16px; font-weight: 700; margin-top: 4px; }
 .mc-from { font-size: 12px; color: var(--muted); }
@@ -869,7 +905,7 @@ select { padding: 8px 12px; border-radius: var(--r-sm); }
 .api-fact code { font-size: 12.5px; color: var(--deep); word-break: break-all; }
 .api-feat span { display: flex; flex-wrap: wrap; gap: 5px; }
 .api-price {
-  display: flex; flex-direction: column; gap: 4px; margin: 14px 0 4px;
+  display: flex; flex-direction: column; gap: 4px; margin: 14px 0;
   background: var(--paper); border-left: 3px solid var(--green-600);
   border-radius: var(--r-sm); padding: 10px 13px;
 }
@@ -918,7 +954,7 @@ select { padding: 8px 12px; border-radius: var(--r-sm); }
 }
 .feat.on { background: color-mix(in srgb, var(--green) 16%, transparent); color: var(--deep); border-color: var(--green-600); }
 .feat.dim { opacity: .7; }
-.code-tabs { display: flex; gap: 6px; align-items: center; margin-bottom: 10px; }
+.code-tabs { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin-bottom: 10px; }
 .code-tab {
   border: 1px solid var(--line); background: var(--card); border-radius: 999px;
   padding: 6px 14px; font-size: 12.5px; cursor: pointer; font-family: inherit; color: var(--ink-2);
@@ -1013,7 +1049,7 @@ select { padding: 8px 12px; border-radius: var(--r-sm); }
 .detail-actions { margin: 4px 0 18px; }
 .cmp-toggle {
   border: 1px solid var(--success); color: var(--success-fg); background: var(--surface);
-  border-radius: 999px; padding: 9px 18px; font-size: 14px; font-weight: 600;
+  border-radius: 999px; padding: 6px 15px; font-size: 14px; font-weight: 600;
   cursor: pointer; transition: background .15s, color .15s;
 }
 .cmp-toggle:hover { background: var(--success-soft); }
