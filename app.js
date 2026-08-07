@@ -48,7 +48,7 @@ const state = {
   familySort: 'default',
   // 浏览页
   browseModality: 'all', browseCaps: [], browseTraits: [], browseSort: 'match', browsePrice: 'all', browseBill: 'all',
-  browseView: 'card', browseSearch: '',
+  browseView: 'card', browseSearch: '', browseSearchClean: '', minContext: 0, favOnly: false,
   // 匹配器
   selectedTask: null, budget: 'balanced', speed: 'balanced',
 }
@@ -86,6 +86,7 @@ async function loadData() {
     console.warn('V4 数据加载失败：', e)
   }
   state.selectedTask = state.tasks[0]?.id || null
+  restoreBrowseFilters()
   bindGlobalEvents()
   render()
 }
@@ -158,6 +159,52 @@ function updateCmpBadge() {
   const n = getCompare().length
   el.textContent = n
   el.hidden = n === 0
+}
+// ---------- Phase 2 用户偏好持久化 ----------
+// 收藏集
+const LS_FAV = 'ame_fav_set'
+function getFav() { return lsGet(LS_FAV, []).filter((id) => variantById(id)) }
+function isFav(id) { return getFav().includes(id) }
+function toggleFav(id) { const f = getFav(); const i = f.indexOf(id); if (i >= 0) f.splice(i, 1); else f.push(id); lsSet(LS_FAV, f); return f }
+// 最近搜索（保留最近 5 条，去重）
+const LS_RECENT_SEARCH = 'ame_recent_search'
+function getRecentSearch() { return lsGet(LS_RECENT_SEARCH, []) }
+function pushRecentSearch(q) {
+  const s = (q || '').trim()
+  if (s.length < 2) return
+  const arr = getRecentSearch().filter((x) => x !== s)
+  arr.unshift(s)
+  lsSet(LS_RECENT_SEARCH, arr.slice(0, 5))
+}
+function recentSearchHTML() {
+  const list = getRecentSearch()
+  if (!list.length) return ''
+  return `<div class="recent-search"><span class="rs-label">最近搜索：</span>${list
+    .map((s) => `<button type="button" class="rs-chip" data-rec-search="${esc(s)}">${esc(s)}</button>`)
+    .join('')}</div>`
+}
+// 浏览筛选记忆（跨会话还原）
+const LS_BROWSE_FILTERS = 'ame_browse_filters'
+function saveBrowseFilters() {
+  lsSet(LS_BROWSE_FILTERS, {
+    browseModality: state.browseModality, browseCaps: state.browseCaps, browseTraits: state.browseTraits,
+    browseSort: state.browseSort, browsePrice: state.browsePrice, browseBill: state.browseBill,
+    browseSearch: state.browseSearch, browseSearchClean: state.browseSearchClean, minContext: state.minContext, favOnly: state.favOnly,
+  })
+}
+function restoreBrowseFilters() {
+  const s = lsGet(LS_BROWSE_FILTERS, null)
+  if (!s) return
+  if (s.browseModality) state.browseModality = s.browseModality
+  if (Array.isArray(s.browseCaps)) state.browseCaps = s.browseCaps
+  if (Array.isArray(s.browseTraits)) state.browseTraits = s.browseTraits
+  if (s.browseSort) state.browseSort = s.browseSort
+  if (s.browsePrice) state.browsePrice = s.browsePrice
+  if (s.browseBill) state.browseBill = s.browseBill
+  if (typeof s.browseSearch === 'string') state.browseSearch = s.browseSearch
+  if (typeof s.browseSearchClean === 'string') state.browseSearchClean = s.browseSearchClean
+  if (typeof s.minContext === 'number') state.minContext = s.minContext
+  if (typeof s.favOnly === 'boolean') state.favOnly = s.favOnly
 }
 function ctxShort(n) {
   if (n == null) return '—'
@@ -314,6 +361,7 @@ function viewHome() {
         <span class="popular-label">大家常搜：</span>
         ${HOME_POPULAR.map((p) => `<button type="button" class="pop-chip" data-pop-task="${esc(p.sample)}">${esc(p.label)}</button>`).join('')}
       </div>
+      ${recentSearchHTML()}
       <a class="text-link hero-browse" href="#browse">或按能力浏览全部型号 →</a>
     </div>
   </section>
@@ -348,12 +396,14 @@ function trustSectionHTML() {
 // ---------- 首页任务输入：结构化提取（Phase 1 V1，不做 AI 推理，仅关键词映射） ----------
 let homeConditions = []
 // 将自然语言需求解析为可编辑的结构化条件
+// raw：命中的原文片段，用于从搜索词中剔除结构化部分，仅保留纯文本做子串匹配
 function extractConditions(text) {
   const t = (text || '').toLowerCase()
   const out = []
-  const push = (key, value, label) => {
-    if (!out.some((c) => c.key === key && c.value === value)) out.push({ key, value, label })
+  const push = (key, value, label, raw) => {
+    if (!out.some((c) => c.key === key && c.value === value)) out.push({ key, value, label, raw: raw || '' })
   }
+  const firstMatch = (re) => (t.match(re) || [''])[0]
   // 任务：取第一个命中的映射
   const taskMap = [
     [/编码|写代码|代码|coding|program/, 'coding'],
@@ -373,23 +423,60 @@ function extractConditions(text) {
   for (const [re, id] of taskMap) {
     if (re.test(t)) {
       const tk = byId(state.tasks, 'id', id)
-      if (tk) { push('task', id, '任务：' + tk.name_cn); break }
+      if (tk) { push('task', id, '任务：' + tk.name_cn, firstMatch(re)); break }
     }
   }
+  // 模态（结构化搜索字段，Phase 2）
+  const modMap = [
+    [/视频|文生视频|video/, 'video'],
+    [/图像|图片|文生图|画图|image/, 'image'],
+  ]
+  for (const [re, id] of modMap) {
+    if (re.test(t)) { push('modality', id, '模态：' + (id === 'video' ? '视频' : '图像'), firstMatch(re)); break }
+  }
+  // 上下文长度（结构化搜索字段，Phase 2）
+  const ctxMap = [['1m', 1000000], ['100万', 1000000], ['256k', 256000], ['200k', 200000], ['128k', 128000], ['64k', 64000]]
+  let ctxPushed = false
+  for (const [kw, num] of ctxMap) { if (t.includes(kw)) { push('context', num, '上下文：≥' + kw.toUpperCase(), kw); ctxPushed = true; break } }
+  if (!ctxPushed && /长上下文|超长|代码库|长文档/.test(t)) push('context', 128000, '上下文：≥128K', firstMatch(/长上下文|超长|代码库|长文档/))
   // 预算
-  if (/免费|free|0 ?元|不花钱/.test(t)) push('budget', 'low', '预算：免费')
-  else if (/便宜|廉价|低成本|高性价比|省钱|cheap|low ?cost|省/.test(t)) push('budget', 'low', '预算：尽量省钱')
-  else if (/旗舰|最好|顶级|高质量|质量优先|premium|best|quality|最强/.test(t)) push('budget', 'high', '预算：质量优先')
+  if (/免费|free|0 ?元|不花钱/.test(t)) push('budget', 'low', '预算：免费', firstMatch(/免费|free|0 ?元|不花钱/))
+  else if (/便宜|廉价|低成本|高性价比|省钱|cheap|low ?cost|省/.test(t)) push('budget', 'low', '预算：尽量省钱', firstMatch(/便宜|廉价|低成本|高性价比|省钱|cheap|low ?cost|省/))
+  else if (/旗舰|最好|顶级|高质量|质量优先|premium|best|quality|最强/.test(t)) push('budget', 'high', '预算：质量优先', firstMatch(/旗舰|最好|顶级|高质量|质量优先|premium|best|quality|最强/))
   // 偏好（速度 / 质量）
   if (/快|速度|实时|rapid|fast/.test(t)) push('speed', 'fast', '偏好：速度')
   else if (/质量优先|最好|最强/.test(t)) push('speed', 'quality', '偏好：质量')
   // 语言
-  if (/中文|国语|汉语|chinese|中文优化/.test(t)) push('language', 'zh', '语言：中文')
+  if (/中文|国语|汉语|chinese|中文优化/.test(t)) push('language', 'zh', '语言：中文', firstMatch(/中文|国语|汉语|chinese|中文优化/))
   // 硬性条件（映射为 browseTraits）
   if (/长上下文|长文档|超长|代码库/.test(t)) push('trait', 'long_context', '条件：长上下文')
   if (/视觉|看图|图像理解|vision/.test(t)) push('trait', 'vision', '条件：视觉输入')
   if (/本地|私有化|开放权重|开源/.test(t)) push('trait', 'open_weight', '条件：开放权重')
   return out
+}
+// 从原始搜索词中剔除已识别的结构化片段，仅保留纯文本做子串匹配
+function cleanQuery(text, conds) {
+  let q = text || ''
+  conds.forEach((c) => { if (c.raw) q = q.split(c.raw).join(' ').split(c.raw.toLowerCase()).join(' ') })
+  q = q.replace(/\s+/g, ' ').trim().toLowerCase()
+  return q.length >= 2 ? q : ''
+}
+// 浏览搜索框：把自然语言解析为结构化筛选条件并应用到 state
+// 每次输入完整重算（文本为空时派生筛选全部复位），保证「清空搜索」能恢复全量
+function applySearchQuery(text) {
+  const conds = extractConditions(text)
+  const mod = conds.find((c) => c.key === 'modality')
+  state.browseModality = mod ? mod.value : 'all'
+  const ctx = conds.find((c) => c.key === 'context')
+  state.minContext = ctx ? ctx.value : 0
+  const bud = conds.find((c) => c.key === 'budget')
+  state.browsePrice = bud ? (bud.label.includes('免费') ? 'free' : 'low') : 'all'
+  state.browseSearchClean = cleanQuery(text, conds)
+}
+// 同步筛选面板分段控件高亮（state 变更后，避免面板与结果区不一致）
+function syncSeg(group, val) {
+  const seg = document.querySelector('[data-seg="' + group + '"]')
+  if (seg) seg.querySelectorAll('button').forEach((b) => b.classList.toggle('selected', b.dataset.value === val))
 }
 // 渲染可编辑条件 chip
 function renderHomeChips() {
@@ -411,6 +498,11 @@ function startMatchFromHome() {
   if (speed) state.speed = speed.value
   const traits = homeConditions.filter((c) => c.key === 'trait').map((c) => c.value)
   if (traits.length) state.browseTraits = Array.from(new Set([...state.browseTraits, ...traits]))
+  const mod = homeConditions.find((c) => c.key === 'modality')
+  if (mod) state.browseModality = mod.value
+  const ctx = homeConditions.find((c) => c.key === 'context')
+  if (ctx) state.minContext = ctx.value
+  pushRecentSearch(input ? input.value : '')
   location.hash = 'matcher'
 }
 
@@ -525,6 +617,53 @@ function sortVariants(arr, mode) {
 function capSum(v) {
   return CAP_DIMS.reduce((s, d) => s + (TIER[(v.capabilities || {})[d.key]?.tier]?.score || 0), 0)
 }
+// ---------- Phase 2 加权推荐评分（透明、可复现）----------
+// 方法论（IMPLEMENTATION_PLAN §2.3）：任务匹配 40% + 能力质量 30% + 成本效率 20% + 响应速度 10%
+// 无任务上下文时，任务匹配 40% 权重按比例分摊给其余三项（能力 50 / 成本 33 / 速度 17），保证仍为 0-100
+function fitScore(v, taskId) {
+  const capNorm = capSum(v) / (CAP_DIMS.length * 6) // 0..1
+  const capQ = capNorm * 30
+  let cost = 4
+  if (v.free) cost = 20
+  else {
+    const pv = priceValue(v)
+    if (pv < Number.MAX_SAFE_INTEGER) cost = Math.max(0, 20 * (1 - pv / 30))
+  }
+  const sp = ((SPEED_RANK[v.speed_tier] || 2) / 6) * 10
+  if (taskId) {
+    const rec = state.recommendations.find((r) => r.task_id === taskId)
+    const m = rec && rec.model_ids.find((x) => x.id === v.id)
+    const taskMatch = m && typeof m.score === 'number' ? (m.score / 5) * 40 : capNorm * 40
+    return Math.max(0, Math.min(100, Math.round(taskMatch + capQ + cost + sp)))
+  }
+  // 无任务：三项按 50/33/17 归一化到 100
+  return Math.max(0, Math.min(100, Math.round(capNorm * 50 + (cost / 20) * 33 + (sp / 10) * 17)))
+}
+function scoreBreakdownHTML(v, taskId) {
+  const capNorm = capSum(v) / (CAP_DIMS.length * 6)
+  let cost = 4
+  if (v.free) cost = 20
+  else {
+    const pv = priceValue(v)
+    if (pv < Number.MAX_SAFE_INTEGER) cost = Math.max(0, 20 * (1 - pv / 30))
+  }
+  const sp = ((SPEED_RANK[v.speed_tier] || 2) / 6) * 10
+  const rows = []
+  if (taskId) {
+    const rec = state.recommendations.find((r) => r.task_id === taskId)
+    const m = rec && rec.model_ids.find((x) => x.id === v.id)
+    const tmRaw = m && typeof m.score === 'number' ? m.score / 5 : capNorm
+    rows.push(['任务匹配', tmRaw * 100, '40%'])
+  }
+  rows.push(['能力质量', capNorm * 100, '30%'])
+  rows.push(['成本效率', (cost / 20) * 100, '20%'])
+  rows.push(['响应速度', (sp / 10) * 100, '10%'])
+  const head = `<div class="sb-head"><span>综合评分<small>${taskId ? '基于所选任务' : '按整体实力'}</small></span><b>${fitScore(v, taskId)}<small>/100</small></b></div>`
+  const body = rows
+    .map(([label, pct, wt]) => `<div class="sb-row"><span class="sb-label">${label}<i>权重${wt}</i></span><span class="sb-track"><i style="width:${Math.max(0, Math.min(100, pct))}%"></i></span><span class="sb-val">${Math.round(pct)}</span></div>`)
+    .join('')
+  return `<div class="score-break">${head}${body}</div>`
+}
 function familyTableHTML(f) {
   const list = sortVariants(variantsOfFamily(f.id), state.familySort)
   if (!list.length) return emptyBox('该系列暂无收录型号。')
@@ -609,7 +748,10 @@ function viewFamily(id) {
 // ---------- 视图：能力 / 场景浏览 ----------
 function matchModels() {
   let list = state.variants.filter((v) => state.browseModality === 'all' || modalityOf(v) === state.browseModality)
-  if (state.browseSearch) list = list.filter((v) => variantMatches(v, state.browseSearch.toLowerCase()))
+  // 子串匹配用「清洗后的纯文本」：结构化片段（模态/上下文/预算等）已转为筛选条件，不再参与文本匹配
+  if (state.browseSearchClean) list = list.filter((v) => variantMatches(v, state.browseSearchClean))
+  if (state.minContext > 0) list = list.filter((v) => (v.context_window || 0) >= state.minContext)
+  if (state.favOnly) { const fav = getFav(); list = list.filter((v) => fav.includes(v.id)) }
   if (state.browsePrice === 'free') list = list.filter((v) => v.free)
   else if (state.browsePrice === 'low') list = list.filter((v) => v.free !== true && v.input_price_per_mtok != null && v.input_price_per_mtok <= 1)
   else if (state.browsePrice === 'standard') list = list.filter((v) => v.free !== true && v.input_price_per_mtok != null && v.input_price_per_mtok > 1)
@@ -661,7 +803,7 @@ function browseResultsHTML() {
   return `<p class="result-count">匹配到 <b>${scored.length}</b> 个模型${scored.length > 24 ? '，展示前 24 个' : ''}</p>
   <div class="card-grid">${top
     .map(({ v, score }) => {
-      const badge = state.browseCaps.length || state.browseTraits.length ? `<span class="match-flag">匹配 ${score}%</span>` : ''
+      const badge = state.browseCaps.length || state.browseTraits.length ? `<span class="match-flag">匹配 ${score}%</span>` : `<span class="score-flag">综合 ${fitScore(v)}</span>`
       const card = modelCard(v, badge)
       const hits = hitLabel(v)
       return hits ? card.replace('</a>', `<div class="mc-hits">${hits}</div></a>`) : card
@@ -686,12 +828,13 @@ function browseTableViewHTML() {
       <td class="mono">${out}</td>
       <td class="dt-caps">${caps}</td>
       <td>${esc(sp)}</td>
+      <td class="mono score-td">${fitScore(v)}</td>
       <td><button class="cmp-toggle sm" data-cmp="${v.id}">${inCompare(v.id) ? '✓' : '＋'}</button></td>
     </tr>`
   }).join('')
   return `<p class="result-count">匹配到 <b>${scored.length}</b> 个模型${scored.length > 60 ? '，表格展示前 60 个' : ''}</p>
   <table class="data-table data-table--browse">
-    <thead><tr><th>模型</th><th>厂商</th><th>上下文</th><th>输入 $/M</th><th>输出 $/M</th><th>能力</th><th>速度</th><th>对比</th></tr></thead>
+    <thead><tr><th>模型</th><th>厂商</th><th>上下文</th><th>输入 $/M</th><th>输出 $/M</th><th>能力</th><th>速度</th><th>评分</th><th>对比</th></tr></thead>
     <tbody>${rows}</tbody>
   </table>`
 }
@@ -723,6 +866,7 @@ function viewBrowse() {
         <div class="fp-block"><h4>能力维度<small>多选，逐条过滤</small></h4><div class="chip-wrap">${CAP_DIMS.map(capChip).join('')}</div></div>
         <div class="fp-block"><h4>硬性条件<small>多选，逐条过滤</small></h4><div class="chip-wrap">${TRAITS.map(traitChip).join('')}</div></div>
         <div class="fp-block"><h4>排序</h4><div class="segmented" data-seg="browseSort"><button class="${state.browseSort === 'match' ? 'selected' : ''}" data-value="match">匹配度</button><button class="${state.browseSort === 'price' ? 'selected' : ''}" data-value="price">价格</button><button class="${state.browseSort === 'context' ? 'selected' : ''}" data-value="context">上下文</button></div></div>
+        <div class="fp-block"><h4>我的收藏<small>本地保存</small></h4><button class="chip ${state.favOnly ? 'on' : ''}" aria-pressed="${state.favOnly}" data-fav-only>只看收藏 ${getFav().length ? '(' + getFav().length + ')' : ''}</button></div>
         <button class="button ghost small" data-reset-filters>清空筛选</button>
       </aside>
       <div class="browse-results" id="browse-results">${state.browseView === 'table' ? browseTableViewHTML() : browseResultsHTML()}</div>
@@ -735,16 +879,26 @@ function rankCandidates(ids) {
   const arr = ids.map((r) => ({ r, v: variantById(r.id) })).filter((x) => x.v)
   const speedOf = (v) => SPEED_RANK[v.speed_tier] ?? 2
   if (state.budget === 'low') arr.sort((a, b) => priceValue(a.v) - priceValue(b.v))
-  else if (state.budget === 'high' || state.speed === 'quality') arr.sort((a, b) => b.r.score - a.r.score)
+  else if (state.budget === 'high' || state.speed === 'quality') arr.sort((a, b) => fitScore(b.v, state.selectedTask) - fitScore(a.v, state.selectedTask))
   else if (state.speed === 'fast') arr.sort((a, b) => speedOf(b.v) - speedOf(a.v))
-  else arr.sort((a, b) => b.r.score - a.r.score)
+  else arr.sort((a, b) => fitScore(b.v, state.selectedTask) - fitScore(a.v, state.selectedTask))
   return arr
 }
 function recommendationHTML(taskId = state.selectedTask) {
   const task = byId(state.tasks, 'id', taskId)
   const rec = state.recommendations.find((r) => r.task_id === taskId)
   if (!task || !rec) return `<div class="empty-box"><span>✦</span><p>该任务暂无推荐数据。</p></div>`
-  const ranked = rankCandidates(rec.model_ids)
+  // 在所选任务基础上，按首页/搜索传入的模态与上下文软过滤（非空才生效，避免清空推荐）
+  let modelIds = rec.model_ids
+  if (state.browseModality !== 'all') {
+    const f = modelIds.filter((m) => { const v = variantById(m.id); return v && modalityOf(v) === state.browseModality })
+    if (f.length) modelIds = f
+  }
+  if (state.minContext > 0) {
+    const f = modelIds.filter((m) => { const v = variantById(m.id); return v && (v.context_window || 0) >= state.minContext })
+    if (f.length) modelIds = f
+  }
+  const ranked = rankCandidates(modelIds)
   const hint =
     state.budget === 'low'
       ? '已按「尽量省钱」排序（价格优先）'
@@ -762,7 +916,7 @@ function recommendationHTML(taskId = state.selectedTask) {
     <span class="result-main"><b>${esc(v.name_cn || v.name)}</b><small>${esc(providerOf(v).name_cn || '')}${famName(v) ? ' · ' + esc(famName(v)) : ''}</small></span>
     ${modBadge(v)}${v.free ? ' <span class="free-badge sm">免费</span>' : ''}
     <span class="result-reason">${esc(r.reason)}</span>
-    <span class="score-pill">${r.score}/5</span>
+    <span class="score-pill" title="综合评分：任务匹配40% + 能力30% + 成本20% + 速度10%">${fitScore(v, taskId)}<small>/100</small></span>
     <span class="arrow">→</span>
   </a>`,
     )
@@ -991,7 +1145,7 @@ function relatedBlock(v) {
   return `<section class="detail-sec"><h3>相关模型</h3>${grp('同系列其他型号', sib)}${grp('同厂商其他系列', other)}</section>`
 }
 // 型号详情：推荐理由（基于公开规格派生，不编造综合分数）
-function whyRecommendedHTML(v) {
+function whyRecommendedHTML(v, taskId) {
   const caps = v.capabilities || {}
   const tierOf = (k) => (caps[k] && caps[k].tier) ? TIER[caps[k].tier] : null
   const strong = (t) => t && ['high', 'highest'].includes(t.lv)
@@ -1009,7 +1163,8 @@ function whyRecommendedHTML(v) {
   if (sp >= 4) reasons.push(`响应快（${SPEED_CN[v.speed_tier] || '快'}）`)
   if (v.open_weight) reasons.push('开放权重，可本地部署')
   if (!reasons.length) reasons.push('综合指标均衡，适合通用场景')
-  return `<section class="detail-sec why-box"><h3>推荐理由<small>基于公开规格与能力档位，不编造综合分数</small></h3>
+  return `<section class="detail-sec why-box"><h3>推荐理由<small>基于公开规格与加权评分：任务40% + 能力30% + 成本20% + 速度10%</small></h3>
+    ${scoreBreakdownHTML(v, taskId)}
     <ul class="why-list">${reasons.map((r) => `<li><span class="ck">✓</span>${esc(r)}</li>`).join('')}</ul>
   </section>`
 }
@@ -1041,9 +1196,10 @@ function viewModel(id) {
 
     <div class="detail-actions">
       <button class="cmp-toggle" data-cmp="${v.id}">${inCompare(v.id) ? '✓ 已加入对比' : '＋ 加入对比'}</button>
+      <button class="cmp-toggle fav-toggle" data-fav="${v.id}">${isFav(v.id) ? '★ 已收藏' : '☆ 收藏'}</button>
     </div>
 
-    ${whyRecommendedHTML(v)}
+    ${whyRecommendedHTML(v, state.selectedTask)}
 
     <section class="detail-sec">
       <h3>关键参数</h3>
@@ -1244,7 +1400,17 @@ function bindGlobalEvents() {
     const t = e.target
     if (t.id === 'provider-search') { state.providerSearch = t.value; refreshProviderGrid() }
     else if (t.id === 'task-input') { homeConditions = extractConditions(t.value); renderHomeChips() }
-    else if (t.id === 'browse-search') { state.browseSearch = t.value; refreshBrowse() }
+    else if (t.id === 'browse-search') {
+      state.browseSearch = t.value
+      applySearchQuery(t.value)
+      pushRecentSearch(t.value)
+      saveBrowseFilters()
+      // 同步筛选面板分段按钮高亮（结构化搜索改了 state，但筛选面板未整体重渲染）
+      syncSeg('browseModality', state.browseModality)
+      syncSeg('browsePrice', state.browsePrice)
+      syncSeg('browseBill', state.browseBill)
+      refreshBrowse()
+    }
   })
   document.addEventListener('submit', (e) => {
     if (e.target.id === 'task-form') { e.preventDefault(); startMatchFromHome() }
@@ -1313,6 +1479,34 @@ function bindGlobalEvents() {
       else location.hash = 'browse'
       return
     }
+    // Phase 2：收藏切换
+    const favBtn = e.target.closest('[data-fav]')
+    if (favBtn) {
+      const id = favBtn.dataset.fav
+      const fav = toggleFav(id)
+      const on = fav.includes(id)
+      favBtn.textContent = on ? '★ 已收藏' : '☆ 收藏'
+      favBtn.classList.toggle('on', on)
+      if (parseHash().name === 'browse' && state.favOnly) refreshBrowse()
+      return
+    }
+    // Phase 2：只看收藏开关
+    const favOnlyBtn = e.target.closest('[data-fav-only]')
+    if (favOnlyBtn) {
+      state.favOnly = !state.favOnly
+      favOnlyBtn.classList.toggle('on', state.favOnly)
+      favOnlyBtn.setAttribute('aria-pressed', String(state.favOnly))
+      saveBrowseFilters()
+      refreshBrowse()
+      return
+    }
+    // Phase 2：最近搜索点击回填输入框
+    const rs = e.target.closest('[data-rec-search]')
+    if (rs) {
+      const input = document.getElementById('task-input')
+      if (input) { input.value = rs.dataset.recSearch; homeConditions = extractConditions(input.value); renderHomeChips() }
+      return
+    }
     // 返回
     const back = e.target.closest('[data-back]')
     if (back) {
@@ -1335,7 +1529,7 @@ function bindGlobalEvents() {
         segBtn.parentElement.querySelectorAll('button').forEach((b) => b.classList.remove('selected'))
         segBtn.classList.add('selected')
         if (group === 'providerFilter' || group === 'providerModality') refreshProviderGrid()
-        else if (group.startsWith('browse')) refreshBrowse()
+        else if (group.startsWith('browse')) { refreshBrowse(); saveBrowseFilters() }
         else if (group === 'budget' || group === 'speed') refresh('#recommendation', recommendationHTML())
       }
       return
@@ -1346,7 +1540,7 @@ function bindGlobalEvents() {
       const k = capChip.dataset.cap
       state.browseCaps = state.browseCaps.includes(k) ? state.browseCaps.filter((x) => x !== k) : [...state.browseCaps, k]
       capChip.classList.toggle('on')
-      refreshBrowse()
+      refreshBrowse(); saveBrowseFilters()
       return
     }
     const traitChip = e.target.closest('[data-trait]')
@@ -1354,7 +1548,7 @@ function bindGlobalEvents() {
       const k = traitChip.dataset.trait
       state.browseTraits = state.browseTraits.includes(k) ? state.browseTraits.filter((x) => x !== k) : [...state.browseTraits, k]
       traitChip.classList.toggle('on')
-      refreshBrowse()
+      refreshBrowse(); saveBrowseFilters()
       return
     }
     if (e.target.closest('[data-reset-filters]')) {
@@ -1364,6 +1558,11 @@ function bindGlobalEvents() {
       state.browseSort = 'match'
       state.browsePrice = 'all'
       state.browseBill = 'all'
+      state.minContext = 0
+      state.browseSearch = ''
+      state.browseSearchClean = ''
+      state.favOnly = false
+      saveBrowseFilters()
       render()
       return
     }
@@ -1372,7 +1571,7 @@ function bindGlobalEvents() {
     if (viewBtn) {
       state.browseView = viewBtn.dataset.view
       viewBtn.parentElement.querySelectorAll('button').forEach((b) => b.classList.toggle('selected', b.dataset.view === state.browseView))
-      refreshBrowse()
+      refreshBrowse(); saveBrowseFilters()
       return
     }
     // 匹配器任务

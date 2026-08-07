@@ -68,6 +68,14 @@ async function main() {
   ti.dispatchEvent(new window.Event('input', { bubbles: true }))
   await new Promise((r) => setTimeout(r, 30))
   ok(app.querySelectorAll('#home-chips .chip-n').length >= 1, '任务输入解析出结构化条件 chip')
+  // Phase 2 最近搜索：提交后写入并在首页展示
+  const tf = app.querySelector('#task-form')
+  ti.value = '超长文档总结模型'
+  tf.dispatchEvent(new window.Event('submit', { bubbles: true }))
+  await new Promise((r) => setTimeout(r, 40))
+  ok((window.localStorage.getItem('ame_recent_search') || '').includes('超长文档总结模型'), '首页提交写入最近搜索')
+  await goto('#home')
+  ok(app.querySelector('.recent-search [data-rec-search]'), '首页展示最近搜索芯片')
 
   console.log('\n[2] 厂商地图')
   h = await goto('#providers')
@@ -166,6 +174,25 @@ async function main() {
   ok(app.querySelector('[data-view="table"].selected'), '表格视图按钮高亮')
   await click('[data-view="card"]')
   ok(app.querySelectorAll('.model-card').length === total, '切回卡片视图恢复默认数量')
+  // Phase 2 结构化搜索：模态识别
+  const bs2 = app.querySelector('#browse-search')
+  bs2.value = '视频'
+  bs2.dispatchEvent(new window.Event('input', { bubbles: true }))
+  await new Promise((r) => setTimeout(r, 30))
+  ok(app.querySelector('[data-seg="browseModality"] [data-value="video"]').classList.contains('selected'), '结构化搜索识别「视频」模态并选中')
+  const vidCount = app.querySelectorAll('.model-card').length
+  ok(vidCount > 0 && vidCount < total, `视频模态结构化过滤收敛（${vidCount} < ${total}）`)
+  // 上下文 + 模态复位（完整重算：无模态词时模态回到 all）
+  bs2.value = '128k 长上下文'
+  bs2.dispatchEvent(new window.Event('input', { bubbles: true }))
+  await new Promise((r) => setTimeout(r, 30))
+  ok(app.querySelector('[data-seg="browseModality"] [data-value="all"]').classList.contains('selected'), '结构化搜索无模态词时模态复位为 all')
+  ok(app.querySelectorAll('.model-card').length > 0, '上下文结构化过滤命中（≥128K）')
+  bs2.value = ''
+  bs2.dispatchEvent(new window.Event('input', { bubbles: true }))
+  await new Promise((r) => setTimeout(r, 30))
+  ok(app.querySelectorAll('.model-card').length === total, '清空结构化搜索恢复全部')
+  ok(app.querySelector('.score-flag'), '浏览卡片显示综合评分标（fitScore）')
   // #browse 只做能力筛选，场景入口统一在首页场景模块 + #matcher（见 398b801 去重决策）
   ok(!app.querySelector('[data-tab="scene"]'), '#browse 无场景 tab（不与 #matcher 重复）')
 
@@ -191,6 +218,22 @@ async function main() {
   ok(app.querySelector('.fit-list li.ok'), '适合列表')
   ok(app.querySelector('.naming-card') || true, '命名解读区块（可选）')
   ok(app.querySelectorAll('.rel-group').length >= 1, '相关模型区块')
+  // Phase 2 综合评分分解
+  ok(app.querySelector('.score-break'), '详情显示综合评分分解')
+  ok(/\/100/.test(app.querySelector('.sb-head b').textContent), '综合评分以 /100 呈现')
+  // Phase 2 收藏 + 只看收藏
+  const favBtn = app.querySelector('[data-fav]')
+  ok(favBtn, '详情有收藏按钮')
+  favBtn.dispatchEvent(new window.MouseEvent('click', { bubbles: true }))
+  await new Promise((r) => setTimeout(r, 30))
+  ok((window.localStorage.getItem('ame_fav_set') || '').includes('openai-gpt-5-5'), '收藏写入 localStorage')
+  await goto('#browse')
+  const favOnlyBtn = app.querySelector('[data-fav-only]')
+  ok(favOnlyBtn, '浏览页有只看收藏开关')
+  favOnlyBtn.dispatchEvent(new window.MouseEvent('click', { bubbles: true }))
+  await new Promise((r) => setTimeout(r, 30))
+  ok(favOnlyBtn.classList.contains('on'), '只看收藏开关激活')
+  ok(app.querySelectorAll('.model-card').length === 1, '只看收藏仅显示收藏的型号')
 
   console.log('\n[8] 型号详情（媒体模型）')
   h = await goto('#model/kuaishou-kling-2-5')

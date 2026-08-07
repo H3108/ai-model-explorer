@@ -344,6 +344,15 @@ select { padding: 8px 12px; border-radius: var(--r-sm); }
   transition: transform .14s, border-color .14s, background .14s, color .14s;
 }
 .pop-chip:hover { border-color: var(--brand-accent); color: var(--brand); background: var(--brand-soft); transform: translateY(-2px); }
+/* Phase 2 最近搜索 */
+.recent-search { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; justify-content: center; margin-top: 14px; }
+.rs-label { font-size: 12.5px; color: var(--muted); }
+.rs-chip {
+  font-size: 12.5px; padding: 4px 12px; border-radius: 999px; cursor: pointer;
+  border: 1px solid var(--border); background: var(--surface); color: var(--foreground-2);
+  transition: border-color .15s, background .15s, color .15s;
+}
+.rs-chip:hover { border-color: var(--brand-accent); color: var(--brand); background: var(--brand-soft); }
 .hero-browse { display: inline-block; margin-top: 18px; font-size: 14px; }
 .section-foot { display: flex; justify-content: center; margin-top: 26px; }
 
@@ -364,6 +373,19 @@ select { padding: 8px 12px; border-radius: var(--r-sm); }
 .why-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 8px 22px; }
 .why-list li { display: flex; align-items: flex-start; gap: 8px; font-size: 14px; color: var(--foreground-2); }
 .why-list .ck { color: var(--success); font-weight: 700; flex: none; }
+/* Phase 2 综合评分分解条 */
+.score-break { background: var(--surface); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 16px; }
+.sb-head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 12px; }
+.sb-head span { font-size: 13px; font-weight: 700; color: var(--foreground-2); }
+.sb-head small { display: block; font-size: 11px; font-weight: 400; color: var(--muted); }
+.sb-head b { font-size: 26px; font-weight: 800; color: var(--brand); line-height: 1; }
+.sb-head b small { font-size: 13px; font-weight: 600; color: var(--muted); margin-left: 2px; }
+.sb-row { display: grid; grid-template-columns: 96px 1fr 34px; align-items: center; gap: 10px; margin: 7px 0; }
+.sb-label { font-size: 12px; color: var(--foreground-2); display: flex; flex-direction: column; line-height: 1.2; }
+.sb-label i { font-style: normal; font-size: 10px; color: var(--muted); }
+.sb-track { height: 7px; border-radius: 999px; background: color-mix(in srgb, var(--brand-accent) 14%, transparent); overflow: hidden; }
+.sb-track i { display: block; height: 100%; border-radius: 999px; background: linear-gradient(90deg, var(--brand-accent), var(--brand)); }
+.sb-val { font-size: 12px; font-weight: 700; text-align: right; color: var(--foreground-2); font-variant-numeric: tabular-nums; }
 .try-box { display: flex; flex-direction: column; gap: 8px; align-items: flex-start; }
 .muted-note { color: var(--muted); font-size: 12.5px; margin: 0; }
 
@@ -586,6 +608,13 @@ select { padding: 8px 12px; border-radius: var(--r-sm); }
   margin-left: auto; font-size: 11px; font-weight: 700;
   background: var(--deep); color: var(--green); padding: 3px 9px; border-radius: 999px;
 }
+/* Phase 2 浏览卡片/表格综合评分标 */
+.score-flag {
+  margin-left: auto; font-size: 11px; font-weight: 700;
+  background: var(--brand-soft); color: var(--brand); padding: 3px 9px; border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--brand-accent) 24%, transparent);
+}
+.score-td { color: var(--brand); font-weight: 700; font-variant-numeric: tabular-nums; }
 .free-badge {
   display: inline-flex; align-items: center;
   font-size: 11px; font-weight: 700; letter-spacing: .02em; line-height: 1.4;
@@ -945,6 +974,9 @@ select { padding: 8px 12px; border-radius: var(--r-sm); }
 }
 .cmp-toggle:hover { background: var(--success-soft); }
 .cmp-toggle.on { background: var(--success); color: var(--on-brand); }
+/* Phase 2 收藏星 */
+.fav-toggle { margin-left: 8px; }
+.fav-toggle.on { background: #b8860b; color: #fff; border-color: #b8860b; }
 .cmp-remove {
   border: 1px solid var(--line); background: var(--surface); color: var(--muted);
   border-radius: 8px; width: 28px; height: 28px; cursor: pointer; line-height: 1; font-size: 14px;
