@@ -8,6 +8,7 @@ export const TIER = {
   'medium-high': { label: '较强', lv: 'mid', pct: 72, score: 4 },
   high: { label: '强', lv: 'high', pct: 88, score: 5 },
   highest: { label: '顶尖', lv: 'top', pct: 100, score: 6 },
+  'very-high': { label: '超强', lv: 'top', pct: 96, score: 6 },
 }
 export const SPEED_RANK = { slow: 1, slower: 2, moderate: 3, medium: 3, fast: 4, faster: 5, fastest: 6 }
 export const SPEED_CN = { slow: '较慢', slower: '偏慢', moderate: '中速', medium: '中速', fast: '快', faster: '很快', fastest: '极快' }

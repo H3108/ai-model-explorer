@@ -89,7 +89,7 @@ export function freeSectionHTML() {
           <div class="fb-stat"><b>${provs.size}</b><small>提供方</small></div>
           <div class="fb-stat"><b>${mods.length}</b><small>${mods.map((m) => MODN[m] || m).join(' / ')}</small></div>
         </div>
-        <p class="fb-note">口径：官方稳定免费层，免信用卡、可程序化调用。仅网页端免费或注册赠金不计入。</p>
+        <p class="fb-note">官方稳定免费层，可程序化调用。仅网页端免费或注册赠金不计入。</p>
         <div class="fb-cta">
           <button type="button" class="button primary" data-cost="free">浏览全部 ${free.length} 个免费模型 →</button>
           <a class="button ghost" href="#gateways">免费 API 网关</a>
@@ -285,7 +285,8 @@ export function familyTableHTML(f) {
           tierPill(v, 'reasoning'),
           tierPill(v, 'coding'),
         ]
-    return `<tr data-goto="#model/${encodeURIComponent(v.id)}">${cells.map((c) => `<td>${c}</td>`).join('')}<td class="td-go">→</td></tr>`
+    const nameLink = `<a class="row-link" href="#model/${encodeURIComponent(v.id)}" aria-label="${esc(v.name_cn || v.name)}">${cells[0]}</a>`
+    return `<tr data-goto="#model/${encodeURIComponent(v.id)}"><td data-label="${head[0] || '型号'}">${nameLink}</td>${cells.slice(1).map((c, i) => `<td data-label="${head[i + 1] || ''}">${c}</td>`).join('')}<td class="td-go">→</td></tr>`
   }
   return `<div class="table-wrap"><table class="cmp-table">
     <thead><tr>${head.map((h) => `<th scope="col">${h}</th>`).join('')}</tr></thead>
@@ -351,7 +352,7 @@ export function browseResultsHTML() {
         const d = CAP_DIMS.find((x) => x.key === k)
         const c = (v.capabilities || {})[k]
         if (!c) return null
-        const t = TIER[c.tier]
+        const t = TIER[c.tier] || { label: c.tier, lv: 'mid' }
         return `<span class="hit-pill tier-${t.lv}">${d.cn} ${t.label}</span>`
       })
       .filter(Boolean)
@@ -387,7 +388,7 @@ export function browseTableViewHTML() {
       <td class="dt-caps" data-label="能力">${caps}</td>
       <td data-label="速度">${esc(sp)}</td>
       <td class="mono score-td" data-label="评分">${fitScore(v)}</td>
-      <td data-label="对比"><button class="cmp-toggle sm" data-cmp="${v.id}">${inCompare(v.id) ? '✓' : '＋'}</button></td>
+      <td data-label="对比"><button class="cmp-toggle sm" data-cmp="${v.id}" aria-pressed="${inCompare(v.id)}" aria-label="${inCompare(v.id) ? '移出对比' : '加入对比'}">${inCompare(v.id) ? '✓' : '＋'}</button></td>
     </tr>`
   }).join('')
   return `<p class="result-count">匹配到 <b>${scored.length}</b> 个模型${scored.length > 60 ? '，表格展示前 60 个' : ''}</p>
@@ -425,7 +426,7 @@ export function viewBrowse() {
         <div class="fp-block"><h4>条件<small>同时满足</small></h4><div class="chip-wrap">${TRAITS.map(traitChip).join('')}${CAP_DIMS.map(capChip).join('')}<button class="chip chip--fav ${state.favOnly ? 'on' : ''}" aria-pressed="${state.favOnly}" title="只显示已收藏的模型（本地保存）" data-fav-only>★ 收藏${getFav().length ? ' ' + getFav().length : ''}</button></div></div>
         <div class="fp-block"><h4>排序</h4><div class="segmented" data-seg="browseSort"><button class="${state.browseSort === 'match' ? 'selected' : ''}" data-value="match">匹配度</button><button class="${state.browseSort === 'price' ? 'selected' : ''}" data-value="price">价格</button><button class="${state.browseSort === 'context' ? 'selected' : ''}" data-value="context">上下文</button></div></div>
       </aside>
-      <div class="browse-results" id="browse-results">${state.browseView === 'table' ? browseTableViewHTML() : browseResultsHTML()}</div>
+      <div class="browse-results" id="browse-results" aria-live="polite">${state.browseView === 'table' ? browseTableViewHTML() : browseResultsHTML()}</div>
     </div>
   </div>`
 }
@@ -449,7 +450,7 @@ export function viewMatcher() {
           <label>我更在意</label>
           <div class="segmented" data-seg="speed">${segBtn('speed', state.speed, 'balanced', '平衡')}${segBtn('speed', state.speed, 'fast', '速度')}${segBtn('speed', state.speed, 'quality', '质量')}</div>
         </div>
-        <div class="recommendation" id="recommendation">${recommendationHTML()}</div>
+        <div class="recommendation" id="recommendation" aria-live="polite">${recommendationHTML()}</div>
       </div>
     </div>
   </div>`
@@ -560,7 +561,8 @@ export function viewCompare() {
           tierPill(v, 'reasoning'),
           tierPill(v, 'coding'),
         ]
-    return `<tr data-goto="#model/${encodeURIComponent(v.id)}">${cells.map((c) => `<td>${c}</td>`).join('')}<td class="td-go"><button class="cmp-remove" data-cmp-remove="${v.id}" aria-label="移除对比">✕</button></td></tr>`
+    const nameLink = `<a class="row-link" href="#model/${encodeURIComponent(v.id)}" aria-label="${esc(v.name_cn || v.name)}">${cells[0]}</a>`
+    return `<tr data-goto="#model/${encodeURIComponent(v.id)}"><td data-label="${head[0] || '型号'}">${nameLink}</td>${cells.slice(1).map((c, i) => `<td data-label="${head[i + 1] || ''}">${c}</td>`).join('')}<td class="td-go"><button class="cmp-remove" data-cmp-remove="${v.id}" aria-label="移除对比">✕</button></td></tr>`
   }
   return `<div class="wrap page">
     ${pageHead({ eyebrow: '06 / 模型对比', title: `模型<em>对比</em>（${list.length}）`, desc: '把想比较的型号放一起，并排看清参数、能力、价格与定位。本地保存、刷新不丢；点任意行看详情，右上角 ✕ 移除。' })}

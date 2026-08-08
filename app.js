@@ -21,7 +21,7 @@ function renderFooterVerified() {
 // ---------- 数据 ----------
 async function loadData() {
   const files = ['providers', 'model_families', 'model_variants', 'tasks', 'recommendations', 'naming_guide']
-  const values = await Promise.all(
+  const results = await Promise.allSettled(
     files.map((f) =>
       fetch(`./data/${f}.json`).then((r) => {
         if (!r.ok) throw new Error(`${f}.json 加载失败 (${r.status})`)
@@ -29,6 +29,16 @@ async function loadData() {
       }),
     ),
   )
+  // 不再「全有全无」：单个 JSON（如 naming_guide）失败仅降级为空数组，不拖垮整站
+  const values = results.map((res, i) => {
+    if (res.status === 'fulfilled') return res.value
+    console.warn(`${files[i]}.json 加载失败：`, res.reason?.message || res.reason)
+    return []
+  })
+  // model_variants 是主库，缺失直接报错（走底部错误提示），其余缺失仅降级
+  if (!Array.isArray(values[2]) || values[2].length === 0) {
+    throw new Error('model_variants.json 加载失败或为空，站点无法运行')
+  }
   ;[state.providers, state.families, state.variants, state.tasks, state.recommendations, state.naming] = values
   // 合并增量模型（新增免费模型 / 网关模型）；加载失败不影响主站
   try {

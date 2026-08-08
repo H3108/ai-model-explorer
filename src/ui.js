@@ -65,7 +65,7 @@ export function modalityMix(list) {
 export function capTags(v) {
   const p = providerOf(v)
   const caps = v.capabilities || {}
-  const strong = (c) => c && ['high', 'highest'].includes(c.tier)
+  const strong = (c) => c && ['high', 'highest', 'very-high'].includes(c.tier)
   const tags = []
   if (strong(caps.coding)) tags.push('编码')
   if (strong(caps.reasoning)) tags.push('推理')

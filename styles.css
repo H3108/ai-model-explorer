@@ -301,8 +301,8 @@ select { padding: 8px 12px; border-radius: var(--r-sm); }
 .brandmark {
   display: inline-grid; place-items: center; flex: none;
   border-radius: 12px; overflow: hidden;
-  background: color-mix(in srgb, var(--brand) 9%, #fff);
-  border: 1px solid color-mix(in srgb, var(--brand) 18%, #fff);
+  background: color-mix(in srgb, var(--brand) 9%, var(--surface));
+  border: 1px solid color-mix(in srgb, var(--brand) 18%, var(--surface));
   color: var(--brand); font-weight: 800;
 }
 .brandmark img { display: block; object-fit: contain; }
@@ -464,7 +464,7 @@ select { padding: 8px 12px; border-radius: var(--r-sm); }
 }
 
 /* ---------------- 厂商卡片 ---------------- */
-.provider-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 18px; }
+.provider-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr)); gap: 18px; }
 .provider-card {
   background: var(--card); border: 1px solid var(--line); border-radius: var(--r-lg);
   padding: 22px; text-decoration: none; display: flex; flex-direction: column; gap: 10px;
@@ -528,13 +528,13 @@ select { padding: 8px 12px; border-radius: var(--r-sm); }
 .stat-card small { font-size: 11.5px; color: var(--muted); }
 
 /* ---------------- 系列卡片 / 系列页 ---------------- */
-.family-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
+.family-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr)); gap: 16px; }
 .family-card {
   background: var(--card); border: 1px solid var(--line); border-radius: var(--r-lg);
   padding: 20px; text-decoration: none; display: flex; flex-direction: column; gap: 10px;
   transition: transform .15s, box-shadow .15s, border-color .15s;
 }
-.family-card:hover { transform: translateY(-3px); box-shadow: var(--sh-3); border-color: color-mix(in srgb, var(--brand) 35%, #fff); }
+.family-card:hover { transform: translateY(-3px); box-shadow: var(--sh-3); border-color: color-mix(in srgb, var(--brand) 35%, var(--surface)); }
 .fc-top { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
 .fc-top b { font-size: 16.5px; }
 .fc-top .count { font-size: 11.5px; color: var(--muted); background: var(--soft); padding: 3px 9px; border-radius: var(--radius-pill); }
@@ -576,6 +576,9 @@ select { padding: 8px 12px; border-radius: var(--r-sm); }
 .cmp-table thead th:first-child { background: var(--border-subtle); z-index: 3; }
 .cell-desc { color: var(--muted); font-size: 12.5px; display: block; max-width: 260px; }
 .td-go { color: var(--green-700); font-weight: 700; text-align: right; }
+/* 表格行首列模型名：真链接，键盘 / Tab 可达（替代仅靠整行 data-goto 点击） */
+.row-link { color: var(--ink); text-decoration: none; font-weight: 600; }
+.row-link:hover { color: var(--deep); }
 
 /* ============================================================
    基础组件：数据表 Token 系统（Phase 0.2）
@@ -639,8 +642,9 @@ select { padding: 8px 12px; border-radius: var(--r-sm); }
 /* 变体：对比表（常规字号，强调行 hover） */
 .data-table--compare { font-size: 14px; }
 
-/* 移动端：浏览表格转卡片堆叠，消除窄屏横向滚动 */
-@media (max-width: 640px) {
+/* 移动端：浏览表 / 对比表转卡片堆叠，消除窄屏横向滚动（断点提到 768px，覆盖 641–768 夹层） */
+@media (max-width: 768px) {
+  /* —— 浏览表 —— */
   .data-table--browse { min-width: 0 !important; table-layout: auto; font-size: 13px; }
   .data-table--browse colgroup { display: none; }
   .data-table--browse thead { display: none; }
@@ -663,6 +667,25 @@ select { padding: 8px 12px; border-radius: var(--r-sm); }
   .data-table--browse .dt-name { max-width: none; }
   .data-table--browse td.dt-caps { max-width: none; flex-wrap: wrap; justify-content: flex-end; }
   .data-table--browse td.dt-caps .cap-mini { margin: 1px 0 1px 4px; }
+  /* —— 对比表 —— */
+  .cmp-table { min-width: 0 !important; table-layout: auto; font-size: 13px; }
+  .cmp-table colgroup { display: none; }
+  .cmp-table thead { display: none; }
+  .cmp-table tbody tr {
+    display: block; margin-bottom: 12px; padding: 4px 2px;
+    background: var(--card); border: 1px solid var(--border-subtle); border-radius: var(--r-md); cursor: default;
+  }
+  .cmp-table tbody td {
+    display: flex; justify-content: space-between; align-items: center; gap: 12px;
+    padding: 8px 12px; border-bottom: 1px solid var(--border-subtle); text-align: right;
+  }
+  .cmp-table tbody tr td:last-child { border-bottom: 0; }
+  .cmp-table tbody td::before {
+    content: attr(data-label); flex: none; text-align: left;
+    font-size: 11px; font-weight: 700; color: var(--muted); letter-spacing: .02em;
+  }
+  .cmp-table tbody td:first-child { position: static; background: transparent; }
+  .cmp-table .td-go { justify-content: flex-end; }
 }
 
 /* ---------------- 模型卡网格 ---------------- */
@@ -725,7 +748,7 @@ select { padding: 8px 12px; border-radius: var(--r-sm); }
   background: var(--deep); color: var(--on-brand);
   font-size: 12px; font-weight: 400; line-height: 1.55; text-align: left;
   padding: 8px 10px; border-radius: 8px; z-index: 60;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, .22);
+  box-shadow: 0 8px 24px color-mix(in srgb, var(--foreground) 22%, transparent);
 }
 .free-tip::after {
   content: ''; position: absolute; right: 100%; top: 50%; transform: translateY(-50%);
@@ -783,7 +806,7 @@ select { padding: 8px 12px; border-radius: var(--r-sm); }
 .gw-cons h4 { color: var(--error-fg); }
 .gw-intro ul { margin: 0; padding-left: 18px; }
 .gw-intro li { font-size: 13px; line-height: 1.7; color: var(--muted); }
-.gw-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+.gw-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr)); gap: 16px; }
 .gw-card { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 18px; }
 .gw-head { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
 .gw-head h3 { margin: 0; font-size: 16px; }
@@ -898,7 +921,7 @@ select { padding: 8px 12px; border-radius: var(--r-sm); }
 .detail-sec > h3 small { font-size: 12px; color: var(--muted); font-weight: 400; }
 
 .cap-bars {
-  display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px;
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); gap: 14px;
   background: var(--card); border: 1px solid var(--line); border-radius: var(--r-lg); padding: 20px;
 }
 .cap-row { display: flex; flex-direction: column; gap: 7px; }
@@ -1053,19 +1076,24 @@ select { padding: 8px 12px; border-radius: var(--r-sm); }
   .filter-panel { position: static; min-width: 0; }
   .stat-strip.four { grid-template-columns: repeat(2, 1fr); }
 }
-@media (max-width: 720px) {
+
+/* 顶栏在 721–960px 区间易溢出：提前折行 + 导航横滑（iPad 竖屏 768px 也能完整显示） */
+@media (max-width: 960px) {
   .topbar { gap: 18px; height: auto; padding: 12px 18px; flex-wrap: wrap; }
   #main-nav {
     gap: 16px; order: 3; width: 100%; overflow-x: auto;
-    /* 边缘渐隐提示：窄屏导航可横向滑动 */
     -webkit-mask-image: linear-gradient(to right, transparent 0, #000 14px, #000 calc(100% - 14px), transparent 100%);
     mask-image: linear-gradient(to right, transparent 0, #000 14px, #000 calc(100% - 14px), transparent 100%);
     scrollbar-width: none;
   }
   #main-nav::-webkit-scrollbar { display: none; }
   .version-pill { display: none; }
-  .page { padding: 26px 18px 60px; }
-  .wrap { padding: 0 18px; }
+}
+
+@media (max-width: 720px) {
+  /* 顶栏折行已在 ≤960px 断点统一处理 */
+  .page { padding-block: 26px 60px; padding-inline: 18px; }
+  .wrap { padding-inline: 18px; }
   .page-head h1, .hero h1 { font-size: 32px; }
   .eh-main h1 { font-size: 25px; }
   .entity-head { flex-direction: column; gap: 14px; padding: 20px; }
@@ -1076,6 +1104,9 @@ select { padding: 8px 12px; border-radius: var(--r-sm); }
   .result-reason { width: 100%; }
   .filter-panel .segmented { flex-wrap: wrap; }
   .filter-panel .segmented button { flex: 1 1 auto; }
+  /* 移动端触控目标不小于 36–40px，避免误触 */
+  .chip, .cmp-toggle, .rs-chip { min-height: 36px; }
+  .cmp-remove { min-width: 32px; min-height: 32px; }
 }
 
 /* ---------- 对比集 / 最近浏览 ---------- */
@@ -1087,6 +1118,8 @@ select { padding: 8px 12px; border-radius: var(--r-sm); }
 }
 .cmp-toggle:hover { background: var(--success-soft); }
 .cmp-toggle.on { background: var(--deep); color: var(--green); }
+/* Phase 2：browse 表内紧凑型，禁止文案换行撑破列宽 */
+.cmp-toggle.sm { white-space: nowrap; padding: 0 10px; min-height: 28px; }
 /* Phase 2 收藏星 */
 .fav-toggle { margin-left: 8px; }
 .fav-toggle.on { background: var(--deep); color: var(--green); border-color: var(--deep); }

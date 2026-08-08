@@ -115,6 +115,8 @@ export function toggleCompare(id) {
   const i = c.indexOf(id)
   if (i >= 0) { c.splice(i, 1) }
   else {
+    // 防止把不存在的 id 加进对比集（避免满额时静默挤出真实模型导致数据丢失）
+    if (!variantById(id)) return c
     if (c.length >= COMPARE_LIMIT) {
       const dropped = c[0]
       c.shift()

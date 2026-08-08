@@ -19,11 +19,17 @@ export function parseHash() {
   const raw = (location.hash || '#home').replace(/^#\/?/, '')
   const slash = raw.indexOf('/')
   const name = slash === -1 ? raw : raw.slice(0, slash)
-  const param = slash === -1 ? null : decodeURIComponent(raw.slice(slash + 1))
+  const param = slash === -1 ? null : safeDecodeURI(raw.slice(slash + 1))
   return { name: name || 'home', param, key: raw || 'home' }
 }
 
+// 畸形 hash（如 #model/%%%）会让 decodeURIComponent 抛 URIError，回退原串避免路由卡死
+function safeDecodeURI(s) {
+  try { return decodeURIComponent(s) } catch { return s }
+}
+
 export function render() {
+ try {
   const r = parseHash()
   let html = ''
   if (r.name === 'providers') html = viewProviders()
@@ -53,6 +59,14 @@ export function render() {
   // 滚动：恢复该路由上次位置，没有则回到顶部（瞬时，不做平滑动画）
   const y = scrollMem.get(r.key) || 0
   window.scrollTo(0, y)
+  // 路由切换后把焦点移到主容器，便于键盘 / 读屏用户从新页面顶部继续
+  const appEl = $('#app')
+  if (appEl) appEl.focus({ preventScroll: true })
+ } catch (err) {
+  console.error('render 失败：', err)
+  const app = $('#app')
+  if (app) app.innerHTML = notFound('页面', '渲染出错', '#home')
+ }
 }
 
 let scrollTick = false
@@ -111,7 +125,7 @@ export function bindGlobalEvents() {
     if (sortSel) {
       state[sortSel.dataset.sort] = sortSel.value
       const r = parseHash()
-      if (r.name === 'family') refresh('#family-table', familyTableHTML(familyById(r.param)))
+      if (r.name === 'family') { const f = familyById(r.param); if (f) refresh('#family-table', familyTableHTML(f)) }
     }
   })
   document.addEventListener('click', (e) => {
@@ -128,7 +142,11 @@ export function bindGlobalEvents() {
       const id = cmpBtn.dataset.cmp
       const on = toggleCompare(id).includes(id)
       cmpBtn.classList.toggle('on', on)
-      cmpBtn.textContent = on ? '✓ 已加入对比' : '＋ 加入对比'
+      // browse 表内紧凑按钮保持短文案，避免撑破列宽；长文案仅用于宽按钮
+      const compact = cmpBtn.classList.contains('sm')
+      cmpBtn.textContent = on ? (compact ? '✓' : '✓ 已加入对比') : (compact ? '＋' : '＋ 加入对比')
+      cmpBtn.setAttribute('aria-pressed', String(on))
+      cmpBtn.setAttribute('aria-label', on ? '移出对比' : '加入对比')
       updateCmpBadge()
       return
     }
@@ -152,14 +170,6 @@ export function bindGlobalEvents() {
       const i = Number(rmChip.dataset.rmChip)
       state.homeConditions = state.homeConditions.filter((_, idx) => idx !== i)
       renderHomeChips()
-      return
-    }
-    // V4 首页场景芯片 → 预选任务进入任务选择器（与 matcher 的 data-task 区分，避免冲突死分支）
-    const sceneChip = e.target.closest('[data-scene-task]')
-    if (sceneChip) {
-      state.selectedTask = sceneChip.dataset.task
-      if (parseHash().name === 'matcher') render()
-      else location.hash = 'matcher'
       return
     }
     // 首页成本入口（如「免费模型」）→ 清掉历史筛选、只留价格条件进入浏览页
@@ -228,8 +238,7 @@ export function bindGlobalEvents() {
       const group = segBtn.closest('[data-seg]')?.dataset.seg
       if (group) {
         state[group] = segBtn.dataset.value
-        segBtn.parentElement.querySelectorAll('button').forEach((b) => b.classList.remove('selected'))
-        segBtn.classList.add('selected')
+        segBtn.parentElement.querySelectorAll('button').forEach((b) => { b.classList.remove('selected'); b.setAttribute('aria-pressed', String(b === segBtn)) })
         if (group === 'providerFilter' || group === 'providerModality') refreshProviderGrid()
         else if (group.startsWith('browse')) { refreshBrowse(); saveBrowseFilters() }
         else if (group === 'budget' || group === 'speed') refresh('#recommendation', recommendationHTML())
@@ -242,6 +251,7 @@ export function bindGlobalEvents() {
       const k = capChip.dataset.cap
       state.browseCaps = state.browseCaps.includes(k) ? state.browseCaps.filter((x) => x !== k) : [...state.browseCaps, k]
       capChip.classList.toggle('on')
+      capChip.setAttribute('aria-pressed', String(state.browseCaps.includes(k)))
       refreshBrowse(); saveBrowseFilters()
       return
     }
@@ -250,6 +260,7 @@ export function bindGlobalEvents() {
       const k = traitChip.dataset.trait
       state.browseTraits = state.browseTraits.includes(k) ? state.browseTraits.filter((x) => x !== k) : [...state.browseTraits, k]
       traitChip.classList.toggle('on')
+      traitChip.setAttribute('aria-pressed', String(state.browseTraits.includes(k)))
       refreshBrowse(); saveBrowseFilters()
       return
     }
