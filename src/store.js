@@ -32,6 +32,10 @@ export const familiesOfProvider = (pid) => state.families.filter((f) => f.provid
 export const variantsOfFamily = (fid) => state.variants.filter((v) => v.family_id === fid)
 export const providerOf = (v) => providerById(v.provider_id)
 export const familyOf = (v) => familyById(v.family_id)
+// 厂商链接守卫：p 解析失败时回落到厂商列表，杜绝 #provider/undefined 死链
+// （providerById 返回 {} 而非 null，使各调用点的 p.x 读取永不抛 NPE；
+//  引用完整性由 scripts/validate_normalized.cjs 强制保证，故不会真正解析失败）
+export const providerLink = (p) => (p && p.id) ? `#provider/${encodeURIComponent(p.id)}` : '#providers'
 export const famName = (v) => { const f = familyOf(v); return f ? (f.name_cn || f.name || '') : '' }
 export const modalityOf = (v) => (v.media_type === 'video' ? 'video' : v.media_type === 'image' ? 'image' : 'text')
 

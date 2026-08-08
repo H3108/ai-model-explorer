@@ -1,7 +1,7 @@
 // AI Model Explorer — 视图层：各路由页面与页面内构件（不含路由与全局事件）
 import { TIER, CAP_DIMS, TRAITS, SPEED_RANK, SPEED_CN, API_STYLE_CN } from './constants.js'
 import {
-  state, byId, providerById, variantById, variantsOfProvider, familiesOfProvider, variantsOfFamily,
+  state, byId, providerById, providerLink, variantById, variantsOfProvider, familiesOfProvider, variantsOfFamily,
   providerOf, familyOf, modalityOf, variantMatches,
   getRecent, getCompare, getFav, inCompare, isFav, pushRecent, pushRecentSearch, recentSearchHTML,
   dataMeta, verifiedNotice,
@@ -154,7 +154,7 @@ export function providerCard(p) {
   const vs = variantsOfProvider(p.id)
   const fs = familiesOfProvider(p.id)
   const region = { US: '美国', CN: '中国', FR: '法国', DE: '德国', GB: '英国' }[p.country] || p.country || '其他'
-  return `<a class="provider-card" href="#provider/${encodeURIComponent(p.id)}" style="--brand:${esc(p.brand_color || '#173e35')}">
+  return `<a class="provider-card" href="${providerLink(p)}" style="--brand:${esc(p.brand_color || '#173e35')}">
     <div class="pc-top">${logoHTML(p, 'md')}<div class="pc-tags"><span class="tag">${esc(region)}</span>${catBadge(p)}${p.open_weight ? '<span class="tag tag-open">开放权重</span>' : ''}</div></div>
     <div class="pc-body">
       <h3>${esc(p.name_cn || p.name)}</h3>
@@ -321,11 +321,11 @@ export function viewFamily(id) {
   }
   const sortOpts = [['default', '默认顺序'], ['price-asc', '价格从低到高'], ['price-desc', '价格从高到低'], ['context', '上下文最长'], ['speed', '速度最快']]
   return `<div class="wrap page">
-    <button class="back-link" data-back="#provider/${encodeURIComponent(p.id)}">← 返回 ${esc(p.name_cn || p.name)}</button>
+    <button class="back-link" data-back="${providerLink(p)}">← 返回 ${esc(p.name_cn || p.name)}</button>
     <header class="entity-head" style="--brand:${esc(p.brand_color)}">
       ${logoHTML(p, 'lg')}
       <div class="eh-main">
-        <span class="eyebrow"><a class="crumb" href="#provider/${encodeURIComponent(p.id)}">${esc(p.name_cn || p.name)}</a> · MODEL FAMILY</span>
+        <span class="eyebrow"><a class="crumb" href="${providerLink(p)}">${esc(p.name_cn || p.name)}</a> · MODEL FAMILY</span>
         <h1>${esc(f.name_cn || f.name)}</h1>
         <p>${esc(f.description_cn || '')}</p>
         <div class="eh-tags">${modalityMix(list)}<span class="tag">${list.length} 个型号</span>${catBadge(p)}</div>
@@ -470,11 +470,11 @@ export function viewModel(id) {
   const avoid = (v.avoid_for || []).map((t) => `<li class="no">${esc(taskName(t))}</li>`).join('')
   const tags = capTags(v)
   return `<div class="wrap page detail-page">
-    <button class="back-link" data-back="${f ? '#family/' + encodeURIComponent(f.id) : '#provider/' + encodeURIComponent(p.id)}">← 返回</button>
+    <button class="back-link" data-back="${f ? '#family/' + encodeURIComponent(f.id) : providerLink(p)}">← 返回</button>
     <header class="entity-head model-head" style="--brand:${esc(p.brand_color)}">
       ${logoHTML(p, 'lg')}
       <div class="eh-main">
-        <span class="eyebrow"><a class="crumb" href="#provider/${encodeURIComponent(p.id)}">${esc(p.name_cn || p.name)}</a>${f ? ` · <a class="crumb" href="#family/${encodeURIComponent(f.id)}">${esc(f.name_cn || f.name || '')}</a>` : ''}</span>
+        <span class="eyebrow"><a class="crumb" href="${providerLink(p)}">${esc(p.name_cn || p.name)}</a>${f ? ` · <a class="crumb" href="#family/${encodeURIComponent(f.id)}">${esc(f.name_cn || f.name || '')}</a>` : ''}</span>
         <h1>${esc(v.name_cn || v.name)}</h1>
         <div class="eh-tags">${modBadge(v)}${gradeBadge(v)}<span class="tag mono">${esc(v.model_id || v.id)}</span>${v.open_weight ? '<span class="tag tag-open">开放权重</span>' : ''}</div>
         <p class="lead">${esc(v.one_liner_cn || '')}</p>

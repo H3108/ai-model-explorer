@@ -90,6 +90,13 @@ variants.forEach((v) => {
 })
 ok(`文本模型价格已知 ${priceKnown}/${variants.length - mediaCount}；媒体模型 ${mediaCount} 个；未知价格的型号保持 null（不编造）`)
 
+console.log('\n校验 model_variants_extra（P2-4 治理：仅查外键存在性，增量文件不强制完整度）：')
+variantsExtra.forEach((v) => {
+  if (!providerIds.has(v.provider_id)) err(`variantsExtra ${v.id}: provider_id=${v.provider_id} 不存在（悬挂外键，会生成 #provider/undefined 死链）`)
+  if (v.family_id && !familyIds.has(v.family_id)) err(`variantsExtra ${v.id}: family_id=${v.family_id} 不存在`)
+})
+ok(`variantsExtra ${variantsExtra.length} 条外键均指向已存在的 provider / family（无悬挂引用）`)
+
 console.log('\n校验 recommendations：')
 recs.forEach((r) => {
   if (!taskIds.has(r.task_id)) err(`${r.id}: task_id=${r.task_id} 不在 tasks`)

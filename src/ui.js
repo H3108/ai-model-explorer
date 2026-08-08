@@ -41,6 +41,8 @@ export function ctxShort(n) {
   return String(n)
 }
 export function logoHTML(p, size = 'md') {
+  // 守卫：p 为 {}（providerById 未解析到厂商）时不拼接 assets/logos/undefined.svg
+  if (!p || !p.id) return `<span class="brandmark bm-${size}"></span>`
   const file = p.logo_file || `assets/logos/${p.id}.svg`
   return `<span class="brandmark bm-${size}" style="--brand:${esc(p.brand_color || '#173e35')}"><img src="${esc(file)}" alt="${esc(p.name || '')}" loading="lazy" onerror="this.replaceWith(document.createTextNode('${esc((p.name || '?').slice(0, 1))}'))"></span>`
 }
