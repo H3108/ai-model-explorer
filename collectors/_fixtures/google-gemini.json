@@ -1,0 +1,10 @@
+[
+  { "id": "google-gemini-3-1-pro", "input": 2, "output": 12, "context": 1000000, "max_output": 64000, "release_date": "2026", "status": "active" },
+  { "id": "google-gemini-3-5-flash", "input": 1.5, "output": 9, "context": 1000000, "max_output": 66000, "release_date": "2026", "status": "active" },
+  { "id": "google-gemini-3-flash", "input": 0.45, "output": 3, "context": 1000000, "max_output": 64000, "release_date": "2026", "status": "active" },
+  { "id": "google-gemini-3-1-flash-lite", "input": 0.25, "output": 1.5, "context": 1000000, "max_output": 64000, "release_date": "2026", "status": "active" },
+  { "id": "google-gemini-2-5-pro", "input": 1.25, "output": 10, "context": 2000000, "max_output": 64000, "release_date": "2025", "status": "active" },
+  { "id": "google-imagen-4", "input": null, "output": null, "context": null, "max_output": null, "release_date": "2026", "status": "active" },
+  { "id": "google-veo-3-1", "input": null, "output": null, "context": null, "max_output": null, "release_date": "2026-01", "status": "active" },
+  { "id": "google-veo-3-1-lite", "input": null, "output": null, "context": null, "max_output": null, "release_date": "2026-03", "status": "active" }
+]

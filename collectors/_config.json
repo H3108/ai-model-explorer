@@ -1,0 +1,9 @@
+{
+  "enabled": ["openai", "anthropic", "google-gemini", "nvidia-nim"],
+  "sources": {
+    "openai": { "label": "OpenAI", "provider_id": "openai", "source_url": "https://openai.com/pricing" },
+    "anthropic": { "label": "Anthropic", "provider_id": "anthropic", "source_url": "https://www.anthropic.com/pricing" },
+    "google-gemini": { "label": "Google Gemini", "provider_id": "google", "source_url": "https://ai.google.dev/gemini-api/docs/pricing" },
+    "nvidia-nim": { "label": "NVIDIA NIM", "provider_id": "nvidia-nim", "source_url": "https://build.nvidia.com/" }
+  }
+}

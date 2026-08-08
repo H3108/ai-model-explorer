@@ -1,0 +1,5 @@
+[
+  { "id": "anthropic-fable-5", "input": 10, "output": 50, "context": 1000000, "max_output": 128000, "release_date": "2026-06", "status": "active" },
+  { "id": "anthropic-opus-5", "input": 5, "output": 25, "context": 1000000, "max_output": 128000, "release_date": "2026", "status": "active" },
+  { "id": "anthropic-sonnet-5", "input": 3.2, "output": 15, "context": 1000000, "max_output": 128000, "release_date": "2026", "status": "active" }
+]

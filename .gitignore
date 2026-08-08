@@ -14,6 +14,9 @@ scripts/visual/*.png
 .last_snapshot.json
 daily_model_update_report.md
 
+# 数据同步 staging（本地 review 用；CI 推到 data-staging 分支时用 `git add -f`）
+data/.staging/
+
 # 内部走查 / 过程文档（不发布到 GitHub）
 设计走查报告.md
 

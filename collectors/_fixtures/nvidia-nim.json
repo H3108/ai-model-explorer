@@ -1,0 +1,12 @@
+[
+  { "id": "nvidia-nim-nemotron-70b", "input": 0, "output": 0, "context": 128000, "max_output": 4096, "release_date": "2026", "status": "active" },
+  { "id": "nvidia-nim-llama-3-3-70b", "input": 0, "output": 0, "context": 128000, "max_output": 32768, "release_date": "2026", "status": "active" },
+  { "id": "nvidia-nim-llama-4-maverick", "input": 0, "output": 0, "context": 128000, "max_output": 32768, "release_date": "2026", "status": "active" },
+  { "id": "nvidia-nim-mistral-small-24b", "input": 0, "output": 0, "context": 32000, "max_output": 8192, "release_date": "2026", "status": "active" },
+  { "id": "nvidia-nim-deepseek-r1", "input": 0, "output": 0, "context": 128000, "max_output": 32768, "release_date": "2026", "status": "active" },
+  { "id": "nvidia-nim-qwen3-coder-480b", "input": 0, "output": 0, "context": 256000, "max_output": 32768, "release_date": "2026", "status": "active" },
+  { "id": "nvidia-nim-nemotron-nano-9b", "input": 0, "output": 0, "context": 128000, "max_output": 4096, "release_date": "2026", "status": "active" },
+  { "id": "nvidia-nim-phi-4", "input": 0, "output": 0, "context": 16384, "max_output": 4096, "release_date": "2026", "status": "active" },
+  { "id": "nvidia-nim-gemma-2-9b", "input": 0, "output": 0, "context": 8192, "max_output": 8192, "release_date": "2026", "status": "active" },
+  { "id": "nvidia-nim-llama-4-scout", "input": 0, "output": 0, "context": 128000, "max_output": 32768, "release_date": "2026", "status": "active" }
+]

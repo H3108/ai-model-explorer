@@ -15,6 +15,11 @@
     "verified": "node scripts/bump_verified.cjs --check",
     "verified:bump": "node scripts/bump_verified.cjs",
     "bump": "node scripts/bump_verified.cjs",
+    "collect": "node scripts/run_collectors.cjs",
+    "collect:offline": "node scripts/run_collectors.cjs --offline",
+    "diff": "node scripts/diff_data.cjs",
+    "staging:apply": "node scripts/apply_staging.cjs",
+    "staging:apply:do": "node scripts/apply_staging.cjs --apply",
     "deploy": "bash scripts/deploy.sh"
   },
   "engines": {
