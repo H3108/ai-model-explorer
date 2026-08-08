@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "provider.schema.json",
+  "title": "AI Model Explorer — Provider",
+  "description": "厂商数据契约。复用现有字段 source / last_verified。additionalProperties 允许，保证 V4 数据兼容。",
+  "type": "object",
+  "required": ["id", "name"],
+  "additionalProperties": true,
+  "properties": {
+    "id": { "type": "string" },
+    "name": { "type": "string" },
+    "name_cn": { "type": "string" },
+    "logo": { "type": "string" },
+    "country": { "type": "string" },
+    "website": { "type": "string" },
+    "api_docs": { "type": ["string", "null"] },
+    "api_base_url": { "type": ["string", "null"] },
+    "api_style": { "type": "string" },
+    "description_cn": { "type": "string" },
+    "description": { "type": "string" },
+    "open_weight": { "type": "boolean" },
+    "source": { "type": "string" },
+    "last_verified": { "type": "string" },
+    "brand_color": { "type": "string" },
+    "logo_file": { "type": "string" }
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "schema_version": "1.0",
+  "generated_at": "2026-08-08",
+  "sources": {
+    "openai": { "enabled": true, "last_sync": null, "status": "pending" },
+    "anthropic": { "enabled": true, "last_sync": null, "status": "pending" },
+    "google-gemini": { "enabled": true, "last_sync": null, "status": "pending" },
+    "nvidia-nim": { "enabled": true, "last_sync": null, "status": "pending" }
+  },
+  "sync_status": "idle"
+}
