@@ -18,6 +18,8 @@
 - [本地运行](#本地运行)
 - [项目结构](#项目结构)
 - [数据校验](#数据校验)
+- [测试](#测试)
+- [文档（内部，不推送 GitHub）](#文档内部不推送-github)
 - [项目定位与免责声明](#项目定位与免责声明)
 - [贡献与许可证](#贡献与许可证)
 - [English](#english)
@@ -109,8 +111,8 @@
 ```bash
 # 方式一：Python 内置服务器（推荐，零安装）
 cd <REPO_ROOT>
-python3 -m http.server 8000
-# 打开 http://localhost:8000
+python3 -m http.server 8848
+# 打开 http://localhost:8848
 
 # 方式二：Node 静态服务器
 npx serve .
@@ -143,12 +145,20 @@ ai-model-explorer/
 │   ├── naming_guide.json
 │   ├── gateways.json
 │   └── api_access.json
-├── scripts/                # 数据校验 / 治理 / 质量检查（本地开发用）
-│   ├── validate_normalized.js
-│   ├── smoke_render.js
-│   ├── model_quality_check.py
-│   ├── governance_v1.js / governance_v2.js
-│   └── gen_data_review.js
+├── scripts/                # 数据校验 / 治理 / 质量 / 测试（本地开发用）
+│   ├── validate_normalized.cjs   # 规范化数据校验（Node，零依赖）
+│   ├── validate_schema.cjs       # JSON Schema 校验（数据契约）
+│   ├── smoke_render.cjs          # JSDOM 渲染冒烟测试
+│   ├── e2e.cjs                   # Playwright 真浏览器 E2E 测试
+│   ├── perf_real.cjs             # 真实浏览器性能实测（Core Web Vitals）
+│   ├── visual_snapshot.cjs       # 多断点视觉回归截图 + 结构基线
+│   ├── crosscheck_free.cjs       # 真·免费 API 交叉核对
+│   ├── bump_verified.cjs         # 核验日期更新 / 检查
+│   ├── model_quality_check.py    # 数据质量复核（CI 周扫）
+│   ├── gen_data_review.cjs       # 评审稿生成
+│   ├── governance_v1.cjs / governance_v2.cjs  # 数据治理脚本
+│   ├── migrate_v4_data.cjs       # V4 数据迁移
+│   └── clean_logo.py             # logo 资源清理
 └── docs/                   # 内部文档（设计稿 / 审计 / 走查）
                           # 不推送 GitHub，见 .gitignore
 ```
@@ -193,6 +203,47 @@ node scripts/bump_verified.cjs --all --date 2026-08-10
 
 ---
 
+## 测试
+
+本项目采用**测试金字塔**：JSDOM 冒烟 + 真浏览器 E2E + 性能 / 视觉回归。`scripts/` 下的 Node 脚本依赖 `jsdom` / `playwright`，通过 `NODE_PATH` 指定本地依赖目录（如 `~/.workbuddy/binaries/node/workspace/node_modules`）；`npm test` / `npm run e2e` 已在 `package.json` 中预置。
+
+```bash
+# 1) 渲染冒烟（JSDOM，需先起本地服务）
+python3 -m http.server 8848 &
+NODE_PATH=~/.workbuddy/binaries/node/workspace/node_modules node scripts/smoke_render.cjs
+#    或：npm test
+
+# 2) 真浏览器 E2E（Playwright + Chromium，需先起本地服务）
+NODE_PATH=~/.workbuddy/binaries/node/workspace/node_modules node scripts/e2e.cjs
+#    或：npm run e2e
+
+# 3) 真实性能实测（Core Web Vitals，需先起本地服务）
+NODE_PATH=~/.workbuddy/binaries/node/workspace/node_modules node scripts/perf_real.cjs
+
+# 4) 多断点视觉回归（截图 + 结构基线）
+NODE_PATH=~/.workbuddy/binaries/node/workspace/node_modules node scripts/visual_snapshot.cjs
+```
+
+> CI 门禁：`.github/workflows/ci.yml` 在每次 push / PR 自动跑 `validate_normalized` + `smoke_render` + 真浏览器 `e2e` 回归；另设每周定时任务跑 `model_quality_check.py` 监测数据新鲜度。
+
+---
+
+## 文档（内部，不推送 GitHub）
+
+设计稿、审计、走查、数据治理、部署、性能与验证等**内部过程文档**统一存放于 `docs/`——已被根 `.gitignore` 的 `docs/` 规则整体排除，不会出现在 GitHub 仓库。按主题分类：
+
+- `docs/audit/` —— 前端审计 / 走查 / 项目审计
+- `docs/data/` —— 数据治理 / 同步 / 免费核对
+- `docs/perf/` —— 性能报告
+- `docs/verify/` —— 验证专项
+- `docs/deploy/` —— 部署方案
+- `docs/archive/` —— 历史归档
+- `docs/README.md` —— 完整文档索引（本地查阅）
+
+> 本 `README.md`（仓库根）为公开文档；内部细节请查阅本地 `docs/`。
+
+---
+
 ## 项目定位与免责声明
 
 - 本项目**不是**大模型排行榜、专业评测平台或自动 Benchmark 系统。
@@ -217,5 +268,5 @@ node scripts/bump_verified.cjs --all --date 2026-08-10
 - **What it does**: browse models by provider / capability / gateway, describe your task in natural language to get ranked recommendations with transparent `fitScore` reasoning, compare models side-by-side, and learn what naming suffixes (Mini / Pro / Flash / Reasoning / Vision) actually mean.
 - **Stack**: plain HTML + CSS + native ES Modules, hash-router SPA, no build step, no backend. Data lives in `data/*.json` (verified against vendor sources; unknowns kept as `null`, never fabricated).
 - **Privacy**: no API keys, no user PII. `api_access.json` stores only public API base URLs.
-- **Run locally**: `python3 -m http.server 8000` then open `http://localhost:8000` (a static server is required because the app `fetch`es JSON).
+- **Run locally**: `python3 -m http.server 8848` then open `http://localhost:8848` (a static server is required because the app `fetch`es JSON).
 - **License**: not yet specified — add a `LICENSE` file if you intend to publish under an open-source license.
