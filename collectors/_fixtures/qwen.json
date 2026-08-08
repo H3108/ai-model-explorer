@@ -1,0 +1,8 @@
+[
+  { "id": "qwen-plus", "input": 0.45, "output": 1.2, "context": 1000000, "max_output": 16000, "release_date": "2025", "status": "active" },
+  { "id": "qwen-3-max", "input": 1.2, "output": 6, "context": 262000, "max_output": 16000, "release_date": "2026", "status": "active" },
+  { "id": "qwen-3-5-flash", "input": 0.1, "output": 0.4, "context": 1000000, "max_output": 65000, "release_date": "2026", "status": "active" },
+  { "id": "qwen-vl-max", "input": 1.6, "output": 4, "context": 128000, "max_output": 16000, "release_date": "2025", "status": "active" },
+  { "id": "alibaba-qwen-image", "input": null, "output": null, "context": null, "max_output": null, "release_date": "2026", "status": "active" },
+  { "id": "alibaba-wan-2-1", "input": null, "output": null, "context": null, "max_output": null, "release_date": "2025", "status": "active" }
+]

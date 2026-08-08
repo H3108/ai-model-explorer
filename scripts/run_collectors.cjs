@@ -17,17 +17,20 @@ const simIdx = args.indexOf('--simulate-failure');
 const SIM = simIdx >= 0 ? args[simIdx + 1] : null;
 const cfgIdx = args.indexOf('--config');
 const CFG = cfgIdx >= 0 ? args[cfgIdx + 1] : path.join(ROOT, 'collectors/_config.json');
+const onlyIdx = args.indexOf('--only');
+const ONLY = onlyIdx >= 0 ? args[onlyIdx + 1] : null;
 
 async function main() {
   const { loadCollectors } = await import(pathToFileURL(path.join(ROOT, 'collectors/_registry.js')).href);
   const all = await loadCollectors(path.join(ROOT, 'collectors'));
   const config = JSON.parse(fs.readFileSync(CFG, 'utf8'));
   const enabled = new Set(config.enabled || []);
-  const active = all.filter((C) => enabled.has(C.id));
+  const active = all.filter((C) => enabled.has(C.id) && (!ONLY || C.id === ONLY));
 
   console.log('=== 运行 Collectors（Phase 1）===');
   console.log('模式: ' + (OFFLINE ? 'offline (fixtures)' : 'network') + (SIM ? ` | 模拟失败: ${SIM}` : ''));
-  console.log('启用源: ' + active.map((c) => c.id).join(', ') + `  (共 ${all.length} 个适配器)`);
+  const scope = ONLY ? `（仅 ${ONLY}）` : '';
+  console.log('启用源: ' + active.map((c) => c.id).join(', ') + `  (共 ${all.length} 个适配器)${scope}`);
 
   const results = [];
   for (const C of active) {

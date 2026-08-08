@@ -1,0 +1,6 @@
+[
+  { "id": "deepseek-v3", "input": 0.30, "output": 1.00, "context": 128000, "max_output": 8000, "release_date": "2025", "status": "active" },
+  { "id": "deepseek-v3-2", "input": 0.28, "output": 0.42, "context": 128000, "max_output": 8000, "release_date": "2026", "status": "active" },
+  { "id": "deepseek-r1", "input": 0.55, "output": 2.19, "context": 128000, "max_output": 8000, "release_date": "2025", "status": "active" },
+  { "id": "deepseek-coder", "input": 0.14, "output": 0.28, "context": 16000, "max_output": 8000, "release_date": "2025", "status": "active" }
+]

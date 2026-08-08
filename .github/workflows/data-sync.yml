@@ -1,10 +1,12 @@
 name: Data Sync
 
-# Phase 2 —— 自动开 PR（不自动合并）+ 扩展 Cloudflare / HuggingFace
-# 行为：跑启用源 Collector（含 Cloudflare / HuggingFace）→ Schema 校验 → 差异报告 →
-#       有「字段变动」自动开 PR（data-sync/<date> → master，人审后 merge）；
+# Phase 2/3 —— 自动开 PR + 受限安全自动合并 + 扩展 13 家厂商
+# 行为：跑启用源 Collector（13 家）→ Schema 校验 → 差异报告 →
+#       有「字段变动」默认自动开 PR（data-sync/<date> → master，人审后 merge）；
+#       当 workflow_dispatch 开启 auto_merge_safe 且 diff 纯为价格/辅助字段变动、无新增/弃用/失败源时，
+#       直接合入 master（绕过 PR，自动合并，默认关）；
 #       仅「新增候选 / 失败源」退化建 Issue 通知；异常仍建 Issue 告警。
-# 关键约束：自动开 PR、不自动合并、不自动部署；free / 定性字段始终不碰（apply_staging 已拦截）。
+# 关键约束：默认不开自动合并、不自动部署；free / 定性字段始终不碰（apply_staging 已拦截）。
 on:
   schedule:
     - cron: '23 3 * * 1'          # 每周一 03:23 UTC（避开整点，非每日）
@@ -12,6 +14,10 @@ on:
     inputs:
       dry_run:
         description: '仅生成差异报告 + 建 Issue 通知，不开 PR'
+        type: boolean
+        default: false
+      auto_merge_safe:
+        description: '安全自动合并：仅当 diff 纯为价格/辅助字段变动时直接合 master（默认关，需人审时留 false）'
         type: boolean
         default: false
 
@@ -42,11 +48,11 @@ jobs:
       - name: 生成差异报告
         run: node scripts/diff_data.cjs
 
-      - name: 自动开 PR（不自动合并）
+      - name: 自动开 PR / 安全自动合并
         if: ${{ !inputs.dry_run && success() }}
         env:
           GH_TOKEN: ${{ github.token }}
-        run: node scripts/stage_pr.cjs --create
+        run: node scripts/stage_pr.cjs --create ${{ inputs.auto_merge_safe == true && '--auto-merge-safe' || '' }}
 
       - name: 仅报告模式（dry_run，不开 PR）
         if: ${{ inputs.dry_run && success() }}

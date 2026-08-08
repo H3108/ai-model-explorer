@@ -1,0 +1,4 @@
+[
+  { "id": "together-llama-3-3-70b", "input": 0.88, "output": 0.88, "context": 131072, "max_output": 32768, "release_date": "2025", "status": "active" },
+  { "id": "together-qwen2-5-72b", "input": 0.90, "output": 0.90, "context": 131072, "max_output": 32768, "release_date": "2025", "status": "active" }
+]

@@ -1,11 +1,18 @@
 {
-  "enabled": ["openai", "anthropic", "google-gemini", "nvidia-nim", "cloudflare", "huggingface"],
+  "enabled": ["openai", "anthropic", "google-gemini", "nvidia-nim", "cloudflare", "huggingface", "deepseek", "qwen", "zhipu", "groq", "together", "replicate", "fal-ai"],
   "sources": {
     "openai": { "label": "OpenAI", "provider_id": "openai", "source_url": "https://openai.com/pricing" },
     "anthropic": { "label": "Anthropic", "provider_id": "anthropic", "source_url": "https://www.anthropic.com/pricing" },
     "google-gemini": { "label": "Google Gemini", "provider_id": "google", "source_url": "https://ai.google.dev/gemini-api/docs/pricing" },
     "nvidia-nim": { "label": "NVIDIA NIM", "provider_id": "nvidia-nim", "source_url": "https://build.nvidia.com/" },
     "cloudflare": { "label": "Cloudflare Workers AI", "provider_id": "cloudflare", "source_url": "https://developers.cloudflare.com/workers-ai/models/" },
-    "huggingface": { "label": "Hugging Face Inference", "provider_id": "huggingface", "source_url": "https://huggingface.co/models?pipeline_tag=text-generation&sort=likes" }
+    "huggingface": { "label": "Hugging Face Inference", "provider_id": "huggingface", "source_url": "https://huggingface.co/models?pipeline_tag=text-generation&sort=likes" },
+    "deepseek": { "label": "DeepSeek", "provider_id": "deepseek", "source_url": "https://platform.deepseek.com/api/v1/models" },
+    "qwen": { "label": "Qwen", "provider_id": "alibaba-qwen", "source_url": "https://help.aliyun.com/zh/model-studio/models" },
+    "zhipu": { "label": "Zhipu GLM", "provider_id": "zhipu-glm", "source_url": "https://open.bigmodel.cn/pricing" },
+    "groq": { "label": "Groq", "provider_id": "groq", "source_url": "https://console.groq.com/docs/pricing" },
+    "together": { "label": "Together AI", "provider_id": "together", "source_url": "https://api.together.xyz/pricing" },
+    "replicate": { "label": "Replicate", "provider_id": "replicate", "source_url": "https://replicate.com/pricing" },
+    "fal-ai": { "label": "fal.ai", "provider_id": "fal-ai", "source_url": "https://fal.ai/models" }
   }
 }

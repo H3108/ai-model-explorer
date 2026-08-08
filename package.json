@@ -22,6 +22,8 @@
     "staging:apply:do": "node scripts/apply_staging.cjs --apply",
     "stage:pr": "node scripts/stage_pr.cjs",
     "stage:pr:create": "node scripts/stage_pr.cjs --create",
+    "stage:pr:auto": "node scripts/stage_pr.cjs --auto-merge-safe",
+    "stage:pr:auto:do": "node scripts/stage_pr.cjs --create --auto-merge-safe",
     "deploy": "bash scripts/deploy.sh"
   },
   "engines": {
