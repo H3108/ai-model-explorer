@@ -30,12 +30,12 @@ EXCLUDES=(
 echo "→ 部署 ${SERVER_USER}@${SERVER_HOST}:${DEPLOY_PATH}"
 
 # 先在远端建目录（不存在则建），并保留上一版便于回滚
-ssh -p "${SERVER_PORT}" -i "${SSH_KEY}" "${SERVER_USER}@${SERVER_HOST}" \
+ssh -p "${SERVER_PORT}" -i "${SSH_KEY}" -o StrictHostKeyChecking=no "${SERVER_USER}@${SERVER_HOST}" \
   "mkdir -p ${DEPLOY_PATH} && rm -rf ${DEPLOY_PATH}.old && cp -r ${DEPLOY_PATH} ${DEPLOY_PATH}.old 2>/dev/null || true"
 
 # 镜像同步（--delete 保证服务器与本地完全一致）
 rsync -avz --delete "${EXCLUDES[@]}" \
-  -e "ssh -p ${SERVER_PORT} -i ${SSH_KEY}" \
+  -e "ssh -p ${SERVER_PORT} -i ${SSH_KEY} -o StrictHostKeyChecking=no" \
   ./ "${SERVER_USER}@${SERVER_HOST}:${DEPLOY_PATH}/"
 
 echo "✓ 部署完成。刷新你的子域名即可看到更新。"

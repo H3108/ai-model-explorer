@@ -102,11 +102,7 @@ jobs:
 
   deploy:
     needs: [collect]
-    if: >-
-      ${{
-        (github.event_name == 'push' && github.ref == 'refs/heads/master') ||
-        (github.event_name == 'workflow_dispatch' && inputs.deploy)
-      }}
+    if: ${{ (github.event_name == 'push' && github.ref == 'refs/heads/master') || (github.event_name == 'workflow_dispatch' && inputs.deploy) }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
