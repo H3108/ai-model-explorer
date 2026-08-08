@@ -1,30 +1,22 @@
-import { BaseCollector, toNum, toInt } from './_base.js';
+import { BaseCollector } from './_base.js';
+import { collectFromOpenRouter } from './_openrouter.js';
 
+// DeepSeek —— 真实源：OpenRouter 聚合。
+// 注意：本站 deepseek-v3 / r1 与 OpenRouter 现网 deepseek-v4 存在版本漂移，当前精确匹配不上 -> 不产生更新；
+// 当本站型号升级到与 OpenRouter 对齐的版本时，本适配器会自动开始产出真实更新（无需改代码）。
 export default class DeepseekCollector extends BaseCollector {
   static id = 'deepseek';
   static label = 'DeepSeek';
   static official = true;
   static requiresKey = false;
-  static sourceUrl = 'https://platform.deepseek.com/api/v1/models';
+  static sourceUrl = 'https://openrouter.ai/models';
   static providerId = 'deepseek';
 
   async fetchRaw() {
-    if (this.ctx.offline) return this.ctx.fixture;
-    // 真实源（best-effort）：DeepSeek 模型/定价。HTML 结构化解析属后续阶段。
-    return this.request(DeepseekCollector.sourceUrl, { timeoutMs: 15000 });
+    if (this.ctx.offline) { this._coverage = (this.ctx.fixture || []).map((f) => f.id); return this.ctx.fixture; }
+    const r = await collectFromOpenRouter(this.constructor.providerId);
+    this._coverage = r.coverage;
+    return r;
   }
-
-  normalize(raw) {
-    if (!Array.isArray(raw)) return [];
-    return raw.map((m) => ({
-      id: m.id,
-      input_price_per_mtok: toNum(m.input),
-      output_price_per_mtok: toNum(m.output),
-      context_window: toInt(m.context),
-      max_output_tokens: toInt(m.max_output),
-      release_date: m.release_date,
-      status: m.status || 'active',
-      source_url: m.source_url || DeepseekCollector.sourceUrl,
-    }));
-  }
+  normalize(raw) { return (raw && raw.patches) ? raw.patches : (Array.isArray(raw) ? raw : []); }
 }

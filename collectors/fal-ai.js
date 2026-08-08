@@ -1,30 +1,21 @@
-import { BaseCollector, toNum, toInt } from './_base.js';
+import { BaseCollector } from './_base.js';
 
+// fal.ai —— 真实源待接入：OpenRouter 未覆盖 fal.ai；官方模型 API 需 API Key。
+// 联网模式 coverage=[] 不产生 patch（避免假 diff）；离线模式仍用 fixtures。
 export default class FalAiCollector extends BaseCollector {
   static id = 'fal-ai';
   static label = 'fal.ai';
   static official = true;
   static requiresKey = false;
+  static realSource = false;
   static sourceUrl = 'https://fal.ai/models';
   static providerId = 'fal-ai';
 
   async fetchRaw() {
-    if (this.ctx.offline) return this.ctx.fixture;
-    // 真实源（best-effort）：fal.ai 模型/定价。HTML 结构化解析属后续阶段。
-    return this.request(FalAiCollector.sourceUrl, { timeoutMs: 15000 });
+    if (this.ctx.offline) { this._coverage = (this.ctx.fixture || []).map((f) => f.id); return this.ctx.fixture; }
+    this.log('  ⚠ fal.ai: 真实源待接入，联网模式跳过（不参与真实更新）');
+    this._coverage = [];
+    return [];
   }
-
-  normalize(raw) {
-    if (!Array.isArray(raw)) return [];
-    return raw.map((m) => ({
-      id: m.id,
-      input_price_per_mtok: toNum(m.input),
-      output_price_per_mtok: toNum(m.output),
-      context_window: toInt(m.context),
-      max_output_tokens: toInt(m.max_output),
-      release_date: m.release_date,
-      status: m.status || 'active',
-      source_url: m.source_url || FalAiCollector.sourceUrl,
-    }));
-  }
+  normalize(raw) { return Array.isArray(raw) ? raw : []; }
 }

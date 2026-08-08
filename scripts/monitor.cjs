@@ -7,7 +7,7 @@
 // 输出：
 //   data/.staging/HEALTH_REPORT.md   （人读报告）
 //   data/.staging/health.json        （结构化告警，供 CI / stage_pr 消费）
-//   data/.staging/health_state.json  （跨运行连续失败计数，gitignored）
+//   data/_monitor_state.json          （跨运行连续失败计数，已纳入 git 跟踪，供 CI 跨次持久化）
 //
 // 告警维度（对应 Phase 4 四项）：
 //   1) 免费层监控：free:true 但官方源给出价格>0（数据诚信错误）；free:true 但 free_note 缺失；非 free 但官方源价格=0（疑似漏标免费）
@@ -129,28 +129,35 @@ function main() {
             `${f}: 0 → ${newV}（曾标价格 0 的型号开始收费，需人工确认是否仍免费）`);
         }
       }
-      // 字段回退为 null（数据缺失）
+      // 字段回退为 null（仅当源「显式」给 null 才算回退；源不提供该字段=undefined 属正常，不算回退）
       for (const f of ['context_window', 'max_output_tokens', 'input_price_per_mtok', 'output_price_per_mtok']) {
         const oldV = cur[f];
         const newV = p[f];
-        if (typeof oldV === 'number' && (newV === null || newV === undefined)) {
+        if (typeof oldV === 'number' && newV === null) {
           add('warn', 'field-regression', p.id, p.provider_id, `${f} 由 ${oldV} 回退为 null（字段缺失，需排查采集）`);
         }
       }
     }
   }
 
-  // 疑似下架：站内该 provider 的型号，官方源本次未返回
-  for (const [pid, ids] of Object.entries(returnedByProvider)) {
+  // 疑似下架：仅在该源「实际覆盖」的型号范围内判断（coverage = 该源本次主动跟踪的型号 id）。
+  // 避免未接入真实源/版本漂移的源把「本站有但没采到」误判为下架（如智谱媒体模型不在 OpenRouter 覆盖内）。
+  const coverageByProvider = {};
+  for (const s of sources) {
+    if (s.status !== 'ok' || !s.coverage) continue;
+    (coverageByProvider[s.provider_id] = coverageByProvider[s.provider_id] || []).push(...s.coverage);
+  }
+  for (const [pid, cov] of Object.entries(coverageByProvider)) {
+    const covSet = new Set(cov);
     for (const [id, cur] of dataMap) {
-      if (cur.provider_id === pid && !ids.has(id)) {
+      if (cur.provider_id === pid && covSet.has(id) && !returnedByProvider[pid].has(id)) {
         add('warn', 'missing-from-source', id, pid, `站内存在但官方源本次未返回（疑似下架，需人工核销）`);
       }
     }
   }
 
   // —— 4) 采集健康 + 连续失败跟踪 ——
-  const statePath = path.join(STAGING, 'health_state.json');
+  const statePath = path.join(ROOT, 'data', '_monitor_state.json');
   const prevState = loadJson(statePath) || { consecutive: {} };
   const consecutive = Object.assign({}, prevState.consecutive || {});
   for (const s of sources) {

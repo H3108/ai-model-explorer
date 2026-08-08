@@ -85,6 +85,21 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: gh issue create --title "数据同步异常 $(date +%F)" --body "见 run log" || true
 
+      - name: 提交监控状态（跨次持久化连续失败计数）
+        if: ${{ (github.event_name == 'schedule' || github.event_name == 'workflow_dispatch') && success() }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git remote set-url origin "https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git"
+          git add data/_monitor_state.json
+          if git diff --cached --quiet; then
+            echo "监控状态无变化，跳过提交"
+          else
+            git commit -m "chore: update monitor state [skip ci]" && git push
+          fi
+
   deploy:
     needs: [collect]
     if: >-

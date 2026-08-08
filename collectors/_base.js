@@ -62,6 +62,7 @@ export class BaseCollector {
         status: 'ok',
         count: patches.length,
         patches,
+        coverage: this._coverage || [],
         elapsedMs: Date.now() - started,
       };
     } catch (err) {
@@ -74,6 +75,7 @@ export class BaseCollector {
         error: msg,
         count: 0,
         patches: [],
+        coverage: this._coverage || [],
         elapsedMs: Date.now() - started,
       };
     }

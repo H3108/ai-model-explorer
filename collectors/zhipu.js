@@ -1,30 +1,20 @@
-import { BaseCollector, toNum, toInt } from './_base.js';
+import { BaseCollector } from './_base.js';
+import { collectFromOpenRouter } from './_openrouter.js';
 
+// Zhipu GLM —— 真实源：OpenRouter 聚合（覆盖本站 zhipu-glm 下可精确匹配的型号）
 export default class ZhipuCollector extends BaseCollector {
   static id = 'zhipu';
   static label = 'Zhipu GLM';
   static official = true;
   static requiresKey = false;
-  static sourceUrl = 'https://open.bigmodel.cn/pricing';
+  static sourceUrl = 'https://openrouter.ai/models';
   static providerId = 'zhipu-glm';
 
   async fetchRaw() {
-    if (this.ctx.offline) return this.ctx.fixture;
-    // 真实源（best-effort）：智谱大模型定价。HTML 结构化解析属后续阶段。
-    return this.request(ZhipuCollector.sourceUrl, { timeoutMs: 15000 });
+    if (this.ctx.offline) { this._coverage = (this.ctx.fixture || []).map((f) => f.id); return this.ctx.fixture; }
+    const r = await collectFromOpenRouter(this.constructor.providerId);
+    this._coverage = r.coverage;
+    return r;
   }
-
-  normalize(raw) {
-    if (!Array.isArray(raw)) return [];
-    return raw.map((m) => ({
-      id: m.id,
-      input_price_per_mtok: toNum(m.input),
-      output_price_per_mtok: toNum(m.output),
-      context_window: toInt(m.context),
-      max_output_tokens: toInt(m.max_output),
-      release_date: m.release_date,
-      status: m.status || 'active',
-      source_url: m.source_url || ZhipuCollector.sourceUrl,
-    }));
-  }
+  normalize(raw) { return (raw && raw.patches) ? raw.patches : (Array.isArray(raw) ? raw : []); }
 }

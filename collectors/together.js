@@ -1,31 +1,21 @@
-import { BaseCollector, toNum, toInt } from './_base.js';
+import { BaseCollector } from './_base.js';
 
+// Together AI —— 真实源待接入：OpenRouter 未覆盖 Together；官方 /v1/models 需 API Key。
+// 联网模式 coverage=[] 不产生 patch（避免假 diff）；离线模式仍用 fixtures。
 export default class TogetherCollector extends BaseCollector {
   static id = 'together';
   static label = 'Together AI';
   static official = true;
   static requiresKey = false;
+  static realSource = false;
   static sourceUrl = 'https://api.together.xyz/pricing';
   static providerId = 'together';
 
   async fetchRaw() {
-    if (this.ctx.offline) return this.ctx.fixture;
-    // 真实源（best-effort）：Together 模型/定价。HTML 结构化解析属后续阶段。
-    return this.request(TogetherCollector.sourceUrl, { timeoutMs: 15000 });
+    if (this.ctx.offline) { this._coverage = (this.ctx.fixture || []).map((f) => f.id); return this.ctx.fixture; }
+    this.log('  ⚠ Together: 真实源待接入，联网模式跳过（不参与真实更新）');
+    this._coverage = [];
+    return [];
   }
-
-  // 输出仅含白名单客观字段；站内暂无对应记录 → diff 阶段归为「新增候选」(news)
-  normalize(raw) {
-    if (!Array.isArray(raw)) return [];
-    return raw.map((m) => ({
-      id: m.id,
-      input_price_per_mtok: toNum(m.input),
-      output_price_per_mtok: toNum(m.output),
-      context_window: toInt(m.context),
-      max_output_tokens: toInt(m.max_output),
-      release_date: m.release_date,
-      status: m.status || 'active',
-      source_url: m.source_url || TogetherCollector.sourceUrl,
-    }));
-  }
+  normalize(raw) { return Array.isArray(raw) ? raw : []; }
 }

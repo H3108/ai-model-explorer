@@ -1,30 +1,20 @@
-import { BaseCollector, toNum, toInt } from './_base.js';
+import { BaseCollector } from './_base.js';
+import { collectFromOpenRouter } from './_openrouter.js';
 
+// OpenAI —— 真实源：OpenRouter 聚合（覆盖本站 openai-* 型号的真实定价/上下文，免密钥）
 export default class OpenAICollector extends BaseCollector {
   static id = 'openai';
   static label = 'OpenAI';
   static official = true;
   static requiresKey = false;
-  static sourceUrl = 'https://openai.com/pricing';
+  static sourceUrl = 'https://openrouter.ai/models';
   static providerId = 'openai';
 
   async fetchRaw() {
-    if (this.ctx.offline) return this.ctx.fixture;
-    // 真实源（best-effort）：OpenAI 定价 JSON。HTML 结构化解析属后续阶段（见 DATA_SYNC_PLAN.md）。
-    return this.request('https://openai.com/api/pricing.json', { timeoutMs: 15000 });
+    if (this.ctx.offline) { this._coverage = (this.ctx.fixture || []).map((f) => f.id); return this.ctx.fixture; }
+    const r = await collectFromOpenRouter(this.constructor.providerId);
+    this._coverage = r.coverage;
+    return r;
   }
-
-  normalize(raw) {
-    if (!Array.isArray(raw)) return [];
-    return raw.map((m) => ({
-      id: m.id || `openai-${m.slug}`,
-      input_price_per_mtok: toNum(m.input),
-      output_price_per_mtok: toNum(m.output),
-      context_window: toInt(m.context),
-      max_output_tokens: toInt(m.max_output),
-      release_date: m.release_date,
-      status: m.status || 'active',
-      source_url: m.source_url || OpenAICollector.sourceUrl,
-    }));
-  }
+  normalize(raw) { return (raw && raw.patches) ? raw.patches : (Array.isArray(raw) ? raw : []); }
 }

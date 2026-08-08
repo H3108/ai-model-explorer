@@ -56,11 +56,18 @@ function main() {
     if (fieldChanges.length) changes.push({ id: p.id, provider_id: p.provider_id, fields: fieldChanges });
   }
 
-  // 疑似下架：站内该 provider 的型号，官方源这次没返回
+  // 疑似下架：仅在该源「实际覆盖」的型号范围内判断（coverage = 该源本次主动跟踪的型号 id）。
+  // 避免未接入真实源/版本漂移的源把「本站有但没采到」误判为下架。
+  const coverageByProvider = {};
+  for (const s of (collected.sources || [])) {
+    if (s.status !== 'ok' || !s.coverage) continue;
+    (coverageByProvider[s.provider_id] = coverageByProvider[s.provider_id] || []).push(...s.coverage);
+  }
   const deprecated = [];
-  for (const [pid, ids] of Object.entries(returnedByProvider)) {
+  for (const [pid, cov] of Object.entries(coverageByProvider)) {
+    const covSet = new Set(cov);
     for (const [id, cur] of map) {
-      if (cur.provider_id === pid && !ids.has(id)) deprecated.push({ id, provider_id: pid });
+      if (cur.provider_id === pid && covSet.has(id) && !returnedByProvider[pid].has(id)) deprecated.push({ id, provider_id: pid });
     }
   }
 

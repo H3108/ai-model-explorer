@@ -52,7 +52,7 @@ async function main() {
   const out = {
     generated_at: new Date().toISOString().slice(0, 10),
     mode: OFFLINE ? 'offline' : 'network',
-    sources: results.map((r) => ({ source: r.source, status: r.status, count: r.count, error: r.error || null })),
+    sources: results.map((r) => ({ source: r.source, provider_id: r.provider_id, status: r.status, count: r.count, coverage: r.coverage || [], error: r.error || null })),
     patches,
   };
   if (!DRY) {
