@@ -20,14 +20,45 @@ data/.staging/
 # 内部走查 / 过程文档（不发布到 GitHub）
 设计走查报告.md
 
-# 密钥安全网（防御：日后若误加 env / 密钥文件）
+# 密钥安全网（防御：日后若误加 env / 密钥 / 凭证文件）
 .env
 .env.*
 *.local
+# 私钥 / 证书
 *.pem
 *.key
+*.p12
+*.pfx
+*.keystore
+*.jks
+*.der
+*.crt
+*.cer
+# 凭证文件（json / yaml 变体）
 credentials.json
+credentials.yml
+credentials.yaml
 secrets.json
+secrets.yaml
+service-account.json
+# 基础设施状态（可能含密钥）
+*.tfstate
+*.tfstate.backup
+# 无扩展名 SSH 私钥
+id_rsa
+id_dsa
+id_ecdsa
+id_ed25519
 
 # 文档目录（内部报告/审计/走查/设计稿，不推送 GitHub）
 docs/
+
+# 编辑器 / OS 临时文件（避免污染仓库）
+*.swp
+*.swo
+*~
+*.bak
+*.tmp
+Thumbs.db
+.idea/
+.vscode/
