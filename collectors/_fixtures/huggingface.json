@@ -1,0 +1,22 @@
+[
+  {
+    "id": "huggingface-llama-3.1-8b",
+    "slug": "meta-llama/Llama-3.1-8B",
+    "input": 0,
+    "output": 0,
+    "context": 131072,
+    "max_output": 8192,
+    "release_date": "2024-07-23",
+    "status": "active"
+  },
+  {
+    "id": "huggingface-qwen2.5-72b-instruct",
+    "slug": "Qwen/Qwen2.5-72B-Instruct",
+    "input": 0.4,
+    "output": 0.4,
+    "context": 131072,
+    "max_output": 8192,
+    "release_date": "2024-09-19",
+    "status": "active"
+  }
+]

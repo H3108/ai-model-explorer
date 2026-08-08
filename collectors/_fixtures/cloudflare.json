@@ -1,0 +1,22 @@
+[
+  {
+    "id": "cloudflare-llama-3.1-8b-instruct",
+    "slug": "llama-3.1-8b-instruct",
+    "input": 0,
+    "output": 0,
+    "context": 128000,
+    "max_output": 8192,
+    "release_date": "2024-07-23",
+    "status": "active"
+  },
+  {
+    "id": "cloudflare-llama-3.3-70b-instruct",
+    "slug": "llama-3.3-70b-instruct",
+    "input": 0.59,
+    "output": 0.79,
+    "context": 128000,
+    "max_output": 8192,
+    "release_date": "2024-12-06",
+    "status": "active"
+  }
+]

@@ -1,15 +1,23 @@
 name: Data Sync
 
-# Phase 1 —— Collector 试点：每周一 + 手动触发
-# 行为：跑启用源 Collector → Schema 校验 → 生成差异报告 → 有 diff 推 data-staging 分支 + 建 Issue 通知
-# 关键约束：不开 PR、不自动改主数据、不自动部署（人工 review 后用本地 apply_staging.cjs 合入）
+# Phase 2 —— 自动开 PR（不自动合并）+ 扩展 Cloudflare / HuggingFace
+# 行为：跑启用源 Collector（含 Cloudflare / HuggingFace）→ Schema 校验 → 差异报告 →
+#       有「字段变动」自动开 PR（data-sync/<date> → master，人审后 merge）；
+#       仅「新增候选 / 失败源」退化建 Issue 通知；异常仍建 Issue 告警。
+# 关键约束：自动开 PR、不自动合并、不自动部署；free / 定性字段始终不碰（apply_staging 已拦截）。
 on:
   schedule:
     - cron: '23 3 * * 1'          # 每周一 03:23 UTC（避开整点，非每日）
-  workflow_dispatch:              # 手动触发
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: '仅生成差异报告 + 建 Issue 通知，不开 PR'
+        type: boolean
+        default: false
 
 permissions:
   contents: write
+  pull-requests: write
   issues: write
 
 jobs:
@@ -17,13 +25,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
 
-      - name: 运行 Collectors（仅启用源）
+      - name: 运行 Collectors（启用源，含 Cloudflare / HuggingFace）
         run: node scripts/run_collectors.cjs
 
       - name: Schema 校验（失败即阻断）
@@ -32,22 +42,17 @@ jobs:
       - name: 生成差异报告
         run: node scripts/diff_data.cjs
 
-      - name: 有变更 → 推 data-staging 分支 + 建 Issue 通知（不开 PR）
-        if: success()
+      - name: 自动开 PR（不自动合并）
+        if: ${{ !inputs.dry_run && success() }}
         env:
           GH_TOKEN: ${{ github.token }}
-        run: |
-          if [ ! -s data/.staging/diff.json ]; then echo "无 diff 产物，跳过"; exit 0; fi
-          SUMMARY=$(node -e "const d=require('./data/.staging/diff.json');console.log((d.changes||[]).length+' 字段变动 / '+(d.news||[]).length+' 新增 / '+(d.deprecated||[]).length+' 疑似下架 / '+(d.failed||[]).length+' 失败源')")
-          if [ "$SUMMARY" = "0 字段变动 / 0 新增 / 0 疑似下架 / 0 失败源" ]; then echo "无变化，跳过"; exit 0; fi
-          git config user.email "bot@github.com"
-          git config user.name "data-sync"
-          git checkout -B data-staging
-          git add -f data/.staging/
-          git commit -m "chore: data staging $(date +%F)" || exit 0
-          git push -f origin data-staging
-          gh issue create --title "数据同步差异 $(date +%F) — ${SUMMARY}" \
-            --body "$(cat data/.staging/DATA_UPDATE_REPORT.md)" || true
+        run: node scripts/stage_pr.cjs --create
+
+      - name: 仅报告模式（dry_run，不开 PR）
+        if: ${{ inputs.dry_run && success() }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: node scripts/stage_pr.cjs --create --issue-only
 
       - name: 异常告警
         if: failure()

@@ -5,7 +5,9 @@
     "openai": { "enabled": true, "last_sync": null, "status": "pending" },
     "anthropic": { "enabled": true, "last_sync": null, "status": "pending" },
     "google-gemini": { "enabled": true, "last_sync": null, "status": "pending" },
-    "nvidia-nim": { "enabled": true, "last_sync": null, "status": "pending" }
+    "nvidia-nim": { "enabled": true, "last_sync": null, "status": "pending" },
+    "cloudflare": { "enabled": true, "last_sync": null, "status": "pending" },
+    "huggingface": { "enabled": true, "last_sync": null, "status": "pending" }
   },
   "sync_status": "idle"
 }

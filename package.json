@@ -20,6 +20,8 @@
     "diff": "node scripts/diff_data.cjs",
     "staging:apply": "node scripts/apply_staging.cjs",
     "staging:apply:do": "node scripts/apply_staging.cjs --apply",
+    "stage:pr": "node scripts/stage_pr.cjs",
+    "stage:pr:create": "node scripts/stage_pr.cjs --create",
     "deploy": "bash scripts/deploy.sh"
   },
   "engines": {
