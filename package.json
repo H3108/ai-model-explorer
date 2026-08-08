@@ -24,6 +24,8 @@
     "stage:pr:create": "node scripts/stage_pr.cjs --create",
     "stage:pr:auto": "node scripts/stage_pr.cjs --auto-merge-safe",
     "stage:pr:auto:do": "node scripts/stage_pr.cjs --create --auto-merge-safe",
+    "monitor": "node scripts/monitor.cjs",
+    "monitor:check": "node scripts/monitor.cjs --fail-on=error",
     "deploy": "bash scripts/deploy.sh"
   },
   "engines": {
