@@ -27,10 +27,10 @@
   --success-fg: #1c7a52;
   --warning: #e8a33d;
   --warning-soft: #fff2e3;
-  --warning-fg: #b4691b;
+  --warning-fg: #94530d;        /* P2-6 收尾：压暗达标（3.83→5.44:1 on --warning-soft，AA 正文） */
   --error: #e06b6b;
   --error-soft: #ffeee1;
-  --error-fg: #bd5c12;
+  --error-fg: #92450c;          /* P2-6 收尾：压暗达标（3.95→6.03:1 on --error-soft，AA 正文） */
   --on-brand: #ffffff;        /* 品牌 / 状态色之上的前景文字 */
 
   /* 强调（保留既有识别色） */
@@ -40,7 +40,7 @@
   /* 模态 / 语言分类（category） */
   --category-text-bg: #e6f2ea;   --category-text-fg: #1d6b4f;
   --category-image-bg: #efeaff;  --category-image-fg: #5f42d6;
-  --category-video-bg: #fff2e3;  --category-video-fg: #b4691b;
+  --category-video-bg: #fff2e3;  --category-video-fg: #94530d;   /* 与 --warning-fg 同底色同达标 */
   --category-audio-bg: #e6f0f2;  --category-audio-fg: #2f6f8f;
   --category-agent-bg: #f3e6f2;  --category-agent-fg: #7d3aa0;
 
@@ -61,6 +61,7 @@
   /* ---- 间距（4px 系统，DESIGN_REVIEW §10） ---- */
   --space-1: 4px;  --space-2: 8px;  --space-3: 12px; --space-4: 16px;
   --space-5: 24px; --space-6: 32px; --space-7: 48px; --space-8: 64px;
+  --page-gutter: 26px;   /* 页面左右留白 / 标准区块间距（P2-6 收口：统一间距裸值） */
 
   /* ---- 字阶（P2-6 收口：统一裸 font-size 进 Token；半像素档折叠进相邻整数档） ---- */
   --text-2xs: 10px;
@@ -139,8 +140,8 @@ code, pre, .mono {
 }
 
 /* ---------------- 布局 ---------------- */
-.wrap { max-width: 1180px; margin: auto; padding: 0 26px; }
-.page { padding: 40px 26px 90px; }
+.wrap { max-width: 1180px; margin: auto; padding: 0 var(--page-gutter); }
+.page { padding: 40px var(--page-gutter) 90px; }
 .app-view { min-height: 70vh; }
 
 .page-head { margin-bottom: 28px; }
@@ -176,7 +177,7 @@ code, pre, .mono {
 .topbar {
   height: 72px;
   border-bottom: 1px solid var(--line);
-  padding: 0 max(26px, calc((100vw - 1180px) / 2));
+  padding: 0 max(var(--page-gutter), calc((100vw - 1180px) / 2));
   display: flex;
   align-items: center;
   gap: 44px;
@@ -193,7 +194,7 @@ code, pre, .mono {
   display: block; object-fit: contain;
   background: transparent;
 }
-#main-nav { display: flex; gap: 26px; margin-right: auto; }
+#main-nav { display: flex; gap: var(--page-gutter); margin-right: auto; }
 #main-nav a {
   text-decoration: none; font-size: var(--text-md); color: var(--muted);
   padding: 6px 0; border-bottom: 2px solid transparent; transition: color .15s, border-color .15s;
@@ -207,7 +208,7 @@ code, pre, .mono {
 }
 .footer {
   border-top: 1px solid var(--line);
-  padding: 26px; display: flex; justify-content: space-between;
+  padding: var(--page-gutter); display: flex; justify-content: space-between;
   color: var(--muted); font-size: var(--text-base); flex-wrap: wrap; gap: var(--space-2);
 }
 
@@ -273,7 +274,7 @@ select { padding: var(--space-2) var(--space-3); border-radius: var(--r-sm); }
   border-radius: var(--r-md); padding: 10px 14px; margin: 0 0 22px;
 }
 
-.tabs { display: flex; gap: var(--space-2); border-bottom: 1px solid var(--line); margin-bottom: 26px; }
+.tabs { display: flex; gap: var(--space-2); border-bottom: 1px solid var(--line); margin-bottom: var(--page-gutter); }
 .tabs button {
   background: none; border: 0; border-bottom: 2px solid transparent;
   padding: 10px var(--space-1); margin-right: 20px; cursor: pointer;
@@ -337,7 +338,7 @@ select { padding: var(--space-2) var(--space-3); border-radius: var(--r-sm); }
 .bm-lg img { width: 36px; height: 36px; }
 
 /* ---------------- 首页 ---------------- */
-.hero { padding: 58px 26px 44px; }
+.hero { padding: 58px var(--page-gutter) 44px; }
 .hero-single { max-width: 760px; margin: 0 auto; text-align: center; }
 .hero-copy.hero-center { display: flex; flex-direction: column; align-items: center; }
 .hero h1 { font-size: var(--text-hero); font-weight: 800; letter-spacing: -.03em; margin-bottom: 14px; line-height: 1.08; }
@@ -382,7 +383,7 @@ select { padding: var(--space-2) var(--space-3); border-radius: var(--r-sm); }
 }
 .rs-chip:hover { border-color: var(--brand-accent); color: var(--brand); background: var(--brand-soft); }
 .hero-browse { display: inline-block; margin-top: 18px; font-size: var(--text-md); }
-.section-foot { display: flex; justify-content: center; margin-top: 26px; }
+.section-foot { display: flex; justify-content: center; margin-top: var(--page-gutter); }
 
 /* 首页零成本入口：免费模型 */
 .free-band {
@@ -521,7 +522,7 @@ select { padding: var(--space-2) var(--space-3); border-radius: var(--r-sm); }
 .entity-head {
   display: flex; gap: 22px; align-items: flex-start;
   background: var(--card); border: 1px solid var(--line); border-radius: var(--r-xl);
-  padding: 28px; margin-bottom: 26px; position: relative; overflow: hidden;
+  padding: 28px; margin-bottom: var(--page-gutter); position: relative; overflow: hidden;
 }
 .entity-head::before {
   content: ''; position: absolute; inset: 0 0 auto 0; height: 4px;
@@ -843,7 +844,7 @@ select { padding: var(--space-2) var(--space-3); border-radius: var(--r-sm); }
 .result-count b { color: var(--deep); }
 
 /* ---------------- 浏览页 ---------------- */
-.browse-layout { display: grid; grid-template-columns: 268px 1fr; gap: 26px; align-items: start; }
+.browse-layout { display: grid; grid-template-columns: 268px 1fr; gap: var(--page-gutter); align-items: start; }
 .browse-results { min-width: 0; }
 .filter-panel {
   background: var(--card); border: 1px solid var(--line); border-radius: var(--r-lg);
@@ -907,7 +908,7 @@ select { padding: var(--space-2) var(--space-3); border-radius: var(--r-sm); }
 
 /* ---------------- 匹配器 ---------------- */
 .matcher-page { background: var(--background); }
-.matcher-layout { display: grid; grid-template-columns: 380px 1fr; gap: 26px; align-items: start; }
+.matcher-layout { display: grid; grid-template-columns: 380px 1fr; gap: var(--page-gutter); align-items: start; }
 .matcher-form {
   background: var(--card); border: 1px solid var(--line); border-radius: var(--r-lg); padding: var(--space-5);
 }
@@ -1113,7 +1114,7 @@ select { padding: var(--space-2) var(--space-3); border-radius: var(--r-sm); }
 
 @media (max-width: 720px) {
   /* 顶栏折行已在 ≤960px 断点统一处理 */
-  .page { padding-block: 26px 60px; padding-inline: 18px; }
+  .page { padding-block: var(--page-gutter) 60px; padding-inline: 18px; }
   .wrap { padding-inline: 18px; }
   .page-head h1, .hero h1 { font-size: var(--text-10xl); }
   .eh-main h1 { font-size: var(--text-7xl); }
