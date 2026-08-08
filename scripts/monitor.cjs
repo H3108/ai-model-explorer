@@ -79,14 +79,20 @@ function main() {
   for (const p of patches) {
     const cur = dataMap.get(p.id);
     const isFree = !!(cur && cur.free === true);
+    const isOverride = isFree && !!(cur && cur.free_override === true);
     const inPrice = p.input_price_per_mtok;
     const outPrice = p.output_price_per_mtok;
 
     // —— 1) 免费层监控 ——
     if (isFree) {
       if ((typeof inPrice === 'number' && inPrice > 0) || (typeof outPrice === 'number' && outPrice > 0)) {
-        add('error', 'free-mismatch', p.id, p.provider_id,
-          `站内标记 free:true，但官方源给出价格 input=${inPrice} / output=${outPrice}（免费标注与官方定价冲突，需人工核销）`);
+        if (isOverride) {
+          add('info', 'free-override', p.id, p.provider_id,
+            `人工确认保留 free:true（官方源标价 input=${inPrice}/output=${outPrice}），依据见 free_note；忽略聚合源标价`);
+        } else {
+          add('error', 'free-mismatch', p.id, p.provider_id,
+            `站内标记 free:true，但官方源给出价格 input=${inPrice} / output=${outPrice}（免费标注与官方定价冲突，需人工核销）`);
+        }
       }
       if (cur && !(cur.free_note && String(cur.free_note).trim())) {
         add('warn', 'free-note-missing', p.id, p.provider_id, 'free:true 但 free_note 缺失/为空，免费依据未记录');
@@ -125,8 +131,10 @@ function main() {
               `${f}: ${oldV} → ${newV}（变动 ${ratio.toFixed(2)}x，需人确认）`);
           }
         } else if (oldV === 0 && newV > 0) {
-          add('warn', 'price-from-zero', p.id, p.provider_id,
-            `${f}: 0 → ${newV}（曾标价格 0 的型号开始收费，需人工确认是否仍免费）`);
+          if (!isOverride) {
+            add('warn', 'price-from-zero', p.id, p.provider_id,
+              `${f}: 0 → ${newV}（曾标价格 0 的型号开始收费，需人工确认是否仍免费）`);
+          }
         }
       }
       // 字段回退为 null（仅当源「显式」给 null 才算回退；源不提供该字段=undefined 属正常，不算回退）
