@@ -7,6 +7,9 @@ __pycache__/
 .cache/
 # 历史快照/旧版站点（已归档，移出版控）
 backup/
+
+# 视觉回归：截图产物不入库（本地 review 用），仅结构基线 .baseline.json 入库
+scripts/visual/*.png
 # 治理脚本本地产物（每日质量检查基线 / 日报告）
 .last_snapshot.json
 daily_model_update_report.md
