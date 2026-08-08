@@ -37,6 +37,41 @@ export const modalityOf = (v) => (v.media_type === 'video' ? 'video' : v.media_t
 
 export const apiAccessOf = (v) => state.apiAccess.find((a) => a.id === v.id) || null
 export const capCn = (k) => (CAP_DIMS.find((c) => c.key === k) || {}).cn || k
+
+// ---------- 数据时效：全站日期的唯一来源 ----------
+// 页面上任何「数据于 X 核实」都必须走这里，禁止在视图 / HTML 里写死日期。
+// 数据更新时只需改 data/*.json 的 verified_date，全站文案自动跟随。
+// 计算结果缓存，避免每次渲染重扫 118 条记录；state.variants 变化后调 resetDataMeta()。
+let _meta = null
+export function resetDataMeta() { _meta = null }
+export function dataMeta() {
+  if (_meta) return _meta
+  const dates = state.variants.map((v) => v.verified_date).filter(Boolean).sort()
+  const latest = dates.length ? dates[dates.length - 1] : null
+  const earliest = dates.length ? dates[0] : null
+  // 距最近一次核验的天数，用于「数据可能过期」提示（按 UTC 日期差，避免时区抖动）
+  let ageDays = null
+  if (latest) {
+    const d = Date.parse(latest + 'T00:00:00Z')
+    if (!Number.isNaN(d)) ageDays = Math.max(0, Math.floor((Date.now() - d) / 86400000))
+  }
+  _meta = {
+    latest,
+    earliest,
+    total: state.variants.length,
+    dated: dates.length,
+    // 覆盖率不足 100% 时说明有型号漏标 verified_date，validate 脚本会告警
+    fullyDated: dates.length === state.variants.length && dates.length > 0,
+    ageDays,
+    stale: ageDays != null && ageDays > 30,
+  }
+  return _meta
+}
+// 「数据于 YYYY-MM-DD 联网核实」——全站统一文案，缺日期时降级为不带日期的说法
+export function verifiedNotice(suffix = '价格与能力以厂商官方为准。') {
+  const { latest } = dataMeta()
+  return latest ? `数据于 ${latest} 联网核实，${suffix}` : `数据已联网核实，${suffix}`
+}
 // 合并变体自带 aliases 字段与 model_aliases.json 别名表
 export function aliasesOf(v) {
   const own = (v.aliases || []).map((a) => (typeof a === 'string' ? a : a.alias || '')).filter(Boolean)

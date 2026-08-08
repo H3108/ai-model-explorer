@@ -4,6 +4,7 @@ import {
   state, byId, providerById, variantById, variantsOfProvider, familiesOfProvider, variantsOfFamily,
   providerOf, familyOf, modalityOf, variantMatches,
   getRecent, getCompare, getFav, inCompare, isFav, pushRecent, pushRecentSearch, recentSearchHTML,
+  dataMeta, verifiedNotice,
 } from './store.js'
 import {
   esc, ctxShort, priceValue, priceCell, logoHTML, catBadge, modBadge, modalityMix, capTags,
@@ -101,14 +102,19 @@ export function freeSectionHTML() {
 
 // ---------- 信任层（DESIGN Layer 3）：数据透明、可核验 ----------
 export function trustSectionHTML() {
-  const dates = state.variants.map((v) => v.verified_date).filter(Boolean).sort()
-  const latest = dates.length ? dates[dates.length - 1] : '—'
+  const m = dataMeta()
+  const latest = m.latest || '—'
+  // 核验日期跨度：全部同一天时不重复显示区间
+  const span = m.earliest && m.latest && m.earliest !== m.latest ? `${m.earliest} ~ ${m.latest}` : latest
+  const ageTip = m.ageDays == null ? '' : m.stale
+    ? `<br><small class="tc-stale">距今 ${m.ageDays} 天，建议重新核验</small>`
+    : `<br><small class="tc-fresh">距今 ${m.ageDays} 天</small>`
   return `<section class="section wrap trust-section">
     <div class="heading"><div><span class="eyebrow">信任与数据</span><h2>数据怎么来的？</h2></div><p>透明、可核验，是我们做选型建议的底气。</p></div>
     <div class="trust-grid">
       <div class="trust-card"><h4>模型覆盖</h4><p><b>${state.variants.length}</b> 个型号 · <b>${state.providers.length}</b> 家厂商 · <b>${state.families.length}</b> 个系列</p></div>
       <div class="trust-card"><h4>价格口径</h4><p>输入 / 输出分别计价，单位美元 / 百万 Token，取自各厂商官方 API 定价页。</p></div>
-      <div class="trust-card"><h4>最近核验</h4><p>自 <b>${esc(latest)}</b> 起持续更新，每个型号标注核验日期。</p></div>
+      <div class="trust-card"><h4>最近核验</h4><p>核验于 <b>${esc(span)}</b>，${m.dated}/${m.total} 个型号标注核验日期。${ageTip}</p></div>
       <div class="trust-card"><h4>推荐方法</h4><p>基于 任务匹配 + 能力质量 + 成本效率 + 速度 四要素；当前展示「推荐理由」而非综合分数，评分体系后续引入。</p></div>
       <div class="trust-card"><h4>数据纠错</h4><p>规格与价格来自公开官方文档。发现错误？欢迎在仓库提交 issue 反馈。</p></div>
     </div>
@@ -190,7 +196,7 @@ export function viewProviders() {
         ${seg('providerModality', state.providerModality, 'providerModality', [['all', '全部模态'], ['text', '文本'], ['image', '图像'], ['video', '视频']])}
       </div>
     </div>
-    <p class="notice">数据于 2026-08-05 联网核实，价格与能力以厂商官方为准。</p>
+    <p class="notice">${esc(verifiedNotice())}</p>
     <div class="provider-grid" id="provider-grid">${providerGridHTML()}</div>
   </div>`
 }
@@ -374,14 +380,14 @@ export function browseTableViewHTML() {
     const sp = SPEED_CN[v.speed_tier] || '—'
     return `<tr>
       <td class="dt-name"><a href="#model/${encodeURIComponent(v.id)}">${logoHTML(p, 'sm')}<span class="dt-name-txt"><b>${esc(v.name_cn || v.name)}</b><small>${esc(p.name_cn || p.name)}</small></span></a></td>
-      <td>${esc(p.name_cn || p.name)}</td>
-      <td class="mono">${ctxShort(v.context_window)}</td>
-      <td class="mono">${inp}</td>
-      <td class="mono">${out}</td>
-      <td class="dt-caps">${caps}</td>
-      <td>${esc(sp)}</td>
-      <td class="mono score-td">${fitScore(v)}</td>
-      <td><button class="cmp-toggle sm" data-cmp="${v.id}">${inCompare(v.id) ? '✓' : '＋'}</button></td>
+      <td data-label="厂商">${esc(p.name_cn || p.name)}</td>
+      <td class="mono" data-label="上下文">${ctxShort(v.context_window)}</td>
+      <td class="mono" data-label="输入 $/M">${inp}</td>
+      <td class="mono" data-label="输出 $/M">${out}</td>
+      <td class="dt-caps" data-label="能力">${caps}</td>
+      <td data-label="速度">${esc(sp)}</td>
+      <td class="mono score-td" data-label="评分">${fitScore(v)}</td>
+      <td data-label="对比"><button class="cmp-toggle sm" data-cmp="${v.id}">${inCompare(v.id) ? '✓' : '＋'}</button></td>
     </tr>`
   }).join('')
   return `<p class="result-count">匹配到 <b>${scored.length}</b> 个模型${scored.length > 60 ? '，表格展示前 60 个' : ''}</p>

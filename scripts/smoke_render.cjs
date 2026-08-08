@@ -328,6 +328,36 @@ async function main() {
   ok(shown > 0 && shown <= nFree, `浏览页仅显示免费型号（${shown} 张卡）`)
   ok(!app.querySelector('.chip.on'), '入口清空了历史能力 / 硬性条件筛选')
 
+  console.log('\n[13] 核验日期跟随数据（唯一来源 verified_date）')
+  const vdates = variants.map((v) => v.verified_date).filter(Boolean).sort()
+  const latestDate = vdates[vdates.length - 1]
+  const earliestDate = vdates[0]
+  ok(vdates.length === variants.length, `全部 ${variants.length} 个型号都有 verified_date`)
+  // 厂商页 notice
+  h = await goto('#providers')
+  const notice = app.querySelector('.notice').textContent
+  ok(notice.includes(latestDate), `厂商页提示使用数据最新核验日期 ${latestDate}`)
+  ok(!/2026-08-05 联网核实/.test(notice) || latestDate === '2026-08-05', '厂商页日期非写死值')
+  // 首页信任层
+  h = await goto('#home')
+  const trust = app.querySelector('.trust-card:nth-child(3)').textContent
+  ok(trust.includes(latestDate), `信任层显示最新核验日期 ${latestDate}`)
+  ok(earliestDate === latestDate || trust.includes(earliestDate), '信任层显示核验区间起点')
+  ok(/\d+\/\d+ 个型号标注核验日期/.test(trust), '信任层显示核验覆盖率')
+  // 页脚（静态 HTML 由 app.js 回填）
+  const footer = window.document.getElementById('footer-verified')
+  ok(footer && footer.textContent.includes(latestDate), `页脚回填最新核验日期 ${latestDate}`)
+  // 改数据 → 文案跟随（验证「每次更新数据自动更新日期」）
+  const store = await import(pathToFileURL(path.join(ROOT, 'src/store.js')).href)
+  const bumped = '2099-01-01'
+  const backup = store.state.variants[0].verified_date
+  store.state.variants[0].verified_date = bumped
+  store.resetDataMeta()
+  h = await goto('#providers')
+  ok(app.querySelector('.notice').textContent.includes(bumped), '改动 verified_date 后页面文案自动跟随')
+  store.state.variants[0].verified_date = backup
+  store.resetDataMeta()
+
   console.log(`\n${failures.length ? '✗ 失败 ' + failures.length + ' 项：\n - ' + failures.join('\n - ') : '✓ 全部通过'}`)
   process.exit(failures.length ? 1 : 0)
 }

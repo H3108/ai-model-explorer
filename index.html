@@ -45,7 +45,8 @@
 
   <footer class="footer wrap">
     <span>© 2026 AI Model Explorer</span>
-    <span>数据已联网核实 · 价格与模型定期更新</span>
+    <!-- 核验日期由 app.js 依据 data/*.json 的 verified_date 回填，勿在此写死 -->
+    <span id="footer-verified">数据已联网核实 · 价格与模型定期更新</span>
   </footer>
 
   <script src="app.js" type="module"></script>

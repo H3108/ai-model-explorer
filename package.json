@@ -10,7 +10,9 @@
     "check": "node scripts/validate_normalized.cjs",
     "test": "node scripts/smoke_render.cjs",
     "quality": "python3 scripts/model_quality_check.py",
-    "review": "node scripts/gen_data_review.cjs"
+    "review": "node scripts/gen_data_review.cjs",
+    "verified": "node scripts/bump_verified.cjs --check",
+    "verified:bump": "node scripts/bump_verified.cjs"
   },
   "engines": {
     "node": ">=18"

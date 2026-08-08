@@ -108,5 +108,45 @@ recs.forEach((r) => {
 console.log('\n校验命名解释系统：')
 naming.forEach((n) => { if (!n.term || !n.name_cn || !n.description_cn) err(`naming ${n.term || '?'}: 字段不全`) })
 
+// ---------- 数据时效：核验日期唯一来源守卫 ----------
+// 页面上的「数据于 X 联网核实」必须由 store.dataMeta() 从 verified_date 推导，
+// 一旦有人在视图 / HTML 里写死日期，这里直接判错，避免代码日期与数据日期脱节。
+console.log('\n校验核验日期（verified_date 为全站唯一来源）：')
+{
+  const ROOT = path.join(__dirname, '..')
+  const allVariants = [...variants, ...variantsExtra]
+  const dates = allVariants.map((v) => v.verified_date).filter(Boolean).sort()
+  const missing = allVariants.filter((v) => !v.verified_date)
+  if (missing.length) err(`${missing.length} 个型号缺 verified_date：${missing.slice(0, 5).map((v) => v.id).join(', ')}${missing.length > 5 ? ' …' : ''}`)
+  else ok(`全部 ${allVariants.length} 个型号均有 verified_date`)
+
+  const bad = dates.filter((d) => !/^\d{4}-\d{2}-\d{2}$/.test(d))
+  if (bad.length) err(`verified_date 格式非法（应为 YYYY-MM-DD）：${bad.slice(0, 3).join(', ')}`)
+
+  if (dates.length) {
+    const latest = dates[dates.length - 1]
+    const ageDays = Math.floor((Date.now() - Date.parse(latest + 'T00:00:00Z')) / 86400000)
+    ok(`核验区间 ${dates[0]} ~ ${latest}`)
+    if (ageDays > 30) warn(`最近核验距今 ${ageDays} 天，建议重新联网核实价格与能力`)
+    else ok(`最近核验距今 ${ageDays} 天（新鲜）`)
+  }
+
+  // 扫描源码：任何 YYYY-MM-DD 字面量都视为写死日期（协议版本号等需在此显式豁免）
+  const ALLOW = [/anthropic-version/, /\bdata-code=/]
+  const SRC = ['index.html', 'app.js', 'src/store.js', 'src/ui.js', 'src/views.js', 'src/router.js', 'src/search.js', 'src/constants.js']
+  let hard = 0
+  SRC.forEach((rel) => {
+    const file = path.join(ROOT, rel)
+    if (!fs.existsSync(file)) return
+    fs.readFileSync(file, 'utf8').split('\n').forEach((line, i) => {
+      if (!/\d{4}-\d{2}-\d{2}/.test(line)) return
+      if (ALLOW.some((re) => re.test(line))) return
+      hard++
+      err(`${rel}:${i + 1} 写死了日期，应改用 store.dataMeta() / verifiedNotice()`)
+    })
+  })
+  if (!hard) ok('源码中无写死的核验日期（全部走 dataMeta）')
+}
+
 console.log(`\n=== 结果：错误 ${errors}，警告 ${warns} ===`)
 process.exit(errors > 0 ? 1 : 0)

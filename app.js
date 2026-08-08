@@ -4,8 +4,19 @@
 // 模块拆分：src/constants.js（常量） · src/store.js（状态/查询/存储） · src/ui.js（展示组件）
 //           src/search.js（搜索与评分） · src/views.js（页面视图） · src/router.js（路由与事件）
 
-import { $, state, restoreBrowseFilters } from './src/store.js'
+import { $, state, restoreBrowseFilters, resetDataMeta, dataMeta } from './src/store.js'
 import { bindGlobalEvents, render } from './src/router.js'
+
+// 页脚核验日期：唯一来源是 data/*.json 的 verified_date（见 store.dataMeta），不在 HTML 里写死
+function renderFooterVerified() {
+  const el = document.getElementById('footer-verified')
+  if (!el) return
+  const m = dataMeta()
+  el.textContent = m.latest
+    ? `数据于 ${m.latest} 联网核实 · 价格与模型定期更新`
+    : '数据已联网核实 · 价格与模型定期更新'
+  if (m.latest) el.title = `核验区间 ${m.earliest} ~ ${m.latest} · ${m.dated}/${m.total} 个型号已标注核验日期`
+}
 
 // ---------- 数据 ----------
 async function loadData() {
@@ -44,8 +55,10 @@ async function loadData() {
     console.warn('V4 数据加载失败：', e)
   }
   state.selectedTask = state.tasks[0]?.id || null
+  resetDataMeta() // variants 已全部就位（含 extra），此后 dataMeta() 结果可缓存
   restoreBrowseFilters()
   bindGlobalEvents()
+  renderFooterVerified()
   render()
 }
 

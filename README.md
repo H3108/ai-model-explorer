@@ -163,14 +163,33 @@ ai-model-explorer/
 
 ```bash
 # 1) 规范化数据校验（Node，无需依赖）
-node scripts/validate_normalized.js
+node scripts/validate_normalized.cjs
 
 # 2) 渲染冒烟测试（需 jsdom；通过 NODE_PATH 指定依赖目录）
-NODE_PATH=<node_modules 路径> node scripts/smoke_render.js
+NODE_PATH=<node_modules 路径> node scripts/smoke_render.cjs
 
 # 3) 数据质量检查（Python）
 python3 scripts/model_quality_check.py
 ```
+
+### 核验日期
+
+页面上的「数据于 YYYY-MM-DD 联网核实」不是写死的文案，而是从 `data/*.json` 中所有型号的
+`verified_date` 取最新值推导出来的（实现见 `src/store.js` 的 `dataMeta()`）。因此**更新数据时
+只需更新 `verified_date`，站点上所有日期会自动跟随**，无需改代码。
+
+```bash
+# 查看当前核验日期分布与站点将显示的日期
+node scripts/bump_verified.cjs --check
+
+# 核实完成后更新日期（支持按厂商 / 按 ID / 全量，--dry-run 可预演）
+node scripts/bump_verified.cjs --provider openai
+node scripts/bump_verified.cjs --id glm-4-7-flash,cogview-3-flash
+node scripts/bump_verified.cjs --all --date 2026-08-10
+```
+
+`validate_normalized.cjs` 会扫描源码，一旦发现有人把日期写回视图或 HTML 就直接报错，
+防止代码里的日期与真实数据脱节。
 
 ---
 
