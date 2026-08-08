@@ -10,7 +10,7 @@
   --surface: #ffffff;
   --foreground: #17221e;
   --foreground-2: #33443c;
-  --muted: #6e7b73;
+  --muted: #647069;          /* P2-6/C: 压暗一档，弱化文字对比度 surface/bg 均 ≥4.5:1（AA 正文） */
 
   --border: #e2e9df;
   --border-subtle: #eef2ea;
@@ -61,6 +61,7 @@
   /* ---- 间距（4px 系统，DESIGN_REVIEW §10） ---- */
   --space-1: 4px;  --space-2: 8px;  --space-3: 12px; --space-4: 16px;
   --space-5: 24px; --space-6: 32px; --space-7: 48px; --space-8: 64px;
+
   /* ---- 字阶（P2-6 收口：统一裸 font-size 进 Token；半像素档折叠进相邻整数档） ---- */
   --text-2xs: 10px;
   --text-xs: 11px;
@@ -81,7 +82,6 @@
   --text-11xl: 34px;
   --text-display: 40px;
   --text-hero: 46px;
-
 
   /* ---- 阴影（中性，去绿调营销感） ---- */
   --shadow-1: 0 1px 2px rgba(17, 34, 30, .05);
