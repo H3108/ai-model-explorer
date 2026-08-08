@@ -9,6 +9,7 @@
     "server": "python3 -m http.server 8848",
     "check": "node scripts/validate_normalized.cjs",
     "test": "node scripts/smoke_render.cjs",
+    "e2e": "node scripts/e2e.cjs",
     "quality": "python3 scripts/model_quality_check.py",
     "review": "node scripts/gen_data_review.cjs",
     "verified": "node scripts/bump_verified.cjs --check",

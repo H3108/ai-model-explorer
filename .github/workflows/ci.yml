@@ -41,3 +41,25 @@ jobs:
           python-version: '3.12'
       - name: 数据质量复核（检测过期/缺失字段）
         run: python3 scripts/model_quality_check.py
+
+  # 真实浏览器 E2E 回归门禁：补 JSDOM 冒烟抓不到的真渲染 / 真点击 / 控制台报错问题
+  e2e:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Install Playwright + Chromium
+        run: |
+          npm install playwright
+          npx playwright install --with-deps chromium
+      - name: 启动静态服务并跑 E2E
+        run: |
+          python3 -m http.server 8848 &
+          SRV=$!
+          sleep 2
+          node scripts/e2e.cjs
+          RC=$?
+          kill $SRV
+          exit $RC
