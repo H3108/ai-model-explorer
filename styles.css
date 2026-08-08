@@ -96,6 +96,9 @@
 
 html { scroll-behavior: auto; }
 
+html, body {
+  overflow-x: hidden;
+}
 body {
   margin: 0;
   background: var(--background);
@@ -173,6 +176,7 @@ code, pre, .mono {
 #main-nav a {
   text-decoration: none; font-size: 14px; color: var(--muted);
   padding: 6px 0; border-bottom: 2px solid transparent; transition: color .15s, border-color .15s;
+  white-space: nowrap; flex: none;
 }
 #main-nav a:hover { color: var(--ink); }
 #main-nav a.on { color: var(--deep); border-color: var(--green); font-weight: 600; }
@@ -459,32 +463,6 @@ select { padding: 8px 12px; border-radius: var(--r-sm); }
   .hero h1 { font-size: 34px; }
 }
 
-/* 移动端：浏览表格转卡片堆叠，消除窄屏横向滚动 bug */
-@media (max-width: 640px) {
-  .data-table--browse { min-width: 0; table-layout: auto; font-size: 13px; }
-  .data-table--browse colgroup { display: none; }
-  .data-table--browse thead { display: none; }
-  .data-table--browse tr {
-    display: block; margin-bottom: 12px; padding: 4px 2px;
-    background: var(--card); border: 1px solid var(--border-subtle); border-radius: var(--r-md);
-  }
-  .data-table--browse td {
-    display: flex; justify-content: space-between; align-items: center; gap: 12px;
-    padding: 8px 12px; border-bottom: 1px solid var(--border-subtle); text-align: right;
-  }
-  .data-table--browse tr td:last-child { border-bottom: 0; }
-  .data-table--browse td::before {
-    content: attr(data-label); flex: none; text-align: left;
-    font-size: 11px; font-weight: 700; color: var(--muted); letter-spacing: .02em;
-  }
-  .data-table--browse td.dt-name { display: block; padding: 12px 12px 8px; }
-  .data-table--browse td.dt-name::before { content: none; }
-  .data-table--browse td.dt-name a { width: 100%; }
-  .data-table--browse .dt-name { max-width: none; }
-  .data-table--browse td.dt-caps { max-width: none; flex-wrap: wrap; justify-content: flex-end; }
-  .data-table--browse td.dt-caps .cap-mini { margin: 1px 0 1px 4px; }
-}
-
 /* ---------------- 厂商卡片 ---------------- */
 .provider-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 18px; }
 .provider-card {
@@ -580,7 +558,7 @@ select { padding: 8px 12px; border-radius: var(--r-sm); }
 .pick-card small { color: var(--muted); font-size: 12px; }
 
 /* ---------------- 对比表 ---------------- */
-.table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--r-lg); background: var(--card); }
+.table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--r-lg); background: var(--card); max-width: 100%; }
 .cmp-table { width: 100%; border-collapse: collapse; font-size: 13.5px; min-width: 780px; }
 .cmp-table th {
   text-align: left; font-size: 11.5px; letter-spacing: .04em; color: var(--muted);
@@ -660,6 +638,32 @@ select { padding: 8px 12px; border-radius: var(--r-sm); }
 .data-table--browse col:nth-child(9) { width: 10%; }
 /* 变体：对比表（常规字号，强调行 hover） */
 .data-table--compare { font-size: 14px; }
+
+/* 移动端：浏览表格转卡片堆叠，消除窄屏横向滚动 */
+@media (max-width: 640px) {
+  .data-table--browse { min-width: 0 !important; table-layout: auto; font-size: 13px; }
+  .data-table--browse colgroup { display: none; }
+  .data-table--browse thead { display: none; }
+  .data-table--browse tr {
+    display: block; margin-bottom: 12px; padding: 4px 2px;
+    background: var(--card); border: 1px solid var(--border-subtle); border-radius: var(--r-md);
+  }
+  .data-table--browse td {
+    display: flex; justify-content: space-between; align-items: center; gap: 12px;
+    padding: 8px 12px; border-bottom: 1px solid var(--border-subtle); text-align: right;
+  }
+  .data-table--browse tr td:last-child { border-bottom: 0; }
+  .data-table--browse td::before {
+    content: attr(data-label); flex: none; text-align: left;
+    font-size: 11px; font-weight: 700; color: var(--muted); letter-spacing: .02em;
+  }
+  .data-table--browse td.dt-name { display: block; padding: 12px 12px 8px; }
+  .data-table--browse td.dt-name::before { content: none; }
+  .data-table--browse td.dt-name a { display: flex; width: 100%; min-width: 0; }
+  .data-table--browse .dt-name { max-width: none; }
+  .data-table--browse td.dt-caps { max-width: none; flex-wrap: wrap; justify-content: flex-end; }
+  .data-table--browse td.dt-caps .cap-mini { margin: 1px 0 1px 4px; }
+}
 
 /* ---------------- 模型卡网格 ---------------- */
 .card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; }
@@ -796,6 +800,7 @@ select { padding: 8px 12px; border-radius: var(--r-sm); }
 
 /* ---------------- 浏览页 ---------------- */
 .browse-layout { display: grid; grid-template-columns: 268px 1fr; gap: 26px; align-items: start; }
+.browse-results { min-width: 0; }
 .filter-panel {
   background: var(--card); border: 1px solid var(--line); border-radius: var(--r-lg);
   padding: 18px; position: sticky; top: 92px; display: flex; flex-direction: column; gap: 16px;
@@ -1045,7 +1050,7 @@ select { padding: 8px 12px; border-radius: var(--r-sm); }
 @media (max-width: 1080px) {
   .hero { grid-template-columns: 1fr; }
   .browse-layout, .matcher-layout { grid-template-columns: 1fr; }
-  .filter-panel { position: static; }
+  .filter-panel { position: static; min-width: 0; }
   .stat-strip.four { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 720px) {
