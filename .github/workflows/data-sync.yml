@@ -102,7 +102,9 @@ jobs:
 
   deploy:
     needs: [collect]
-    if: ${{ (github.event_name == 'push' && github.ref == 'refs/heads/master') || (github.event_name == 'workflow_dispatch' && inputs.deploy) }}
+    # 关键修复：采集(collect)失败不应阻断站点部署。always() 保证 push 到 master 时
+    # 无论 collect 成功/失败，deploy 都会执行 rsync，确保站点文件始终上服务器。
+    if: ${{ always() && ((github.event_name == 'push' && github.ref == 'refs/heads/master') || (github.event_name == 'workflow_dispatch' && inputs.deploy)) }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
