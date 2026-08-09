@@ -203,47 +203,6 @@ node scripts/bump_verified.cjs --all --date 2026-08-10
 
 ---
 
-## 测试
-
-本项目采用**测试金字塔**：JSDOM 冒烟 + 真浏览器 E2E + 性能 / 视觉回归。`scripts/` 下的 Node 脚本依赖 `jsdom` / `playwright`，通过 `NODE_PATH` 指定本地依赖目录（如 `~/.workbuddy/binaries/node/workspace/node_modules`）；`npm test` / `npm run e2e` 已在 `package.json` 中预置。
-
-```bash
-# 1) 渲染冒烟（JSDOM，需先起本地服务）
-python3 -m http.server 8848 &
-NODE_PATH=~/.workbuddy/binaries/node/workspace/node_modules node scripts/smoke_render.cjs
-#    或：npm test
-
-# 2) 真浏览器 E2E（Playwright + Chromium，需先起本地服务）
-NODE_PATH=~/.workbuddy/binaries/node/workspace/node_modules node scripts/e2e.cjs
-#    或：npm run e2e
-
-# 3) 真实性能实测（Core Web Vitals，需先起本地服务）
-NODE_PATH=~/.workbuddy/binaries/node/workspace/node_modules node scripts/perf_real.cjs
-
-# 4) 多断点视觉回归（截图 + 结构基线）
-NODE_PATH=~/.workbuddy/binaries/node/workspace/node_modules node scripts/visual_snapshot.cjs
-```
-
-> CI 门禁：`.github/workflows/ci.yml` 在每次 push / PR 自动跑 `validate_normalized` + `smoke_render` + 真浏览器 `e2e` 回归；另设每周定时任务跑 `model_quality_check.py` 监测数据新鲜度。
-
----
-
-## 文档（内部，不推送 GitHub）
-
-设计稿、审计、走查、数据治理、部署、性能与验证等**内部过程文档**统一存放于 `docs/`——已被根 `.gitignore` 的 `docs/` 规则整体排除，不会出现在 GitHub 仓库。按主题分类：
-
-- `docs/audit/` —— 前端审计 / 走查 / 项目审计
-- `docs/data/` —— 数据治理 / 同步 / 免费核对
-- `docs/perf/` —— 性能报告
-- `docs/verify/` —— 验证专项
-- `docs/deploy/` —— 部署方案
-- `docs/archive/` —— 历史归档
-- `docs/README.md` —— 完整文档索引（本地查阅）
-
-> 本 `README.md`（仓库根）为公开文档；内部细节请查阅本地 `docs/`。
-
----
-
 ## 项目定位与免责声明
 
 - 本项目**不是**大模型排行榜、专业评测平台或自动 Benchmark 系统。
