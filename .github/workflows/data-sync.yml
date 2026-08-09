@@ -106,25 +106,27 @@ jobs:
     # 无论 collect 成功/失败，deploy 都会执行 rsync，确保站点文件始终上服务器。
     if: ${{ always() && ((github.event_name == 'push' && github.ref == 'refs/heads/master') || (github.event_name == 'workflow_dispatch' && inputs.deploy)) }}
     runs-on: ubuntu-latest
+    env:
+      DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
       - name: 安装部署密钥
-        if: ${{ secrets.DEPLOY_HOST != '' }}
+        if: ${{ env.DEPLOY_HOST != '' }}
         run: |
           install -m 600 -D /dev/stdin ~/.ssh/id_ed25519 <<< "${{ secrets.DEPLOY_KEY }}"
-          ssh-keyscan -H "${{ secrets.DEPLOY_HOST }}" >> ~/.ssh/known_hosts 2>/dev/null || true
+          ssh-keyscan -H "${{ env.DEPLOY_HOST }}" >> ~/.ssh/known_hosts 2>/dev/null || true
 
       - name: 部署到海外服务器 (rsync)
-        if: ${{ secrets.DEPLOY_HOST != '' }}
+        if: ${{ env.DEPLOY_HOST != '' }}
         env:
-          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+          DEPLOY_HOST: ${{ env.DEPLOY_HOST }}
           DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
           DEPLOY_KEY: ~/.ssh/id_ed25519
         run: bash scripts/deploy.sh
 
       - name: 跳过部署（未配置 DEPLOY_HOST secret）
-        if: ${{ secrets.DEPLOY_HOST == '' }}
+        if: ${{ env.DEPLOY_HOST == '' }}
         run: echo "未配置 DEPLOY_HOST secret，跳过自动部署（本地可手动 npm run deploy）。"
