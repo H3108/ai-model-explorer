@@ -15,13 +15,23 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(__dirname, '..');
 
 // 本站 provider_id -> OpenRouter id 归一化函数（仅精确映射，不猜测）
+// 2026-08-23 修正：DeepSeek 原规则映射生成 `deepseek/v3` 等 OpenRouter 现网不存在的 id，导致 0 覆盖（曾被误判为版本漂移）。
+// 现改为查表精确对齐；NVIDIA NIM 本站型号仍属旧系列、与现网 nemotron-3.x 整代漂移，保持规则映射 -> 自然 0 覆盖。
 const NORM = {
   openai: (s) => 'openai/' + s.replace('openai-', '').replace(/(\d)-(\d)/g, '$1.$2'),
   anthropic: (s) => 'anthropic/claude-' + s.replace('anthropic-', '').replace(/(\d)-(\d)/g, '$1.$2'),
   google: (s) => 'google/' + s.replace('google-', '').replace(/(\d)-(\d)/g, '$1.$2'),
   'alibaba-qwen': (s) => 'qwen/' + s.replace(/^qwen-/, 'qwen-'),
   'zhipu-glm': (s) => 'z-ai/' + s.replace(/(\d)-(\d)/g, '$1.$2'),
-  deepseek: (s) => 'deepseek/' + s.replace('deepseek-', ''),
+  // DeepSeek：本站 id ↔ OpenRouter 现网真实 id 精确映射。仅保留语义清晰对应；
+  // `deepseek-coder` 在 OpenRouter 无独立模型 -> 返回 undefined -> collectFromOpenRouter 跳过。
+  deepseek: (s) => ({
+    'deepseek-v3': 'deepseek/deepseek-v3.2',
+    'deepseek-v3-2': 'deepseek/deepseek-v3.2',
+    'deepseek-r1': 'deepseek/deepseek-r1',
+  }[s]),
+  // NVIDIA NIM：本站型号（nemotron/llama/mistral/phi/gemma/qwen3-coder 旧系列）与 OpenRouter 现网 nemotron-3.x 无安全精确对应，
+  // 保持规则映射 -> 自然 0 覆盖；data 升级到现网版本后自动对齐，本期不强行猜测映射。
   'nvidia-nim': (s) => 'nvidia/' + s.replace('nvidia-nim-', ''),
 };
 
@@ -75,6 +85,7 @@ export async function collectFromOpenRouter(providerId) {
   const patches = [];
   for (const ourId of getOurModelIds(providerId)) {
     const orId = norm(ourId);
+    if (!orId) continue; // 本源无该型号的安全精确对应（如 deepseek-coder、nvidia-nim 旧系列）-> 跳过，绝不猜测
     const m = byId.get(orId.toLowerCase());
     if (!m) continue; // 精确匹配不上 -> 跳过（版本漂移/未覆盖），绝不猜测
     patches.push({
