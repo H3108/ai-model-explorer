@@ -2,8 +2,9 @@ import { BaseCollector } from './_base.js';
 import { collectFromOpenRouter } from './_openrouter.js';
 
 // DeepSeek —— 真实源：OpenRouter 聚合。
-// 注意：本站 deepseek-v3 / r1 与 OpenRouter 现网 deepseek-v4 存在版本漂移，当前精确匹配不上 -> 不产生更新；
-// 当本站型号升级到与 OpenRouter 对齐的版本时，本适配器会自动开始产出真实更新（无需改代码）。
+// 2026-08-23 修正：原 NORM 规则映射生成 `deepseek/v3` 等 OpenRouter 不存在的 id，导致 0 覆盖（曾被误判为版本漂移）。
+// 现 _openrouter.js 改为查表精确对齐：deepseek-v3 / deepseek-v3-2 -> deepseek/deepseek-v3.2，deepseek-r1 -> deepseek/deepseek-r1，
+// 可产出真实现价/上下文；deepseek-coder 在 OpenRouter 无独立模型 -> 自然跳过。
 export default class DeepseekCollector extends BaseCollector {
   static id = 'deepseek';
   static label = 'DeepSeek';
