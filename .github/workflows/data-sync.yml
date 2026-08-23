@@ -67,6 +67,15 @@ jobs:
           gh issue create --title "数据健康告警 $(date +%F)" \
             --body "$(cat data/.staging/HEALTH_REPORT.md)" || true
 
+      - name: 配置 git 身份与远端（stage_pr commit/push 需要，早于自动开 PR 步骤）
+        if: ${{ (github.event_name == 'schedule' || github.event_name == 'workflow_dispatch') && !inputs.dry_run && success() }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git remote set-url origin "https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git"
+
       - name: 自动开 PR / 安全自动合并
         if: ${{ (github.event_name == 'schedule' || github.event_name == 'workflow_dispatch') && !inputs.dry_run && success() }}
         env:
