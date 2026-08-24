@@ -44,7 +44,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
 
       - name: 运行 Collectors（启用源，含 Cloudflare / HuggingFace）
         run: node scripts/run_collectors.cjs

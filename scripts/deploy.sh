@@ -41,6 +41,35 @@ fi
 ssh "${SSH_OPTS[@]}" "${SERVER_USER}@${SERVER_HOST}" \
   "mkdir -p ${DEPLOY_PATH} && rm -rf ${DEPLOY_PATH}.old && cp -r ${DEPLOY_PATH} ${DEPLOY_PATH}.old 2>/dev/null || true"
 
+# ── 上线前校验（防静默回退，2026-08-24 加固）──
+# 根因：之前一次手动部署在本地 collect+apply 出新价后未提交，导致 git 真相源停留在旧价，
+#       下次从干净 checkout 部署会把生产静默打回旧价。下面两段把这类故障挡在 rsync 之前。
+
+# 1) 主数据必须存在且为合法 JSON，否则直接中止，避免把破损站点打上生产
+ROOT_JSON="data/model_variants.json"
+if [[ ! -f "${ROOT_JSON}" ]]; then
+  echo "✗ 中止：找不到 ${ROOT_JSON}，部署取消。" >&2
+  exit 1
+fi
+if ! python3 -c "import json,sys; json.load(open(sys.argv[1]))" "${ROOT_JSON}" 2>/dev/null; then
+  echo "✗ 中止：${ROOT_JSON} 不是合法 JSON，部署取消。" >&2
+  exit 1
+fi
+
+# 2) 检测 data/ 是否有未提交改动：若有，说明本次要发的不是 git 里的"真相源"。
+#    部署能成功，但下次从干净 checkout 部署会静默回退。设 DEPLOY_UNCOMMITTED=1 可显式绕过（仅临时验证用）。
+if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+  if ! git diff --quiet -- data/ 2>/dev/null || ! git diff --cached --quiet -- data/ 2>/dev/null; then
+    echo "⚠️ 警告：data/ 存在未提交改动，本次部署内容与 git 真相源不一致。" >&2
+    echo "⚠️ 这会把未提交数据打上生产；建议先『git add data/ && git commit』，否则下次干净部署会静默回退。" >&2
+    if [[ "${DEPLOY_UNCOMMITTED:-}" != "1" ]]; then
+      echo "✗ 中止（安全第一）。确认要部署未提交数据，请设 DEPLOY_UNCOMMITTED=1 后重试。" >&2
+      exit 1
+    fi
+    echo "→ DEPLOY_UNCOMMITTED=1 已设置，继续部署未提交数据。" >&2
+  fi
+fi
+
 # 镜像同步（--delete 保证服务器与本地完全一致）
 rsync -avz --delete "${EXCLUDES[@]}" \
   -e "ssh ${SSH_OPTS[*]}" \
