@@ -379,3 +379,22 @@ jobs:
   3. `scripts/deploy.sh` 加固：上线前校验 `data/model_variants.json` 存在且合法 JSON，否则中止；检测到 `data/` 有未提交改动时中止（设 `DEPLOY_UNCOMMITTED=1` 可显式绕过）——从根上拦截「collect+apply 后没提交就 deploy」的故障模式；
   4. `ci.yml` / `data-sync.yml` 的 `node-version` 由 `20` 升 `22`，消除 Node 20 deprecated 告警。
 - 状态：本地 master 已领先 origin/master 2 个提交（数据对齐 + 加固），**待 push 到 origin/master 后**：origin/master == 生产真实价，且后续 data-sync 在 master 用修正后的 collector 跑，不会再开 PR 把 deepseek 打回 1.1。push 会触发 CI 自动部署（rsync 同值，生产无感），按部署红线需用户确认后再 push。
+
+> 注：上述"待 push"已于 2026-08-24 完成（`git push origin master` 触发 CI 自动部署，生产复拉确认 `deepseek-v3=0.38` 无回退）；其后另补提交 `7e465b3` 将本文档本身纳入版本控制。
+
+---
+
+## 11. 6 桩源真实采集可行性结论（2026-08-24 调研）
+
+**背景**：`collectors/` 下 `groq / together / cloudflare / huggingface / replicate / fal-ai` 六源在联网模式**故意返回 `[]`**（`realSource=false`，注释"真实源待接入，联网模式跳过"）。本轮调研能否接真实采集。
+
+**实测证据**：
+1. **OpenRouter（项目唯一免密钥价格聚合源）不覆盖 Groq / Together**：实测 `openrouter.ai/api/v1/models` 子串搜 `groq` / `together` 均为 **0 个**模型 → 无法复用现有 `collectFromOpenRouter()` 机制（anthropic/openai/deepseek 正是走这条）。
+2. **主数据 provider 分布**：仅 `groq` 有 10 条型号；`together / cloudflare / huggingface / replicate / fal-ai` **provider_id 均 0 条目**。
+3. **官方端点现实**：这 6 源官方定价页均为 JS 渲染 HTML（无免密钥结构化 API）；fal-ai / replicate 需 Key 且按次/秒计费（非 per-mtok，与本 pipeline 的 token 价模型不符）；cloudflare Workers AI / huggingface 推理大量免费。
+
+**决策：保持 stub（现状合理，非技术债）**
+- 硬接会产出 **0 patch**（主数据无本站 id 可匹配 → `getOurModelIds()` 返回空）或**假 diff**（HTML 解析易碎 + 匹配不上硬猜价格），直接违反本项目数据诚信红线（见 `collectors/_openrouter.js`："匹配不上就跳过，绝不猜测"）。
+- 若要真正接入，属于「核心数据集扩展」决策：需先在 `data/model_variants*.json` 新增这些 provider 的型号条目 + 为 `groq/together` 写独立的官方定价解析器，超出本期"修复"范围，应单独评审而非顺手接。
+
+**结论**：第 6 源"接真实采集"经独立调研判定为当前架构下**无干净可行路径**，保持 stub 并落档此结论；不写假采集器。
