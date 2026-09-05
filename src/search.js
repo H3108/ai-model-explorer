@@ -79,7 +79,8 @@ export function applySearchQuery(text) {
   const ctx = conds.find((c) => c.key === 'context')
   state.minContext = ctx ? ctx.value : 0
   const bud = conds.find((c) => c.key === 'budget')
-  state.browsePrice = bud ? (bud.label.includes('免费') ? 'free' : 'low') : 'all'
+  // 预算映射：「免费」→ free；「省钱/便宜」→ low；「质量优先/旗舰」与价格无关，不限制区间（旧逻辑误判成 low，搜旗舰只剩廉价模型）
+  state.browsePrice = !bud ? 'all' : bud.label.includes('免费') ? 'free' : bud.value === 'high' ? 'all' : 'low'
   state.browseSearchClean = cleanQuery(text, conds)
 }
 // 同步筛选面板分段控件高亮（state 变更后，避免面板与结果区不一致）

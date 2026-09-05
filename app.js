@@ -41,9 +41,13 @@ async function loadData() {
   }
   ;[state.providers, state.families, state.variants, state.tasks, state.recommendations, state.naming] = values
   // 合并增量模型（新增免费模型 / 网关模型）；加载失败不影响主站
+  // 增量按 verified_date 倒序前置：新入库模型不再垫底，系列页默认表 / 厂商系列卡前 5 / 详情同系列前 4 三处默认顺序同步受益
   try {
     const extra = await fetch('./data/model_variants_extra.json').then((r) => (r.ok ? r.json() : []))
-    if (Array.isArray(extra) && extra.length) state.variants = state.variants.concat(extra)
+    if (Array.isArray(extra) && extra.length) {
+      const extraSorted = extra.slice().sort((a, b) => (b.verified_date || '').localeCompare(a.verified_date || ''))
+      state.variants = extraSorted.concat(state.variants)
+    }
   } catch (e) {
     console.warn('增量模型加载失败：', e)
   }
