@@ -1,5 +1,5 @@
 // AI Model Explorer — 视图层：各路由页面与页面内构件（不含路由与全局事件）
-import { TIER, CAP_DIMS, TRAITS, SPEED_RANK, SPEED_CN, API_STYLE_CN } from './constants.js'
+import { TIER, CAP_DIMS, TRAITS, SPEED_RANK, SPEED_CN, API_STYLE_CN, REGION_CN } from './constants.js'
 import {
   state, byId, providerById, providerLink, variantById, variantsOfProvider, familiesOfProvider, variantsOfFamily,
   providerOf, familyOf, modalityOf, variantMatches,
@@ -153,7 +153,7 @@ export function startMatchFromHome() {
 export function providerCard(p) {
   const vs = variantsOfProvider(p.id)
   const fs = familiesOfProvider(p.id)
-  const region = { US: '美国', CN: '中国', FR: '法国', DE: '德国', GB: '英国' }[p.country] || p.country || '其他'
+  const region = REGION_CN[p.country] || p.country || '其他'
   return `<a class="provider-card" href="${providerLink(p)}" style="--brand:${esc(p.brand_color)}">
     <div class="pc-top">${logoHTML(p, 'md')}<div class="pc-tags"><span class="tag">${esc(region)}</span>${catBadge(p)}${p.open_weight ? '<span class="tag tag-open">开放权重</span>' : ''}</div></div>
     <div class="pc-body">
@@ -217,7 +217,7 @@ export function viewProvider(id) {
       <i class="fc-go">进入系列 →</i>
     </a>`
   }
-  const region = { US: '美国', CN: '中国', FR: '法国', DE: '德国', GB: '英国' }[p.country] || p.country || '其他'
+  const region = REGION_CN[p.country] || p.country || '其他'
   return `<div class="wrap page">
     <button class="back-link" data-back="#providers">← 返回厂商地图</button>
     <header class="entity-head" style="--brand:${esc(p.brand_color)}">
@@ -259,38 +259,43 @@ export function sortVariants(arr, mode) {
   else if (mode === 'speed') a.sort((x, y) => (SPEED_RANK[y.speed_tier] || 2) - (SPEED_RANK[x.speed_tier] || 2))
   return a
 }
+// 系列表 / 对比表共用：表头与行构建。两处 row 逻辑完全一致，仅末列操作钮不同，
+// 抽成 helper 后改一处即同步两处（原先改一处易漏改另一处）。
+export function cmpHead(isMedia) {
+  return isMedia
+    ? ['型号', '模态', '分辨率 / 时长', '价格', '速度', '定位', '']
+    : ['型号', '模态', '上下文', '输入 / 输出 (每 M tokens)', '速度', '推理', '编码', '']
+}
+export function cmpRow(v, isMedia, head, goCell) {
+  const cells = isMedia
+    ? [
+        `<b>${esc(v.name_cn || v.name)}</b><small>${esc(v.model_id || v.id)}</small>`,
+        modBadge(v),
+        esc([v.max_resolution, v.max_duration_sec ? v.max_duration_sec + 's' : null].filter(Boolean).join(' · ') || '—'),
+        priceCell(v),
+        esc(SPEED_CN[v.speed_tier] || v.speed_tier || '—'),
+        `<span class="cell-desc">${esc(v.one_liner_cn || '')}</span>`,
+      ]
+    : [
+        `<b>${esc(v.name_cn || v.name)}</b><small>${esc(v.model_id || v.id)}</small>`,
+        modBadge(v),
+        ctxShort(v.context_window),
+        priceCell(v),
+        esc(SPEED_CN[v.speed_tier] || v.speed_tier || '—'),
+        tierPill(v, 'reasoning'),
+        tierPill(v, 'coding'),
+      ]
+  const nameLink = `<a class="row-link" href="#model/${encodeURIComponent(v.id)}" aria-label="${esc(v.name_cn || v.name)}">${cells[0]}</a>`
+  return `<tr data-goto="#model/${encodeURIComponent(v.id)}"><td data-label="${head[0] || '型号'}">${nameLink}</td>${cells.slice(1).map((c, i) => `<td data-label="${head[i + 1] || ''}">${c}</td>`).join('')}<td class="td-go">${goCell}</td></tr>`
+}
 export function familyTableHTML(f) {
   const list = sortVariants(variantsOfFamily(f.id), state.familySort)
   if (!list.length) return emptyBox('该系列暂无收录型号。')
   const isMedia = list.every((v) => v.media_type)
-  const head = isMedia
-    ? ['型号', '模态', '分辨率 / 时长', '价格', '速度', '定位', '']
-    : ['型号', '模态', '上下文', '输入 / 输出 (每 M tokens)', '速度', '推理', '编码', '']
-  const row = (v) => {
-    const cells = isMedia
-      ? [
-          `<b>${esc(v.name_cn || v.name)}</b><small>${esc(v.model_id || v.id)}</small>`,
-          modBadge(v),
-          esc([v.max_resolution, v.max_duration_sec ? v.max_duration_sec + 's' : null].filter(Boolean).join(' · ') || '—'),
-          priceCell(v),
-          esc(SPEED_CN[v.speed_tier] || v.speed_tier || '—'),
-          `<span class="cell-desc">${esc(v.one_liner_cn || '')}</span>`,
-        ]
-      : [
-          `<b>${esc(v.name_cn || v.name)}</b><small>${esc(v.model_id || v.id)}</small>`,
-          modBadge(v),
-          ctxShort(v.context_window),
-          priceCell(v),
-          esc(SPEED_CN[v.speed_tier] || v.speed_tier || '—'),
-          tierPill(v, 'reasoning'),
-          tierPill(v, 'coding'),
-        ]
-    const nameLink = `<a class="row-link" href="#model/${encodeURIComponent(v.id)}" aria-label="${esc(v.name_cn || v.name)}">${cells[0]}</a>`
-    return `<tr data-goto="#model/${encodeURIComponent(v.id)}"><td data-label="${head[0] || '型号'}">${nameLink}</td>${cells.slice(1).map((c, i) => `<td data-label="${head[i + 1] || ''}">${c}</td>`).join('')}<td class="td-go">→</td></tr>`
-  }
+  const head = cmpHead(isMedia)
   return `<div class="table-wrap"><table class="cmp-table">
     <thead><tr>${head.map((h) => `<th scope="col">${h}</th>`).join('')}</tr></thead>
-    <tbody>${list.map(row).join('')}</tbody>
+    <tbody>${list.map((v) => cmpRow(v, isMedia, head, '→')).join('')}</tbody>
   </table></div>`
 }
 export function tierPill(v, key) {
@@ -363,9 +368,7 @@ export function browseResultsHTML() {
   <div class="card-grid">${top
     .map(({ v, score }) => {
       const badge = state.browseCaps.length || state.browseTraits.length ? `<span class="match-flag">匹配 ${score}%</span>` : `<span class="score-flag">综合 ${fitScore(v)}</span>`
-      const card = modelCard(v, badge)
-      const hits = hitLabel(v)
-      return hits ? card.replace('</a>', `<div class="mc-hits">${hits}</div></a>`) : card
+      return modelCard(v, badge, hitLabel(v))
     })
     .join('')}</div>`
 }
@@ -539,36 +542,12 @@ export function viewCompare() {
   </div>`
   const list = ids.map(variantById).filter(Boolean)
   const isMedia = list.every((v) => v.media_type)
-  const head = isMedia
-    ? ['型号', '模态', '分辨率 / 时长', '价格', '速度', '定位', '']
-    : ['型号', '模态', '上下文', '输入 / 输出 (每 M tokens)', '速度', '推理', '编码', '']
-  const row = (v) => {
-    const cells = isMedia
-      ? [
-          `<b>${esc(v.name_cn || v.name)}</b><small>${esc(v.model_id || v.id)}</small>`,
-          modBadge(v),
-          esc([v.max_resolution, v.max_duration_sec ? v.max_duration_sec + 's' : null].filter(Boolean).join(' · ') || '—'),
-          priceCell(v),
-          esc(SPEED_CN[v.speed_tier] || v.speed_tier || '—'),
-          `<span class="cell-desc">${esc(v.one_liner_cn || '')}</span>`,
-        ]
-      : [
-          `<b>${esc(v.name_cn || v.name)}</b><small>${esc(v.model_id || v.id)}</small>`,
-          modBadge(v),
-          ctxShort(v.context_window),
-          priceCell(v),
-          esc(SPEED_CN[v.speed_tier] || v.speed_tier || '—'),
-          tierPill(v, 'reasoning'),
-          tierPill(v, 'coding'),
-        ]
-    const nameLink = `<a class="row-link" href="#model/${encodeURIComponent(v.id)}" aria-label="${esc(v.name_cn || v.name)}">${cells[0]}</a>`
-    return `<tr data-goto="#model/${encodeURIComponent(v.id)}"><td data-label="${head[0] || '型号'}">${nameLink}</td>${cells.slice(1).map((c, i) => `<td data-label="${head[i + 1] || ''}">${c}</td>`).join('')}<td class="td-go"><button class="cmp-remove" data-cmp-remove="${v.id}" aria-label="移除对比">✕</button></td></tr>`
-  }
+  const head = cmpHead(isMedia)
   return `<div class="wrap page">
     ${pageHead({ eyebrow: '06 / 模型对比', title: `模型<em>对比</em>（${list.length}）`, desc: '把想比较的型号放一起，并排看清参数、能力、价格与定位。本地保存、刷新不丢；点任意行看详情，右上角 ✕ 移除。' })}
     <div class="table-wrap"><table class="cmp-table">
       <thead><tr>${head.map((h) => `<th scope="col">${h}</th>`).join('')}</tr></thead>
-      <tbody>${list.map(row).join('')}</tbody>
+      <tbody>${list.map((v) => cmpRow(v, isMedia, head, `<button class="cmp-remove" data-cmp-remove="${v.id}" aria-label="移除对比">✕</button>`)).join('')}</tbody>
     </table></div>
   </div>`
 }

@@ -107,7 +107,7 @@ export const gradeBadge = (v) => {
   const g = gradeOf(v)
   return `<span class="grade-badge g-${g}" title="数据质量 ${v.data_quality_score || 0} 分">${g}</span>`
 }
-export function modelCard(v, extra = '') {
+export function modelCard(v, extra = '', hits = '') {
   const p = providerOf(v)
   const f = familyOf(v)
   const free = v.free ? `<span class="free-badge" title="${esc(v.free_note || '免费可用')}">免费</span>` : ''
@@ -125,7 +125,7 @@ export function modelCard(v, extra = '') {
     <b class="mc-name">${esc(v.name_cn || v.name)}</b>
     <small class="mc-from">${esc(p.name_cn || p.name)}${famName(v) ? ' · ' + esc(famName(v)) : ''}</small>
     <p class="mc-desc">${esc(v.one_liner_cn || '')}</p>
-    <div class="mc-meta">${meta}</div>
+    <div class="mc-meta">${meta}</div>${hits ? `<div class="mc-hits">${hits}</div>` : ''}
   </a>`
 }
 export function emptyBox(text) {

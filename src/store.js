@@ -179,6 +179,7 @@ export function saveBrowseFilters() {
   lsSet(LS_BROWSE_FILTERS, {
     browseModality: state.browseModality, browseCaps: state.browseCaps, browseTraits: state.browseTraits,
     browseSort: state.browseSort, browsePrice: state.browsePrice,
+    browseView: state.browseView,
     browseSearch: state.browseSearch, browseSearchClean: state.browseSearchClean, minContext: state.minContext, favOnly: state.favOnly,
   })
 }
@@ -190,6 +191,7 @@ export function restoreBrowseFilters() {
   if (Array.isArray(s.browseTraits)) state.browseTraits = s.browseTraits
   if (s.browseSort) state.browseSort = s.browseSort
   if (s.browsePrice) state.browsePrice = s.browsePrice
+  if (s.browseView) state.browseView = s.browseView
   if (typeof s.browseSearch === 'string') state.browseSearch = s.browseSearch
   if (typeof s.browseSearchClean === 'string') state.browseSearchClean = s.browseSearchClean
   if (typeof s.minContext === 'number') state.minContext = s.minContext

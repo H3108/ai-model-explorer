@@ -99,6 +99,25 @@ export function refreshBrowse() {
   const el = document.getElementById('browse-results')
   if (el) el.innerHTML = state.browseView === 'table' ? browseTableViewHTML() : browseResultsHTML()
 }
+// 输入防抖：浏览搜索每敲一字符都触发 applySearchQuery + refreshBrowse（重建 ≤24 张卡）
+// 并写两次 localStorage（含 pushRecentSearch，否则中间态「旗舰」「旗舰模」会污染最近搜索）。
+// 140ms 内合并为一次；state.browseSearch 仍即时同步，保证输入框与 state 始终一致。
+const debounce = (fn, ms = 140) => {
+  let t
+  return (...args) => {
+    clearTimeout(t)
+    t = setTimeout(() => fn(...args), ms)
+  }
+}
+const debounceBrowseSearch = debounce((value) => {
+  applySearchQuery(value)
+  pushRecentSearch(value)
+  saveBrowseFilters()
+  // 同步筛选面板分段按钮高亮（结构化搜索改了 state，但筛选面板未整体重渲染）
+  syncSeg('browseModality', state.browseModality)
+  syncSeg('browsePrice', state.browsePrice)
+  refreshBrowse()
+})
 
 // ---------- 事件 ----------
 export function bindGlobalEvents() {
@@ -108,13 +127,7 @@ export function bindGlobalEvents() {
     else if (t.id === 'task-input') { state.homeConditions = extractConditions(t.value); renderHomeChips() }
     else if (t.id === 'browse-search') {
       state.browseSearch = t.value
-      applySearchQuery(t.value)
-      pushRecentSearch(t.value)
-      saveBrowseFilters()
-      // 同步筛选面板分段按钮高亮（结构化搜索改了 state，但筛选面板未整体重渲染）
-      syncSeg('browseModality', state.browseModality)
-      syncSeg('browsePrice', state.browsePrice)
-      refreshBrowse()
+      debounceBrowseSearch(t.value)
     }
   })
   document.addEventListener('submit', (e) => {

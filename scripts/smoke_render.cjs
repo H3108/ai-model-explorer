@@ -180,12 +180,12 @@ async function main() {
   const bs = app.querySelector('#browse-search')
   bs.value = 'gpt'
   bs.dispatchEvent(new window.Event('input', { bubbles: true }))
-  await new Promise((r) => setTimeout(r, 30))
+  await new Promise((r) => setTimeout(r, 200)) // 须 > router.js 的 browse-search 防抖窗口（140ms）
   const searched = app.querySelectorAll('.model-card').length
   ok(searched > 0 && searched < total, `浏览搜索过滤生效（${searched} < ${total}）`)
   bs.value = ''
   bs.dispatchEvent(new window.Event('input', { bubbles: true }))
-  await new Promise((r) => setTimeout(r, 30))
+  await new Promise((r) => setTimeout(r, 200))
   ok(app.querySelectorAll('.model-card').length === total, '清空搜索恢复全部')
   // 视图切换 卡片 / 表格（Phase 1 data-table 表格视图）
   await click('[data-view="table"]')
@@ -193,34 +193,34 @@ async function main() {
   ok(app.querySelector('[data-view="table"].selected'), '表格视图按钮高亮')
   await click('[data-view="card"]')
   ok(app.querySelectorAll('.model-card').length === total, '切回卡片视图恢复默认数量')
-  // Phase 2 结构化搜索：模态识别
+  // Phase 2 结构化搜索：模态识别（下方等待须 > router.js 的 browse-search 防抖窗口 140ms）
   const bs2 = app.querySelector('#browse-search')
   bs2.value = '视频'
   bs2.dispatchEvent(new window.Event('input', { bubbles: true }))
-  await new Promise((r) => setTimeout(r, 30))
+  await new Promise((r) => setTimeout(r, 200))
   ok(app.querySelector('[data-seg="browseModality"] [data-value="video"]').classList.contains('selected'), '结构化搜索识别「视频」模态并选中')
   const vidCount = app.querySelectorAll('.model-card').length
   ok(vidCount > 0 && vidCount < total, `视频模态结构化过滤收敛（${vidCount} < ${total}）`)
   // 上下文 + 模态复位（完整重算：无模态词时模态回到 all）
   bs2.value = '128k 长上下文'
   bs2.dispatchEvent(new window.Event('input', { bubbles: true }))
-  await new Promise((r) => setTimeout(r, 30))
+  await new Promise((r) => setTimeout(r, 200))
   ok(app.querySelector('[data-seg="browseModality"] [data-value="all"]').classList.contains('selected'), '结构化搜索无模态词时模态复位为 all')
   ok(app.querySelectorAll('.model-card').length > 0, '上下文结构化过滤命中（≥128K）')
   bs2.value = ''
   bs2.dispatchEvent(new window.Event('input', { bubbles: true }))
-  await new Promise((r) => setTimeout(r, 30))
+  await new Promise((r) => setTimeout(r, 200))
   ok(app.querySelectorAll('.model-card').length === total, '清空结构化搜索恢复全部')
   ok(app.querySelector('.score-flag'), '浏览卡片显示综合评分标（fitScore）')
   // Issue-5 别名表召回：搜索「ChatGPT」应命中 openai 模型（model_aliases.json）
   bs2.value = 'ChatGPT'
   bs2.dispatchEvent(new window.Event('input', { bubbles: true }))
-  await new Promise((r) => setTimeout(r, 30))
+  await new Promise((r) => setTimeout(r, 200))
   const aliasCards = app.querySelectorAll('.model-card').length
   ok(aliasCards > 0 && aliasCards < total, `别名搜索「ChatGPT」命中（${aliasCards} < ${total}）`)
   bs2.value = ''
   bs2.dispatchEvent(new window.Event('input', { bubbles: true }))
-  await new Promise((r) => setTimeout(r, 30))
+  await new Promise((r) => setTimeout(r, 200))
   ok(app.querySelectorAll('.model-card').length === total, '清空别名搜索恢复全部')
   // #browse 只做能力筛选，场景入口统一在首页场景模块 + #matcher（见 398b801 去重决策）
   ok(!app.querySelector('[data-tab="scene"]'), '#browse 无场景 tab（不与 #matcher 重复）')

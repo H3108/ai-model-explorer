@@ -13,6 +13,8 @@ export const TIER = {
 export const SPEED_RANK = { slow: 1, slower: 2, moderate: 3, medium: 3, fast: 4, faster: 5, fastest: 6 }
 export const SPEED_CN = { slow: '较慢', slower: '偏慢', moderate: '中速', medium: '中速', fast: '快', faster: '很快', fastest: '极快' }
 export const API_STYLE_CN = { openai: 'OpenAI 兼容', media: '媒体接口', anthropic: 'Anthropic', google: 'Google Gemini' }
+// 厂商所属地区（未收录的地区码原样回显，再缺则显示「其他」）
+export const REGION_CN = { US: '美国', CN: '中国', FR: '法国', DE: '德国', GB: '英国' }
 export const MODALITY = {
   text: { label: '文本', short: '文本', icon: '¶' },
   image: { label: '图像生成', short: '图像', icon: '◈' },
