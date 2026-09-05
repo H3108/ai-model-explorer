@@ -1,21 +1,13 @@
-import { BaseCollector } from './_base.js';
+import { makeLiteLLMCollector } from './_litellm_source.js';
 
-// Together AI —— 真实源待接入：OpenRouter 未覆盖 Together；官方 /v1/models 需 API Key。
-// 联网模式 coverage=[] 不产生 patch（避免假 diff）；离线模式仍用 fixtures。
-export default class TogetherCollector extends BaseCollector {
-  static id = 'together';
-  static label = 'Together AI';
-  static official = true;
-  static requiresKey = false;
-  static realSource = false;
-  static sourceUrl = 'https://api.together.xyz/pricing';
-  static providerId = 'together';
-
-  async fetchRaw() {
-    if (this.ctx.offline) { this._coverage = (this.ctx.fixture || []).map((f) => f.id); return this.ctx.fixture; }
-    this.log('  ⚠ Together: 真实源待接入，联网模式跳过（不参与真实更新）');
-    this._coverage = [];
-    return [];
-  }
-  normalize(raw) { return Array.isArray(raw) ? raw : []; }
-}
+// Together AI —— 真实源（发现模式）：LiteLLM 聚合，本站尚无 together 型号。
+// Together 官方 /v1/models 需 API Key；OpenRouter 未覆盖；LiteLLM 的 together_ai provider 有 69 条真实定价。
+// 本站 provider_id=together 下暂无型号 → 设为 discoveryOnly：不产生更新 patch，
+// 改由 scripts/discover_models.cjs 把它作为「新模型发现源」用（可发现 GLM-5.3、Kimi-K3、Qwen3.8 等）。
+export default makeLiteLLMCollector({
+  id: 'together',
+  label: 'Together AI',
+  providerId: 'together',
+  sourceUrl: 'https://api.together.xyz/pricing',
+  discoveryOnly: true,
+});

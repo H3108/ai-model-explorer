@@ -6,7 +6,7 @@ import { fileURLToPath } from 'url';
 import { BaseCollector } from './_base.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const SKIP = new Set(['_base.js', '_registry.js', '_config.js', '_whitelist.js', '_openrouter.js']);
+const SKIP = new Set(['_base.js', '_registry.js', '_config.js', '_whitelist.js', '_openrouter.js', '_litellm.js', '_litellm_source.js']);
 
 export async function loadCollectors(dir) {
   const base = dir || __dirname;

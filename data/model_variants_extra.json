@@ -4171,5 +4171,158 @@
     "repo_url": "https://huggingface.co/Kwai-Kolors",
     "benchmarks": [],
     "params": "未公开"
+  },
+  {
+    "id": "glm-5-3-flash",
+    "family_id": "zhipu-glm",
+    "provider_id": "zhipu-glm",
+    "name": "GLM-5.3-Flash",
+    "name_cn": "GLM-5.3-Flash",
+    "model_id": "glm-5-3-flash",
+    "one_liner_cn": "智谱 2026-08 多模态（文/图/视频）开源旗舰，320B/18B 底座、1M 上下文；价格约为旗舰 1/10，适合低成本多模态 Agent 与编码。",
+    "context_window": 1310720,
+    "max_output_tokens": null,
+    "input_price_per_mtok": 0.075,
+    "output_price_per_mtok": 0.25,
+    "currency": "USD",
+    "vision_support": true,
+    "open_weight": true,
+    "speed_tier": "fast",
+    "model_type": [
+      "Chat",
+      "Coding",
+      "Agent",
+      "Vision",
+      "Video"
+    ],
+    "capabilities": {
+      "reasoning": {
+        "tier": "high",
+        "basis": "相较 5.2 明显提升，Toolathlon / Automation 局部超过自家旗舰。"
+      },
+      "coding": {
+        "tier": "high",
+        "basis": "编码强，CodingPlan 额度约为旗舰 3 倍。"
+      },
+      "agent": {
+        "tier": "high",
+        "basis": "工具执行强，多模态 Agent 适用。"
+      },
+      "knowledge": {
+        "tier": "high",
+        "basis": "旗舰级知识。"
+      },
+      "multilingual": {
+        "tier": "high",
+        "basis": "中英双语强。"
+      }
+    },
+    "best_for": [
+      "coding",
+      "agent",
+      "multimodal",
+      "low_cost"
+    ],
+    "avoid_for": [],
+    "release_date": "2026-08",
+    "source_url": "https://openrouter.ai/models/z-ai/glm-5-3-flash",
+    "verified": true,
+    "free": false,
+    "free_note": "",
+    "aliases": [
+      "glm-5-3-flash",
+      "GLM-5.3-Flash",
+      "智谱 GLM-5.3-Flash"
+    ],
+    "cost_tier": "cost_effective",
+    "role": "multimodal",
+    "access_types": [
+      "official_api"
+    ],
+    "status": "active",
+    "data_quality_score": 70,
+    "data_source": "official",
+    "last_verified_at": "2026-09-05",
+    "price_model": "per_token",
+    "benchmarks": [],
+    "verified_date": "2026-09-05"
+  },
+  {
+    "id": "glm-5-3",
+    "family_id": "zhipu-glm",
+    "provider_id": "zhipu-glm",
+    "name": "GLM-5.3",
+    "name_cn": "GLM-5.3",
+    "model_id": "glm-5-3",
+    "one_liner_cn": "智谱 2026-08 旗舰，MIT 开源权重；1M 上下文，长程编码与 Agent 能力达开源模型最优，输入 $1.4 / 输出 $4.4 每百万 token。",
+    "context_window": 1310720,
+    "max_output_tokens": null,
+    "input_price_per_mtok": 1.4,
+    "output_price_per_mtok": 4.4,
+    "currency": "USD",
+    "vision_support": false,
+    "open_weight": true,
+    "speed_tier": "medium",
+    "model_type": [
+      "Chat",
+      "Coding",
+      "Agent",
+      "Reasoning"
+    ],
+    "capabilities": {
+      "reasoning": {
+        "tier": "high",
+        "basis": "旗舰，复杂推理与深度思考领先。"
+      },
+      "coding": {
+        "tier": "high",
+        "basis": "开源编码最强，Z.ai Code Bench 较 5.2 +50%，Terminal Bench 3.0 达 28.3。"
+      },
+      "agent": {
+        "tier": "high",
+        "basis": "长程自主 Agent 与工具执行最优之一，支持 function calling。"
+      },
+      "knowledge": {
+        "tier": "high",
+        "basis": "旗舰级中文与世界知识。"
+      },
+      "multilingual": {
+        "tier": "high",
+        "basis": "中英双语强。"
+      }
+    },
+    "best_for": [
+      "coding",
+      "agent",
+      "long_context",
+      "reasoning"
+    ],
+    "avoid_for": [
+      "vision"
+    ],
+    "release_date": "2026-08",
+    "source_url": "https://openrouter.ai/models/z-ai/glm-5.3",
+    "verified": true,
+    "free": false,
+    "free_note": "",
+    "aliases": [
+      "glm-5.3",
+      "GLM-5.3",
+      "智谱 GLM-5.3",
+      "智谱",
+      "Z.ai GLM-5.3"
+    ],
+    "cost_tier": "production",
+    "role": "agent",
+    "access_types": [
+      "official_api"
+    ],
+    "status": "active",
+    "data_quality_score": 70,
+    "data_source": "official",
+    "last_verified_at": "2026-09-05",
+    "price_model": "per_token",
+    "benchmarks": [],
+    "verified_date": "2026-09-05"
   }
 ]

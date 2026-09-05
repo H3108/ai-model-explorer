@@ -1,15 +1,20 @@
 name: Data Sync
 
-# Phase 2/3/4 —— 自动开 PR + 受限安全自动合并 + 13 家厂商 + 健康监控 + 自动部署
+# Phase 2/3/4/5 —— 自动开 PR + 受限安全自动合并 + 13 家厂商 + 健康监控 + 新模型发现 + 自动部署
 # 行为：
 #   1) 跑启用源 Collector（13 家）→ Schema 校验 → 差异报告 → 健康监控报告
-#   2) 差异处理（默认自动闭环）：
+#   2) 新模型发现（Discovery）：从 OpenRouter + LiteLLM 拉全量型号，反向比对本站，
+#      把「站外有、站内没有」的候选写入 data/model_candidates.json（仅客观字段），
+#      若有新增候选则开/更新一条滚动 Issue 提醒人工补定性字段并入库。
+#      —— 这解决了「官方发了新模型（如 GLM-5.3）但本站查不到」的架构缺口。
+#   3) 差异处理（默认自动闭环）：
 #      - 定时（每周一）与手动触发：diff 判为「纯安全变动」→ 直接合入 master，push 自动触发 deploy job 上线；
 #      - 非安全变动（含新增候选 / 疑似下架 / 失败源 / 非白名单字段 / 价格幅度 >50%）→ 开 PR 等人工 review。
 #      安全判定见 scripts/stage_pr.cjs isSafeDiff。
-#   3) 监控发现 error 级告警 → 建「健康告警」Issue（数据诚信问题，如 free 标注与官方定价冲突）
-#   4) push 到 master（自动合并后）或手动勾选 deploy → 自动 rsync 部署到海外服务器（闭环）
-# 关键约束：free / 定性字段始终不碰（apply_staging 已拦截）；自动合并仅覆盖价格 / context / max_output 白名单字段。
+#   4) 监控发现 error 级告警 → 建「健康告警」Issue（数据诚信问题，如 free 标注与官方定价冲突）
+#   5) push 到 master（自动合并后）或手动勾选 deploy → 自动 rsync 部署到海外服务器（闭环）
+# 关键约束：free / 定性字段始终不碰（apply_staging 已拦截）；自动合并仅覆盖价格 / context / max_output 白名单字段；
+#          新模型候选的客观字段来自聚合源，定性字段必须人工补（人审），脚本不杜撰。
 on:
   schedule:
     - cron: '23 3 * * 1'          # 每周一 03:23 UTC（避开整点，非每日）
@@ -68,6 +73,33 @@ jobs:
           node -e "const h=require('./data/.staging/health.json');process.exit(h.summary.error>0?0:1)" && \
           gh issue create --title "数据健康告警 $(date +%F)" \
             --body "$(cat data/.staging/HEALTH_REPORT.md)" || true
+
+      - name: 新模型发现（Discovery）
+        if: ${{ (github.event_name == 'schedule' || github.event_name == 'workflow_dispatch') && !inputs.dry_run && success() }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          node scripts/discover_models.cjs --write-candidates || echo "::warning::discovery 执行失败，跳过本轮发现（不影响价格同步）"
+          if [ ! -f data/.staging/new_candidates.json ]; then echo "无候选增量文件，跳过"; exit 0; fi
+          NEW=$(node -e "console.log(require('./data/.staging/new_candidates.json').added.length)")
+          echo "本次新增候选: $NEW"
+          if [ "$NEW" = "0" ]; then echo "无新模型，跳过"; exit 0; fi
+          # 提交候选中转区（持久化，供人工补录）
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git remote set-url origin "https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git"
+          git add data/model_candidates.json
+          if ! git diff --cached --quiet; then
+            git commit -m "data(discovery): 新增 ${NEW} 个候选待人工补录 [skip ci]" && git push
+          fi
+          # 开/更新一条滚动 Issue 提醒人工补定性字段并入库
+          BODY=$(node -e "const j=require('./data/.staging/new_candidates.json');console.log('以下 '+j.added.length+' 个新模型已加入候选中转区（data/model_candidates.json，status=pending），需人工补定性字段（name_cn / one_liner_cn / capabilities 五维等）后执行 \`node scripts/promote_candidates.cjs\` 入库：\n\n- '+j.added.map(x=>'\`'+x+'\`').join('\n- '))")
+          EXIST=$(gh issue list --state open --jq 'map(select(.title | contains("新模型待人工补录")))[0].number' 2>/dev/null || true)
+          if [ -n "$EXIST" ]; then
+            gh issue comment "$EXIST" --body "$BODY"
+          else
+            gh issue create --title "🆕 新模型待人工补录" --body "$BODY"
+          fi
 
       - name: 配置 git 身份与远端（stage_pr commit/push 需要，早于自动开 PR 步骤）
         if: ${{ (github.event_name == 'schedule' || github.event_name == 'workflow_dispatch') && !inputs.dry_run && success() }}

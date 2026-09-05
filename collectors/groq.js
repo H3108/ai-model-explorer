@@ -1,21 +1,16 @@
-import { BaseCollector } from './_base.js';
+import { makeLiteLLMCollector } from './_litellm_source.js';
 
-// Groq —— 真实源待接入：OpenRouter 未覆盖 Groq（无免密钥公开定价 API；官方定价页为 JS 渲染 HTML）。
-// 联网模式 coverage=[] 不产生 patch（避免假 diff）；离线模式仍用 fixtures 供本地/CI 离线复现。
-export default class GroqCollector extends BaseCollector {
-  static id = 'groq';
-  static label = 'Groq';
-  static official = true;
-  static requiresKey = false;
-  static realSource = false;
-  static sourceUrl = 'https://console.groq.com/docs/pricing';
-  static providerId = 'groq';
-
-  async fetchRaw() {
-    if (this.ctx.offline) { this._coverage = (this.ctx.fixture || []).map((f) => f.id); return this.ctx.fixture; }
-    this.log('  ⚠ Groq: 真实源待接入，联网模式跳过（不参与真实更新）');
-    this._coverage = [];
-    return [];
-  }
-  normalize(raw) { return Array.isArray(raw) ? raw : []; }
-}
+// Groq —— 真实源：LiteLLM 聚合（本站 provider_id=groq 下 10 个型号）
+// 为什么用 LiteLLM 而非官方：Groq 官方 /openai/v1/models 需 API Key，定价页为 JS 渲染 HTML；
+// OpenRouter 又不覆盖 Groq（其定价是 Groq 自己的，不等于 OpenRouter 同款模型价）。
+// LiteLLM 的 groq provider 含 20 条（14 条 per-token 聊天 + 6 条音频），免密钥、静态 JSON。
+// 本站 10 个型号中，7 个可精确匹配（见 _litellm.js ID_MAP）；
+// groq-gemma-2-9b / groq-mixtral-8x7b / groq-deepseek-r1-distill-70b 在 Groq 现网已下架，
+// 精确匹配不上 → 跳过不猜测，交由「疑似下架」机制提示人工核销。
+export default makeLiteLLMCollector({
+  id: 'groq',
+  label: 'Groq',
+  providerId: 'groq',
+  sourceUrl: 'https://console.groq.com/docs/pricing',
+  discoveryOnly: false,
+});
