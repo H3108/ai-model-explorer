@@ -70,9 +70,40 @@ if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
   fi
 fi
 
+# ── 静态资源版本号注入（缓存加固，2026-09-05）──
+# 根因：index.html 用 <script src="app.js"> 无版本号，nginx 也未下发
+#       Cache-Control / ETag / Last-Modified，浏览器走启发式缓存 → 发版后
+#       用户仍加载旧 JS（当天连续踩两次：排序按钮、family 默认顺序都看不到）。
+# 做法：rsync 前给入口引用 + 全部 ESM import 打上 ?v=<git sha>，sha 随提交变化
+#       → URL 变化 → 浏览器必然拉新；同 commit 重复部署版本号不变，仍可命中缓存。
+# 原则：源码保持干净（版本号只是部署期产物，不进 git），rsync 后自动还原本地。
+BUMP_FILES=(index.html app.js)
+for _f in src/*.js; do [[ -f "${_f}" ]] && BUMP_FILES+=("${_f}"); done
+
+# 仅当这些文件本身干净时才在部署后还原，避免误丢用户未提交的前端改动
+BUMP_CLEAN=1
+if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+  if ! git diff --quiet -- "${BUMP_FILES[@]}" 2>/dev/null ||
+     ! git diff --cached --quiet -- "${BUMP_FILES[@]}" 2>/dev/null; then
+    BUMP_CLEAN=0
+    echo "⚠️ 检测到 index.html / app.js / src/ 有未提交改动，部署后将保留版本号（不自动还原）。" >&2
+  fi
+fi
+
+if [[ -f scripts/bump_version.sh ]]; then
+  bash scripts/bump_version.sh
+else
+  echo "⚠️ 未找到 scripts/bump_version.sh，跳过版本注入（仍按旧行为部署）。" >&2
+fi
+
 # 镜像同步（--delete 保证服务器与本地完全一致）
 rsync -avz --delete "${EXCLUDES[@]}" \
   -e "ssh ${SSH_OPTS[*]}" \
   ./ "${SERVER_USER}@${SERVER_HOST}:${DEPLOY_PATH}/"
+
+# 版本号只是部署期产物，不进 git：还原本地工作区（仅在原本干净时）
+if [[ ${BUMP_CLEAN} -eq 1 ]] && git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+  git checkout -- "${BUMP_FILES[@]}" 2>/dev/null || true
+fi
 
 echo "✓ 部署完成。刷新你的子域名即可看到更新。"
