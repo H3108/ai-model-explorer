@@ -96,6 +96,16 @@ else
   echo "⚠️ 未找到 scripts/bump_version.sh，跳过版本注入（仍按旧行为部署）。" >&2
 fi
 
+# 权限安全网：强制前端文件/目录对其他用户可读。
+# 背景：2026-09-05 版本注入脚本误用 mv（mktemp 文件是 600）→ 本地文件被改成
+#       600 → rsync -a 含 -p，把 600 同步到服务器 → nginx worker（www-data）
+#       读不到 → models.hush7.online 全站 403。
+# 说明：不用 rsync --chmod，因为 macOS 自带 openrsync 2.6.9 对它静默无效，
+#       行为随 rsync 版本漂移；这里直接在本地 chmod，跨版本百分百可靠。
+#       （rsync -a 会把源端权限同步到目标，本地是 644 → 远端故障态 600 会被
+#        自动修正为 644，无需手工上服务器修。）
+chmod a+rX index.html app.js styles.css src/*.js 2>/dev/null || true
+
 # 镜像同步（--delete 保证服务器与本地完全一致）
 rsync -avz --delete "${EXCLUDES[@]}" \
   -e "ssh ${SSH_OPTS[*]}" \

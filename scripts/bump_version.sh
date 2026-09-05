@@ -81,7 +81,14 @@ for f in "${FILES[@]}"; do
   fi
 
   if ! cmp -s "${tmp}" "${f}"; then
-    mv "${tmp}" "${f}"
+    # 千万别用 mv：mktemp 创建的文件权限是 600（rw-------），mv 会把 600 带给
+    # 目标文件；rsync -a 含 -p，同步到服务器后 nginx worker（www-data）读不到
+    # → 全站 403。2026-09-05 就栽在这里，models.hush7.online 挂掉。
+    # 用 cat 重定向写入原 inode：权限、属主、硬链接全部保持不变。
+    cat "${tmp}" > "${f}"
+    rm -f "${tmp}"
+    # 双保险：即便上面的写入方式将来被改动，也强制保证组/其他可读
+    chmod a+r "${f}"
     changed=$((changed + 1))
   else
     rm -f "${tmp}"
