@@ -358,6 +358,26 @@ async function main() {
   store.state.variants[0].verified_date = backup
   store.resetDataMeta()
 
+  // [14] 对比集：cmpRow / cmpHead 共用表行守卫（系列页与对比页共用同一 row 构建，此处专测对比页）
+  // 放在最后：切表格视图会写入 ame_browse_filters，避免污染 [12] 的 .model-card 断言
+  console.log('\n[14] 对比集（#compare）')
+  const savedCompare = store.lsGet('ame_compare_set', [])
+  store.lsSet('ame_compare_set', [])
+  store.toggleCompare('openai-gpt-5-5')
+  store.toggleCompare('anthropic-opus-5')
+  ok(store.getCompare().length === 2, '对比集收集 2 个型号')
+  h = await goto('#compare')
+  ok(h.includes('模型对比'), '对比页标题渲染')
+  ok(app.querySelectorAll('.cmp-table tbody tr').length === 2, 'cmpRow 渲染 2 行')
+  ok(app.querySelectorAll('.cmp-remove').length === 2, 'cmpRow 末列 ✕ 移除钮已渲染')
+  ok(app.querySelector('.cmp-table tbody tr').getAttribute('data-goto').startsWith('#model/'), 'cmpRow 行 data-goto 跳转属性保留')
+  await click('[data-cmp-remove="openai-gpt-5-5"]')
+  ok(app.querySelectorAll('.cmp-table tbody tr').length === 1, '✕ 移除后剩 1 行')
+  ok(store.getCompare().length === 1, '对比集同步为 1 个')
+  await click('[data-cmp-remove]')
+  ok(app.querySelector('.empty-box'), '对比集清空后回落到空态')
+  store.lsSet('ame_compare_set', savedCompare)
+
   console.log(`\n${failures.length ? '✗ 失败 ' + failures.length + ' 项：\n - ' + failures.join('\n - ') : '✓ 全部通过'}`)
   process.exit(failures.length ? 1 : 0)
 }
