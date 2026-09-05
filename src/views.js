@@ -257,6 +257,10 @@ export function sortVariants(arr, mode) {
   else if (mode === 'price-desc') a.sort((x, y) => priceValue(y) - priceValue(x))
   else if (mode === 'context') a.sort((x, y) => (y.context_window || 0) - (x.context_window || 0))
   else if (mode === 'speed') a.sort((x, y) => (SPEED_RANK[y.speed_tier] || 2) - (SPEED_RANK[x.speed_tier] || 2))
+  // 「默认顺序」按核验日期降序：用户对默认顺序的语义预期就是「新加的在前」。
+  // 之前依赖 state.variants 的合并顺序，是脆弱的隐式约定；显式排序更稳，
+  // 且即便数据层顺序将来被打乱，排序结果仍正确。
+  else a.sort((x, y) => (y.verified_date || '').localeCompare(x.verified_date || ''))
   return a
 }
 // 系列表 / 对比表共用：表头与行构建。两处 row 逻辑完全一致，仅末列操作钮不同，
