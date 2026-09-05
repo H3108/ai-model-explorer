@@ -199,6 +199,8 @@ export function matchModels() {
   })
   if (state.browseSort === 'price') scored.sort((a, b) => priceValue(a.v) - priceValue(b.v))
   else if (state.browseSort === 'context') scored.sort((a, b) => (b.v.context_window || 0) - (a.v.context_window || 0))
+  // 「最新入库」按核验日期降序：匹配度排序只看能力得分，无法体现新度，这是新收录模型在浏览页置顶的唯一路径
+  else if (state.browseSort === 'new') scored.sort((a, b) => (b.v.verified_date || '').localeCompare(a.v.verified_date || ''))
   else scored.sort((a, b) => b.score - a.score || priceValue(a.v) - priceValue(b.v))
   return scored
 }
