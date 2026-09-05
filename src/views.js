@@ -154,7 +154,7 @@ export function providerCard(p) {
   const vs = variantsOfProvider(p.id)
   const fs = familiesOfProvider(p.id)
   const region = { US: '美国', CN: '中国', FR: '法国', DE: '德国', GB: '英国' }[p.country] || p.country || '其他'
-  return `<a class="provider-card" href="${providerLink(p)}" style="--brand:${esc(p.brand_color || '#173e35')}">
+  return `<a class="provider-card" href="${providerLink(p)}" style="--brand:${esc(p.brand_color)}">
     <div class="pc-top">${logoHTML(p, 'md')}<div class="pc-tags"><span class="tag">${esc(region)}</span>${catBadge(p)}${p.open_weight ? '<span class="tag tag-open">开放权重</span>' : ''}</div></div>
     <div class="pc-body">
       <h3>${esc(p.name_cn || p.name)}</h3>

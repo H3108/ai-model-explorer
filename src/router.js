@@ -128,6 +128,14 @@ export function bindGlobalEvents() {
       if (r.name === 'family') { const f = familyById(r.param); if (f) refresh('#family-table', familyTableHTML(f)) }
     }
   })
+  document.addEventListener('keydown', (e) => {
+    // 免费信息点标了 role="button" + tabindex，补键盘可达性：Enter / Space 展开收起
+    const freeInfoKey = e.target.closest && e.target.closest('.free-info')
+    if (freeInfoKey && (e.key === 'Enter' || e.key === ' ')) {
+      e.preventDefault()
+      freeInfoKey.classList.toggle('active')
+    }
+  })
   document.addEventListener('click', (e) => {
     // 对比表「免费信息点」：点击展开/收起说明，且不触发整行跳转
     const freeInfo = e.target.closest('.free-info')
