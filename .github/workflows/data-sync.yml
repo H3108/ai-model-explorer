@@ -3,11 +3,13 @@ name: Data Sync
 # Phase 2/3/4 —— 自动开 PR + 受限安全自动合并 + 13 家厂商 + 健康监控 + 自动部署
 # 行为：
 #   1) 跑启用源 Collector（13 家）→ Schema 校验 → 差异报告 → 健康监控报告
-#   2) 有「字段变动」默认自动开 PR（data-sync/<date> → master，人审后 merge）；
-#      当 workflow_dispatch 开启 auto_merge_safe 且 diff 纯为价格/辅助字段变动、无新增/弃用/失败源时，直接合入 master（绕过 PR，自动合并，默认关）
+#   2) 差异处理（默认自动闭环）：
+#      - 定时（每周一）与手动触发：diff 判为「纯安全变动」→ 直接合入 master，push 自动触发 deploy job 上线；
+#      - 非安全变动（含新增候选 / 疑似下架 / 失败源 / 非白名单字段 / 价格幅度 >50%）→ 开 PR 等人工 review。
+#      安全判定见 scripts/stage_pr.cjs isSafeDiff。
 #   3) 监控发现 error 级告警 → 建「健康告警」Issue（数据诚信问题，如 free 标注与官方定价冲突）
-#   4) push 到 master（PR 合并 / 安全自动合并后）或手动勾选 deploy → 自动 rsync 部署到海外服务器（闭环）
-# 关键约束：默认不开自动合并、不自动部署；free / 定性字段始终不碰（apply_staging 已拦截）。
+#   4) push 到 master（自动合并后）或手动勾选 deploy → 自动 rsync 部署到海外服务器（闭环）
+# 关键约束：free / 定性字段始终不碰（apply_staging 已拦截）；自动合并仅覆盖价格 / context / max_output 白名单字段。
 on:
   schedule:
     - cron: '23 3 * * 1'          # 每周一 03:23 UTC（避开整点，非每日）
@@ -80,7 +82,7 @@ jobs:
         if: ${{ (github.event_name == 'schedule' || github.event_name == 'workflow_dispatch') && !inputs.dry_run && success() }}
         env:
           GH_TOKEN: ${{ github.token }}
-        run: node scripts/stage_pr.cjs --create ${{ inputs.auto_merge_safe == true && '--auto-merge-safe' || '' }}
+        run: node scripts/stage_pr.cjs --create ${{ (github.event_name == 'schedule' || inputs.auto_merge_safe == true) && '--auto-merge-safe' || '' }}
 
       - name: 仅报告模式（dry_run，不开 PR）
         if: ${{ github.event_name == 'workflow_dispatch' && inputs.dry_run && success() }}
