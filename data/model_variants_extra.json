@@ -4324,5 +4324,312 @@
     "price_model": "per_token",
     "benchmarks": [],
     "verified_date": "2026-09-05"
+  },
+  {
+    "id": "google-gemini-3-8-flash",
+    "family_id": "google-gemini",
+    "provider_id": "google",
+    "name": "Gemini 3.8 Flash",
+    "name_cn": "Gemini 3.8 Flash",
+    "model_id": "google-gemini-3-8-flash",
+    "one_liner_cn": "Google 2026-09-02 GA 的第三代 Flash 旗舰，1M 上下文、多模态（文/图/视频/音频/PDF），思考可调（低/中/高）；长程编码与 Agent 工作流接近前沿，价格仅为前沿数分之一。",
+    "context_window": 1048576,
+    "max_output_tokens": null,
+    "input_price_per_mtok": 0.75,
+    "output_price_per_mtok": 3.75,
+    "currency": "USD",
+    "vision_support": true,
+    "open_weight": false,
+    "speed_tier": "fast",
+    "model_type": [
+      "Chat",
+      "Vision",
+      "Reasoning",
+      "Coding",
+      "Agent"
+    ],
+    "capabilities": {
+      "reasoning": {
+        "tier": "high",
+        "basis": "近前沿推理（HLE-Verified 54.9%，接近 Opus 5）"
+      },
+      "coding": {
+        "tier": "high",
+        "basis": "DeepSWE v1.1 73.7%，长程编码接近 Opus 5"
+      },
+      "agent": {
+        "tier": "high",
+        "basis": "Agent Arena 第 14，强于 DeepSeek-V4-Pro"
+      },
+      "knowledge": {
+        "tier": "high",
+        "basis": "知识工作 Elo 领先多数前沿"
+      },
+      "multilingual": {
+        "tier": "high",
+        "basis": "中英及多语强"
+      }
+    },
+    "best_for": [
+      "coding",
+      "agent",
+      "multimodal",
+      "long_context",
+      "cost_effective"
+    ],
+    "avoid_for": [
+      "image_generation",
+      "audio_generation"
+    ],
+    "release_date": "2026-09",
+    "source_url": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash",
+    "verified": true,
+    "free": false,
+    "free_note": "",
+    "aliases": [
+      "google-gemini-3-8-flash",
+      "Gemini 3.8 Flash",
+      "gemini-3.8-flash"
+    ],
+    "cost_tier": "cost_effective",
+    "role": "multimodal",
+    "access_types": [
+      "official_api"
+    ],
+    "status": "active",
+    "data_quality_score": 70,
+    "data_source": "official",
+    "last_verified_at": "2026-09-05",
+    "price_model": "per_token",
+    "benchmarks": [],
+    "verified_date": "2026-09-05"
+  },
+  {
+    "id": "deepseek-v4-pro",
+    "family_id": "deepseek-deepseek",
+    "provider_id": "deepseek",
+    "name": "DeepSeek V4 Pro",
+    "name_cn": "DeepSeek V4 Pro",
+    "model_id": "deepseek-v4-pro",
+    "one_liner_cn": "DeepSeek 2026-04 开源旗舰，1.6T 总参/49B 激活 MoE，1M 上下文；开源模型 Agent 编码 SOTA，世界知识仅次于 Gemini-3.1-Pro，推理比肩顶级闭源。支持思考/非思考双模式。",
+    "context_window": 1048576,
+    "max_output_tokens": null,
+    "input_price_per_mtok": 0.9208,
+    "output_price_per_mtok": 1.8416,
+    "currency": "USD",
+    "vision_support": false,
+    "open_weight": true,
+    "speed_tier": "medium",
+    "model_type": [
+      "Chat",
+      "Coding",
+      "Agent",
+      "Reasoning"
+    ],
+    "capabilities": {
+      "reasoning": {
+        "tier": "high",
+        "basis": "数学/STEM/竞赛编码超越所有已公开开源模型，比肩顶级闭源"
+      },
+      "coding": {
+        "tier": "high",
+        "basis": "Agentic Coding 开源 SOTA，交付质量接近 Opus-4.6 非思考模式"
+      },
+      "agent": {
+        "tier": "high",
+        "basis": "针对 Claude Code/OpenClaw/OpenCode 优化，长流程自主任务强"
+      },
+      "knowledge": {
+        "tier": "high",
+        "basis": "世界知识领先所有开源模型，仅稍逊 Gemini-3.1-Pro"
+      },
+      "multilingual": {
+        "tier": "high",
+        "basis": "中英双语强"
+      }
+    },
+    "best_for": [
+      "coding",
+      "agent",
+      "reasoning",
+      "long_context"
+    ],
+    "avoid_for": [
+      "vision"
+    ],
+    "release_date": "2026-04",
+    "source_url": "https://api-docs.deepseek.com/",
+    "verified": true,
+    "free": false,
+    "free_note": "",
+    "aliases": [
+      "deepseek-v4-pro",
+      "DeepSeek V4 Pro",
+      "DeepSeek-V4-Pro"
+    ],
+    "cost_tier": "production",
+    "role": "agent",
+    "access_types": [
+      "official_api"
+    ],
+    "status": "active",
+    "data_quality_score": 70,
+    "data_source": "official",
+    "last_verified_at": "2026-09-05",
+    "price_model": "per_token",
+    "benchmarks": [],
+    "verified_date": "2026-09-05"
+  },
+  {
+    "id": "deepseek-v4-flash",
+    "family_id": "deepseek-deepseek",
+    "provider_id": "deepseek",
+    "name": "DeepSeek V4 Flash",
+    "name_cn": "DeepSeek V4 Flash",
+    "model_id": "deepseek-v4-flash",
+    "one_liner_cn": "DeepSeek 2026-04 开源高效档，284B 总参/13B 激活 MoE，1M 上下文；推理接近 V4-Pro，简单 Agent 任务与 Pro 持平，响应更快、价格极低。",
+    "context_window": 1048576,
+    "max_output_tokens": null,
+    "input_price_per_mtok": 0.0855,
+    "output_price_per_mtok": 0.1711,
+    "currency": "USD",
+    "vision_support": false,
+    "open_weight": true,
+    "speed_tier": "fast",
+    "model_type": [
+      "Chat",
+      "Coding",
+      "Agent",
+      "Reasoning"
+    ],
+    "capabilities": {
+      "reasoning": {
+        "tier": "high",
+        "basis": "推理接近 V4-Pro"
+      },
+      "coding": {
+        "tier": "high",
+        "basis": "编码接近 Pro，高性价比"
+      },
+      "agent": {
+        "tier": "high",
+        "basis": "简单 Agent 任务与 Pro 持平"
+      },
+      "knowledge": {
+        "tier": "high",
+        "basis": "世界知识领先开源"
+      },
+      "multilingual": {
+        "tier": "high",
+        "basis": "中英双语强"
+      }
+    },
+    "best_for": [
+      "coding",
+      "agent",
+      "low_cost",
+      "long_context"
+    ],
+    "avoid_for": [
+      "vision"
+    ],
+    "release_date": "2026-04",
+    "source_url": "https://api-docs.deepseek.com/",
+    "verified": true,
+    "free": false,
+    "free_note": "",
+    "aliases": [
+      "deepseek-v4-flash",
+      "DeepSeek V4 Flash",
+      "DeepSeek-V4-Flash"
+    ],
+    "cost_tier": "cost_effective",
+    "role": "agent",
+    "access_types": [
+      "official_api"
+    ],
+    "status": "active",
+    "data_quality_score": 70,
+    "data_source": "official",
+    "last_verified_at": "2026-09-05",
+    "price_model": "per_token",
+    "benchmarks": [],
+    "verified_date": "2026-09-05"
+  },
+  {
+    "id": "qwen-3-8-max",
+    "family_id": "qwen-qwen",
+    "provider_id": "alibaba-qwen",
+    "name": "Qwen3.8-Max",
+    "name_cn": "Qwen3.8-Max",
+    "model_id": "qwen-3-8-max",
+    "one_liner_cn": "阿里 2026-08 GA 旗舰 MoE（2.4T 总参/95B 激活），1M 上下文、原生多模态（文/图/视频）；前端编程 CodeArena 全球第一，长程自主编码可连续运行 16 天；计划开放权重。",
+    "context_window": 1000000,
+    "max_output_tokens": null,
+    "input_price_per_mtok": 2,
+    "output_price_per_mtok": 6,
+    "currency": "USD",
+    "vision_support": true,
+    "open_weight": true,
+    "speed_tier": "medium",
+    "model_type": [
+      "Chat",
+      "Vision",
+      "Reasoning",
+      "Coding",
+      "Agent"
+    ],
+    "capabilities": {
+      "reasoning": {
+        "tier": "high",
+        "basis": "综合推理强，部分榜单仅次于 Fable 5"
+      },
+      "coding": {
+        "tier": "high",
+        "basis": "前端编程 CodeArena 全球第一，Terminal-Bench 2.1 86.6% 超 Opus 4.8"
+      },
+      "agent": {
+        "tier": "high",
+        "basis": "长程自主编码实测连续运行 16 天"
+      },
+      "knowledge": {
+        "tier": "high",
+        "basis": "世界知识强"
+      },
+      "multilingual": {
+        "tier": "high",
+        "basis": "中英双语强"
+      }
+    },
+    "best_for": [
+      "coding",
+      "agent",
+      "long_context",
+      "multimodal"
+    ],
+    "avoid_for": [],
+    "release_date": "2026-08",
+    "source_url": "https://qwen.ai/",
+    "verified": true,
+    "free": false,
+    "free_note": "",
+    "aliases": [
+      "qwen-3-8-max",
+      "qwen3-8-max",
+      "Qwen3.8-Max",
+      "Qwen 3.8 Max"
+    ],
+    "cost_tier": "production",
+    "role": "agent",
+    "access_types": [
+      "official_api"
+    ],
+    "status": "active",
+    "data_quality_score": 70,
+    "data_source": "official",
+    "last_verified_at": "2026-09-05",
+    "price_model": "per_token",
+    "benchmarks": [],
+    "verified_date": "2026-09-05"
   }
 ]
