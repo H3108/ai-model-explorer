@@ -80,7 +80,8 @@ async function main() {
   const ti = app.querySelector('#task-input')
   ti.value = '便宜的中文编码模型'
   ti.dispatchEvent(new window.Event('input', { bubbles: true }))
-  await new Promise((r) => setTimeout(r, 30))
+  // 任务输入 renderHomeChips 已防抖（140ms，与 browse-search 一致），需等 >140ms 再断言
+  await new Promise((r) => setTimeout(r, 200))
   ok(app.querySelectorAll('#home-chips .chip-n').length >= 1, '任务输入解析出结构化条件 chip')
   // Phase 2 最近搜索：提交后写入并在首页展示
   const tf = app.querySelector('#task-form')

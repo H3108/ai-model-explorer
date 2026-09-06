@@ -118,13 +118,18 @@ const debounceBrowseSearch = debounce((value) => {
   syncSeg('browsePrice', state.browsePrice)
   refreshBrowse()
 })
+// 同款防抖：厂商网格搜索 / 首页任务输入。state 仍即时同步（输入框与 state 永远一致），
+// 仅把全量重渲染（refreshProviderGrid / renderHomeChips）合并到 140ms 内一次。
+// 主要收益是中文 IME 用户：拼音中间态「zhi」「zhipu」不会反复触发过滤/重渲染跳动。
+const debounceProviderSearch = debounce(() => { refreshProviderGrid() })
+const debounceTaskInput = debounce(() => { renderHomeChips() })
 
 // ---------- 事件 ----------
 export function bindGlobalEvents() {
   document.addEventListener('input', (e) => {
     const t = e.target
-    if (t.id === 'provider-search') { state.providerSearch = t.value; refreshProviderGrid() }
-    else if (t.id === 'task-input') { state.homeConditions = extractConditions(t.value); renderHomeChips() }
+    if (t.id === 'provider-search') { state.providerSearch = t.value; debounceProviderSearch() }
+    else if (t.id === 'task-input') { state.homeConditions = extractConditions(t.value); debounceTaskInput() }
     else if (t.id === 'browse-search') {
       state.browseSearch = t.value
       debounceBrowseSearch(t.value)
