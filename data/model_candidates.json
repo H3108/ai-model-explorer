@@ -4922,5 +4922,20 @@
     "source_url": "https://models.litellm.ai/",
     "discovered_at": "2026-09-05",
     "status": "pending"
+  },
+  {
+    "id": "qwen3-8-max-0902",
+    "provider_id": "alibaba-qwen",
+    "name": "Qwen3 8 MAX 0902",
+    "name_cn": "",
+    "one_liner_cn": "",
+    "context_window": 1000000,
+    "input_price_per_mtok": 2,
+    "output_price_per_mtok": 6,
+    "source": "openrouter",
+    "source_key": "qwen/qwen3.8-max-0902",
+    "source_url": "https://openrouter.ai/models/qwen/qwen3.8-max-0902",
+    "discovered_at": "2026-09-07",
+    "status": "pending"
   }
 ]
