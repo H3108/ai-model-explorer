@@ -5756,5 +5756,35 @@
     "source_url": "https://openrouter.ai/models/nvidia/switchyard",
     "discovered_at": "2026-10-05",
     "status": "pending"
+  },
+  {
+    "id": "anthropic-claude-haiku-5-5",
+    "provider_id": "anthropic",
+    "name": "Anthropic Claude Haiku 5 5",
+    "name_cn": "",
+    "one_liner_cn": "",
+    "context_window": 1000000,
+    "input_price_per_mtok": 0.1,
+    "output_price_per_mtok": 0.5,
+    "source": "openrouter",
+    "source_key": "anthropic/claude-haiku-5.5",
+    "source_url": "https://openrouter.ai/models/anthropic/claude-haiku-5.5",
+    "discovered_at": "2026-10-12",
+    "status": "pending"
+  },
+  {
+    "id": "google-gemini-nano-banana-2-1",
+    "provider_id": "google",
+    "name": "Google Gemini Nano Banana 2 1",
+    "name_cn": "",
+    "one_liner_cn": "",
+    "context_window": 65536,
+    "input_price_per_mtok": 1.5,
+    "output_price_per_mtok": 7.5,
+    "source": "openrouter",
+    "source_key": "google/gemini-nano-banana-2.1",
+    "source_url": "https://openrouter.ai/models/google/gemini-nano-banana-2.1",
+    "discovered_at": "2026-10-12",
+    "status": "pending"
   }
 ]
