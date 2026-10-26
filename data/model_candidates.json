@@ -5891,5 +5891,20 @@
     "source_url": "https://models.litellm.ai/",
     "discovered_at": "2026-10-19",
     "status": "pending"
+  },
+  {
+    "id": "together-minimaxai-minimax-m3-1-flash",
+    "provider_id": "together",
+    "name": "Together Minimaxai Minimax M3 1 Flash",
+    "name_cn": "",
+    "one_liner_cn": "",
+    "context_window": 1048576,
+    "input_price_per_mtok": 0.15,
+    "output_price_per_mtok": 0.6,
+    "source": "litellm",
+    "source_key": "together_ai/MiniMaxAI/MiniMax-M3.1-Flash",
+    "source_url": "https://models.litellm.ai/",
+    "discovered_at": "2026-10-26",
+    "status": "pending"
   }
 ]
