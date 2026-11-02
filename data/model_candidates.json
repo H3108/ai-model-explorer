@@ -5906,5 +5906,35 @@
     "source_url": "https://models.litellm.ai/",
     "discovered_at": "2026-10-26",
     "status": "pending"
+  },
+  {
+    "id": "openai-gpt-6-1-terra-pro",
+    "provider_id": "openai",
+    "name": "Openai GPT 6 1 Terra PRO",
+    "name_cn": "",
+    "one_liner_cn": "",
+    "context_window": 1050000,
+    "input_price_per_mtok": 1,
+    "output_price_per_mtok": 5,
+    "source": "openrouter",
+    "source_key": "openai/gpt-6.1-terra-pro",
+    "source_url": "https://openrouter.ai/models/openai/gpt-6.1-terra-pro",
+    "discovered_at": "2026-11-02",
+    "status": "pending"
+  },
+  {
+    "id": "openai-gpt-6-1-terra",
+    "provider_id": "openai",
+    "name": "Openai GPT 6 1 Terra",
+    "name_cn": "",
+    "one_liner_cn": "",
+    "context_window": 1050000,
+    "input_price_per_mtok": 1,
+    "output_price_per_mtok": 5,
+    "source": "openrouter",
+    "source_key": "openai/gpt-6.1-terra",
+    "source_url": "https://openrouter.ai/models/openai/gpt-6.1-terra",
+    "discovered_at": "2026-11-02",
+    "status": "pending"
   }
 ]
