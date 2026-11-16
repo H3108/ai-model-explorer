@@ -1638,7 +1638,7 @@
     "one_liner_cn": "智谱最新旗舰，1M 上下文，长程 agent。",
     "context_window": 1048576,
     "max_output_tokens": 128000,
-    "input_price_per_mtok": 0.006,
+    "input_price_per_mtok": 0.007,
     "output_price_per_mtok": 6.8,
     "currency": "USD",
     "vision_support": false,
